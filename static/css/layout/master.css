@@ -1,0 +1,197 @@
+:root {
+    --wh: 100vh;
+    --ww: 100vw;
+}
+
+html,
+body,
+main,
+div.column {
+    height: var(--wh);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+main::-webkit-scrollbar,
+div.column::-webkit-scrollbar {
+    display: none;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    overflow: hidden;
+    margin: auto;
+}
+
+div.column {
+    padding: 16px 8px 64px 8px;
+}
+
+#left, #center, #right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.c-grid #center,
+.cr-grid #center,
+.lc-grid #center,
+.lcr-grid #center,
+.lr-grid #left {
+    grid-column: 1/13;
+}
+
+@media (width >= 720px) {
+
+    main {
+        width: 720px;
+    }
+
+    /*
+        LR-Grid
+        L = R (6 columns)
+    */
+
+    .lr-grid #left {
+        grid-column: 1/7;
+    }
+
+    .lr-grid #right {
+        display: flex;
+        z-index: initial;
+        position: static;
+        grid-column: 7/13;
+        width: 100%;
+    }
+
+    .lr-grid #left #right-pin {
+        display: none;
+    }
+
+}
+
+@media (width >= 1080px) {
+
+    main {
+        width: 1080px;
+    }
+
+    .cr-grid #right,
+    .lc-grid #left,
+    .lcr-grid #left {
+        z-index: initial;
+        position: static;
+        display: flex;
+        width: 100%;
+    }
+
+    .cr-grid #right-pin,
+    .lc-grid #left-pin,
+    .lcr-grid #left-pin {
+        display: none;
+    }
+
+    /*
+        CR-Grid
+        R = 312 (4 columns)
+        C = 2R  (8 columns)
+    */
+
+    .cr-grid #center {
+        grid-column: 1/9;
+    }
+
+    .cr-grid #right {
+        grid-column: 9/13;
+    }
+
+    /*
+        LC-Grid &
+        LCR-Grid
+        L = 312 (4 columns)
+        C = 2L  (8 columns)
+
+        In this width LCR-Grid will be treated
+        as LC-Grid and R will be completely ignored.
+    */
+
+    .lc-grid #left,
+    .lcr-grid #left {
+        grid-column: 1/5;
+    }
+
+    .lc-grid #center,
+    .lcr-grid #center {
+        grid-column: 5/13;
+    }
+
+}
+
+@media (width >= 1440px) {
+    
+    main {
+        width: 1440px;
+    }
+
+    /*
+        CR-Grid
+        C = 3R  (9 columns)
+        R = 312 (3 columns) 
+    */
+
+    .cr-grid #center {
+        grid-column: 1/10;
+    }
+
+    .cr-grid #right {
+        grid-column: 10/13;
+    }
+
+    /*
+        LC-Grid &
+        LCR-Grid
+        L = 312 (3 columns)
+    */
+
+    .lc-grid #left,
+    .lcr-grid #left {
+        grid-column: 1/4;
+    }
+
+    /*
+        LC-Grid
+        C = 3L (9 columns)
+    */
+    
+    .lc-grid #center {
+        grid-column: 4/13;
+    }
+
+    /*
+        LCR-Grid
+        C = 2L  (6 columns)
+        R = 312 (3 columns)
+    */
+
+    .lcr-grid #center {
+        grid-column: 4/10;
+    }
+
+    .lcr-grid #right {
+        display: flex;
+        z-index: initial;
+        position: static;
+        grid-column: 10/13;
+        width: 100%;
+    }
+
+    .lcr-grid #right-pin {
+        display: none;
+    }
+
+}

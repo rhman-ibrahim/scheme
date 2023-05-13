@@ -1,0 +1,7 @@
+{{ set.management_form }}
+{% for form in set %}
+<fieldset>
+    {% include "components/form/base.html" %}
+    {% if form.instance.id %}<a href="#">delete</a>{% endif %}
+</fieldset>
+{% endfor %}

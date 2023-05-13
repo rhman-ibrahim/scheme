@@ -1,0 +1,9 @@
+venv/
+
+__pycache__
+migrations
+db.sqlite3
+
+*.png
+*.jpg
+*.jpeg

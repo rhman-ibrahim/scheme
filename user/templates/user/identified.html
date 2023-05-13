@@ -1,0 +1,37 @@
+{% extends 'layouts/cr.html' %}
+{% load filters %}
+
+{% block fixed %}
+<form method="POST" action="{% url 'user:reset' %}" id="reset-form">
+    {% with header=1 form=forms.reset password=1 %}{% include "form/base.html" %}{% endwith %}
+</form>
+{% endblock fixed %}
+
+{% block center %}
+<section class="cards-w">
+    <div class="card">
+        <h3>reset</h3>
+        <p>Download your new token after resetting or you won't be able to recover your account again.</p>
+        </ul>
+        <ul class="row end">
+            <li class="material-icons" onclick="Aside.open('#reset-form')">lock_reset</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>{{ user.username }}</h3>
+        <p>You could cancel and back to the previous page and use your token later.</p>
+        <ul class="row end">
+            <li>
+                <img class="circle-24" src="{{ user.profile.picture.url }}" alt="{{ user.username }}'s profile picture" id="picture">
+            </li>
+            <li>
+                <a class="material-icons" href="{% url 'user:cancel' %}">arrow_back</a>
+            </li>
+        </ul>
+    </div>
+</section>
+{% endblock center %}
+
+{% block right %}
+{% include "logs.html" %}
+{% endblock right %}

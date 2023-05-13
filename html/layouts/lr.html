@@ -1,0 +1,21 @@
+{% load filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "layouts/components/head.html" %}
+</head>
+<body onload="Handler.init();" onresize="Handler.init();Aside.clear();" class="lr-grid {{ request.resolver_match.app_name }}" id="{{ request.resolver_match.url_name }}">
+    {% include "layouts/components/message.html" %}
+    {% block fixed %}{% endblock fixed %}
+    <main>
+        <div class="column" id="left">
+            {% block left %}{% endblock left %}
+        </div>
+        <div class="column aside-r" id="right">
+            {% block right %}{% endblock right %}
+        </div>
+    </main>
+    <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#right')" id="right-pin">menu</button>
+    <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'signals:create_signal' %}" id="concern-create-form">
+    {% with header=1 form=signal.forms.concern %}
+    {% include "form/base.html" %}
+    {% endwith %}
+</form>

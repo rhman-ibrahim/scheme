@@ -1,0 +1,16 @@
+{% extends 'layouts/lcr.html' %}
+{% load filters %}
+
+{% block fixed %}
+{% include "signals/components/signal/idea/form.html" %}
+{% endblock fixed %}
+
+{% block left %}
+{% include "user/components/actions/apps.html" %}
+{% endblock left %}
+
+{% block center %}
+{% for signal in signal.list %}
+{% include "signals/components/signal/idea/index.html" %}
+{% endfor %}
+{% endblock center %}

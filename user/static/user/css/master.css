@@ -1,0 +1,67 @@
+/*
+    .
+*/
+
+body#index .title i.material-icons,
+body#index .title i.material-symbols-outlined {
+    color: var(--di);
+}
+
+/*
+    <>
+*/
+
+body#index a.pin {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+}
+body#index mark {
+    color: var(--di);
+    background: none;
+    font-weight: 500;
+}
+
+body#index header p {
+    font-size: 1.4rem;
+}
+
+body#index header p span {
+    display: inline-block;
+}
+
+body#index header h3.title {
+    margin-top: 16px;
+}
+
+/*
+    #
+*/
+
+#theme {
+    border: none;
+    outline: none;
+    color: var(--fc);
+}
+
+/*
+    @
+*/
+
+@media (width > 568px) {
+    body#index header p {
+        width: 90%;
+    }   
+}
+
+@media (width >= 936px) {
+    body#index #center {
+        display: flex;
+        flex-direction: row;
+    }
+    body#index #center > header,
+    body#index #center > section {
+        width: 50%;
+        flex: 1;
+    }
+}

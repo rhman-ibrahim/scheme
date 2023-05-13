@@ -1,0 +1,35 @@
+:root {
+    --ld: #ff4444;
+    --lw: #ffbb33;
+    --ls: #00C851;
+    --li: #33b5e5;
+    --dd: #CC0000;
+    --dw: #FF8800;
+    --ds: #007E33;
+    --di: #0099CC;
+    --a1: #77216F;
+}
+
+body,
+.light {
+    --d1: #FFFFFF;
+    --d2: #FAFAFA;
+    --d3: #F5F5F5;
+    --d4: #E0E0E0;
+    --bc: var(--d4);
+    --fc: #000000;
+}
+
+.dark {
+    --d1: #000000;
+    --d2: #212121;
+    --d3: #303030;
+    --d4: #424242;
+    --bc: var(--d4);
+    --fc: #FFFFFF;
+}
+
+body {
+    background: var(--d1);
+    color: var(--fc);
+}

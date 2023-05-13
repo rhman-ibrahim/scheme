@@ -1,0 +1,18 @@
+{% extends 'layouts/lcr.html' %}
+{% load filters %}
+
+{% block fixed %}
+{% include "signals/components/signal/test/form.html" %}
+{% endblock fixed %}
+
+{% block center %}
+{% with signals=concern.object.tree|dictsortreversed:"id" %}
+{% include "signals/components/signal/beam.html" %}
+{% endwith %}
+{% endblock center %}
+
+{% block right %}
+{% with signals=concern.object.get_children.all|dictsort:"id" %}
+{% include "signals/components/signal/beam.html" %}
+{% endwith %}
+{% endblock right %}

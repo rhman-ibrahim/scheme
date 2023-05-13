@@ -1,0 +1,22 @@
+{% load filters %}
+<ul class="card signal" id="{{ signal.serial }}" data-signal-id="{{ signal.id }}">
+    <ul class="row" title="{{ signal.user.username }} shared an idea">
+        <li class="material-symbols-outlined">tips_and_updates</li>
+        <li>{{ signal.created|ago }}</li>
+    </ul>
+    <ul>
+        <li class="description">
+            {{ signal.print|safe|linebreaks }}
+        </li>
+    </ul>
+    <ul class="row end">
+        <li>
+            <a href="{% url 'signals:read_idea' signal.serial %}">
+                <i class="material-symbols-outlined">ul</i>
+            </a>
+        </li>
+        <li>
+            <img src="{{ signal.user.profile.picture.url }}">
+        </li>
+    </ul>
+</ul>

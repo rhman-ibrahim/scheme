@@ -1,0 +1,22 @@
+{% load filters %}
+<section class="cards">
+    {% for connection in connections %}
+    {% if connection|get_class == "Circle" %}
+    <ul class="card">
+        <li>{{ connection.name }}</li>
+    </ul>
+    {% elif connection|get_class == "Account" %}
+    <ul class="card">
+        <li class="row">
+            <img src="{{ connection.profile.picture.url }}" alt="{{ connection.username }}" class="circle-24">
+            <span>{{ connection.username }}</span>
+        </li>
+        <li class="row end">
+            <a href="{% url 'circles:create_connection' connection.username %}">
+                <i class="material-icons">person_add</i>
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+    {% endfor %}
+</section>

@@ -1,0 +1,61 @@
+.pin {
+    color: var(--fc);
+    background: var(--d1);
+    outline: 1.32px solid var(--bc);
+    border-radius: 100%;
+    padding: 8px;
+    height: 40px;
+    width: 40px;
+}
+
+#aside-button {
+    display: none;
+    transition: top 2s ease-in-out;
+}
+
+#aside-button.pin-l {
+    position: fixed;
+    left: -80px;
+    top: -40;
+}
+
+#aside-button.pin-r {
+    position: fixed;
+    right: -80px;
+    top: -40px;
+}
+
+#aside-button.active {
+    display: block;
+}
+
+#aside-button.pin-l.active {
+    position: fixed;
+    left: 320px;
+    top: 16px;
+}
+
+#aside-button.pin-r.active {
+    position: fixed;
+    right: 320px;
+    top: 16px;
+}
+
+#left-pin, #right-pin {
+    display: block;
+}
+
+.cr-grid #right-pin,
+.lc-grid #left-pin,
+.lcr-grid #right-pin,
+.lr-grid #right-ping {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+}
+
+.lcr-grid #left-pin {
+    position: fixed;
+    bottom: 8px;
+    right: 52px;
+}

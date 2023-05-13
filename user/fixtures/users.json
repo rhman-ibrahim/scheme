@@ -1,0 +1,92 @@
+[
+  {
+    "model": "user.Account",
+    "id": 1,
+    "fields": {
+      "username": "rhman",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":true,
+      "is_admin": true,
+      "is_staff": true,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "user.Account",
+    "id": 2,
+    "fields": {
+      "username": "mido",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":false,
+      "is_admin": false,
+      "is_staff": false,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "user.Account",
+    "id": 3,
+    "fields": {
+      "username": "essam",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":false,
+      "is_admin": false,
+      "is_staff": false,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "user.Account",
+    "id": 4,
+    "fields": {
+      "username": "marwan",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":false,
+      "is_admin": false,
+      "is_staff": false,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "user.Account",
+    "id": 5,
+    "fields": {
+      "username": "tarek",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":false,
+      "is_admin": false,
+      "is_staff": false,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "user.Account",
+    "id": 6,
+    "fields": {
+      "username": "bassem",
+      "password": "pbkdf2_sha256$320000$LMyBdnHdkh4NQPZqs0AHUH$f62W2RCxuT9KyomfXhW3DGfFT2yYylO/XmTnrl1rcBE=",
+      "is_active": true,
+      "is_superuser":false,
+      "is_admin": false,
+      "is_staff": false,
+      "is_lazy": false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  }
+]

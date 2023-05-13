@@ -1,0 +1,49 @@
+:root {
+    --ah: calc(var(--wh) * .5);
+    --aw: 100%;
+}
+
+/*
+    an aside is hidden by default (in mobile view),
+    each aside has open & close functionalities,
+*/
+
+.aside-r,
+.aside-l {
+    width: 312px;
+    height: var(--wh);
+    filter: none;
+}
+
+.aside-r {
+    border-left: 1.32px solid var(--bc);
+    position: fixed;
+    transition-property: right;
+    right: calc(var(--aw) * -4);
+    bottom: 0px;
+    top: 0px;
+}
+
+.aside-l {
+    border-right: 1.32px solid var(--bc);
+    position: fixed;
+    transition-property: left;
+    left: calc(var(--aw) * -4);
+    bottom: 0px;
+    top: 0px;
+}
+
+.aside-r.active {
+    right: 0px;
+}
+
+.aside-l.active {
+    left: 0px;
+}
+
+.aside-r,
+.aside-l {
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+    background: var(--d1);
+}

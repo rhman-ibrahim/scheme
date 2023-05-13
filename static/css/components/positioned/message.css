@@ -1,0 +1,67 @@
+.message {
+    width: 300px;
+    padding: 16px;
+    border-radius: 8px;
+    height: max-content;
+    color: #000 !important;
+    position: fixed;
+    right: calc((var(--ww) - 300px) / 2);
+    left: calc((var(--ww) - 300px) / 2);
+    top: 8px;
+}
+
+.message.info {
+    background: var(--li);
+    outline: 1.32px solid var(--di);
+}
+
+.message.error {
+    background: var(--ld);
+    outline: 1.32px solid var(--dd);
+}
+
+.message.warning {
+    background: var(--lw);
+    outline: 1.32px solid var(--dw);
+}
+
+.message.success {
+    background: var(--ls);
+    outline: 1.32px solid var(--ds);
+}
+
+.message ul {
+    display: flex;
+}
+
+.message ul li {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.message ul li:last-child {
+    justify-content: flex-end;
+}
+
+.message ul li.tag {
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.message ul li,
+.message ul li.material-icons,
+.message ul li i.material-icons,
+.message ul li span,
+.message h6 {
+    font-size: 1rem !important;
+}
+
+.message ul li span {
+    text-transform: capitalize;
+}
+
+.message h6 {
+    line-height: 1.5;
+}

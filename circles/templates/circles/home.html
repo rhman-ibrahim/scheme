@@ -1,0 +1,29 @@
+{% extends 'layouts/lcr.html' %}
+
+{% block left %}
+{% include "user/components/actions/apps.html" %}
+{% endblock left %}
+
+{% block right %}
+
+<h3>firends {{self.pro}}</h3>
+{% for firend in request.user.profile.connections.firends %}
+<div class="card">
+    {{ firend.username }}
+</div>
+{% endfor %}
+
+<h3>following</h3>
+{% for followee in request.user.profile.connections.following %}
+<div class="card">
+    {{ followee.username }}
+</div>
+{% endfor %}
+<h3>followers</h3>
+{% for follower in request.user.profile.connections.followers %}
+<div class="card">
+    {{ follower.username }}
+</div>
+{% endfor %}
+
+{% endblock right %}

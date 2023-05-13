@@ -1,0 +1,21 @@
+{% extends 'layouts/lcr.html' %}
+{% load filters %}
+
+{% block fixed %}
+{% include "signals/components/signal/concern/form.html" %}
+{% endblock fixed %}
+
+{% block left %}
+{% endblock left %}
+
+{% block center %}
+{% with signal=idea.object %}
+{% include "signals/components/signal/index.html" %}
+{% endwith %}
+{% endblock center %}
+
+{% block right %}
+{% with signals=idea.object.get_children.all|dictsort:"id" %}
+{% include "signals/components/signal/beam.html" %}
+{% endwith %}
+{% endblock right %}

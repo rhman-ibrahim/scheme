@@ -1,0 +1,10 @@
+{% load filters %}
+{% for message in messages %}
+<ul class="message {{ message.tags }}">
+    <ul class="row">
+        <li class="material-icons">{{ message.tags|message_tag_icon }}</li>
+        <li onclick="Message.close(this)" class="material-icons">close</li>
+    </ul>
+    <li>{{ message }}</h6>
+</ul>
+{% endfor %}

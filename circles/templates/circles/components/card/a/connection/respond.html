@@ -1,0 +1,23 @@
+{% for request in requests %}
+{% if request|get_class == "followRequest" %}
+<ul class="card">
+    <li>{{ request.sender }}</li>
+    <ul class="row end">
+        <li>
+            <a href="{% url 'circles:accept_connection' request.id %}">
+                <i class="material-icons">done</i>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'circles:reject_connection' request.id %}">
+                <i class="material-icons">close</i>
+            </a>
+        </li>
+    </ul>
+</ul>
+{% elif request|get_class == "joinRequest"%}
+<ul class="card">
+    <li>join request</li>
+</ul>
+{% endif %}
+{% endfor %}

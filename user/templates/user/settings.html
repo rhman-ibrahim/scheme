@@ -1,0 +1,80 @@
+{% extends 'layouts/cr.html' %}
+{% load filters %}
+
+{% block fixed %}
+<form method="POST" action="{% url 'user:password' %}" id="password-form">
+    {% with form=forms.password password=1 %}
+    {% include "form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" enctype="multipart/form-data" action="{% url 'user:picture' %}" id="picture-form">
+    {% with form=forms.picture %}
+    {% include "form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'user:info' %}" id="info-form">
+    {% with form=forms.info %}
+    {% include "form/base.html" %}
+    {% endwith %}
+</form>
+{% endblock fixed %}
+
+{% block center %}
+<div class="card">
+    <h3><b>Welcome!</b>, {{ request.user.username }}</h3>
+    <p class="class="description"">This is your account settings page, here you view your logs, download token, update profile information and manage applications.</p>
+    <ul class="row end">
+        <li>
+            <a href="{% url 'user:settings' %}">
+                <img src="{{ request.user.profile.picture.url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture" id="picture">
+            </a>
+        </li>
+        <li>
+            <a class="material-icons" href="{% url 'user:signout' %}">logout</a>
+        </li>
+    </ul>
+</div>
+<section class="cards-w">
+    {% include "home/components/card/theme.html" %}
+    <div class="card">
+        <h3 class="title">
+            <i class="material-icons">qr_code</i>
+            <span>token</span>
+        </h3>
+        <p>Keep your token secure and updated to ensure that you can always recover your account when needed and prevent security breaches.</p>
+        <ul class="row end">
+            <li>
+                <a class="material-icons" href="{% url 'user:token' %}">refresh</a>
+            </li>
+            <li>
+                <a class="material-icons" href="{{ request.user.token.path }}" download>download</a>
+            </li>
+        <ul>
+    </div>
+    <div class="card">
+        <h3 class="title">
+            <i class="material-icons">person</i>
+            <span>profile</span>
+        </h3>
+        <p>Stay recognizable & connected with others. Update profile info and picture regularly to maintain a professional online presence.</p>
+        <ul class="row end">
+            <li class="material-icons" onclick="Aside.open('#picture-form')">image</li>
+            <li class="material-icons" onclick="Aside.open('#info-form')">edit</li>
+        </ul>
+    </div>
+    <div class="card">
+        <li class="title">
+            <i class="material-icons">lock</i>
+            <span>password</span>
+        </li>
+        <p>Regular (3 months) updating is important to have strong and unique passwords which protect your online identity and information.</p>
+        <ul class="row end">
+            <li class="material-icons" onclick="Aside.open('#password-form')">key</li>
+        </ul>
+    </div>
+</section>
+{% endblock center %}
+
+{% block right %}
+{% include "logs.html" %}
+{% endblock right %}

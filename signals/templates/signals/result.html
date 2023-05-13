@@ -1,0 +1,8 @@
+{% extends 'layouts/lcr.html' %}
+{% load filters %}
+
+{% block center %}
+{% with signals=result.object.tree|dictsortreversed:"id" %}
+{% include "signals/components/signal/beam.html" %}
+{% endwith %}
+{% endblock center %}

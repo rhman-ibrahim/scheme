@@ -1,0 +1,21 @@
+.log li,
+.log li .material-icons {
+    font-size: .84rem;
+}
+
+.log li:nth-child(1),
+.log li:nth-child(1) .material-icons {
+    font-size: .88rem;
+}
+
+.log li i.add {
+    color: var(--li);
+}
+
+.log li i.change {
+    color: var(--lw);
+}
+
+.log li i.delete {
+    color: var(--ld);
+}

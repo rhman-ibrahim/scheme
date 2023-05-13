@@ -1,0 +1,22 @@
+{% load filters %}
+<ul class="card signal" id="{{ signal.serial }}" data-signal-id="{{ signal.id }}">
+    <ul class="row" title="{{ signal.user.username }} shared a result">
+        <li class="material-symbols-outlined">{{ signal.status_state }}</li>
+        <li>{{ signal.created|ago }}</li>
+    </ul>
+    <ul>
+        <li>
+            {{ signal.print|safe|linebreaks }}
+        </li>
+    </ul>
+    <ul class="row end">
+        <li>
+            <a href="{% url 'signals:read_result' signal.serial %}">
+                <i class="material-symbols-outlined">summarize</i>
+            </a>
+        </li>
+        <li>
+            <img src="{{ signal.user.profile.picture.url }}">
+        </li>
+    </ul>
+</ul>

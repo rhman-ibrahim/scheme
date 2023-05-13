@@ -1,0 +1,27 @@
+.message {
+    z-index: 32px;
+}
+
+body > form {
+    z-index: 16;
+}
+
+.aside-r,
+.aside-l,
+#aside-button {
+    z-index: 8;
+}
+
+#left-pin,
+#right-pin {
+    z-index: 4;
+}
+
+.cards-v .card,
+.cards-v .signal {
+    z-index: 2;
+}
+
+.cards-v .cards-v_line {
+    z-index: 1;
+}
