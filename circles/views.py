@@ -1,15 +1,15 @@
 from itertools import chain
 from operator import attrgetter
 
-
-
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from django.contrib import messages
 
 from user.decorators import authenticated
-from .models import followRequest, joinRequest, Connection, Circle
 from user.models import Account
+from .models import (
+    followRequest, joinRequest, Connection, Circle
+)
 
 
 @authenticated(True)
