@@ -4,17 +4,17 @@
 {% block fixed %}
 <form method="POST" action="{% url 'user:password' %}" id="password-form">
     {% with form=forms.password password=1 %}
-    {% include "form/base.html" %}
+    {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 <form method="POST" enctype="multipart/form-data" action="{% url 'user:picture' %}" id="picture-form">
     {% with form=forms.picture %}
-    {% include "form/base.html" %}
+    {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 <form method="POST" action="{% url 'user:info' %}" id="info-form">
     {% with form=forms.info %}
-    {% include "form/base.html" %}
+    {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 {% endblock fixed %}
@@ -35,7 +35,7 @@
     </ul>
 </div>
 <section class="cards-w">
-    {% include "home/components/card/theme.html" %}
+    {% include "components/cards/theme.html" %}
     <div class="card">
         <h3 class="title">
             <i class="material-icons">qr_code</i>
@@ -76,5 +76,5 @@
 {% endblock center %}
 
 {% block right %}
-{% include "logs.html" %}
+{% include "components/logs.html" %}
 {% endblock right %}

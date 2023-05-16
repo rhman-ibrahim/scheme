@@ -3,7 +3,7 @@
 
 {% block fixed %}
 <form method="POST" action="{% url 'user:reset' %}" id="reset-form">
-    {% with header=1 form=forms.reset password=1 %}{% include "form/base.html" %}{% endwith %}
+    {% with header=1 form=forms.reset password=1 %}{% include "components/form/base.html" %}{% endwith %}
 </form>
 {% endblock fixed %}
 
@@ -33,5 +33,5 @@
 {% endblock center %}
 
 {% block right %}
-{% include "logs.html" %}
+{% include "components/logs.html" %}
 {% endblock right %}

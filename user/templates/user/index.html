@@ -3,20 +3,18 @@
 
 {% block fixed %}
 <form method="POST" action="{% url 'user:signup' %}" id="sign-up-form">
-    {% with header=1 form=forms.signup password=1 %}{% include "form/base.html" %}{% endwith %}
+    {% with header=1 form=forms.signup password=1 %}{% include "components/form/base.html" %}{% endwith %}
 </form>
 <form method="POST" action="{% url 'user:signin' %}" id="sign-in-form">
-    {% with header=1 form=forms.signin password=1 %}{% include "form/base.html" %}{% endwith %}
+    {% with header=1 form=forms.signin password=1 %}{% include "components/form/base.html" %}{% endwith %}
 </form>
 <form method="POST" enctype="multipart/form-data" action="{% url 'user:verify' %}" id="token-form">
-    {% with header=1 form=forms.token password=1 %}{% include "form/base.html" %}{% endwith %}
+    {% with header=1 form=forms.token password=1 %}{% include "components/form/base.html" %}{% endwith %}
 </form>
 {% endblock fixed %}
 
 {% block main %}
-{% include "home/components/header.html" %}
-<section class="widget">
-    <div class="cards-w">
+    <section class="cards-w">
         <div class="card">
             <h3 class="title">
                 <i class="material-icons">person_add</i>
@@ -61,7 +59,6 @@
                 <a class="material-icons" href="{% url 'user:lazy' %}">arrow_forward</a>
             </h3>
         </div>
-    </div>
-</section>
+    </section>
 <a class="pin material-icons" href="{% url 'home:index' %}">home</a>
 {% endblock main %}

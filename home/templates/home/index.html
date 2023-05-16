@@ -2,69 +2,66 @@
 {% load filters %}
 
 {% block main %}
-<a class="pin material-icons" href="{% url 'user:navigate' %}">person</a>
-{% include "home/components/header.html" %}
-<section class="widget">
-    <div id="steps">
-        <h2 class="title">how it works?</h2>
-        <div class="cards-h">
-            <div class="card">
-                <p>Create an <a href="{% url 'user:navigate' %}"><mark>account</mark></a>, set a username/password only and signup now!.</p>
-            </div>
-            <div class="card">
-                <p><a href="{% url 'user:navigate' %}"><mark>Signin</mark></a>!, create and join <a href="#circle-definition"><mark>circles</mark></a>,
-                share <a href="#signal-definition"><mark>signal</mark></a>s and have <a href="#space-definition"><mark>space</mark></a>s.</p>
-            </div>
-            <div class="card">
-                <p>Express your thoughts and assign tasks and <mark>interact</mark> with others.</p>
-            </div>
-            <div class="card">
-                <p>Develop by defining <b>concerns</b>, making <b>tests</b> and tracking <b>results</b>.</p>
-            </div>
-            <div class="card">
-                <p>Different methods of sharing & interacting to get the best out!.</p>
-            </div>
-            <div class="card">
-                <p>Discuss points in circle conversations anonymously using spaces.</p>
-            </div>
-            <div class="card">
-                <p>Update the state!, send and receive alerts, print phase reports.</p>
-            </div>
-            <div class="card">
-                <p>Contribute to the development by your feedbacks and suggestions.</p>
-            </div>
+<section id="steps">
+    <h2 class="title">how it works?</h2>
+    <div class="cards-h">
+        <div class="card">
+            <p>Create an <a href="{% url 'user:navigate' %}"><mark>account</mark></a>, set a username/password only and signup now!.</p>
         </div>
-    </div>
-    <div id="definitions">
-        <h2 class="title">
-            <span>the building</span>
-            <br>
-            <i class="material-symbols-outlined">widgets</i>
-            <span>blocks</span>
-        </h2>
-        <div class="card definition" id="circle-definition">
-            <h3 class="title">
-                <i class="material-symbols-outlined">diversity_2</i>
-                <span>circles</span>
-            </h3>
-            <p>Circle is where you invite users to <b>share signals and create spaces</b>.
-            <mark>Create</mark> private circles & <mark>join</mark> public and official circles!.</p>
+        <div class="card">
+            <p><a href="{% url 'user:navigate' %}"><mark>Signin</mark></a>!, create and join <a href="#circle-definition"><mark>circles</mark></a>,
+            share <a href="#signal-definition"><mark>signal</mark></a>s and have <a href="#space-definition"><mark>space</mark></a>s.</p>
         </div>
-        <div class="card definition" id="space-definition">
-            <h3 class="title">
-                <i class="material-symbols-outlined">forum</i>
-                <span>spaces</span>
-            </h3>
-            <p>Space is a group conversation where <b>users could be anonymous</b>. To have spaces you have to <mark>create a circle then invite members</mark> in.</p>
+        <div class="card">
+            <p>Express your thoughts and assign tasks and <mark>interact</mark> with others.</p>
         </div>
-        <div class="card definition" id="signal-definition">
-            <h3 class="title">
-                <i class="material-symbols-outlined">speaker_notes</i>
-                <span>signals</span>
-            </h3>
-            <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
-            together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
+        <div class="card">
+            <p>Develop by defining <b>concerns</b>, making <b>tests</b> and tracking <b>results</b>.</p>
+        </div>
+        <div class="card">
+            <p>Different methods of sharing & interacting to get the best out!.</p>
+        </div>
+        <div class="card">
+            <p>Discuss points in circle conversations anonymously using spaces.</p>
+        </div>
+        <div class="card">
+            <p>Update the state!, send and receive alerts, print phase reports.</p>
+        </div>
+        <div class="card">
+            <p>Contribute to the development by your feedbacks and suggestions.</p>
         </div>
     </div>
 </section>
+<section id="definitions">
+    <h2 class="title">
+        <span>the building</span>
+        <br>
+        <i class="material-symbols-outlined">widgets</i>
+        <span>blocks</span>
+    </h2>
+    <div class="card definition" id="circle-definition">
+        <h3 class="title">
+            <i class="material-symbols-outlined">diversity_2</i>
+            <span>circles</span>
+        </h3>
+        <p>Circle is where you invite users to <b>share signals and create spaces</b>.
+        <mark>Create</mark> private circles & <mark>join</mark> public and official circles!.</p>
+    </div>
+    <div class="card definition" id="space-definition">
+        <h3 class="title">
+            <i class="material-symbols-outlined">forum</i>
+            <span>spaces</span>
+        </h3>
+        <p>Space is a group conversation where <b>users could be anonymous</b>. To have spaces you have to <mark>create a circle then invite members</mark> in.</p>
+    </div>
+    <div class="card definition" id="signal-definition">
+        <h3 class="title">
+            <i class="material-symbols-outlined">speaker_notes</i>
+            <span>signals</span>
+        </h3>
+        <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
+        together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
+    </div>
+</section>
+<a class="pin material-icons" href="{% url 'user:navigate' %}">person</a>
 {% endblock main %}
