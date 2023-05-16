@@ -1,0 +1,5 @@
+@media (width >= 720px) and (height >= 810px) {
+    #center {
+        justify-content: center;
+    }
+}
