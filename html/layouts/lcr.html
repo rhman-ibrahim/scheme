@@ -4,10 +4,10 @@
 <head>
     {% include "components/head.html" %}
 </head>
-<body onload="Handler.init();" onresize="Handler.init();" class="c-grid" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
+<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
     {% block fixed %}{% endblock fixed %}
-    <main>
+    <main class="lcr-grid">
         <div class="column aside-l" id="left">
             {% block left %}{% endblock left %}
         </div>
