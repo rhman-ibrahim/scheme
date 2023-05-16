@@ -1,19 +1,4 @@
 /*
-    .widget
-    flex column & full width
-    padding bottom is (16*3) for bottom icons
-*/
-
-.widget {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 16px 16px 64px 16px;
-    min-height: var(--wh);
-    gap: 8px;
-}
-
-/*
     .card containers
     .cards-w: card windows
     .card-v: vertical thread with a line connector
