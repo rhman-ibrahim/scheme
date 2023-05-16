@@ -1,0 +1,20 @@
+{% if request.user.is_authenticated %}
+<div class="card">
+    <h3>{{ request.user.username }}</h3>
+    <p>Download your security token, manage your account settings and privacy. View and update profile information, view activity logs.</p>
+    <nav class="end">
+        <a href="{% url 'user:settings' %}">
+            <img src="{{ request.user.profile.picture.url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture" id="picture">
+        </a>
+        <a href="{% url 'user:signout' %}" class="material-icons">logout</a></a>
+    </nav>
+</div>
+{% else %}
+<div class="card">
+    <h3 class="title">user</h3>
+    <p>Signup or you could signin as a guest in a single click. Login to your account, recover. Visit the user application to join us!.</p>
+    <nav class="end">
+        <a class="material-icons" href="{% url 'user:navigate' %}">person</a>
+    </nav>
+</div>
+{% endif %}
