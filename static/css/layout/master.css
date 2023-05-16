@@ -28,22 +28,24 @@ main {
     margin: auto;
 }
 
+main.c-grid #center,
+main.cr-grid #center,
+main.lc-grid #center,
+main.lcr-grid #center,
+main.lr-grid #left {
+    grid-column: 1/13;
+}
+
 div.column {
     padding: 16px 8px 64px 8px;
 }
 
-#left, #center, #right {
+#left,
+#center,
+#right {
     display: flex;
     flex-direction: column;
     gap: 8px;
-}
-
-.c-grid #center,
-.cr-grid #center,
-.lc-grid #center,
-.lcr-grid #center,
-.lr-grid #left {
-    grid-column: 1/13;
 }
 
 @media (width >= 720px) {
@@ -57,11 +59,11 @@ div.column {
         L = R (6 columns)
     */
 
-    .lr-grid #left {
+    main.lr-grid #left {
         grid-column: 1/7;
     }
 
-    .lr-grid #right {
+    main.lr-grid #right {
         display: flex;
         z-index: initial;
         position: static;
@@ -69,7 +71,7 @@ div.column {
         width: 100%;
     }
 
-    .lr-grid #left #right-pin {
+    main.lr-grid #left #right-pin {
         display: none;
     }
 
@@ -81,18 +83,18 @@ div.column {
         width: 1080px;
     }
 
-    .cr-grid #right,
-    .lc-grid #left,
-    .lcr-grid #left {
+    main.cr-grid #right,
+    main.lc-grid #left,
+    main.lcr-grid #left {
         z-index: initial;
         position: static;
         display: flex;
         width: 100%;
     }
 
-    .cr-grid #right-pin,
-    .lc-grid #left-pin,
-    .lcr-grid #left-pin {
+    main.cr-grid #right-pin,
+    main.lc-grid #left-pin,
+    main.lcr-grid #left-pin {
         display: none;
     }
 
@@ -102,11 +104,11 @@ div.column {
         C = 2R  (8 columns)
     */
 
-    .cr-grid #center {
+    main.cr-grid #center {
         grid-column: 1/9;
     }
 
-    .cr-grid #right {
+    main.cr-grid #right {
         grid-column: 9/13;
     }
 
@@ -120,13 +122,13 @@ div.column {
         as LC-Grid and R will be completely ignored.
     */
 
-    .lc-grid #left,
-    .lcr-grid #left {
+    main.lc-grid #left,
+    main.lcr-grid #left {
         grid-column: 1/5;
     }
 
-    .lc-grid #center,
-    .lcr-grid #center {
+    main.lc-grid #center,
+    main.lcr-grid #center {
         grid-column: 5/13;
     }
 
@@ -144,11 +146,11 @@ div.column {
         R = 312 (3 columns) 
     */
 
-    .cr-grid #center {
+    main.cr-grid #center {
         grid-column: 1/10;
     }
 
-    .cr-grid #right {
+    main.cr-grid #right {
         grid-column: 10/13;
     }
 
@@ -158,8 +160,8 @@ div.column {
         L = 312 (3 columns)
     */
 
-    .lc-grid #left,
-    .lcr-grid #left {
+    main.lc-grid #left,
+    main.lcr-grid #left {
         grid-column: 1/4;
     }
 
@@ -168,7 +170,7 @@ div.column {
         C = 3L (9 columns)
     */
     
-    .lc-grid #center {
+    main.lc-grid #center {
         grid-column: 4/13;
     }
 
@@ -178,11 +180,11 @@ div.column {
         R = 312 (3 columns)
     */
 
-    .lcr-grid #center {
+    main.lcr-grid #center {
         grid-column: 4/10;
     }
 
-    .lcr-grid #right {
+    main.lcr-grid #right {
         display: flex;
         z-index: initial;
         position: static;
@@ -190,7 +192,7 @@ div.column {
         width: 100%;
     }
 
-    .lcr-grid #right-pin {
+    main.lcr-grid #right-pin {
         display: none;
     }
 
