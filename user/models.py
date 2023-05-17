@@ -78,6 +78,7 @@ class Token(models.Model):
 
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
     value   = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
+    ready   = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
