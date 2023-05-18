@@ -5,11 +5,10 @@ from user import views
 app_name    = "user"
 urlpatterns = [
     # Templates
-    ## Anonymous
     path('auth/', views.index, name="index"),
     path('identified/', views.identified, name="identified"),
-    ## Authenticated
     path('settings/', views.settings, name="settings"),
+    path('token/', views.token, name='token'),
     # Forms
     ## Anonymous
     path('signup/', views.signup, name='signup'),
@@ -20,13 +19,11 @@ urlpatterns = [
     ## Authenticated
     path('update/picture/', views.update_profile_picture, name='picture'),
     path('update/password/', views.update_password, name='password'),
+    path('update/token/', views.update_token, name='update_token'),
     path('update/info/', views.update_profile_info, name='info'),
     # Functionalities
+    path('reset/cancel/', views.cancel, name='cancel'),
     path("navigate/", views.navigate, name="navigate"),
-    ## Anonynous
-    path('lazy/signup/', views.lazy_signup, name="lazy"),
-    ## Authenticated
-    path('token/', views.token, name='token'),
-    path('verification/cancel/', views.cancel, name='cancel'),
     path('signout/', views.signout, name='signout'),
+    path('guest/', views.guest, name="guest"),
 ]
