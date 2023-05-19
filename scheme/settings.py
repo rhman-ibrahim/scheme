@@ -10,10 +10,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig',
-    'user.apps.UserConfig',
+    # Scheme
     'circles.apps.CirclesConfig',
     'signals.apps.SignalsConfig',
+    'spaces.apps.SpacesConfig',
+    'user.apps.UserConfig',
+    'home.apps.HomeConfig',
+    # Third Party
     'rest_framework',
     'mptt'
 ]
