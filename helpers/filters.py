@@ -47,8 +47,12 @@ def replace_underscores(text):
 # Message
 @register.filter
 def message_tag_icon(tag):
-    if tag in ["error", "info", "sucess", "warning"]:
-        return "check_circle" if tag == "success" else tag
+    if tag in ["error", "info", "warning"]:
+        return tag
+    elif tag == "success":
+        return "check_circle"
+    else:
+        return "mail"
 
 # Logs
 @register.filter
