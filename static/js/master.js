@@ -174,7 +174,7 @@ class Theme {
 
 class Message {
     static close = button => {
-        document.body.removeChild(button.parentNode.parentNode);
+        document.body.removeChild(button.parentNode);
     }
 }
 
