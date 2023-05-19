@@ -21,18 +21,16 @@
 
 {% block center %}
 <div class="card">
-    <h3><b>Welcome!</b>, {{ request.user.username }}</h3>
-    <p class="class="description"">This is your account settings page, here you view your logs, download token, update profile information and manage applications.</p>
-    <ul class="row end">
-        <li>
-            <a href="{% url 'user:settings' %}">
-                <img src="{{ request.user.profile.picture.url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture" id="picture">
-            </a>
-        </li>
-        <li>
-            <a class="material-icons" href="{% url 'user:signout' %}">logout</a>
-        </li>
-    </ul>
+    <h3 class="title">
+        <img src="{{ request.user.profile.picture.url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture" id="picture">
+        <span>Welcome!, <b>{{ request.user.username }}</b></span>
+    </h3>
+    <p class="class="description"">This is your account settings page,
+    here you view your logs, download token, update profile information
+    and manage applications.</p>
+    <nav class="row end">
+        <a class="material-icons" href="{% url 'user:signout' %}">logout</a>
+    </nav>
 </div>
 <section class="cards-w">
     <div class="card">
@@ -40,7 +38,8 @@
             <i class="material-icons">qr_code</i>
             <span>token</span>
         </h3>
-        <p>Keep your token secure and updated to ensure that you can always recover your account when needed and prevent security breaches.</p>
+        <p>Keep your token secure and updated to ensure that you can always
+        recover your account when needed and prevent security breaches.</p>
         <ul class="row end">
             <li>
                 <a class="material-icons" href="{% url 'user:update_token' %}">refresh</a>
@@ -55,7 +54,8 @@
             <i class="material-icons">lock</i>
             <span>password</span>
         </li>
-        <p>Regular (3 months) updating is important to have strong and unique passwords which protect your online identity and information.</p>
+        <p>Regular (3 months) updating is important to have strong and unique
+        passwords which protect your online identity and information.</p>
         <ul class="row end">
             <li class="material-icons" onclick="Aside.open('#password-form')">key</li>
         </ul>
@@ -65,7 +65,8 @@
             <i class="material-icons">person</i>
             <span>profile</span>
         </h3>
-        <p>Stay recognizable & connected with others. Update profile info and picture regularly to maintain a professional online presence.</p>
+        <p>Stay recognizable & connected with others. Update profile info and picture
+        regularly to maintain a professional online presence.</p>
         <ul class="row end">
             <li class="material-icons" onclick="Aside.open('#picture-form')">image</li>
             <li class="material-icons" onclick="Aside.open('#info-form')">edit</li>

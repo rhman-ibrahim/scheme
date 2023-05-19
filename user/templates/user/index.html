@@ -3,13 +3,19 @@
 
 {% block fixed %}
 <form method="POST" action="{% url 'user:signup' %}" id="sign-up-form">
-    {% with header=1 form=forms.signup password=1 %}{% include "components/form/base.html" %}{% endwith %}
+    {% with form=forms.signup password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
 </form>
 <form method="POST" action="{% url 'user:signin' %}" id="sign-in-form">
-    {% with header=1 form=forms.signin password=1 %}{% include "components/form/base.html" %}{% endwith %}
+    {% with form=forms.signin password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
 </form>
 <form method="POST" enctype="multipart/form-data" action="{% url 'user:verify' %}" id="token-form">
-    {% with header=1 form=forms.token password=1 %}{% include "components/form/base.html" %}{% endwith %}
+    {% with form=forms.token password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
 </form>
 {% endblock fixed %}
 
@@ -45,8 +51,10 @@
             <i class="material-symbols-outlined">verified_user</i>
             <span>recover</span>
         </h3>
-        <p>A token is a <b>one-time-use</b> quick response code used to recover your account. Download your token and <mark>keep it safe and up-to-date</mark>.
-        Upload your token to recover and reset your password. You may use your token to <b>verify your account and use it later to recover</b>.</p>
+        <p>A token is a <b>one-time-use</b> quick response code used to recover your account.
+        Download your token and <mark>keep it safe and up-to-date</mark>. Upload your token to
+        recover and reset your password. You may use your token to <b>verify your account
+        and use it later to recover</b>.</p>
         <h3 class="row end">
             <i class="material-icons" onclick="Aside.open('#token-form')">arrow_forward</i>
         </ul>
