@@ -16,19 +16,19 @@
 }
 
 .aside-r {
-    border-left: 1.32px solid var(--bc);
     position: fixed;
-    transition-property: right;
+    border-left: 1.32px solid var(--bc);
     right: calc(var(--aw) * -4);
+    transition-property: right;
     bottom: 0px;
     top: 0px;
 }
 
 .aside-l {
-    border-right: 1.32px solid var(--bc);
     position: fixed;
-    transition-property: left;
+    border-right: 1.32px solid var(--bc);
     left: calc(var(--aw) * -4);
+    transition-property: left;
     bottom: 0px;
     top: 0px;
 }

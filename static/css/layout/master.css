@@ -28,11 +28,11 @@ main {
     margin: auto;
 }
 
+main.lr-grid #left,
 main.c-grid #center,
 main.cr-grid #center,
 main.lc-grid #center,
-main.lcr-grid #center,
-main.lr-grid #left {
+main.lcr-grid #center {
     grid-column: 1/13;
 }
 
