@@ -53,7 +53,6 @@ class Signal(MPTTModel):
 
     parent     = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     user       = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False)
-    user       = models.ForeignKey("circles.Circle", on_delete=models.SET_NULL, blank=True, null=True, default=None)
 
     serial     = models.UUIDField(default=uuid.uuid4, editable=False)
     message    = models.TextField(max_length=512, blank=False, null=False)

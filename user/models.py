@@ -7,9 +7,7 @@ from django.contrib.admin.models import LogEntry
 from django.db import models
 
 from scheme.settings import MEDIA_ROOT
-
 from helpers.functions import completion
-from circles.models import Connection
 
 
 
@@ -111,27 +109,3 @@ class Profile(models.Model):
     @property
     def completion_percentage(self):
         return completion([self.name, self.email, self.about])
-
-    @property
-    def names(self):
-        if self.name != None and self.name != "":
-            name = f'{self.name}'.split()
-            return {
-                'first': name[0],
-                'second': ' '.join(name[1:])
-            }
-    
-    @property
-    def connections(self):
-        # Get Following
-        following = [connection.followee for connection in Connection.objects.all() if connection.followers.contains(self.user)]
-        # Get Followers
-        followers = Connection.objects.get(followee=self.user).followers.all()
-        # Get Friends
-        friends = set(following).intersection(followers)
-        # Remove friends from following
-        following = list(set(friends).symmetric_difference(set(following)))
-        # Remove friends from followers
-        followers = list(set(friends).symmetric_difference(set(followers)))
-        return {'firends':friends, 'following':following, 'followers':followers}
-
