@@ -25,5 +25,5 @@ urlpatterns = [
     path('reset/cancel/', views.cancel, name='cancel'),
     path("navigate/", views.navigate, name="navigate"),
     path('signout/', views.signout, name='signout'),
-    path('guest/', views.guest, name="guest"),
+    path('guest/', views.guest_login, name="guest"),
 ]

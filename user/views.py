@@ -1,19 +1,20 @@
-import uuid
+
 import cv2
 
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.http import HttpResponse
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.admin.models import LogEntry, CHANGE, DELETION
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.admin.models import LogEntry, CHANGE
 from django.contrib import messages
 
 from scheme.settings import MEDIA_ROOT
 from helpers.functions import get_form_errors, log
 
 from user.forms import  SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
+from user.functions import create_a_guest_user
 from user.decorators import authenticated
-from user.models import Account, Token
+from user.models import Token
 
 
 # Templates
@@ -196,14 +197,8 @@ def navigate(request):
     return redirect("user:index")
 
 @authenticated(False)
-def guest(request):
-    uuid_key_8 = str(uuid.uuid4())[:8]
-    uuid_key16 = str(uuid.uuid4())[:16]
-    Account.objects.create_lazy_user(username=uuid_key_8, password=uuid_key16)
-    user = authenticate(username=uuid_key_8, password=uuid_key16)
-    if user is not None:
-        login(request, user)
-        log(request.user.id, request.user, CHANGE, "signed in as a user")
+def guest_login(request):
+    create_a_guest_user(request)
     return redirect("user:settings")
 
 @authenticated(True)
