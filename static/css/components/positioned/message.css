@@ -1,13 +1,13 @@
 h3.message {
-    width: 300px;
     padding: 8px;
+    color: #000;
     display: flex;
     position: fixed;
     border-radius: 8px;
     height: min-content;
-    color: #000 !important;
-    right: calc((var(--ww) - 300px) / 2);
-    left: calc((var(--ww) - 300px) / 2);
+    width: calc(var(--ww) / 2);
+    right: calc(var(--ww) / 4);
+    left: calc(var(--ww) / 4);
     top: 8px;
     gap: 8px;
 }
