@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Circle, Radius
+from .models import Circle
 
 admin.site.register(Circle)
-admin.site.register(Radius)
