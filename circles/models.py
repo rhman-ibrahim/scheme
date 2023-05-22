@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 
