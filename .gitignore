@@ -3,6 +3,7 @@ venv/
 __pycache__
 migrations
 db.sqlite3
+.vscode
 
 celerybeat-schedule
 dump.rdb
