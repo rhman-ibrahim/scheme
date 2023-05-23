@@ -10,6 +10,20 @@ from .forms import SignalForm, CommentForm, NoteForm
 
 
 
+def read_ideas(request):
+    return render(
+        request,
+        "signals/index.html",
+        {
+            "signal": {
+                'list': Signal.objects._mptt_filter(level=0),
+                "forms": {
+                    'idea': SignalForm,
+                }
+            }
+        }
+    )
+
 @authenticated(True)
 def create_signal(request):
     if  request.method == "POST":
@@ -45,21 +59,6 @@ def create_comment(request):
             messages.success(request, "your comment is created successfully")
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-@authenticated(True)
-def read_ideas(request):
-    return render(
-        request,
-        "signals/index.html",
-        {
-            "signal": {
-                'list': Signal.objects._mptt_filter(level=0),
-                "forms": {
-                    'idea': SignalForm,
-                }
-            }
-        }
-    )
 
 @authenticated(True)
 def read_idea(request, id):
