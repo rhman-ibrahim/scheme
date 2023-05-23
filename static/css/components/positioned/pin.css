@@ -45,16 +45,16 @@
     display: block;
 }
 
-.cr-grid #right-pin,
-.lc-grid #left-pin,
-.lcr-grid #right-pin,
-.lr-grid #right-ping {
+main.cr-grid + #right-pin,
+main.lc-grid + #left-pin,
+main.lcr-grid + #right-pin,
+main.lr-grid + #right-ping {
     position: fixed;
     bottom: 8px;
     right: 8px;
 }
 
-.lcr-grid #left-pin {
+main.lcr-grid + #left-pin {
     position: fixed;
     bottom: 8px;
     right: 52px;

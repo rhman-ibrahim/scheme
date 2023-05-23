@@ -50,10 +50,6 @@ div.column {
 
 @media (width >= 720px) {
 
-    main {
-        width: 720px;
-    }
-
     /*
         LR-Grid
         L = R (6 columns)
@@ -78,10 +74,6 @@ div.column {
 }
 
 @media (width >= 1080px) {
-
-    main {
-        width: 1080px;
-    }
 
     main.cr-grid #right,
     main.lc-grid #left,
@@ -136,10 +128,6 @@ div.column {
 
 @media (width >= 1440px) {
     
-    main {
-        width: 1440px;
-    }
-
     /*
         CR-Grid
         C = 3R  (9 columns)
