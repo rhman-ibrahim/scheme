@@ -1,0 +1,14 @@
+{% extends 'layouts/lcr.html' %}
+
+{% block fixed %}
+<form method="POST" action="{% url 'circles:create' %}" id="circle-update-form">
+    {% with form=forms.circle %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+{% endblock fixed %}
+
+{% block center %}
+<h1>{{ circle.name }}</h1>
+<i onclick="Aside.open('#circle-update-form')">koko</i>
+{% endblock center %}
