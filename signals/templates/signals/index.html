@@ -1,16 +1,15 @@
-{% extends 'layouts/lcr.html' %}
+{% extends 'templates/app.html' %}
 {% load filters %}
 
-{% block fixed %}
-{% include "signals/components/signal/idea/form.html" %}
-{% endblock fixed %}
-
-{% block left %}
-{% include "user/components/actions/apps.html" %}
-{% endblock left %}
-
 {% block center %}
-{% for signal in signal.list %}
-{% include "signals/components/signal/idea/index.html" %}
-{% endfor %}
+<section class="cards-w">
+    {% include "components/cards/signals.html" %}
+    <div class="card">
+        <h3 class="title">
+            <i class="material-symbols-outlined">tips_and_updates</i>
+        </h3>
+        <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
+        together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
+    </div>
+</section>
 {% endblock center %}

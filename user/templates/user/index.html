@@ -1,4 +1,4 @@
-{% extends 'layouts/c.html' %}
+{% extends 'templates/app.html' %}
 {% load filters %}
 
 {% block fixed %}
@@ -19,10 +19,7 @@
 </form>
 {% endblock fixed %}
 
-{% block main %}
-<section id="menu">
-    {% include "components/cards/_.html" %}
-</section>
+{% block center %}
 <section class="cards-w">
     <div class="card">
         <h3 class="title">
@@ -71,4 +68,4 @@
         </h3>
     </div>
 </section>
-{% endblock main %}
+{% endblock center %}

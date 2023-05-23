@@ -1,1 +1,14 @@
-{% extends 'layouts/c.html' %}
+{% extends 'templates/app.html' %}
+
+{% block center %}
+<section class="cards-w">
+    {% include "components/cards/spaces.html" %}
+    <div class="card">
+        <h3 class="title">
+            <i class="material-symbols-outlined">tips_and_updates</i>
+        </h3>
+        <p>Space is a group conversation where <b>users could be anonymous</b>.
+        To have spaces you have to <mark>create a circle then invite members</mark> in.</p>
+    </div>
+</section>
+{% endblock center %}

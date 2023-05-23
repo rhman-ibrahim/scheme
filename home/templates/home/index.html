@@ -3,34 +3,8 @@
 
 {% block main %}
 <section id="menu">
-    {% include "components/cards/_.html" %}
-</section>
-<section id="building-blocks">
     <div class="cards-w">
-        <div class="card">
-            <h3 class="title">
-                <i class="material-symbols-outlined">speaker_notes</i>
-                <span>signals</span>
-            </h3>
-            <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
-            together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
-        </div>
-        <div class="card">
-            <h3 class="title">
-                <i class="material-symbols-outlined">diversity_2</i>
-                <span>circles</span>
-            </h3>
-            <p>Circle is where you invite users to <b>share signals and create spaces</b>.
-            <mark>Create</mark> private circles & <mark>join</mark> public and official circles!.</p>
-        </div>
-        <div class="card">
-            <h3 class="title">
-                <i class="material-symbols-outlined">forum</i>
-                <span>spaces</span>
-            </h3>
-            <p>Space is a group conversation where <b>users could be anonymous</b>.
-            To have spaces you have to <mark>create a circle then invite members</mark> in.</p>
-        </div>
+        {% include "components/cards/_.html" %}
     </div>
 </section>
 {% endblock main %}
