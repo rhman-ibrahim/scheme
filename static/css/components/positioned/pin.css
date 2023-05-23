@@ -47,7 +47,7 @@
 
 main.cr-grid + #right-pin,
 main.lc-grid + #left-pin,
-main.lcr-grid + #right-pin,
+main.lcr-grid + #left-pin + #right-pin,
 main.lr-grid + #right-ping {
     position: fixed;
     bottom: 8px;
