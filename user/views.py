@@ -56,7 +56,7 @@ def identified(request):
                 }
             }
         )
-    return redirect('user:index')
+    return redirect('home:user')
 
 # Forms
 
@@ -69,7 +69,7 @@ def signup(request):
             messages.success(request, "your account has been created successfully.")
         else:
             get_form_errors(request, form)
-        return redirect("user:index")
+        return redirect("home:user")
     
 @authenticated(False)
 def signin(request):
@@ -84,7 +84,7 @@ def signin(request):
                 return redirect("user:settings")
         else:
             get_form_errors(request, form)
-    return redirect("user:index")
+    return redirect("home:user")
 
 def verify(request):
     if request.method == 'POST':
@@ -114,10 +114,10 @@ def reset(request):
             form.save()
             messages.success(request, 'password has been reset successfully')
             del request.session['token']
-            return redirect("user:index")
+            return redirect("home:user")
         else:
             get_form_errors(request, form)
-    return redirect('user:index')
+    return redirect('home:user')
 
 @authenticated(True)
 def update_token(request):
@@ -140,7 +140,7 @@ def update_profile_picture(request):
             messages.success(request, "profile picture updated successfully")
         else:
             get_form_errors(request, form)
-    return redirect('user:index')
+    return redirect('home:user')
 
 @authenticated(True)
 def update_password(request):
@@ -151,10 +151,10 @@ def update_password(request):
             update_session_auth_hash(request, user)
             log(request.user.id, request.user, CHANGE, "updated password")
             messages.success(request, 'password has been updated successfully')
-            return redirect("user:index")
+            return redirect("home:user")
         else:
             get_form_errors(request, form)
-    return redirect('user:index')
+    return redirect('home:user')
 
 @authenticated(True)
 def update_profile_info(request):
@@ -174,7 +174,7 @@ def update_profile_info(request):
 
 def navigate(request):
     if request.user.is_authenticated: return redirect("user:settings")
-    return redirect("user:index")
+    return redirect("home:user")
 
 @authenticated(False)
 def guest_login(request):
@@ -186,8 +186,8 @@ def signout(request):
     log(request.user.id, request.user, CHANGE, "signed out")
     logout(request)
     messages.success(request, 'signed out successfully')
-    return redirect('user:index')
+    return redirect('home:user')
 
 def cancel(request):
     if 'token' in request.session: del request.session['token']
-    return redirect("user:index")
+    return redirect("home:user")

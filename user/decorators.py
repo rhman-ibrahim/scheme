@@ -19,7 +19,7 @@ def authenticated(status):
                 return view(request, *args, **kwargs)
             if status:
                 messages.warning(request, "you have to signin first.")
-                return redirect('user:index')
+                return redirect('home:user')
             messages.warning(request, "you have to signouty first.")
             return redirect("user:settings")
         return wrapper
