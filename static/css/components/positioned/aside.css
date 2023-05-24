@@ -80,11 +80,11 @@ main.lcr-grid #center #left-pin {
     }
 
     .aside-r {
-        right: calc(360px * 4);
+        right: calc(-360px * 4);
     }
 
     aside.-l {
-        left: calc(360px * 4);
+        left: calc(-360px * 4);
     }
 
 }
