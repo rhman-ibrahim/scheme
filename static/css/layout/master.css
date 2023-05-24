@@ -29,14 +29,11 @@ main {
     margin: auto;
 }
 
-aside {
+aside div.wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-aside div.wrapper {
     padding: 16px 8px 64px 8px;
+    gap: 8px;
 }
 
 main.lr-grid #left,
