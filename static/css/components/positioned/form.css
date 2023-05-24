@@ -103,7 +103,6 @@ form fieldset div textarea:focus {
 
 form fieldset div small {
   display: inline-block;
-  text-align: right;
   font-size: .75rem;
   font-weight: 500;
   line-height: 1.2;
