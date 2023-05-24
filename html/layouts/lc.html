@@ -6,16 +6,23 @@
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
-    {% block fixed %}{% endblock fixed %}
+    {% block fixed %}
+    {% endblock %}
     <main class="lc-grid">
-        <div class="column aside-l" id="left">
-            {% block left %}{% endblock left %}
-        </div>
-        <div class="column" id="center">
-            {% block center %}{% endblock center %}
-        </div>
+        <aside class="aside-l" id="left">
+            <div class="wrapper">
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
+                {% block left %}
+                {% endblock %}
+            </div>
+        </aside>
+        <aside id="center">
+            <div class="wrapper">
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#left')" id="left-pin">widgets</button>
+                {% block center %}
+                {% endblock %}
+            </div>
+        </aside>
     </main>
-    <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#left')" id="left-pin">widgets</button>
-    <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
 </body>
 </html>

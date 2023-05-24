@@ -6,11 +6,15 @@
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
-    {% block fixed %}{% endblock fixed %}
+    {% block fixed %}
+    {% endblock fixed %}
     <main class="c-grid">
-        <div class="column" id="center">
-            {% block main %}{% endblock main %}
-        </div>
+        <aside id="center">
+            <div class="wrapper">
+                {% block main %}
+                {% endblock %}
+            </div>
+        </aside>
     </main>
 </body>
 </html>
