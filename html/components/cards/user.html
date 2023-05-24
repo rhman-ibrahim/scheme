@@ -1,5 +1,5 @@
 {% if request.user.is_authenticated %}
-<div class="card">
+<div class="card" data-app="user">
     <h3 class="title">
         <img src="{{ request.user.profile.picture.url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture" id="picture">
         <span>{{ request.user.username }}</span>
@@ -12,7 +12,7 @@
     </nav>
 </div>
 {% else %}
-<div class="card">
+<div class="card" data-app="user">
     <h3 class="title">
         <i class="material-symbols-outlined">person</i>
         <span>user</span>
