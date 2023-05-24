@@ -3,7 +3,6 @@ class Handler {
         Template.init();
         Theme.default();
         Form.init();
-        Aside.init();
         Thread.init();
     }
 }
@@ -25,7 +24,7 @@ class Template {
         const main = document.querySelector('main');
         if (state == true) {
             if (main.contains(elem)) {
-                document.querySelectorAll('div.column:not(.active)').forEach(
+                document.querySelectorAll('aside:not(.active)').forEach(
                     column => {
                         column.style.filter = "blur(5px)";
                     }
@@ -35,7 +34,7 @@ class Template {
             }
         } else {
             if (main.contains(elem)) {
-                document.querySelectorAll('div.column').forEach(
+                document.querySelectorAll('aside').forEach(
                     column => {
                         column.style.filter = "none";
                     }
@@ -48,37 +47,6 @@ class Template {
 }
 
 class Aside {
-    static init = () => {
-        let asideObserver = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(
-                    entry => {
-                        const position  = getComputedStyle(entry.target).position;
-                        const arrow     = (entry.target.classList[1] == "aside-l") ? "arrow_back":"arrow_forward";
-                        const pin       = (entry.target.classList[1] == "aside-l") ? "pin-l":"pin-r";
-                        if (entry.isIntersecting && position != "static") {
-                            document.querySelector('#aside-button').textContent = arrow;
-                            document.querySelector('#aside-button').classList.add('active', pin);
-                        } else {
-                            document.querySelector('#aside-button').classList.remove('active', pin);
-                        }
-                    }
-                );
-            }
-        );
-        if (Template.isThere('.aside-r')) {
-            const rAside = document.querySelector('.aside-r');
-            asideObserver.observe(rAside);
-        }
-        
-        if (Template.isThere('.aside-l')) {
-            const lAside = document.querySelector('.aside-l');
-            asideObserver.observe(lAside);
-        }
-        if (Template.isThere(localStorage.getItem('aside'))) {
-            Aside.open(localStorage.getItem('aside'));
-        }
-    }
     static open = selector => {
         Aside.clear();
         document.querySelector(`${selector}`).classList.add('active');

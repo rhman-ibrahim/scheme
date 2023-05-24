@@ -6,7 +6,8 @@
 html,
 body,
 main,
-div.column {
+aside,
+aside div.wrapper {
     height: var(--wh);
     overflow-x: hidden;
     overflow-y: scroll;
@@ -17,7 +18,7 @@ div.column {
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
 main::-webkit-scrollbar,
-div.column::-webkit-scrollbar {
+aside::-webkit-scrollbar {
     display: none;
 }
 
@@ -28,24 +29,19 @@ main {
     margin: auto;
 }
 
-main.lr-grid #left,
-main.c-grid #center,
-main.cr-grid #center,
-main.lc-grid #center,
-main.lcr-grid #center {
-    grid-column: 1/13;
-}
-
-div.column {
-    padding: 16px 8px 64px 8px;
-}
-
-#left,
-#center,
-#right {
+aside {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+aside div.wrapper {
+    padding: 16px 8px 64px 8px;
+}
+
+main.lr-grid #left,
+#center {
+    grid-column: 1/13;
 }
 
 @media (width >= 720px) {
@@ -67,10 +63,6 @@ div.column {
         width: 100%;
     }
 
-    main.lr-grid #left #right-pin {
-        display: none;
-    }
-
 }
 
 @media (width >= 1080px) {
@@ -82,12 +74,6 @@ div.column {
         position: static;
         display: flex;
         width: 100%;
-    }
-
-    main.cr-grid #right-pin,
-    main.lc-grid #left-pin,
-    main.lcr-grid #left-pin {
-        display: none;
     }
 
     /*
@@ -178,10 +164,6 @@ div.column {
         position: static;
         grid-column: 10/13;
         width: 100%;
-    }
-
-    main.lcr-grid #right-pin {
-        display: none;
     }
 
 }

@@ -1,25 +1,20 @@
-:root {
-    --ah: calc(var(--wh) * .5);
-    --aw: 100%;
+aside {
+    width: 100%;
+    background: var(--d1);
+    filter: none;
 }
 
-/*
-    an aside is hidden by default (in mobile view),
-    each aside has open & close functionalities,
-*/
-
-.aside-r,
-.aside-l {
-    width: 312px;
-    height: var(--wh);
-    filter: none;
+.aside-l,
+.aside-r {
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
 }
 
 .aside-r {
     position: fixed;
     border-left: 1.32px solid var(--bc);
-    right: calc(var(--aw) * -4);
     transition-property: right;
+    right: -400%;
     bottom: 0px;
     top: 0px;
 }
@@ -27,8 +22,8 @@
 .aside-l {
     position: fixed;
     border-right: 1.32px solid var(--bc);
-    left: calc(var(--aw) * -4);
     transition-property: left;
+    left: -400%;
     bottom: 0px;
     top: 0px;
 }
@@ -41,9 +36,86 @@
     left: 0px;
 }
 
-.aside-r,
-.aside-l {
-    transition-timing-function: ease-in-out;
-    transition-duration: 1s;
+aside div.wrapper #aside-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+.pin {
+    color: var(--fc);
     background: var(--d1);
+    outline: 1.32px solid var(--bc);
+    border-radius: 100%;
+    padding: 8px;
+    height: 40px;
+    width: 40px;
+}
+
+#left-pin,
+#right-pin {
+    display: block;
+}
+
+main.cr-grid #center #right-pin,
+main.lc-grid #center #left-pin,
+main.lcr-grid #center #left-pin + #right-pin,
+main.lr-grid #center #right-ping {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+main.lcr-grid #center #left-pin {
+    position: absolute;
+    bottom: 8px;
+    right: 52px;
+}
+
+@media (width > 360px) {
+
+    .aside-l,
+    .aside-r {
+        width: 360px;
+    }
+
+    .aside-r {
+        right: calc(360px * 4);
+    }
+
+    aside.-l {
+        left: calc(360px * 4);
+    }
+
+}
+
+@media (width >= 720px) {
+
+    main.lr-grid #center #right-pin,
+    main.lr-grid #right.aside-r #aside-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1080px) {
+
+    main.cr-grid #center #right-pin,
+    main.lc-grid #center #left-pin,
+    main.lcr-grid #center #left-pin,
+    main.cr-grid #right.aside-r #aside-button,
+    main.lc-grid #left.aside-l #aside-button,
+    main.lcr-grid #left.aside-l #aside-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1440px) {
+
+    main.lcr-grid #center #right-pin, 
+    main.lcr-grid #right.aside-r #aside-button {
+        display: none;
+    }
+
 }
