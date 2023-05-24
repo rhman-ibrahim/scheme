@@ -1,4 +1,4 @@
-{% extends 'templates/app.html' %}
+{% extends 'layouts/app.html' %}
 {% load filters %}
 
 {% block fixed %}
@@ -54,17 +54,6 @@
         and use it later to recover</b>.</p>
         <h3 class="end">
             <i class="material-icons" onclick="Aside.open('#token-form')">arrow_forward</i>
-        </h3>
-    </div>
-    <div class="card">
-        <h3 class="title">
-            <i class="material-icons">bolt</i>
-            <span>guest</span>
-        </h3>
-        <p><b>Chat anonymously</b>, host a private conversation circle and invite others.
-        Sign in as a guest, <mark>start now without filling any forms</mark>.</p>
-        <h3 class="row end">
-            <a class="material-icons" href="{% url 'user:guest' %}">arrow_forward</a>
         </h3>
     </div>
 </section>
