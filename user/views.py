@@ -1,37 +1,17 @@
-
 import cv2
-
 from django.http import HttpResponse
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.admin.models import LogEntry, CHANGE
 from django.contrib import messages
-
 from scheme.settings import MEDIA_ROOT
 from helpers.functions import get_form_errors, log
-
 from user.forms import  SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
 from user.functions import create_a_guest_user
 from user.decorators import authenticated
 from user.models import Token
 
-
-# Templates
-
-@authenticated(False)
-def index(request):
-    return render(
-        request,
-        "user/index.html",
-        {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'token': TokenForm
-            }
-        }
-    )
 
 @authenticated(True)
 def settings(request):

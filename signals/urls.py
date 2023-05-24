@@ -5,9 +5,6 @@ from . import views
 app_name    = "signals"
 urlpatterns = [
 
-    # Index (Home)
-    path('', views.read_ideas, name="read_ideas"),
-
     # Signal
     path('signal/', views.create_signal, name="create_signal"),
     path('signal/update/<str:id>/', views.update_signal, name="update_signal"),

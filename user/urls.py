@@ -5,7 +5,6 @@ from user import views
 app_name    = "user"
 urlpatterns = [
     # Templates
-    path('auth/', views.index, name="index"),
     path('identified/', views.identified, name="identified"),
     path('settings/', views.settings, name="settings"),
     path('token/', views.token, name='token'),

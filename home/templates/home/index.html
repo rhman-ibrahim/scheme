@@ -1,10 +1,17 @@
-{% extends 'layouts/c.html' %}
+{% extends 'layouts/lc.html' %}
 {% load filters %}
 
-{% block main %}
+{% block left %}
+{% include "components/cards/theme.html" %}
+{% endblock left %}
+
+{% block center %}
 <section id="menu">
     <div class="cards-w">
-        {% include "components/cards/_.html" %}
+        {% include "components/cards/user.html" %}
+        {% include "components/cards/circles.html" %}
+        {% include "components/cards/spaces.html" %}
+        {% include "components/cards/signals.html" %}
     </div>
 </section>
-{% endblock main %}
+{% endblock center %}

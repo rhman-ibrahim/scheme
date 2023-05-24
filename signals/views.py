@@ -1,16 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-
 from helpers.functions import get_form_errors
 from user.decorators import authenticated
-
 from .models import Signal, Note, Comment
 from .forms import SignalForm, CommentForm, NoteForm
 
 
-
-def read_ideas(request):
+@authenticated(False)
+def index(request):
     return render(
         request,
         "signals/index.html",

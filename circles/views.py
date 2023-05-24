@@ -1,24 +1,18 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-
 from helpers.decorators import resource
 from helpers.functions import get_form_errors
-
 from user.functions import create_a_guest_user
 from user.decorators import authenticated
-
 from .models import Circle, Invitation
 from .forms import CircleForm
 
 
 def create(request):
-
     if  request.method == "POST":
         form = CircleForm(request.POST)
-        
         if not request.user.is_authenticated:
             create_a_guest_user(request)
-
         if form.is_valid():
             circle         = form.save(commit=False)
             circle.founder = request.user
@@ -27,7 +21,6 @@ def create(request):
             messages.success(request, "your circle is created successfully")
         else:
             get_form_errors(request, form)
-
     return redirect("circles:manage")
 
 
@@ -41,17 +34,6 @@ def manage(request):
             'circle': circle,
             'forms': {
                 'circle': CircleForm(instance=circle)
-            }
-        }
-    )
-
-def index(request):
-    return render(
-        request,
-        "circles/index.html",
-        {
-            'forms': {
-                'circle': CircleForm
             }
         }
     )
