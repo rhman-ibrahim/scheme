@@ -1,6 +1,14 @@
 {% extends 'layouts/app.html' %}
 {% load filters %}
 
+{% block fixed %}
+<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
+    {% with form=forms.circle %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+{% endblock %}
+
 {% block center %}
 <section class="cards-w">
     {% include "components/cards/spaces.html" %}
@@ -13,4 +21,4 @@
         To have spaces you have to <mark>create a circle then invite members</mark> in.</p>
     </div>
 </section>
-{% endblock center %}
+{% endblock %}

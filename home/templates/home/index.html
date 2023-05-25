@@ -1,2 +1,10 @@
 {% extends 'layouts/app.html' %}
 {% load filters %}
+
+{% block fixed %}
+<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
+    {% with form=forms.circle %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+{% endblock %}

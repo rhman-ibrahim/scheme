@@ -2,6 +2,11 @@
 {% load filters %}
 
 {% block fixed %}
+<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
+    {% with form=forms.circle %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
 <form method="POST" action="{% url 'user:signup' %}" id="sign-up-form">
     {% with form=forms.signup password=1 %}
     {% include "components/form/base.html" %}
@@ -17,7 +22,7 @@
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
-{% endblock fixed %}
+{% endblock %}
 
 {% block center %}
 <section class="cards-w">
@@ -57,4 +62,4 @@
         </h3>
     </div>
 </section>
-{% endblock center %}
+{% endblock %}
