@@ -2,12 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from helpers.functions import get_form_errors
-from user.decorators import authenticated
 from .models import Signal, Note, Comment
 from .forms import SignalForm, CommentForm, NoteForm
 
 
-@authenticated(False)
 def index(request):
     return render(
         request,
@@ -22,7 +20,6 @@ def index(request):
         }
     )
 
-@authenticated(True)
 def create_signal(request):
     if  request.method == "POST":
         form = SignalForm(request.POST)
@@ -34,7 +31,6 @@ def create_signal(request):
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def create_note(request):
     if  request.method == "POST":
         form = NoteForm(request.POST)
@@ -46,7 +42,6 @@ def create_note(request):
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def create_comment(request):
     if  request.method == "POST":
         form = CommentForm(request.POST)
@@ -58,7 +53,6 @@ def create_comment(request):
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def read_idea(request, id):
     signal = Signal.objects.get(serial=id)
     return render(
@@ -76,7 +70,6 @@ def read_idea(request, id):
         }
     )
 
-@authenticated(True)
 def read_concern(request, id):
     concern = Signal.objects.get(serial=id)
     return render(
@@ -94,7 +87,6 @@ def read_concern(request, id):
         }
     )
 
-@authenticated(True)
 def read_test(request, id):
     test = Signal.objects.get(serial=id)
     return render(
@@ -112,7 +104,6 @@ def read_test(request, id):
         }
     )
 
-@authenticated(True)
 def read_result(request, id):
     result = Signal.objects.get(serial=id)
     return render(
@@ -125,7 +116,6 @@ def read_result(request, id):
         }
     )
 
-@authenticated(True)
 def update_signal(request, id):
     if request.method == "POST":
         form = SignalForm(request.POST, instance=Signal.objects.get(serial=id))
@@ -135,7 +125,6 @@ def update_signal(request, id):
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def update_comment(request, id):
     if request.method == "POST":
         form = CommentForm(request.POST, instance=Comment.objects.get(serial=id))
@@ -145,13 +134,11 @@ def update_comment(request, id):
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def delete_signal(request, id):
     Signal.objects._mptt_filter(serial=id).delete()
     messages.success(request, "your signal is deleted successfully")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@authenticated(True)
 def delete_comment(request, id):
     Comment.objects._mptt_filter(id=id).delete()
     messages.success(request, "your comment is deleted successfully")
