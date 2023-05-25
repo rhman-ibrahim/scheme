@@ -9,11 +9,23 @@ from scheme.settings import MEDIA_ROOT
 from helpers.functions import get_form_errors, log
 from user.forms import  SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
 from user.functions import create_a_guest_user
-from user.decorators import authenticated
+from user.decorators import authentication, guest
 from user.models import Token
 
 
-@authenticated(True)
+def navigate(request):
+    if request.user.is_authenticated:
+        if request.user.is_lazy:
+            if request.session['circle']:
+                return redirect("circles:manage")
+            else:
+                return redirect("user:signout")
+        else:
+            return redirect("user:settings")
+    return redirect("home:user")
+
+@guest(False)
+@authentication(True)
 def settings(request):
     return render(
         request,
@@ -32,7 +44,8 @@ def settings(request):
         }
     )
 
-@authenticated(True)
+@guest(False)
+@authentication(True)
 def token(request):
     with open(
         f"{MEDIA_ROOT}/user/account/tokens/{request.user.username}.png",
@@ -41,7 +54,8 @@ def token(request):
     response = HttpResponse(content_type='image/png')
     response.write(file)
     return response
-    
+
+@guest(False)    
 def identified(request):
     token = Token.objects.get(value=request.session['token'])
     if 'token' in request.session:
@@ -58,9 +72,7 @@ def identified(request):
         )
     return redirect('home:user')
 
-# Forms
-
-@authenticated(False)
+@authentication(False)
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -71,7 +83,7 @@ def signup(request):
             get_form_errors(request, form)
         return redirect("home:user")
     
-@authenticated(False)
+@authentication(False)
 def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
@@ -86,6 +98,7 @@ def signin(request):
             get_form_errors(request, form)
     return redirect("home:user")
 
+@guest(False)
 def verify(request):
     if request.method == 'POST':
         form = TokenForm(request.POST, request.FILES)
@@ -106,6 +119,7 @@ def verify(request):
             get_form_errors(request, form)
     return redirect('user:identified')
 
+@guest(False)
 def reset(request):
     if 'token' in request.session and request.method == "POST":
         token = Token.objects.get(value=request.session['token'])
@@ -119,7 +133,8 @@ def reset(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@authenticated(True)
+@guest(False)
+@authentication(True)
 def update_token(request):
     token = request.user.token
     if token != None:
@@ -128,7 +143,8 @@ def update_token(request):
         messages.success(request, "your token has been updated successfully")
     return redirect("user:settings")
 
-@authenticated(True)
+@guest(False)
+@authentication(True)
 def update_profile_picture(request):
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST, request.FILES, instance=request.user.profile)
@@ -142,7 +158,8 @@ def update_profile_picture(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@authenticated(True)
+@guest(False)
+@authentication(True)
 def update_password(request):
     if request.method == 'POST':
         form = PasswordUpdateForm(request.user, request.POST)
@@ -156,7 +173,8 @@ def update_password(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@authenticated(True)
+@guest(False)
+@authentication(True)
 def update_profile_info(request):
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, instance=request.user.profile)
@@ -170,24 +188,19 @@ def update_profile_info(request):
             get_form_errors(request, form)
     return redirect('user:settings')
 
-# Functionalities
-
-def navigate(request):
-    if request.user.is_authenticated: return redirect("user:settings")
-    return redirect("home:user")
-
-@authenticated(False)
+@authentication(False)
 def guest_login(request):
     create_a_guest_user(request)
     return redirect("user:settings")
 
-@authenticated(True)
+@authentication(True)
 def signout(request):
     log(request.user.id, request.user, CHANGE, "signed out")
     logout(request)
     messages.success(request, 'signed out successfully')
     return redirect('home:user')
 
+@guest(False)
 def cancel(request):
     if 'token' in request.session: del request.session['token']
     return redirect("home:user")
