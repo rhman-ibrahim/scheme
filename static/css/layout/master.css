@@ -30,15 +30,24 @@ main {
 }
 
 aside div.wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 16px 8px 64px 8px;
+    padding: 16px 16px 64px 16px;
     gap: 8px;
 }
 
 main.lr-grid #left,
 #center {
     grid-column: 1/13;
+}
+
+/*
+    []
+*/
+
+[data-state=False] {
+    display: none !important;
 }
 
 @media (width >= 720px) {

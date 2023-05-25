@@ -98,11 +98,3 @@ a {
     text-decoration: none;
     color: var(--fc);
 }
-
-/*
-    []
-*/
-
-[data-state=False] {
-    display: none !important;
-}
