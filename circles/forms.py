@@ -1,5 +1,5 @@
 from django import forms
-from .models import Circle
+from .models import Circle, Invitation
 
 
 class CircleForm(forms.ModelForm):
@@ -22,6 +22,17 @@ class CircleForm(forms.ModelForm):
     )
 
     class Meta:
-
         model  = Circle
         fields = ['name', 'description']
+
+
+class InvitationForm(forms.ModelForm):
+
+    limit = forms.CharField(
+        max_length=9,
+        required=True
+    )
+
+    class Meta:
+        model  = Invitation
+        fields = ['limit']    
