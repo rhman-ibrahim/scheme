@@ -1,7 +1,7 @@
 class Handler {
     static init = () => {
         Template.init();
-        Theme.default();
+        Theme.init();
         Form.init();
         Thread.init();
     }
@@ -109,12 +109,12 @@ class Form {
 
 class Theme {
     static init = () => {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener(
-            'change', (e) => {
-                if (e.matches) Theme.dark();
-                else Theme.light();
-            }
-        );
+        if (localStorage.getItem('theme') == null) Theme.default();
+        else {
+            document.body.classList.remove("dark", "light");
+            document.body.classList.add(localStorage.getItem('theme'));
+        }
+        Theme.setIcon();
     }
     static default = () => {
         document.body.classList.remove("dark", "light");
@@ -122,7 +122,6 @@ class Theme {
         localStorage.setItem("theme", theme);
         document.body.classList.add(theme);
         Theme.setIcon();
-        Theme.init();
     }
     static dark = () => {
         document.body.classList.remove(localStorage.getItem('theme'));
