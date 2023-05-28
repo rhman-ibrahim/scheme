@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'user:reset' %}" id="reset-form">
+    {% with form=forms.reset password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

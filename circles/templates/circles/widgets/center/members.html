@@ -1,0 +1,16 @@
+{% if circle.members.count %}
+<section class="widget" id="members">
+    <h3 class="title">
+        <i class="material-icons">group</i>
+        <span>members ({{ circle.members.count }})</span>
+    </h3>
+    <div class="cards-w">
+        {% for member in circle.members.all %}
+        <div class="card center fs">
+            <img src="{{ member.profile.picture.url }}" alt="" class="circle-48">
+            <h4>{{ member.username }}</h4>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

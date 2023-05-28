@@ -1,0 +1,20 @@
+<form method="POST" action="{% url 'user:password' %}" id="password-form">
+    {% with form=forms.password password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" enctype="multipart/form-data" action="{% url 'user:picture' %}" id="picture-form">
+    {% with form=forms.picture %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'user:info' %}" id="info-form">
+    {% with form=forms.info %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
+    {% with form=forms.circle %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

@@ -1,0 +1,5 @@
+<nav>
+    {% for circle in request.user.profile.circles %}
+    <a href="{{ circle.open }}">{{ circle.name }}</a>
+    {% endfor %}
+</nav>

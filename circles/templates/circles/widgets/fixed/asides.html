@@ -1,0 +1,18 @@
+<aside class="aside-r" id="requests">
+    <div class="wrapper">
+        <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
+        {% for ask in circle.circlerequests_set.all %}
+        <div class="card">
+            <h4 class="title">
+                <img src="{{ ask.user.profile.picture.url }}" alt="" class="circle-24">
+                <span>{{ ask.user.username }}</span>
+            </h4>
+            <h5>{{ user.circlerequests.timestamp }}</h5>
+            <nav class="end">
+                <a href="{% url 'circles:approve' circle.id ask.user.id %}" class="material-symbols-outlined">check</a>
+                <a href="{% url 'circles:reject' circle.id ask.user.id %}" class="material-symbols-outlined">close</a>
+            </nav>
+        </div>
+        {% endfor %}
+    </div>
+</aside>

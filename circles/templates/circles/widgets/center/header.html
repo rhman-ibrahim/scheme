@@ -1,0 +1,30 @@
+<header class="widget">
+    <h3 class="title">
+        <i class="material-icons">person</i>
+        <span>founder</span>
+    </h3>
+    <div class="cards-w">
+        <div class="card">
+            <h3 class="title">
+                <img src="{{ circle.founder.profile.picture.url }}" alt="" class="circle-24">
+                <span>{{ circle.founder.username }}</span>
+            </h3>
+            {% if user.profile.has_about %}
+            <p>{{ user.profile.has_about}}</p>
+            {% else %}
+            <p>No about paragraph was provided.</p>
+            {% endif %}
+        </div>
+        <div class="card">
+            <h3 class="title">
+                <i class="material-symbols-outlined">diversity_2</i>
+                <span>{{ circle.name }}</span>
+            </h3>
+            {% if circle.has_description %}
+            <p>{{ circle.description}}</p>
+            {% else %}
+            <p>No about paragraph was provided.</p>
+            {% endif %}
+        </div>
+    </div>
+</header>

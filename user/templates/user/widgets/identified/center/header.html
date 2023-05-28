@@ -1,0 +1,12 @@
+<header class="card fb">
+    <h3 class="title">
+        <img class="circle-24" src="{{ user.profile.picture.url }}" alt="{{ user.username }}'s profile picture" id="picture">
+        <span>Welcome, <b>{{ user.username }}</b></span>
+    </h3>
+    <p>Your account has been identified successfully!,
+    you could reset now or you could cancel the recovering
+    and use your token later.</p>
+    <nav class="end">
+        <a class="material-icons" href="{% url 'user:cancel' %}">arrow_back</a>
+    </nav>
+</header>

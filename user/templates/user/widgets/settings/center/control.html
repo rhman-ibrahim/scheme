@@ -1,0 +1,43 @@
+<section class="cards-w" id="control">
+    <div class="card">
+        <h3 class="title">
+            <i class="material-icons">qr_code</i>
+            <span>token</span>
+        </h3>
+        <p>Keep your token secure and updated to ensure that you can always
+        recover your account when needed and prevent security breaches.</p>
+        <ul class="row end">
+            <li>
+                <a class="material-icons" href="{% url 'user:update_token' %}">refresh</a>
+            </li>
+            <li>
+                <a class="material-icons" href="{% url 'user:token' %}">download</a>
+            </li>
+        <ul>
+    </div>
+    <div class="card">
+        <li class="title">
+            <i class="material-icons">lock</i>
+            <span>password</span>
+        </li>
+        <p>Regular (3 months) updating is important to have strong and unique
+        passwords which protect your online identity and information.</p>
+        <ul class="row end">
+            <li class="material-icons" onclick="Aside.open('#password-form')">key</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3 class="title">
+            <i class="material-icons">person</i>
+            <span>profile</span>
+        </h3>
+        <p>Stay recognizable & connected with others. Update profile info and picture
+        regularly to maintain a professional online presence.</p>
+        <ul class="row end">
+            <li class="material-icons" onclick="Aside.open('#picture-form')">image</li>
+            <li class="material-icons" onclick="Aside.open('#info-form')">edit</li>
+        </ul>
+    </div>
+    {% include "components/cards/circles/guest.html" %}
+    {% include "components/cards/theme.html" %}
+</section>
