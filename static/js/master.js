@@ -5,6 +5,16 @@ class Handler {
         Form.init();
         Thread.init();
     }
+    static copy = (element, attribute) => {
+        let dataToCopy = element.getAttribute(`data-${attribute}`);
+        navigator.clipboard.writeText(dataToCopy)
+        .then(function() {
+            alert("Link copied to clipboard!");
+        })
+        .catch(function() {
+            alert("Failed to copy link to clipboard.");
+        });
+    }
 }
 
 class Template {
@@ -148,7 +158,7 @@ class Message {
 
 class Thread {
     static init = () => {
-        if (Template.isThere('.cards-h')) {
+        if (Template.isThere('.cards-s')) {
             let isDown = false;
             let startX, scrollLeft;
             document.querySelectorAll('.card-h').forEach(
