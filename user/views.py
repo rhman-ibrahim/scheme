@@ -1,50 +1,54 @@
 import cv2
+
+# Django
 from django.http import HttpResponse
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.admin.models import LogEntry, CHANGE
 from django.contrib import messages
+
+# Scheme
 from scheme.settings import MEDIA_ROOT
+
+# Helpers
 from helpers.functions import get_form_errors, log
-from user.forms import  SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
-from user.functions import create_a_guest_user
-from user.decorators import authentication, guest
-from user.models import Token
+
+# Circles
+from circles.forms import CircleForm
+from circles.models import Circle
+
+# User
+from .forms import  (
+    SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
+)
+from .functions import create_a_guest_user
+from .decorators import authentication
+from .models import Token
 
 
 def navigate(request):
     if request.user.is_authenticated:
         if request.user.is_lazy:
-            if request.session['circle']:
-                return redirect("circles:manage")
-            else:
-                return redirect("user:signout")
-        else:
-            return redirect("user:settings")
+            return redirect("circles:manage")
+        return redirect("user:settings")
     return redirect("home:user")
 
-@guest(False)
 @authentication(True)
 def settings(request):
     return render(
         request,
         "user/settings.html",
         {
-            'logs': LogEntry.objects.filter(user_id=request.user.id),
             'forms': {
                 'picture': ProfilePictureForm,
                 'password': PasswordUpdateForm(False),
-                'info': ProfileInfoForm(instance=request.user.profile)
-            },
-            'state': {
-                'profile': True if request.user.profile.completion_percentage == 1 else False,
-                'super_user': True if request.user.is_superuser == 1 else False
+                'info': ProfileInfoForm(instance=request.user.profile),
+                'circle': CircleForm
             }
         }
     )
 
-@guest(False)
 @authentication(True)
 def token(request):
     with open(
@@ -55,7 +59,6 @@ def token(request):
     response.write(file)
     return response
 
-@guest(False)    
 def identified(request):
     token = Token.objects.get(value=request.session['token'])
     if 'token' in request.session:
@@ -64,7 +67,6 @@ def identified(request):
             "user/identified.html",
             {
                 'user': token.user,
-                'logs': LogEntry.objects.filter(user_id=token.user.id),
                 'forms': {
                     'reset': PassWordResetForm(token.user),
                 }
@@ -98,7 +100,6 @@ def signin(request):
             get_form_errors(request, form)
     return redirect("home:user")
 
-@guest(False)
 def verify(request):
     if request.method == 'POST':
         form = TokenForm(request.POST, request.FILES)
@@ -119,7 +120,6 @@ def verify(request):
             get_form_errors(request, form)
     return redirect('user:identified')
 
-@guest(False)
 def reset(request):
     if 'token' in request.session and request.method == "POST":
         token = Token.objects.get(value=request.session['token'])
@@ -133,7 +133,6 @@ def reset(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@guest(False)
 @authentication(True)
 def update_token(request):
     token = request.user.token
@@ -143,7 +142,6 @@ def update_token(request):
         messages.success(request, "your token has been updated successfully")
     return redirect("user:settings")
 
-@guest(False)
 @authentication(True)
 def update_profile_picture(request):
     if request.method == 'POST':
@@ -158,7 +156,6 @@ def update_profile_picture(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@guest(False)
 @authentication(True)
 def update_password(request):
     if request.method == 'POST':
@@ -173,7 +170,6 @@ def update_password(request):
             get_form_errors(request, form)
     return redirect('home:user')
 
-@guest(False)
 @authentication(True)
 def update_profile_info(request):
     if request.method == 'POST':
@@ -200,7 +196,6 @@ def signout(request):
     messages.success(request, 'signed out successfully')
     return redirect('home:user')
 
-@guest(False)
 def cancel(request):
     if 'token' in request.session: del request.session['token']
     return redirect("home:user")

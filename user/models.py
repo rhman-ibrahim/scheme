@@ -1,21 +1,27 @@
 import qrcode
 
+# Django
+from django.db.models import Q
+from django.contrib.admin.models import LogEntry
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator, FileExtensionValidator
 from django.utils.crypto import get_random_string
 from django.contrib.admin.models import LogEntry
 from django.db import models
 
+# Scheme
 from scheme.settings import MEDIA_ROOT
+
+# Helpers
 from helpers.functions import completion
 
-
+# Circles
+from circles.models import Circle
 
 
 def profile_picture_path_handler(instance, filename):
     # renames the updated profile picture with the user's username.
     return f'user/profile/pictures/{instance.account.username}.{filename.split(".")[-1]}'
-
 
 class UserManager(BaseUserManager):
 
@@ -109,3 +115,25 @@ class Profile(models.Model):
     @property
     def completion_percentage(self):
         return completion([self.name, self.email, self.about])
+    
+    @property
+    def has_name(self):
+        return False if not bool(self.name) else True
+    
+    @property
+    def has_email(self):
+        return False if not bool(self.email) else True
+    
+    @property
+    def has_about(self):
+        return False if not bool(self.about) else True
+    
+    @property
+    def logs(self):
+        return LogEntry.objects.filter(user_id=self.user.id)
+    
+    @property
+    def circles(self):
+        return Circle.objects.filter(
+            Q(founder=self.user) | Q(members=self.user)
+        )
