@@ -50,6 +50,10 @@
     top: 0px;
 }
 
+body.light .cards-v .verticl-line {
+    background: var(--d4);
+}
+
 /*
     .cards-w
 */
