@@ -1,3 +1,7 @@
+.log {
+    background: var(--d1);
+}
+
 .log li,
 .log li .material-icons {
     font-size: .84rem;

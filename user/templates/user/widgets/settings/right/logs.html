@@ -1,3 +1,6 @@
 {% with logs=request.user.profile.logs %}
-{% include "components/logs.html" %}
+<div class="cards-v">
+    <div class="verticl-line"></div>
+    {% include "components/logs.html" %}
+</div>
 {% endwith %}
