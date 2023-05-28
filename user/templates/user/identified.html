@@ -1,44 +1,14 @@
 {% extends 'layouts/cr.html' %}
-{% load filters %}
 
 {% block fixed %}
-<form method="POST" action="{% url 'user:reset' %}" id="reset-form">
-    {% with form=forms.reset password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+{% include "user/widgets/identified/fixed/forms.html" %}
 {% endblock fixed %}
 
 {% block center %}
-<section class="cards-w">
-    <div class="card f2">
-        <h3 class="title">
-            <img class="circle-24" src="{{ user.profile.picture.url }}" alt="{{ user.username }}'s profile picture" id="picture">
-            <span>Welcome, <b>{{ user.username }}</b></span>
-        </h3>
-        <p>Your account has been identified successfully!,
-        you could reset now or you could cancel the recovering
-        and use your token later.</p>
-        <nav class="end">
-            <a class="material-icons" href="{% url 'user:cancel' %}">arrow_back</a>
-        </nav>
-    </div>
-    <div class="card">
-        <h3 class="title">
-            <li class="material-icons">lock_reset</li>
-            <span>reset</span>
-        </h3>
-        <p><b>Remember!</b> to download your new token after resetting,
-        if you canceled the recovery process you could use your token
-        again later.</p>
-        </ul>
-        <ul class="row end">
-            <li class="material-icons" onclick="Aside.open('#reset-form')">arrow_forward</li>
-        </ul>
-    </div>
-</section>
+{% include "user/widgets/identified/center/header.html" %}
+{% include "user/widgets/identified/center/control.html" %}
 {% endblock center %}
 
 {% block right %}
-{% include "components/logs.html" %}
+{% include "user/widgets/identified/right/logs.html" %}
 {% endblock right %}

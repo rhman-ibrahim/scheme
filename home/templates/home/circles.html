@@ -1,5 +1,4 @@
-{% extends 'layouts/app.html' %}
-{% load filters %}
+{% extends 'home/layouts/app.html' %}
 
 {% block fixed %}
 <form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
@@ -20,7 +19,7 @@
         <p>Circle is where you invite users to <b>share signals and create spaces</b>.
         <mark>Create</mark> private circles & <mark>join</mark> public and official circles!.</p>
     </div>
-    <div class="card f2">
+    <div class="card fb">
         <h3 class="title">
             <i class="material-symbols-outlined">tips_and_updates</i>
             <span>how it works</span>

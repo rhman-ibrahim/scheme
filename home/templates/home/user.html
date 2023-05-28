@@ -1,5 +1,4 @@
-{% extends 'layouts/app.html' %}
-{% load filters %}
+{% extends 'home/layouts/app.html' %}
 
 {% block fixed %}
 <form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
@@ -48,7 +47,7 @@
             <i class="material-icons" onclick="Aside.open('#sign-in-form')">arrow_forward</i>
         </h3>
     </div>
-    <div class="card f2">
+    <div class="card fb">
         <h3 class="title">
             <i class="material-symbols-outlined">verified_user</i>
             <span>recover</span>
