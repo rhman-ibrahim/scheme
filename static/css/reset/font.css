@@ -57,6 +57,13 @@ h3 {
     font-size: 1.25rem;
 }
 
+p {
+    font-size: 1rem;
+}
+
+p span {
+    display: inline-block;
+}
 
 /*
     .<>
