@@ -1,0 +1,5 @@
+<form method="POST" enctype="multipart/form-data" action="{% url 'user:verify' %}" id="token-form">
+    {% with form=forms.token password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
