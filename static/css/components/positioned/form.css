@@ -1,57 +1,34 @@
-/*
-form
-*/
-
 form {
-  /*
-  dimensions
-  */
-  width: 312px;
-  padding: 16px;
+  width: 360px;
   height: var(--wh);
-  /*
-  position
-  */
-  position: fixed;
-  right: calc(var(--ww) * -1);
-  bottom: 0px;
-  /**/
-  transition: right 1s ease-in-out;
-  border-left: 1.32px solid var(--bc);
   background: var(--d1);
   fill: none !important;
+  border-right: 1.32px solid var(--bc);
+  transition: left 1s ease-in-out;
+  position: fixed;
+  left: calc(var(--ww) * -1);
+  bottom: 0px;
 }
 
 form.active {
-  right: 0px;
+  left: 0px;
 }
 
-/*
-fieldset
-*/
-
-form fieldset {
-  height: inherit;
-  overflow: hidden;
-}
-
-/*
-nav
-*/
-
-form fieldset nav {
+form nav {
   display: flex;
   background: none;
   height: max-content;
-  transition: top 1s ease-in-out;
-  flex-direction: column;
-  background: none;
-  position: fixed;
-  margin-top: 16px;
-  right: 320px;
-  top: -384px;
+  position: absolute;
   z-index: 16;
+  bottom: 8px;
+  right: 8px;
   gap: 8px;
+}
+
+form fieldset {
+  height: var(--wh);
+  overflow: hidden;
+  width: 100%;
 }
 
 form.active fieldset nav {
