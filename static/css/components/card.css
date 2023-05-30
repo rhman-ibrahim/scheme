@@ -142,6 +142,10 @@ body.light .card {
     outline: 1.32px solid var(--ls);
 }
 
+.card p {
+    margin: 0px;
+}
+
 /*
     circles
 */

@@ -35,8 +35,8 @@
 */
 
 body {
-    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
 }
 
 mark {
@@ -55,14 +55,6 @@ h2 {
 
 h3 {
     font-size: 1.25rem;
-}
-
-p {
-    font-size: 1rem;
-}
-
-p span {
-    display: inline-block;
 }
 
 /*
@@ -92,10 +84,15 @@ h2.title i.material-symbols-outlined {
 */
 
 p {
+    margin: 12px 0px;
     text-transform: none;
     font-weight: 300;
     line-height: 1.4;
     font-size: 1rem;
+}
+
+p span {
+    display: inline-block;
 }
 
 b {
