@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% block center %}
-<header class="card">
-    <h3 class="title">
-        <i class="material-symbols-outlined">tips_and_updates</i>
-        <span>how it works</span>
-    </h3>
-</header>
+{% include "user/cards/app.html" %}
+{% include "user/widgets/features.html" %}
+{% include "user/widgets/guest.html" %}
 {% endblock %}

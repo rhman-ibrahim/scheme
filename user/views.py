@@ -20,7 +20,7 @@ from circles.models import Circle
 
 # User
 from .forms import  (
-    SignUpForm, SignInForm, TokenForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
+    SignUpForm, SignInForm, VerifyForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
 )
 from .functions import create_a_guest_user
 from .decorators import authentication
@@ -102,7 +102,7 @@ def signin(request):
 
 def verify(request):
     if request.method == 'POST':
-        form = TokenForm(request.POST, request.FILES)
+        form = VerifyForm(request.POST, request.FILES)
         if form.is_valid():
             path = f'{MEDIA_ROOT}/user/account/verify/{get_random_string(length=32)}.png'
             destination = open(path, 'wb+')

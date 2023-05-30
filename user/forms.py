@@ -94,7 +94,7 @@ class SignInForm(forms.ModelForm):
         model  = Account
         fields = ['username', 'password']
 
-class TokenForm(forms.Form):
+class VerifyForm(forms.Form):
 
     token = forms.ImageField(
         label="upload your token",

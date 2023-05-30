@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 # User
-from user.forms import SignUpForm, SignInForm, TokenForm
+from user.forms import SignUpForm, SignInForm, VerifyForm
 from user.decorators import authentication
 
 # Circles
@@ -27,6 +27,11 @@ def index(request):
 
 @authentication(False)
 def user(request):
+    context.update(
+        {
+            'verify': VerifyForm
+        }
+    )
     return render(
         request,
         "home/user.html",
