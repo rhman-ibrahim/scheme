@@ -1,68 +1,70 @@
-<fieldset>
-    {% csrf_token %}
-    {% if form.hidden_fields %}
-    {% for hidden in form.hidden_fields %}
-    {{ hidden }}
-    {% endfor %}
-    {% endif %}
-    {% for field in form.visible_fields %}
-    {% if field.field.widget.input_type == "checkbox" %}
-    <div class="check">
-        <h5>{{ field.name|slugify }}</h5>
-        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
-        <div class="container">
-            {% for value, text in field.field.choices %}
-            <label for="{{ text|slugify }}_{{ value }}">
-                <input type="checkbox" name="{{ field.name }}" value="{{ value }}" id="{{ text|slugify }}_{{ value }}" {% if text in list %}checked{% endif %}>
-                <h6>{{ text }}</h6>
-            </label>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-    {% if field.field.widget.input_type == "file" %}
-    <div class="file">
-        <label for="{{ field.id_for_label }}">
-            <input type="file" name="{{ field.name }}" id="{{ field.id_for_label }}">
-            <h6>{{ field.label }}</h6>
-        </label>
-        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
-    </div>
-    {% endif %}
-    {% if field.field.widget.input_type == "password" %}
-    <div class="password">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
-    </div>
-    {% endif %}
-    {% if field.field.widget.input_type == "radio" %}
-    <div class="radio">
-        <h5>{{ field.name|slugify }}</h5>
-        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
-        <div class="container">
-            {% for value, name in field.field.choices %}
-            <label>
-                <input type="radio" name="{{ field.name }}" value="{{ value }}">
-                <h6>{{ name }}</h6>
-            </label>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-    {% if field.field.widget.input_type == "text" or field.field.widget.input_type == "text-area" or field.field.widget.input_type == "email" %}
-    <div class="text">
-        {% if field.label %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
-        {{ field }}
-        {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
-    </div>
-    {% endif %}    
-    {% endfor %}
+<div class="wrapper">
     <nav>
-        <button type="button" onclick="Aside.clear()" class="pin material-icons">close</button>
         {% if password %}
         <button type="button" onclick="Form.passwordToggle(this)" class="pin material-icons">visibility</button>
         {% endif %}
+        <button type="button" onclick="Aside.clear()" class="pin material-icons">close</button>
         <button type="submit" class="pin material-icons">check</button>
     </nav>
-</fieldset>
+    <fieldset>
+        {% csrf_token %}
+        {% if form.hidden_fields %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+        {% endif %}
+        {% for field in form.visible_fields %}
+        {% if field.field.widget.input_type == "checkbox" %}
+        <div class="check">
+            <h5>{{ field.name|slugify }}</h5>
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+            <div class="container">
+                {% for value, text in field.field.choices %}
+                <label for="{{ text|slugify }}_{{ value }}">
+                    <input type="checkbox" name="{{ field.name }}" value="{{ value }}" id="{{ text|slugify }}_{{ value }}" {% if text in list %}checked{% endif %}>
+                    <h6>{{ text }}</h6>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if field.field.widget.input_type == "file" %}
+        <div class="file">
+            <label for="{{ field.id_for_label }}">
+                <input type="file" name="{{ field.name }}" id="{{ field.id_for_label }}">
+                <h6>{{ field.label }}</h6>
+            </label>
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        </div>
+        {% endif %}
+        {% if field.field.widget.input_type == "password" %}
+        <div class="password">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        </div>
+        {% endif %}
+        {% if field.field.widget.input_type == "radio" %}
+        <div class="radio">
+            <h5>{{ field.name|slugify }}</h5>
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+            <div class="container">
+                {% for value, name in field.field.choices %}
+                <label>
+                    <input type="radio" name="{{ field.name }}" value="{{ value }}">
+                    <h6>{{ name }}</h6>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if field.field.widget.input_type == "text" or field.field.widget.input_type == "text-area" or field.field.widget.input_type == "email" %}
+        <div class="text">
+            {% if field.label %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+            {{ field }}
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        </div>
+        {% endif %}    
+        {% endfor %}
+    </fieldset>
+</div>
