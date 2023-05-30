@@ -2,6 +2,7 @@ body[data-url="index"] #left .card[data-app="home"],
 body[data-url="user"] #left .card[data-app="user"],
 body[data-url="circles"] #left .card[data-app="circles"],
 body[data-url="spaces"] #left .card[data-app="spaces"],
-body[data-url="signals"] #left .card[data-app="signals"] {
+body[data-url="signals"] #left .card[data-app="signals"],
+body[data-url="tasks"] #left .card[data-app="tasks"] {
     outline-color: var(--di);
 }
