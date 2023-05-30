@@ -81,7 +81,7 @@ body.light .cards-v .verticl-line {
         flex: calc(calc(100% - 8px) / 2);
     }
 
-    .cards-w .card.fb {
+    .cards-w .card.fw {
         max-width: 100%;
         flex: 100%;
     }
