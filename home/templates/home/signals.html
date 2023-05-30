@@ -1,23 +1,16 @@
 {% extends 'home/layouts/app.html' %}
 
-{% block fixed %}
-<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
-    {% with form=forms.circle %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+{% block apps %}
+{% include "home/widgets/apps.html" %}
 {% endblock %}
 
 {% block center %}
-<section class="cards-w">
-    {% include "components/cards/signals.html" %}
-    <div class="card">
-        <h3 class="title">
-            <i class="material-symbols-outlined">tips_and_updates</i>
-            <span>what is a signal</span>
-        </h3>
-        <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
-        together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
-    </div>
-</section>
+<header class="card">
+    <h3 class="title">
+        <i class="material-symbols-outlined">tips_and_updates</i>
+        <span>what is a signal</span>
+    </h3>
+    <p>Signal is a text of <b>512 characters</b> at max. Signals could be connected
+    together to form a beam. <mark>Everything in Scheme is a signal</mark>.</p>
+</header>
 {% endblock %}

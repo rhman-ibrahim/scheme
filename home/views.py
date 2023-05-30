@@ -1,6 +1,11 @@
+# Django
 from django.shortcuts import render
-from user.decorators import authentication
+
+# User
 from user.forms import SignUpForm, SignInForm, TokenForm
+from user.decorators import authentication
+
+# Circles
 from circles.forms import CircleForm
 
 
@@ -8,9 +13,11 @@ from circles.forms import CircleForm
 def index(request):
     return render(
         request,
-        "home/index.html",
+        "home/_.html",
         {
             'forms': {
+                'signup': SignUpForm,
+                'signin': SignInForm,
                 'circle': CircleForm
             }
         }
@@ -23,10 +30,9 @@ def user(request):
         "home/user.html",
         {
             'forms': {
-                'circle': CircleForm,
                 'signup': SignUpForm,
                 'signin': SignInForm,
-                'token': TokenForm
+                'circle': CircleForm,
             }
         }
     )
@@ -38,6 +44,22 @@ def circles(request):
         "home/circles.html",
         {
             'forms': {
+                'signup': SignUpForm,
+                'signin': SignInForm,
+                'circle': CircleForm,
+            }
+        }
+    )
+
+@authentication(False)
+def signals(request):
+    return render(
+        request,
+        "home/signals.html",
+        {
+            'forms': {
+                'signup': SignUpForm,
+                'signin': SignInForm,
                 'circle': CircleForm
             }
         }
@@ -50,18 +72,8 @@ def spaces(request):
         "home/spaces.html",
         {
             'forms': {
-                'circle': CircleForm
-            }
-        }
-    )
-
-@authentication(False)
-def signals(request):
-    return render(
-        request,
-        "home/signals.html",
-        {
-            'forms': {
+                'signup': SignUpForm,
+                'signin': SignInForm,
                 'circle': CircleForm
             }
         }

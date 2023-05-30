@@ -1,36 +1,21 @@
 {% extends 'home/layouts/app.html' %}
 
-{% block fixed %}
-<form method="POST" action="{% url 'circles:create' %}" id="circle-create-form">
-    {% with form=forms.circle %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+{% block apps %}
+{% include "home/widgets/apps.html" %}
 {% endblock %}
 
 {% block center %}
-<section class="cards-w">
-    {% include "components/cards/circles.html" %}
-    <div class="card">
-        <h3 class="title">
-            <i class="material-symbols-outlined">tips_and_updates</i>
-            <span>what is a circle</span>
-        </h3>
-        <p>Circle is where you invite users to <b>share signals and create spaces</b>.
-        <mark>Create</mark> private circles & <mark>join</mark> public and official circles!.</p>
-    </div>
-    <div class="card fb">
-        <h3 class="title">
-            <i class="material-symbols-outlined">tips_and_updates</i>
-            <span>how it works</span>
-        </h3>
-        <p>Simply you have to provide a circle name and an optional description,
-        then you will be redirected to the circle management page where you generate
-        invitation links, QR codes and manage settings and members. You do not
-        have to signup, start now as a guest!.</p>
-        <ul class="end">
-            <li class="material-symbols-outlined" onclick="Aside.open('#circle-create-form')">arrow_forward</li>
-        </ul>
-    </div>
-</section>
+<header class="card">
+    <h3 class="title">
+        <i class="material-symbols-outlined">tips_and_updates</i>
+        <span>how it works</span>
+    </h3>
+    <p>Simply you have to provide a circle name and an optional description,
+    then you will be redirected to the circle management page where you generate
+    invitation links, QR codes and manage settings and members. You do not
+    have to signup, start now as a guest!.</p>
+    <ul class="end">
+        <li class="material-symbols-outlined" onclick="Aside.open('#circle-create-form')">arrow_forward</li>
+    </ul>
+</header>
 {% endblock %}

@@ -1,11 +1,20 @@
-{% extends 'layouts/lcr.html' %}
+{% extends 'templates/lcr.html' %}
+
+{% block fixed %}
+{% include "user/forms/signup.html" %}
+{% include "user/forms/signin.html" %}
+{% include "circles/forms/create.html" %}
+{% endblock %}
 
 {% block left %}
-{% include "components/cards/_.html" %}
-{% endblock left %}
+{% include "home/cards/_.html" %}
+{% block apps %}
+{% endblock %}
+{% include "components/cards/theme.html" %}
+{% endblock %}
 
 {% block right %}
-{% include "components/cards/theme.html" %}
-{% include "components/cards/user/guest.html" %}
-{% include "components/cards/circles/guest.html" %}
-{% endblock right %}
+{% include "user/cards/signup.html" %}
+{% include "user/cards/signin.html" %}
+{% include "circles/cards/create.html" %}
+{% endblock %}
