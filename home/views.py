@@ -9,17 +9,19 @@ from user.decorators import authentication
 from circles.forms import CircleForm
 
 
+context = {
+    'signup': SignUpForm,
+    'signin': SignInForm,
+    'circle': CircleForm
+}
+
 @authentication(False)
 def index(request):
     return render(
         request,
         "home/_.html",
         {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm
-            }
+            'forms':context
         }
     )
 
@@ -29,11 +31,7 @@ def user(request):
         request,
         "home/user.html",
         {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm,
-            }
+            'forms':context
         }
     )
 
@@ -43,11 +41,7 @@ def circles(request):
         request,
         "home/circles.html",
         {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm,
-            }
+            'forms':context
         }
     )
 
@@ -57,11 +51,7 @@ def signals(request):
         request,
         "home/signals.html",
         {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm
-            }
+            'forms':context
         }
     )
 
@@ -71,10 +61,16 @@ def spaces(request):
         request,
         "home/spaces.html",
         {
-            'forms': {
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm
-            }
+            'forms':context
+        }
+    )
+
+@authentication(False)
+def tasks(request):
+    return render(
+        request,
+        "home/tasks.html",
+        {
+            'forms':context
         }
     )
