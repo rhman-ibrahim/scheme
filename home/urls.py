@@ -9,4 +9,5 @@ urlpatterns = [
     path('circles/', views.circles, name="circles"),
     path('spaces/', views.spaces, name="spaces"),
     path('signals/', views.signals, name="signals"),
+    path('tasks/', views.tasks, name="tasks"),
 ]
