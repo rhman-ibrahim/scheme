@@ -8,6 +8,7 @@ urlpatterns = [
     path('circles/', include('circles.urls'), name="circles"),
     path('signals/', include('signals.urls'), name="signals"),
     path('spaces/', include('spaces.urls'), name="spaces"),
+    path('tasks/', include('tasks.urls'), name="tasks"),
     path('user/', include('user.urls'), name="user"),
     path('home/', include('home.urls'), name="home"),
 ]

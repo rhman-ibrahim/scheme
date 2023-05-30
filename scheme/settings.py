@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'circles.apps.CirclesConfig',
     'signals.apps.SignalsConfig',
     'spaces.apps.SpacesConfig',
+    'tasks.apps.TasksConfig',
     'user.apps.UserConfig',
     'home.apps.HomeConfig',
     # Third Party
