@@ -14,6 +14,11 @@
 {% include "components/cards/theme.html" %}
 {% endblock %}
 
+{% block center %}
+{% block main %}{% endblock %}
+{% include "user/widgets/guest.html" %}
+{% endblock %}
+
 {% block right %}
 {% include "user/cards/signup.html" %}
 {% include "user/cards/signin.html" %}
