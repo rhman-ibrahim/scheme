@@ -8,30 +8,28 @@
     --ds: #007E33;
     --di: #0099CC;
     --a1: #77216F;
+    --fb: #000000;
+    --fw: #FFFFFF;
+}
+
+.dark {
+    --d1: var(--fb);
+    --d2: hsl(0, 0%, 04%);
+    --d3: hsl(0, 0%, 12%);
+    --d4: var(--fw);
 }
 
 body,
 .light {
-    --d1: #FFFFFF;
-    --d2: #FAFAFA;
-    --d3: #F5F5F5;
-    --d4: #E0E0E0;
-    --bc: var(--d4);
-    --fc: #000000;
-}
-
-.dark {
-    --d1: #000000;
-    --d2: #212121;
-    --d3: #303030;
-    --d4: #424242;
-    --bc: var(--d4);
-    --fc: #FFFFFF;
+    --d1: var(--fw);
+    --d2: hsl(0, 0%, 98%);
+    --d3: hsl(0, 0%, 92%);
+    --d4: var(--fb);
 }
 
 body {
     background: var(--d1);
-    color: var(--fc);
+    color: var(--d4);
 }
 
 /*
@@ -44,11 +42,11 @@ aside {
 }
 
 aside.aside-r {
-    border-left: 1.32px solid var(--bc);
+    border-left: 1.32px solid var(--d3);
 }
 
 aside.aside-l {
-    border-right: 1.32px solid var(--bc);
+    border-right: 1.32px solid var(--d3);
 }
 
 /*
@@ -56,14 +54,14 @@ aside.aside-l {
 */
 
 form {
-    border-right: 1.32px solid var(--bc);   
+    border-right: 1.32px solid var(--d3);   
     background: var(--d1);
     fill: none !important;
 }
 
 form fieldset div input,
 form fieldset div textarea {
-    color: var(--fc);
+    color: var(--d4);
     outline: 1px solid var(--d2);
     background: none;
     border: none;
@@ -102,7 +100,8 @@ form div.file label {
 */
 
 .card {
-    outline: 1.32px solid var(--bc);
+    outline: 1.32px solid var(--d3);
+    background: var(--d2);
 }
 
 .cards-v .verticl-line {
@@ -146,7 +145,7 @@ form div.file label {
 */
 
 .pin {
-    outline: 1.32px solid var(--bc);
+    outline: 1.32px solid var(--d3);
     background: var(--d1);
-    color: var(--fc);
+    color: var(--d4);
 }
