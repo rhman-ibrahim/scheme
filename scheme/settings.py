@@ -69,7 +69,8 @@ ROOT_URLCONF     = 'scheme.urls'
 WSGI_APPLICATION = 'scheme.wsgi.application'
 ALLOWED_HOSTS    = [
     '127.0.0.1',
-    '192.168.1.10'
+    '192.168.1.10',
+    '192.168.1.24'
 ]
 AUTH_USER_MODEL  = 'user.Account'
 
