@@ -1,9 +1,6 @@
 form {
   width: 360px;
   height: var(--wh);
-  background: var(--d1);
-  fill: none !important;
-  border-right: 1.32px solid var(--bc);
   transition: left 1s ease-in-out;
   position: fixed;
   left: calc(var(--ww) * -1);
@@ -48,15 +45,10 @@ form fieldset div {
 
 form fieldset div input,
 form fieldset div textarea {
-  width: 100%;
-  border: none;
   resize: none;
   display: block;
-  background: none;
   font-size: 1rem !important;
-  outline: 1px solid var(--d2);
   border-radius: 4px;
-  color: var(--fc);
   padding: 8px;
   width: 100%;
 }
@@ -71,11 +63,6 @@ form fieldset div textarea {
 
 form fieldset div textarea::-webkit-scrollbar {
   display: none;
-}
-
-form fieldset div input:focus,
-form fieldset div textarea:focus {
-  outline-color: var(--d3);
 }
 
 form fieldset div small {
@@ -110,12 +97,6 @@ div.check div.container [type=checkbox] + h6 {
   font-weight: bold;
   display: inline-block;
   text-transform: capitalize;
-  outline: 1px solid var(--d2);
-}
-
-div.check div.container [type=checkbox]:checked + h6 {
-  outline-color: var(--d4);
-  background: var(--d4);
 }
 
 /*
@@ -144,17 +125,13 @@ div.radio div.container input {
 }
 
 div.radio div.container input + h6 {
-  display: inline-block;
   text-transform: capitalize;
-  outline: 1px solid var(--d2);
-  background: var(--d1);
+  display: inline-block;
   cursor: pointer;
 }
 
 div.radio div.container input:checked + h6 {
   font-weight: bolder;
-  outline-color: var(--d4);
-  background: var(--d4);
 }
 
 /*
@@ -165,7 +142,6 @@ form div.file label {
   display: block;
   cursor: pointer;
   text-align: center;
-  outline: 1px solid var(--d2);
   text-transform: capitalize;
 }
 

@@ -25,26 +25,6 @@ h3.message span.material-icons:last-child {
     text-align: right;
 }
 
-h3.message.info {
-    outline: 1.32px solid var(--di);
-    background: var(--li);
-}
-
-h3.message.error {
-    outline: 1.32px solid var(--dd);
-    background: var(--ld);
-}
-
-h3.message.warning {
-    outline: 1.32px solid var(--dw);
-    background: var(--lw);
-}
-
-h3.message.success {
-    outline: 1.32px solid var(--ds);
-    background: var(--ls);
-}
-
 h3.message span,
 h3.message span.material-icons {
     font-size: 1rem !important;

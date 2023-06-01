@@ -1,7 +1,5 @@
 aside {
     width: 100%;
-    background: var(--d1);
-    filter: none;
 }
 
 .aside-l,
@@ -12,7 +10,6 @@ aside {
 
 .aside-r {
     position: fixed;
-    border-left: 1.32px solid var(--bc);
     transition-property: right;
     right: -400%;
     bottom: 0px;
@@ -21,7 +18,6 @@ aside {
 
 .aside-l {
     position: fixed;
-    border-right: 1.32px solid var(--bc);
     transition-property: left;
     left: -400%;
     bottom: 0px;
@@ -43,9 +39,6 @@ aside div.wrapper #aside-button {
 }
 
 .pin {
-    color: var(--fc);
-    background: var(--d1);
-    outline: 1.32px solid var(--bc);
     border-radius: 100%;
     padding: 8px;
     height: 40px;

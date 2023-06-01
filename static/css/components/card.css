@@ -43,15 +43,10 @@
 .cards-v .verticl-line {
     width: 2px;
     content: "";
-    background: var(--d2);
     position: absolute;
     bottom: 0px; 
     left: 16px;
     top: 0px;
-}
-
-body.light .cards-v .verticl-line {
-    background: var(--d4);
 }
 
 /*
@@ -95,7 +90,6 @@ body.light .cards-v .verticl-line {
 .card {
     display: flex;
     flex-direction: column;
-    outline: 1.32px solid var(--bc);
     border-radius: 8px;
     padding: 16px;
     gap: 8px;
@@ -103,10 +97,6 @@ body.light .cards-v .verticl-line {
 
 .card.center {
     align-items: center;
-}
-
-body.light .card {
-    background: var(--d2);
 }
 
 .card .row,

@@ -33,3 +33,120 @@ body {
     background: var(--d1);
     color: var(--fc);
 }
+
+/*
+    aside
+*/
+
+aside {
+    background: var(--d1);
+    filter: none;
+}
+
+aside.aside-r {
+    border-left: 1.32px solid var(--bc);
+}
+
+aside.aside-l {
+    border-right: 1.32px solid var(--bc);
+}
+
+/*
+    form
+*/
+
+form {
+    border-right: 1.32px solid var(--bc);   
+    background: var(--d1);
+    fill: none !important;
+}
+
+form fieldset div input,
+form fieldset div textarea {
+    color: var(--fc);
+    outline: 1px solid var(--d2);
+    background: none;
+    border: none;
+}
+
+form fieldset div input:focus,
+form fieldset div textarea:focus {
+  outline-color: var(--d3);
+}
+
+form fieldset div.check div.container [type=checkbox] + h6 {
+  outline: 1px solid var(--d2);
+}
+
+form fieldset div.check div.container [type=checkbox]:checked + h6 {
+  outline-color: var(--d4);
+  background: var(--d4);
+}
+
+form fieldset div.radio div.container input + h6 {
+  outline: 1px solid var(--d2);
+  background: var(--d1);
+}
+
+form fieldset div.radio div.container input:checked + h6 {
+  outline-color: var(--d4);
+  background: var(--d4);
+}
+
+form div.file label {
+  outline: 1px solid var(--d2);
+}
+
+/*
+    .card
+*/
+
+.card {
+    outline: 1.32px solid var(--bc);
+}
+
+.cards-v .verticl-line {
+    background: var(--d2);
+}
+
+/*
+    .message
+*/
+
+.message.info {
+    outline: 1.32px solid var(--di);
+    background: var(--li);
+}
+
+.message.error {
+    outline: 1.32px solid var(--dd);
+    background: var(--ld);
+}
+
+.message.warning {
+    outline: 1.32px solid var(--dw);
+    background: var(--lw);
+}
+
+.message.success {
+    outline: 1.32px solid var(--ds);
+    background: var(--ls);
+}
+
+/*
+    .log
+*/
+
+.log {
+    background: var(--d1);
+}
+
+/*
+    .pin
+*/
+
+.pin {
+    outline: 1.32px solid var(--bc);
+    background: var(--d1);
+    color: var(--fc);
+}
