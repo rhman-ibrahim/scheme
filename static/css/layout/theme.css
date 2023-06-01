@@ -124,7 +124,7 @@ form div.file label {
 
 .pin {
     outline: 1.32px solid var(--d3);
-    background: var(--d1);
+    background: var(--d2);
     color: var(--d4);
 }
 
