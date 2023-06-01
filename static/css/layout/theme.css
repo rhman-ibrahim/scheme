@@ -1,3 +1,8 @@
+
+/*
+    Variables
+*/
+
 :root {
     --ld: #ff4444;
     --lw: #ffbb33;
@@ -26,6 +31,11 @@ body,
     --d3: hsl(0, 0%, 92%);
     --d4: var(--fb);
 }
+
+/*
+    Rules Of main
+    theme colors
+*/
 
 body {
     background: var(--d1);
@@ -109,6 +119,41 @@ form div.file label {
 }
 
 /*
+    .pin
+*/
+
+.pin {
+    outline: 1.32px solid var(--d3);
+    background: var(--d1);
+    color: var(--d4);
+}
+
+/*
+    Rules Of alert
+    theme colors
+*/
+
+/*
+    .card
+*/
+
+.card.info {
+    outline: 1.32px solid var(--li);
+}
+
+.card.warning {
+    outline: 1.32px solid var(--lw);
+}
+
+.card.danger {
+    outline: 1.32px solid var(--ld);
+}
+
+.card.success {
+    outline: 1.32px solid var(--ls);
+}
+
+/*
     .message
 */
 
@@ -136,16 +181,24 @@ form div.file label {
     .log
 */
 
-.log {
-    background: var(--d1);
+.log li i.add {
+    color: var(--li);
+}
+
+.log li i.change {
+    color: var(--lw);
+}
+
+.log li i.delete {
+    color: var(--ld);
 }
 
 /*
-    .pin
+    Rules Of accent
+    theme colors
 */
 
-.pin {
-    outline: 1.32px solid var(--d3);
-    background: var(--d1);
-    color: var(--d4);
+mark {
+    color: var(--a1);
+    background: none;
 }

@@ -17,8 +17,8 @@
     components
 */
 
-@import url("components/positioned/aside.css");
-@import url("components/positioned/form.css");
-@import url("components/positioned/message.css");
+@import url("components/aside.css");
+@import url("components/message.css");
 @import url("components/card.css");
+@import url("components/form.css");
 @import url("components/log.css");

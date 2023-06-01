@@ -8,6 +8,10 @@
     .
 */
 
+/*
+    .title
+*/
+
 .title {
     display: table-cell;
     text-transform: capitalize;
@@ -22,6 +26,10 @@
     text-align: left;
 }
 
+/*
+    .text-*
+*/
+
 .text-center {
     text-align: center;
 }
@@ -31,18 +39,26 @@
 }
 
 /*
+    .log
+*/
+
+.log li,
+.log li .material-icons {
+    font-size: .84rem;
+}
+
+.log li:nth-child(1),
+.log li:nth-child(1) .material-icons {
+    font-size: .88rem;
+}
+
+/*
     <>
 */
 
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-}
-
-mark {
-    color: var(--a1);
-    font-weight: 500;
-    background: none;
 }
 
 h1 {
