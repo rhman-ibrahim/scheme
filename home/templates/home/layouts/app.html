@@ -1,10 +1,10 @@
 {% extends 'templates/lcr.html' %}
 
 {% block fixed %}
+{% include "circles/forms/create.html" %}
 {% include "user/forms/signup.html" %}
 {% include "user/forms/signin.html" %}
 {% include "user/forms/verify.html" %}
-{% include "circles/forms/create.html" %}
 {% endblock %}
 
 {% block left %}
