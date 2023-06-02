@@ -1,18 +1,17 @@
-{% extends 'layouts/lcr.html' %}
+{% extends 'templates/lcr.html' %}
 
 {% block fixed %}
-{% include "user/widgets/settings/fixed/forms.html" %}
+{% include "user/forms/settings.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "user/widgets/settings/left/circles.html" %}
+{% include "user/cards/circles.html" %}
 {% endblock %}
 
 {% block center %}
-{% include "user/widgets/settings/center/header.html" %}
-{% include "user/widgets/settings/center/control.html" %}
+{% include "user/widgets/settings.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "user/widgets/settings/right/logs.html" %}
+{% include "user/widgets/logs.html" %}
 {% endblock %}

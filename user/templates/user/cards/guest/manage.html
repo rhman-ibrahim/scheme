@@ -1,0 +1,27 @@
+{% if request.user.is_authenticated %}
+<div class="card">
+    <h3 class="title">
+        <i class="material-icons">person</i>
+        <span>{{ request.user.username }}</span>
+    </h3>
+    <p>As a guest, experience the <b>Circles</b>, <b>Spaces</b> &
+    <b>Signals</b> applications, while the <b>User</b> and <b>Tasks</b>
+    applications require a user account.</p>
+    <nav class="end">
+        <a class="material-icons" href="{% url 'user:guest' %}">settings</a>
+        <a class="material-icons" href="{% url 'user:signout' %}">logout</a>
+    </nav>
+</div>
+{% else %}
+<div class="card">
+    <h3 class="title">
+        <i class="material-icons">person</i>
+    </h3>
+    <p>As a guest, experience the <b>Circles</b>, <b>Spaces</b> &
+    <b>Signals</b> applications, while the <b>User</b> and <b>Tasks</b>
+    applications require a user account.</p>
+    <nav class="end">
+        <a class="material-icons" href="{% url 'user:guest' %}">login</a>
+    </nav>
+</div>
+{% endif %}

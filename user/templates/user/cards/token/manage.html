@@ -1,0 +1,16 @@
+<div class="card">
+    <h3 class="title">
+        <i class="material-icons">qr_code</i>
+        <span>token</span>
+    </h3>
+    <p>Keep your token secure and updated to ensure that you can always
+    recover your account when needed and prevent security breaches.</p>
+    <ul class="row end">
+        <li>
+            <a class="material-icons" href="{% url 'user:update_token' %}">refresh</a>
+        </li>
+        <li>
+            <a class="material-icons" href="{% url 'user:token' %}">download</a>
+        </li>
+    <ul>
+</div>
