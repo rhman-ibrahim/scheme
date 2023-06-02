@@ -28,12 +28,20 @@ from .functions import create_a_guest_user
 from .decorators import authentication
 
 
-def navigate(request):
-    if request.user.is_authenticated:
-        if request.user.is_lazy:
-            return redirect("circles:manage")
-        return redirect("user:settings")
-    return redirect("home:user")
+def guest(request):
+
+    if not request.user.is_authenticated:
+        create_a_guest_user(request)
+
+    return render(
+        request,
+        "user/guest.html",
+        {
+            'forms': {
+                'circle': CircleForm
+            }
+        }
+    )
 
 @authentication(True)
 def settings(request):
@@ -52,10 +60,8 @@ def settings(request):
 
 @authentication(True)
 def token(request):
-    with open(
-        f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png",
-        'rb'
-    ) as f: file = f.read()
+    with open(f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png", 'rb') as f:
+        file = f.read()
     response = HttpResponse(content_type='image/png')
     response.write(file)
     return response
@@ -91,7 +97,10 @@ def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password'])
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
             if user is not None:
                 login(request, user)
                 log(request.user.id, request.user, CHANGE, "signed in")
@@ -105,9 +114,10 @@ def verify(request):
     if request.method == 'POST':
         form = VerifyForm(request.POST, request.FILES)
         if form.is_valid():
-            path = f'{MEDIA_ROOT}/user/account/verify/{get_random_string(length=32)}.png'
+            path = f'{MEDIA_ROOT}/user/tokens/verify/{get_random_string(length=32)}.png'
             destination = open(path, 'wb+')
-            for chunk in request.FILES['token']: destination.write(chunk)
+            for chunk in request.FILES['token']:
+                destination.write(chunk)
             destination.close()
             decoder = cv2.QRCodeDetector()
             reval, point, s_qr, = decoder.detectAndDecode(cv2.imread(path))
@@ -185,11 +195,6 @@ def update_profile_info(request):
             get_form_errors(request, form)
     return redirect('user:settings')
 
-@authentication(False)
-def guest_login(request):
-    create_a_guest_user(request)
-    return redirect("user:settings")
-
 @authentication(True)
 def signout(request):
     log(request.user.id, request.user, CHANGE, "signed out")
@@ -199,4 +204,11 @@ def signout(request):
 
 def cancel(request):
     if 'token' in request.session: del request.session['token']
+    return redirect("home:index")
+
+def navigate(request):
+    if request.user.is_authenticated:
+        if request.user.is_lazy:
+            return redirect("user:guest")
+        return redirect("user:settings")
     return redirect("home:user")

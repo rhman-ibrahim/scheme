@@ -5,6 +5,7 @@ from user import views
 app_name    = "user"
 urlpatterns = [
     # Templates
+    path('guest/', views.guest, name="guest"),
     path('identified/', views.identified, name="identified"),
     path('settings/', views.settings, name="settings"),
     path('token/', views.token, name='token'),
@@ -23,6 +24,5 @@ urlpatterns = [
     # Functionalities
     path('reset/cancel/', views.cancel, name='cancel'),
     path("navigate/", views.navigate, name="navigate"),
-    path('signout/', views.signout, name='signout'),
-    path('guest/', views.guest_login, name="guest"),
+    path('signout/', views.signout, name='signout')
 ]
