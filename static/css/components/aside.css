@@ -53,7 +53,7 @@ aside div.wrapper #aside-button {
 main.cr-grid #center #right-pin,
 main.lc-grid #center #left-pin,
 main.lcr-grid #center #left-pin + #right-pin,
-main.lr-grid #center #right-ping {
+main.lr-grid #left #right-pin {
     position: absolute;
     bottom: 8px;
     right: 8px;
@@ -84,7 +84,7 @@ main.lcr-grid #center #left-pin {
 
 @media (width >= 720px) {
 
-    main.lr-grid #center #right-pin,
+    main.lr-grid #left #right-pin,
     main.lr-grid #right.aside-r #aside-button {
         display: none;
     }
