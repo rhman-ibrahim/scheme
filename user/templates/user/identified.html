@@ -1,14 +1,10 @@
-{% extends 'layouts/cr.html' %}
+{% extends 'templates/c.html' %}
 
 {% block fixed %}
-{% include "user/widgets/identified/fixed/forms.html" %}
-{% endblock fixed %}
+{% include "user/forms/reset.html" %}
+{% endblock %}
 
-{% block center %}
-{% include "user/widgets/identified/center/header.html" %}
-{% include "user/widgets/identified/center/control.html" %}
-{% endblock center %}
-
-{% block right %}
-{% include "user/widgets/identified/right/logs.html" %}
-{% endblock right %}
+{% block main %}
+{% include "user/widgets/identified/header.html" %}
+{% include "user/widgets/identified/control.html" %}
+{% endblock %}
