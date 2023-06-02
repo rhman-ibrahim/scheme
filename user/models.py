@@ -88,11 +88,11 @@ class Token(models.Model):
 
     @property
     def path(self):
-        return f'/media/user/account/tokens/{self.user.username}.png'
+        return f'/media/user/tokens/{self.user.username}.png'
 
     def save(self, *args, **kwargs):
         qr = qrcode.make(self.value)
-        qr.save(f'{MEDIA_ROOT}/user/account/tokens/{self.user.username}.png')
+        qr.save(f'{MEDIA_ROOT}/user/tokens/{self.user.username}.png')
         super(Token, self).save(*args, **kwargs)
 
 class Profile(models.Model):

@@ -1,12 +1,12 @@
 import cv2
 
 # Django
+from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.admin.models import LogEntry, CHANGE
-from django.contrib import messages
 
 # Scheme
 from scheme.settings import MEDIA_ROOT
@@ -19,12 +19,13 @@ from circles.forms import CircleForm
 from circles.models import Circle
 
 # User
+from .models import Token
 from .forms import  (
-    SignUpForm, SignInForm, VerifyForm, ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
+    SignUpForm, SignInForm, VerifyForm, ProfilePictureForm,
+    PasswordUpdateForm, ProfileInfoForm, PassWordResetForm
 )
 from .functions import create_a_guest_user
 from .decorators import authentication
-from .models import Token
 
 
 def navigate(request):
@@ -41,9 +42,9 @@ def settings(request):
         "user/settings.html",
         {
             'forms': {
-                'picture': ProfilePictureForm,
-                'password': PasswordUpdateForm(False),
                 'info': ProfileInfoForm(instance=request.user.profile),
+                'password': PasswordUpdateForm(False),
+                'picture': ProfilePictureForm,
                 'circle': CircleForm
             }
         }
@@ -52,7 +53,7 @@ def settings(request):
 @authentication(True)
 def token(request):
     with open(
-        f"{MEDIA_ROOT}/user/account/tokens/{request.user.username}.png",
+        f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png",
         'rb'
     ) as f: file = f.read()
     response = HttpResponse(content_type='image/png')
