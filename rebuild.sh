@@ -1,11 +1,18 @@
 #!/bin/bash
 
-# Delete cache tokens, files and migrations
-rm /media/tokens/*.png
+# Find all PNG files
+png_files=$(find . -name "*.png")
+
+# If there are PNG files delete them
+if test -n "$png_files"
+then rm $png_files
+fi
+
+# Delete cache and migrations files
 rm -rf */__pycache__
 rm -rf */migrations
 
-# Delete db.sqlite3 file
+# Delete db.sqlite3 file (Django Database)
 if [ -f "db.sqlite3" ]
 then rm db.sqlite3
 fi
@@ -15,13 +22,10 @@ if [ -f "celerybeat-schedule" ]
 then rm celerybeat-schedule
 fi
 
-# Delete dump.rdb (redis) file
+# Delete dump.rdb (redis database) file
 if [ -f "dump.rdb" ]
 then rm dump.rdb
 fi
-
-# Restart Redis service
-sudo systemctl restart redis.service
 
 # Make migrations
 python3 manage.py makemigrations user
@@ -36,6 +40,10 @@ python3 manage.py migrate
 # Load fixtures
 python3 manage.py loaddata user/fixtures/users.json
 
+# Restart Redis service
+sudo systemctl restart redis.service
+
+# Kill Redis port PID
 if sudo lsof -i :6379
 then sudo lsof -t -i :6379 | sudo xargs kill
 fi
