@@ -47,6 +47,7 @@ form fieldset div input,
 form fieldset div textarea {
   resize: none;
   display: block;
+  background: var(--d2);
   font-size: 1rem !important;
   border-radius: 4px;
   padding: 8px;
