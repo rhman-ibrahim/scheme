@@ -4,19 +4,11 @@ from user import views
 
 app_name    = "user"
 urlpatterns = [
-    # Templates
-    path('guest/', views.guest, name="guest"),
-    path('identified/', views.identified, name="identified"),
-    path('settings/', views.settings, name="settings"),
-    path('token/', views.token, name='token'),
     # Forms
-    ## Anonymous
+    path('reset/', views.reset, name='reset'),
+    path('verify/', views.verify, name='verify'),
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
-    path('verify/', views.verify, name='verify'),
-    ## Identified
-    path('reset/', views.reset, name='reset'),
-    ## Authenticated
     path('update/picture/', views.update_profile_picture, name='picture'),
     path('update/password/', views.update_password, name='password'),
     path('update/token/', views.update_token, name='update_token'),
@@ -24,5 +16,10 @@ urlpatterns = [
     # Functionalities
     path('reset/cancel/', views.cancel, name='cancel'),
     path("navigate/", views.navigate, name="navigate"),
-    path('signout/', views.signout, name='signout')
+    path('signout/', views.signout, name='signout'),
+    # Templates
+    path('guest/', views.guest, name="guest"),
+    path('identified/', views.identified, name="identified"),
+    path('settings/', views.settings, name="settings"),
+    path('token/', views.token, name='token')
 ]
