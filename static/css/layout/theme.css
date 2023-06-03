@@ -114,6 +114,10 @@ form div.file label {
     background: var(--d2);
 }
 
+.card .card {
+    background: var(--d3);
+}
+
 .cards-v .verticl-line {
     background: var(--d2);
 }
