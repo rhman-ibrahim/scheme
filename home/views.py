@@ -1,12 +1,10 @@
 # Django
 from django.shortcuts import render
-
 # User
 from user.forms import (
     SignUpForm, SignInForm, VerifyForm
 )
-from user.decorators import authentication
-
+from user.decorators import is_authenticated
 # Circles
 from circles.forms import CircleForm
 
@@ -18,7 +16,7 @@ context = {
     'verify': VerifyForm
 }
 
-@authentication(False)
+@is_authenticated(False)
 def index(request):
     return render(
         request,
@@ -28,7 +26,7 @@ def index(request):
         }
     )
 
-@authentication(False)
+@is_authenticated(False)
 def user(request):
     return render(
         request,
@@ -38,7 +36,7 @@ def user(request):
         }
     )
 
-@authentication(False)
+@is_authenticated(False)
 def circles(request):
     return render(
         request,
@@ -48,7 +46,7 @@ def circles(request):
         }
     )
 
-@authentication(False)
+@is_authenticated(False)
 def signals(request):
     return render(
         request,
@@ -58,7 +56,7 @@ def signals(request):
         }
     )
 
-@authentication(False)
+@is_authenticated(False)
 def spaces(request):
     return render(
         request,
@@ -68,7 +66,7 @@ def spaces(request):
         }
     )
 
-@authentication(False)
+@is_authenticated(False)
 def tasks(request):
     return render(
         request,
