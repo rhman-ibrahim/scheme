@@ -1,10 +1,10 @@
 {% load static %}
 {% load filters %}
-<!-- META -->
+<!-- Meta -->
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!-- FAVICON -->
+<!-- Favicon -->
 <link rel="icon" type="image/png" sizes="48x48" href="{% static 'favicon/48.png' %}">
 <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/180.png' %}">
 <link rel="apple-touch-icon-precomposed" sizes="180x180" href="{% static 'favicon/180.png' %}">
@@ -16,9 +16,8 @@
 <!-- CSS -->
 <link rel="stylesheet" href="{% static 'css/init.css' %}?v={% now "U" %}"/>
 <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}{{ request.resolver_match.app_name }}/css/master.css?v={% now "U" %}"/>
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}{{ request.resolver_match.app_name }}/css/{{ request.resolver_match.url_name }}.css?v={% now "U" %}"/>
 <!-- JS -->
 <script src="{% static 'js/master.js' %}?v={% now "U" %}" defer></script>
 <script src="{% get_static_prefix %}{{ request.resolver_match.app_name }}/js/master.js" defer></script>
-<!-- TITLE -->
+<!-- Title -->
 <title>{{ request.resolver_match.app_name|capfirst }} | {{ request.resolver_match.url_name|replace_underscores }}</title>
