@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Find all PNG files
-png_files=$(find . -name "*.png")
+png_files=$(find . -name "/media/user/tokens/*.png")
 
 # If there are PNG files delete them
 if test -n "$png_files"
