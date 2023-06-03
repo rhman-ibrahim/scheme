@@ -1,8 +1,0 @@
-@media (width >= 720px) {
-
-    #members .cards-w .card {
-        max-width: calc(calc(100% - 16px) / 3);
-        flex: calc(calc(100% - 16px) / 3);
-    }
-    
-}
