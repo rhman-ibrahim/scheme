@@ -8,6 +8,7 @@ db.sqlite3
 celerybeat-schedule
 dump.rdb
 
-*.png
-*.jpg
-*.jpeg
+/media/user/tokens/*.png
+/media/user/tokens/verify/*.png
+/media/user/profile/pictures/*.jpg
+/media/user/profile/pictures/*.jpeg
