@@ -4,10 +4,11 @@
 {% include "circles/forms/create.html" %}
 {% endblock %}
 
+{% block left %}
+{% include "circles/cards/create.html" %}
+{% include "components/cards/theme.html" %}
+{% endblock %}
+
 {% block center %}
 {% include "user/widgets/guest.html" %}
 {% endblock %}
-
-{% block right %}
-{% include "circles/cards/create.html" %}
-{% endblock  %}
