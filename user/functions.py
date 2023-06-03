@@ -13,7 +13,7 @@ def create_a_guest_user(request):
     uuid_key_8 = str(uuid.uuid4())[:8]
     uuid_key16 = str(uuid.uuid4())[:16]
     
-    Account.objects.create_lazy_user(
+    Account.objects.create_guest(
         username=uuid_key_8,
         password=uuid_key16
     )
