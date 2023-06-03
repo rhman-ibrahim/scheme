@@ -9,7 +9,7 @@
     scrollable row
 */
 
-.card-s {
+.cards-s {
     display: flex;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -19,11 +19,11 @@
     gap: 8px;
 }
 
-.card-s::-webkit-scrollbar {
+.cards-s::-webkit-scrollbar {
     display: none;
 }
 
-.card-s > .card {
+.cards-s > .card {
     width: calc(50% - 4px);
     flex-wrap: wrap;
     flex: 0 0 auto;
