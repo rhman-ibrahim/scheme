@@ -36,7 +36,7 @@ def guest(allowed):
     def decorator(view):
         def wrapper(request, *args, **kwargs):
             if allowed:
-                if request.user.is_authenticated and request.user.is_lazy:
+                if request.user.is_authenticated and request.user.is_guest:
                     return view(request, *args, **kwargs)
                 else:
                     messages.warning(request, "This is a guest account, signup first.")

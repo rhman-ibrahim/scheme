@@ -26,17 +26,25 @@ def profile_picture_path_handler(instance, filename):
 class UserManager(BaseUserManager):
 
     def create_user(self, username, password=None):
-        if not username or not password: raise ValueError('a username and a password are required.')
+        
+        if not username or not password:
+            raise ValueError('a username and a password are required.')
+        
         user = self.model(username=username)
         user.set_password(password)
         user.save(using=self._db)
+
         return user
     
-    def create_lazy_user(self, username, password=None):
-        if not username or not password: raise ValueError('a username and a password are required.')
-        user = self.model(username=username, is_lazy=True)
+    def create_guest(self, username, password=None):
+        
+        if not username or not password:
+            raise ValueError('a username and a password are required.')
+        
+        user = self.model(username=username, is_guest=True)
         user.set_password(password)
         user.save(using=self._db)
+        
         return user
 
     def create_superuser(self, username, password):
@@ -61,7 +69,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_superuser   = models.BooleanField(default=False)
     is_admin       = models.BooleanField(default=False)
     is_staff       = models.BooleanField(default=False)
-    is_lazy        = models.BooleanField(default=False)
+    is_guest       = models.BooleanField(default=False)
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = 'username'

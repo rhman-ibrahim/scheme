@@ -208,7 +208,7 @@ def cancel(request):
 
 def navigate(request):
     if request.user.is_authenticated:
-        if request.user.is_lazy:
+        if request.user.is_guest:
             return redirect("user:guest")
         return redirect("user:settings")
     return redirect("home:user")
