@@ -5,10 +5,13 @@ from . import views
 app_name    = "circles"
 urlpatterns = [
     path('create/', views.create, name="create"),
-    path('manage/', views.manage, name="manage"),
-    path('ask/<str:uuid>/', views.ask, name="ask"),
-    path('open/<str:uuid>/', views.open, name="open"),
-    path('approve/<int:cid>/<int:uid>/', views.approve, name="approve"),
-    path('reject/<int:cid>/<int:uid>/', views.reject, name="reject"),
-    path('close/', views.close, name="close"),
+    #
+    path('join/<str:serial>/', views.join, name="join"),
+    path('open/<str:serial>/', views.open, name="open"),
+    path('page/<str:serial>/', views.page, name="page"),
+    path('exit/<str:serial>/', views.exit, name="exit"),
+    #
+    path('approve/<str:serial>/<int:user_id>/', views.approve, name="approve"),
+    path('reject/<str:serial>/<int:user_id>/', views.reject, name="reject"),
+    path('remove/<str:serial>/<int:user_id>/', views.remove, name="remove")
 ]
