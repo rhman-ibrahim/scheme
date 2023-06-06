@@ -10,12 +10,6 @@ from helpers.functions import log
 from user.decorators import is_authenticated, is_guest
 
 
-def navigate(request):
-    if request.user.is_authenticated:
-        if request.user.is_guest: return redirect("user:guest")
-        return redirect("user:settings")
-    return redirect("home:user")
-
 @is_authenticated(False)
 def cancel(request):
     if 'token' in request.session: del request.session['token']
@@ -42,3 +36,11 @@ def signout(request):
     logout(request)
     messages.success(request, 'signed out successfully')
     return redirect('home:user')
+
+def navigate(request):
+    if request.user.is_authenticated:
+        if request.user.is_guest:
+            return redirect("user:guest")
+        else:
+            return redirect("user:settings")
+    return redirect("home:user")
