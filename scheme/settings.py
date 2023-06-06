@@ -44,16 +44,18 @@ TEMPLATES      = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'circles.processors.opened_circle'
             ],
             'libraries':{
                 'filters':'helpers.filters',
+                'user_filters':'user.filters',
+                'circle_filters':'circles.filters',
             }
         },
     },
 ]
 
 # Database
-
 DATABASES          = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -64,7 +66,6 @@ DATABASES          = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Web
-
 DEBUG            = True
 ROOT_URLCONF     = 'scheme.urls'
 WSGI_APPLICATION = 'scheme.wsgi.application'
@@ -73,10 +74,15 @@ ALLOWED_HOSTS    = [
     '192.168.1.10',
     '192.168.1.24'
 ]
+
+# User
 AUTH_USER_MODEL  = 'user.Account'
 
-# Password validation
+# Default profile picture (guests)
+DEFAULT_PROFILE_PICTURE_URL = '/media/user/profile/default.jpg'
 
+
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -93,24 +99,21 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE     = 'Africa/Cairo'
 USE_I18N      = True
 USE_TZ        = True
 
 # Messages
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Static files (CSS, JavaScript, Images)
-
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
 ]
-
 STATIC_URL          = '/static/'
 STATIC_ROOT         = 'scheme'
 
+# Media
 MEDIA_URL           = '/media/'
 MEDIA_ROOT          = BASE_DIR / 'media'
