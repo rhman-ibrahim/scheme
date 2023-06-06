@@ -1,35 +1,55 @@
 # Django
-from django.shortcuts import redirect
+from django.contrib.admin.models import ADDITION, CHANGE
+from django.shortcuts import render, redirect
 from django.contrib import messages
-
 # Circles
-from .models import Circle
+from circles.models import Circle
+# User
+from user.decorators import is_authenticated
+from user.functions import log
 
 
-def circle(view):
+# Check if there is an active circle's session
+# Check if the requested circle and the session's circle are the same
+# Check if the user is a founder
+def circle_founder(view):
     def decorator(request, *args, **kwargs):
-        if request.user.is_authenticated:
-            if 'circle' not in request.session:
-                messages.warning(request, "there is no opened circle's session.")
+        requested_circle = Circle.objects.get(uuid=kwargs.get('serial'))
+        if 'circle' in request.session:
+            if requested_circle.id == request.session.get('circle'):
+                session_circle = Circle.objects.get(id=request.session.get('circle'))
+                if session_circle.user_role(request.user) == "founder":
+                    return view(request, *args, **kwargs)
+                else:
+                    messages.warning(request, "you are not allowed to preform this action.")
+                    return redirect("circles:page", kwargs.get('serial'))
+            else:
+                messages.warning(request, "you have to open the proper circle.")
+                return redirect("circles:page", kwargs.get('serial'))
+        else:
+            messages.warning(request, "you have to open the circle.")
+            return redirect("user:navigate")
+    return decorator
+
+
+# Check if there is an active circle's session
+# Check if the requested circle and the session's circle are the same
+# Check if the user is a member
+def circle_member(view):
+    def decorator(request, *args, **kwargs):
+        requested_circle = Circle.objects.get(uuid=kwargs.get('serial'))
+        if 'circle' in request.session:
+            if requested_circle.id == request.session.get('circle'):
+                session_circle = Circle.objects.get(id=request.session.get('circle'))
+                if session_circle.user_role(request.user) != None:
+                    return view(request, *args, **kwargs)
+                else:
+                    messages.warning(request, "you are not allowed to preform this action.")
+                    return redirect("user:navigate")
+            else:
+                messages.warning(request, "you have to open the proper circle.")
                 return redirect("user:navigate")
-        return redirect("user:navigate")
-    return decorator
-
-def founder(view):
-    def decorator(request, *args, **kwargs):
-        circle = Circle.objects.get(id=request.session['circle'])
-        if request.user.is_authenticated and request.user == circle.founder:
-            return view(request, *args, **kwargs)
-        messages.warning(request, "you are not authorized to view this.")
-        return redirect("user:navigate")
-    return decorator
-
-def member(view):
-    def decorator(request, *args, **kwargs):
-        circle = Circle.objects.get(id=request.session['circle'])
-        if request.user.is_authenticated:
-            if request.user == circle.founder or request.user in circle.members.all():
-                return view(request, *args, **kwargs)
-        messages.warning(request, "you are not authorized to view this.")
-        return redirect("user:navigate")
+        else:
+            messages.warning(request, "you have to open the circle.")
+            return redirect("user:navigate")
     return decorator
