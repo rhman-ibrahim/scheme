@@ -3,7 +3,7 @@ from django.contrib.admin.models import LogEntry
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.urls import reverse
-from django.db import models
+from django.db import models, IntegrityError
 
 
 class Circle(models.Model):
@@ -21,24 +21,37 @@ class Circle(models.Model):
     def __str__(self):
         return f"{self.name} by {self.founder.username}"
 
+    @property
+    def has_description(self):
+        return False if not bool(self.description) else True
+    
     def link(self):
-        return f"http://192.168.1.10:8000/circles/{self.uuid}/"
+        return str(reverse("circles:join", args=[str(self.uuid)]))
     
     def open(self):
         return reverse("circles:open", args=[str(self.uuid)])
 
-    def close(self):
-        return reverse("circles:close", args=[str(self.uuid)])
+    def page(self):
+        return reverse("circles:page", args=[str(self.uuid)])
+    
+    def exit(self):
+        return reverse("circles:exit", args=[str(self.uuid)])
     
     def logs(self):
         return LogEntry.objects.filter(
             content_type = ContentType.objects.get_for_model(Circle),
             object_id    = self.id
         )
-
-    @property
-    def has_description(self):
-        return False if not bool(self.description) else True
+    
+    def user_role(self, user):
+        if user in self.members.all():
+            return "member"
+        elif user == self.founder:
+            return "founder"
+        return None
+    
+    class Meta:
+        unique_together = ('founder', 'name')
 
 
 class CircleRequests(models.Model):
