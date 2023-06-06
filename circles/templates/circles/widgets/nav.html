@@ -5,6 +5,6 @@
     </h3>
     <p>To open another circle, you have to close this circle's session.</p>
     <nav class="end">
-        <a href="{% url 'circles:close' %}" class="material-symbols-outlined">arrow_forward</a>
+        <a href="{% url 'circles:exit' opened_circle.uuid %}" class="material-symbols-outlined">arrow_forward</a>
     </nav>
 </div>

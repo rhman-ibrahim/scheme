@@ -9,8 +9,8 @@
             </h4>
             <h5>{{ user.circlerequests.timestamp }}</h5>
             <nav class="end">
-                <a href="{% url 'circles:approve' circle.id ask.user.id %}" class="material-symbols-outlined">check</a>
-                <a href="{% url 'circles:reject' circle.id ask.user.id %}" class="material-symbols-outlined">close</a>
+                <a href="{% url 'circles:approve' circle.uuid ask.user.id %}" class="material-symbols-outlined">check</a>
+                <a href="{% url 'circles:reject' circle.uuid ask.user.id %}" class="material-symbols-outlined">close</a>
             </nav>
         </div>
         {% endfor %}

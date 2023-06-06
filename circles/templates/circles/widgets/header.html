@@ -1,3 +1,5 @@
+{% load user_filters %}
+
 <header class="widget">
     <h3 class="title">
         <i class="material-icons">person</i>
@@ -6,7 +8,7 @@
     <div class="cards-w">
         <div class="card">
             <h3 class="title">
-                <img src="{{ circle.founder.profile.picture.url }}" alt="" class="circle-24">
+                <img src="{{ circle.founder|profile_picture_url }}" alt="" class="circle-24">
                 <span>{{ circle.founder.username }}</span>
             </h3>
             {% if user.profile.has_about %}
