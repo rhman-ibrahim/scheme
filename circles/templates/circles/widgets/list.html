@@ -15,7 +15,7 @@
     <li><b>{{ circle.name }}</b></li>
     <nav class="end">
         {% if not opened_circle %}
-        <a href="{{ circle.open }}" class="material-symbols-outlined">arrow_forward</a>
+        <a href="{{ circle.open }}" class="material-symbols-outlined">radio_button_checked</a>
         {% else %}
         <a href="{{ circle.page }}" class="material-symbols-outlined">subdirectory_arrow_right</a>
         {% endif %}
@@ -29,7 +29,7 @@
     <li><b>{{ circle.name }}</b> by {{ circle.founder.username }}</li>
     <nav class="end">
         {% if not opened_circle %}
-        <a href="{{ circle.open }}" class="material-symbols-outlined">arrow_forward</a>
+        <a href="{{ circle.open }}" class="material-symbols-outlined">radio_button_checked</a>
         {% else %}
         <a href="{{ circle.page }}" class="material-symbols-outlined">subdirectory_arrow_right</a>
         {% endif %}
