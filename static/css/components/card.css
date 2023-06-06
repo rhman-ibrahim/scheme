@@ -95,8 +95,23 @@
     gap: 8px;
 }
 
-.card.center {
+.card.row,
+.card.center,
+.card.end {
+    flex-direction: row;
     align-items: center;
+}
+
+.card.row {
+    justify-content: flex-start;
+}
+
+.card.center {
+    justify-content: center;
+}
+
+.card.end {
+    justify-content: flex-end;
 }
 
 .card .row,
@@ -106,6 +121,10 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
+}
+
+.card .row {
+    justify-content: flex-start;
 }
 
 .card .center {
