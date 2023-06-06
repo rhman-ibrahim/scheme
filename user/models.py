@@ -135,13 +135,19 @@ class Profile(models.Model):
     @property
     def has_about(self):
         return False if not bool(self.about) else True
-    
+
+
+class Scheme(models.Model):
+
+    user = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
     
     @property
     def circles(self):
-        return Circle.objects.filter(
-            Q(founder=self.user) | Q(members=self.user)
-        )
+        return {
+            'as_founder':Circle.objects.filter(founder=self.user),
+            'as_member':Circle.objects.filter(Q(members=self.user))
+        }
