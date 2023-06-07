@@ -7,8 +7,25 @@
 {% endblock %}
 
 {% block center %}
-{% block main %}
-{% endblock %}
+{% include "home/cards/describe/project.html" %}
+<section class="cards-w">
+    {% include "home/cards/describe/what.html" %}
+    {% include "home/cards/describe/why.html" %}
+    {% include "home/cards/describe/how.html" %}
+</section>
+<section class="widget">
+    {% include "home/cards/describe/app.html" %}
+    <section class="cards-s" id="apps">
+        {% include "user/cards/navigate/app.html" %}
+        {% include "circles/cards/navigate/app.html" %}
+        {% include "signals/cards/navigate/app.html" %}
+        {% include "spaces/cards/navigate/app.html" %}
+        {% include "tasks/cards/navigate/app.html" %}
+    </section>
+</section>
+<section class="cards-w">
+    {% include "home/cards/function/theme.html" %}
+</section>
 {% endblock %}
 
 {% block right %}
