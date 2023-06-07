@@ -1,17 +1,11 @@
 {% if request.user.is_authenticated %}
 {% include "user/cards/guest/manage.html" %}
 <section class="cards-w">
-    {% include "user/cards/guest/features.html" %}
+    {% include "user/cards/navigate/guest.html" %}
 </section>
 {% else %}
-<section class="widget" id="guest">
-    <h2 class="title">
-        <i class="material-icons">person_pin</i>
-        <span>guest</span>
-    </h2>
-    <div class="cards-w">
-        {% include "user/cards/guest/manage.html" %}
-        {% include "user/cards/guest/features.html" %}
-    </div>
+<section class="cards-w">
+    {% include "user/cards/describe/guest.html" %}
+    {% include "user/cards/navigate/guest.html" %}
 </section>
 {% endif %}

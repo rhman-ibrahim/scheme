@@ -34,8 +34,8 @@ class Circle(models.Model):
     def page(self):
         return reverse("circles:page", args=[str(self.uuid)])
     
-    def exit(self):
-        return reverse("circles:exit", args=[str(self.uuid)])
+    def close(self):
+        return reverse("circles:close", args=[str(self.uuid)])
     
     def logs(self):
         return LogEntry.objects.filter(

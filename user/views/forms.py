@@ -18,8 +18,13 @@ from user.forms import  (
 from user.decorators import is_authenticated, is_guest
 
 
+def end_token_session(request):
+    if 'token' in request.session:
+        del request.session['token']
+
 @is_authenticated(False)
 def signup(request):
+    end_token_session(request)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -31,6 +36,7 @@ def signup(request):
     
 @is_authenticated(False)    
 def signin(request):
+    end_token_session(request)
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():

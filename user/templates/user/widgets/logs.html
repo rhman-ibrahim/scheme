@@ -1,6 +1,3 @@
 {% with logs=request.user.scheme.logs %}
-<div class="cards-v">
-    <div class="verticl-line"></div>
-    {% include "components/logs.html" %}
-</div>
+{% include "components/logs.html" %}
 {% endwith %}

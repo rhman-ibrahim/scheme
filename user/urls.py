@@ -14,7 +14,6 @@ urlpatterns = [
     path('update/token/', views.update_token, name='update_token'),
     path('update/info/', views.update_profile_info, name='info'),
     # Functionalities
-    path('reset/cancel/', views.cancel, name='cancel'),
     path("navigate/", views.navigate, name="navigate"),
     path('signout/', views.signout, name='signout'),
     # Templates

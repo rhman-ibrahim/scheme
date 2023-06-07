@@ -2,7 +2,7 @@
     <div class="wrapper">
         <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
         {% for ask in circle.circlerequests_set.all %}
-        <div class="card">
+        <div class="card" role="navigate">
             <h4 class="title">
                 <img src="{{ ask.user.profile.picture.url }}" alt="" class="circle-24">
                 <span>{{ ask.user.username }}</span>

@@ -18,7 +18,7 @@ def open(request, serial):
     return redirect("circles:page", serial)
 
 @circle_member
-def exit(request, serial):
+def close(request, serial):
     circle = Circle.objects.get(uuid=serial)
     del request.session['circle']
     log(

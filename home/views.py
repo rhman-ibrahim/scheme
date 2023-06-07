@@ -20,7 +20,7 @@ context = {
 def index(request):
     return render(
         request,
-        "home/_.html",
+        "home/index.html",
         {
             'forms':context
         }

@@ -1,19 +1,32 @@
 # Django
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.admin.models import CHANGE
 from django.utils.crypto import get_random_string
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+# Scheme
+from scheme.settings import MEDIA_ROOT
 # Helpers
 from helpers.functions import log
 # User
 from user.decorators import is_authenticated, is_guest
 
 
-@is_authenticated(False)
-def cancel(request):
-    if 'token' in request.session: del request.session['token']
-    return redirect("home:index")
+def navigate(request):
+    if request.user.is_authenticated:
+        if request.user.is_guest: return redirect("user:guest")
+        else: return redirect("user:settings")
+    return redirect("home:user")
+
+@is_authenticated(True)
+@is_guest(False)
+def token(request):
+    with open(f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png", 'rb') as f:
+        file = f.read()
+    response = HttpResponse(content_type='image/png')
+    response.write(file)
+    return response
 
 @is_authenticated(True)
 @is_guest(False)
@@ -36,11 +49,3 @@ def signout(request):
     logout(request)
     messages.success(request, 'signed out successfully')
     return redirect('home:user')
-
-def navigate(request):
-    if request.user.is_authenticated:
-        if request.user.is_guest:
-            return redirect("user:guest")
-        else:
-            return redirect("user:settings")
-    return redirect("home:user")
