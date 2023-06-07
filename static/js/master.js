@@ -160,7 +160,7 @@ class Thread {
         if (Template.isThere('.cards-s')) {
             let isDown = false;
             let startX, scrollLeft;
-            document.querySelectorAll('.card-h').forEach(
+            document.querySelectorAll('.card-s').forEach(
                 thread => {
                     thread.addEventListener('mousedown', (e) => {
                         isDown = true;
@@ -212,6 +212,22 @@ class Thread {
         item.parentElement.scrollBy(
             {
                 left: (item.clientWidth * item.parentElement.childElementCount),
+                behavior: 'smooth'
+            }
+        );
+    }
+    static item = (selector, index) => {
+        const thread = document.querySelector(`${selector}`);
+        thread.querySelectorAll('.card').forEach(
+            card => {
+                card.style.outlineColor = "var(--d3)";
+            }
+        )
+        thread.querySelector(`.card:nth-child(${index})`).style.outlineColor = "var(--di)";
+        thread.querySelector(`.card:nth-child(${index})`)
+        .scrollIntoView(
+            {
+                threshold: 1,
                 behavior: 'smooth'
             }
         );

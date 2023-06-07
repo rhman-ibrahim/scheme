@@ -1,32 +1,8 @@
 .widget {
     display: flex;
     flex-direction: column;
+    padding: 8px 0px;
     gap: 8px;
-}
-
-/*
-    .card-s
-    scrollable row
-*/
-
-.cards-s {
-    display: flex;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    flex-wrap: nowrap;
-    overflow: auto;
-    padding: 4px;
-    gap: 8px;
-}
-
-.cards-s::-webkit-scrollbar {
-    display: none;
-}
-
-.cards-s > .card {
-    width: calc(50% - 4px);
-    flex-wrap: wrap;
-    flex: 0 0 auto;
 }
 
 /*
@@ -81,6 +57,36 @@
         flex: 100%;
     }
 
+}
+
+/*
+    .card-s
+    scrollable row
+*/
+
+.cards-s {
+    display: flex;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow: auto;
+    padding: 2px;
+    gap: 8px;
+}
+
+.cards-s::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-s .card {
+    width: 340px !important;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+}
+
+@media screen {
+    .cards-s .card {
+        width: calc((100% - 8px) / 2);
+    }
 }
 
 /*
