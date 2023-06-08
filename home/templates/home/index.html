@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block left %}
+{% include "home/cards/function/theme.html" %}
+{% include "circles/cards/form/create.html" %}
 {% endblock %}
 
 {% block center %}
@@ -23,10 +25,10 @@
         {% include "tasks/cards/navigate/app.html" %}
     </section>
 </section>
-<section class="cards-w">
-    {% include "home/cards/function/theme.html" %}
-</section>
 {% endblock %}
 
 {% block right %}
+{% include "user/cards/form/signup.html" %}
+{% include "user/cards/form/signin.html" %}
+{% include "user/cards/form/verify.html" %}
 {% endblock %}
