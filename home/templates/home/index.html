@@ -13,12 +13,14 @@
 {% endblock %}
 
 {% block center %}
-{% include "home/cards/describe/project.html" %}
-<section class="cards-w">
-    {% include "home/cards/describe/what.html" %}
-    {% include "home/cards/describe/why.html" %}
-    {% include "home/cards/describe/how.html" %}
-</section>
+<header class="widget">
+    {% include "home/cards/describe/project.html" %}
+    <section class="cards-w">
+        {% include "home/cards/describe/what.html" %}
+        {% include "home/cards/describe/why.html" %}
+        {% include "home/cards/describe/how.html" %}
+    </section>
+</header>
 <section class="widget">
     {% include "home/cards/describe/app.html" %}
     <section class="cards-s" id="apps">
@@ -29,45 +31,7 @@
         {% include "tasks/cards/navigate/app.html" %}
     </section>
 </section>
-<section class="widget" id="scheme-guide-section">
-    <div class="card" role="describe">
-        <h2 class="title">
-            <i class="material-symbols-outlined">commit</i>
-            <span>how it works</span>
-        </h2>
-        <p>Everything in Scheme is a <b>circle related object</b>. To create
-        a circle, you have to have an account. Kindly,
-        <b>read the cards below!.</b></p>
-    </div>
-    <section class="cards-w">
-        <div class="card">
-            <h3 class="material-symbols-outlined">looks_one</h3>
-            <p>With a user account you create multiple circles,
-            access all of the applications and recover,
-            in case the password was forgotten.</p>
-        </div>
-        <div class="card">
-            <h3 class="material-symbols-outlined">looks_two</h3>
-            <p>With a guest account you create (1) circle, access the "Spaces"
-            application only <span>and your session</span>
-            lasts for (4) hours then ends.</p>
-        </div>
-        <div class="card">
-            <h3 class="material-symbols-outlined">looks_3</h3>
-            <p>You could only communicate with a circle at a time,
-            and to navigate between circles, you have to use the
-            close and open methods.</p>
-        </div>
-        <div class="card">
-            <h3 class="material-symbols-outlined">looks_4</h3>
-            <p>Its suggested to provide the circle's description paragraph
-            in order to be as specific as possible about
-            it's topic and purpose.</p>
-        </div>
-    </section>
-</section>
-<section class="widget" id="guest-user-section">
-</section>
+{% include "home/widgets/guide.html" %}
 {% endblock %}
 
 {% block right %}
