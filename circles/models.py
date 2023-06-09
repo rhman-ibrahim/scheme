@@ -26,16 +26,16 @@ class Circle(models.Model):
         return False if not bool(self.description) else True
     
     def link(self):
-        return str(reverse("circles:join", args=[str(self.uuid)]))
+        return str(reverse("circclejoin", args=[str(self.uuid)]))
     
     def open(self):
-        return reverse("circles:open", args=[str(self.uuid)])
+        return reverse("circcleopen", args=[str(self.uuid)])
 
     def page(self):
-        return reverse("circles:page", args=[str(self.uuid)])
+        return reverse("circclepage", args=[str(self.uuid)])
     
     def close(self):
-        return reverse("circles:close", args=[str(self.uuid)])
+        return reverse("circcleclose", args=[str(self.uuid)])
     
     def logs(self):
         return LogEntry.objects.filter(

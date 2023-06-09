@@ -6,7 +6,7 @@
         <img src="{{ member|profile_picture_url }}" alt="" class="circle-48">
         <h4>{{ member.username }}</h4>
         <nav>
-            <a href="{% url 'circles:remove' opened_circle.uuid member.id %}">remove</a>
+            <a href="{% url 'circcleremove' opened_circle.uuid member.id %}">remove</a>
         </nav>
     </div>
     {% endfor %}

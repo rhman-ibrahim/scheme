@@ -15,7 +15,7 @@ def open(request, serial):
         request.user.id, circle, ADDITION,
         f"opened the circle ({circle.name})."
     )
-    return redirect("circles:page", serial)
+    return redirect("circclepage", serial)
 
 @circle_member
 def close(request, serial):

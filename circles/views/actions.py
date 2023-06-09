@@ -32,7 +32,7 @@ def create(request):
         except IntegrityError:
             messages.warning(request, "you have a circle with this name")
             return redirect("user:navigate")
-    return redirect("circles:open", circle.uuid)
+    return redirect("circcleopen", circle.uuid)
 
 def join(request, serial):
     circle = Circle.objects.get(uuid=serial)

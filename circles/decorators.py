@@ -22,10 +22,10 @@ def circle_founder(view):
                     return view(request, *args, **kwargs)
                 else:
                     messages.warning(request, "you are not allowed to preform this action.")
-                    return redirect("circles:page", kwargs.get('serial'))
+                    return redirect("circclepage", kwargs.get('serial'))
             else:
                 messages.warning(request, "you have to open the proper circle.")
-                return redirect("circles:page", kwargs.get('serial'))
+                return redirect("circclepage", kwargs.get('serial'))
         else:
             messages.warning(request, "you have to open the circle.")
             return redirect("user:navigate")

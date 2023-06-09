@@ -21,7 +21,7 @@ def approve(request, serial, user_id):
         request.user.id, circle, CHANGE,
         f"approved ({user.username}) joining the circle ({circle.name})."
     )
-    return redirect("circles:page", serial)    
+    return redirect("circclepage", serial)    
 
 @is_authenticated(True)
 @circle_founder
@@ -34,7 +34,7 @@ def remove(request, serial, user_id):
         request.user.id, circle, CHANGE,
         f"removed ({user.username}) from the circle ({circle.name})."
     )
-    return redirect("circles:page", serial)
+    return redirect("circclepage", serial)
 
 @is_authenticated(True)
 @circle_founder
@@ -47,4 +47,4 @@ def reject(request, serial, user_id):
         request.user.id, circle, CHANGE,
         f"rejected ({user.username}) joining the circle ({circle.name})."
     )
-    return redirect("circles:page", serial)
+    return redirect("circclepage", serial)
