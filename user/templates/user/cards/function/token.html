@@ -3,10 +3,10 @@
         <i class="material-icons">qr_code</i>
         <span>token</span>
     </h3>
-    <p>Keep your token secure and updated to ensure that you can always
-    recover your account when needed and prevent security breaches.</p>
+    <p><b>Download</b> your QR code recovery token and store it securely. Also,
+    you could <b>regenerate</b> your token, if it was <span>exposed or shared!</span>.</p>
     <nav class="end">
-        <a class="material-icons" href="{% url 'user:update_token' %}">refresh</a>
-        <a class="material-icons" href="{% url 'user:token' %}">download</a>
+        <a class="material-icons" href="{% url 'user:update_token' %}">autorenew</a>
+        <a class="material-symbols-outlined" href="{% url 'user:token' %}">download</a>
     </nav>
 </div>

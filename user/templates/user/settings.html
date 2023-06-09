@@ -1,12 +1,32 @@
 {% extends 'templates/lcr.html' %}
 
 {% block fixed %}
+{% include "circles/forms/create.html" %}
+{% include "user/forms/profile.html" %}
+{% include "user/forms/password.html" %}
 {% endblock %}
 
 {% block left %}
 {% endblock %}
 
 {% block center %}
+<section class="widget">
+    <section class="cards-w">
+        {% include "user/cards/navigate/settings.html" %}
+    </section>
+</section>
+<section class="widget">
+    <section class="cards-w">
+        {% include "home/cards/function/theme.html" %}
+        {% include "circles/cards/form/create.html" %}
+        {% include "user/cards/function/token.html" %}
+    </section>
+    <section class="cards-w">
+        {% include "user/cards/form/profile.html" %}
+        {% include "user/cards/form/password.html" %}
+        {% include "user/cards/navigate/signout.html" %}
+    </section>
+</section>
 {% endblock %}
 
 {% block right %}
