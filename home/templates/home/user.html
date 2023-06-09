@@ -1,5 +1,12 @@
 {% extends 'templates/lcr.html' %}
 
+{% block fixed %}
+{% include "circles/forms/create.html" %}
+{% include "user/forms/signup.html" %}
+{% include "user/forms/signin.html" %}
+{% include "user/forms/verify.html" %}
+{% endblock %}
+
 {% block left %}
 {% include "home/cards/navigate/app.html" %}
 {% include "user/cards/navigate/app.html" %}
@@ -9,13 +16,11 @@
 {% include "tasks/cards/navigate/app.html" %}
 {% endblock %}
 
-{% block fixed %}
-{% include "circles/forms/create.html" %}
-{% include "user/forms/signup.html" %}
-{% include "user/forms/signin.html" %}
-{% include "user/forms/verify.html" %}
+{% block center %}
+{% include "home/widgets/guide.html" %}
+{% block app %}
 {% endblock %}
-
+{% endblock %}
 
 {% block right %}
 {% include "home/cards/function/theme.html" %}
