@@ -11,14 +11,14 @@
     <main class="lc-grid">
         <aside class="aside-l" id="left">
             <div class="wrapper">
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-lc-button">chevron_left</button>
                 {% block left %}
                 {% endblock %}
             </div>
         </aside>
         <aside id="center">
             <div class="wrapper">
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#left')" id="left-pin">widgets</button>
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#left')" id="left-pin">chevron_right</button>
                 {% block center %}
                 {% endblock %}
             </div>

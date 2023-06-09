@@ -32,10 +32,16 @@ aside {
     left: 0px;
 }
 
-aside div.wrapper #aside-button {
+aside div.wrapper #aside-l-button {
     position: absolute;
     bottom: 8px;
     right: 8px;
+}
+
+aside div.wrapper #aside-r-button {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
 }
 
 .pin {
@@ -61,8 +67,8 @@ main.lr-grid #left #right-pin {
 
 main.lcr-grid #center #left-pin {
     position: absolute;
-    bottom: 8px;
-    right: 52px;
+    bottom: 52px;
+    right: 8px;
 }
 
 @media (width > 360px) {
