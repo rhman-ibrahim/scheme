@@ -1,0 +1,13 @@
+{% if opened_circle %}
+<div class="card">
+    <h4 class="title">
+        <i class="material-symbols-outlined">diversity_2</i>
+        <span>{{ opened_circle.name }}</span>
+    </h4>
+    <p>You are connected to this circle now. Use the icons to navigate.</p>
+    <nav class="end">
+        <a class="material-icons" href="{{ opened_circle.browse }}">radio_button_checked</a>
+        <a class="material-icons" href="{{ opened_circle.close }}">logout</a>
+    </nav>
+</div>
+{% endif %}

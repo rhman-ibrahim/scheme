@@ -7,17 +7,13 @@
 {% endblock %}
 
 {% block left %}
-{% if opened_circle %}
-{% with circle=opened_circle %}
-{% include "circles/cards/function/circle.html" %}
-{% endwith %}
-{% endif %}
 {% endblock %}
 
 {% block center %}
 <section class="widget">
     <section class="cards-w">
         {% include "user/cards/navigate/settings.html" %}
+        {% include "circles/cards/function/opened.html" %}
     </section>
 </section>
 <section class="widget">
