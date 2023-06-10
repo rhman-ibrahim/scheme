@@ -4,14 +4,15 @@ from . import views
 
 app_name    = "circle"
 urlpatterns = [
+    
     path('create/', views.create, name="create"),
-    #
+    
     path('join/<str:serial>/', views.join, name="join"),
+    path('approve/<int:user_id>/', views.approve, name="approve"),
+    path('reject/<int:user_id>/', views.reject, name="reject"),
+    path('remove/<int:user_id>/', views.remove, name="remove"),
+
     path('open/<str:serial>/', views.open, name="open"),
-    path('page/<str:serial>/', views.page, name="page"),
-    path('exit/<str:serial>/', views.close, name="exit"),
-    #
-    path('approve/<str:serial>/<int:user_id>/', views.approve, name="approve"),
-    path('reject/<str:serial>/<int:user_id>/', views.reject, name="reject"),
-    path('remove/<str:serial>/<int:user_id>/', views.remove, name="remove")
+    path('browse/', views.browse, name="browse"),
+    path('close/', views.close, name="close"),
 ]

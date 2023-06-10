@@ -2,8 +2,7 @@ from circles.models import Circle
 
 
 def opened_circle(request):
-    circle_id = request.session['circle'] if 'circle' in request.session else None
-    circle    = Circle.objects.get(id=circle_id) if circle_id else None
+    circle_uuid = request.session['circle'] if 'circle' in request.session else None
     return {
-        'opened_circle': circle
+        'opened_circle': Circle.objects.get(uuid=circle_uuid) if circle_uuid else None
     }

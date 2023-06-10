@@ -24,19 +24,19 @@ class Circle(models.Model):
     @property
     def has_description(self):
         return False if not bool(self.description) else True
-    
-    def link(self):
-        return str(reverse("circclejoin", args=[str(self.uuid)]))
-    
-    def open(self):
-        return reverse("circcleopen", args=[str(self.uuid)])
 
-    def page(self):
-        return reverse("circclepage", args=[str(self.uuid)])
-    
+    def browse(self):
+        return reverse("circle:browse")
+
     def close(self):
-        return reverse("circcleclose", args=[str(self.uuid)])
-    
+        return reverse("circle:close")
+            
+    def open(self):
+        return reverse("circle:open", args=[str(self.uuid)])
+
+    def link(self):
+        return str(reverse("circle:join", args=[str(self.uuid)]))
+
     def logs(self):
         return LogEntry.objects.filter(
             content_type = ContentType.objects.get_for_model(Circle),
