@@ -3,4 +3,11 @@
         <i class="material-symbols-outlined">diversity_2</i>
         <span>{{ circle.name }}</span>
     </h4>
+    <nav class="end">
+        {% if not opened_circle %}
+        <a class="material-icons" href="{{ circle.open }}">login</a>
+        {% elif circle.id == opened_circle.id %}
+        <a class="material-icons" href="{{ circle.close }}">logout</a>
+        {% endif %}
+    </nav>
 </div>
