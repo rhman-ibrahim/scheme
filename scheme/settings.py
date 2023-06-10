@@ -47,9 +47,9 @@ TEMPLATES      = [
                 'circles.processors.opened_circle'
             ],
             'libraries':{
-                'filters':'helpers.filters',
-                'user_filters':'user.filters',
                 'circle_filters':'circles.filters',
+                'user_filters':'user.filters',
+                'filters':'helpers.filters'
             }
         },
     },
