@@ -35,7 +35,7 @@ class Circle(models.Model):
         return reverse("circle:open", args=[str(self.uuid)])
 
     def link(self):
-        return str(reverse("circle:join", args=[str(self.uuid)]))
+        return str(reverse("circle:link", args=[str(self.uuid)]))
 
     def logs(self):
         return LogEntry.objects.filter(

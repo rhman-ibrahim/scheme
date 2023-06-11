@@ -3,7 +3,11 @@
         <i class="material-symbols-outlined">diversity_2</i>
         <span>{{ circle.name }}</span>
     </h4>
+    {% if circle.has_description %}
+    <p>{{ circle.description }}</p>
+    {% endif %}
     <nav class="end">
+        <a class="material-icons" href="{{ circle.link }}">content_copy</a>
         {% if opened_circle and circle.id == opened_circle.id %}
         <a class="material-icons" href="{{ circle.browse }}">radio_button_checked</a>
         <a class="material-icons" href="{{ circle.close }}">logout</a>

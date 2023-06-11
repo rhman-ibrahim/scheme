@@ -1,3 +1,4 @@
+{% if request.user == circle.founder %}
 <div class="card" role="aside">
     <h3 class="title">
         <i class="material-symbols-outlined">sync_alt</i>
@@ -9,3 +10,4 @@
         <li class="material-symbols-outlined" onclick="Aside.open('#requests')">radio_button_checked</li>
     </ul>
 </div>
+{% endif %}

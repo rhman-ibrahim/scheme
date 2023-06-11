@@ -1,6 +1,12 @@
+{% if request.user == circle.founder %}
 <aside class="aside-r" id="requests">
     <div class="wrapper">
-        <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-button">close</button>
+        <div class="card">
+            <p>These requests have been received, sorted from oldest to newest.</p>
+            <ul class="end">
+                <li><b>{{ circle.circlerequests_set.count }}</b></li>
+            </ul>
+        </div>
         {% for ask in circle.circlerequests_set.all %}
         <div class="card" role="navigate">
             <h4 class="title">
@@ -9,10 +15,12 @@
             </h4>
             <h5>{{ user.circlerequests.timestamp }}</h5>
             <nav class="end">
-                <a href="{% url 'circcleapprove' circle.uuid ask.user.id %}" class="material-symbols-outlined">check</a>
-                <a href="{% url 'circclereject' circle.uuid ask.user.id %}" class="material-symbols-outlined">close</a>
+                <a href="{% url 'circle:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
+                <a href="{% url 'circle:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
             </nav>
         </div>
         {% endfor %}
+        <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()">chevron_right</button>
     </div>
 </aside>
+{% endif %}

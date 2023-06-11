@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from user.decorators import is_authenticated
 from circles.models import Circle
+from circles.forms import CircleForm
 
 
 @is_authenticated(True)
@@ -36,7 +37,10 @@ def browse(request):
         request,
         "circles/index.html",
         {
-            'circle': circle
+            'circle': circle,
+            'forms': {
+                'circle': CircleForm(instance=circle)
+            }
         }
     )
 

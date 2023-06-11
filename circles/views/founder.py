@@ -22,18 +22,6 @@ def approve(request, user_id):
     return redirect("circle:browse")    
 
 @is_authenticated(True)
-def remove(request, user_id):
-    circle = Circle.objects.get(uuid=request.session.get('circle'))
-    user = circle.members.get(id=int(user_id))
-    circle.members.remove(user)
-    circle.save()
-    log(
-        request.user.id, circle, CHANGE,
-        f"removed ({user.username}) from the circle ({circle.name})."
-    )
-    return redirect("circle:browse")
-
-@is_authenticated(True)
 def reject(request, user_id):
     circle = Circle.objects.get(uuid=request.session.get('circle'))
     user   = circle.requested.get(id=int(user_id))
@@ -42,5 +30,17 @@ def reject(request, user_id):
     log(
         request.user.id, circle, CHANGE,
         f"rejected ({user.username}) joining the circle ({circle.name})."
+    )
+    return redirect("circle:browse")
+
+@is_authenticated(True)
+def remove(request, user_id):
+    circle = Circle.objects.get(uuid=request.session.get('circle'))
+    user = circle.members.get(id=int(user_id))
+    circle.members.remove(user)
+    circle.save()
+    log(
+        request.user.id, circle, CHANGE,
+        f"removed ({user.username}) from the circle ({circle.name})."
     )
     return redirect("circle:browse")

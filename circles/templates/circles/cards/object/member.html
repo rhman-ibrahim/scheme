@@ -1,0 +1,13 @@
+{% load user_filters %}
+
+<div class="card">
+    <h3 class="title">
+        <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
+        <span>{{ member.username }}</span>
+    </h3>
+    {% if request.user == circle.founder and member != circle.founder %}
+    <ul class="end">
+        <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
+    </ul>
+    {% endif %}
+</div>

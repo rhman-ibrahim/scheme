@@ -7,7 +7,7 @@ urlpatterns = [
     
     path('create/', views.create, name="create"),
     
-    path('join/<str:serial>/', views.join, name="join"),
+    path('link/<str:serial>/', views.link, name="link"),
     path('approve/<int:user_id>/', views.approve, name="approve"),
     path('reject/<int:user_id>/', views.reject, name="reject"),
     path('remove/<int:user_id>/', views.remove, name="remove"),

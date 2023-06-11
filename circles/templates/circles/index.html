@@ -1,1 +1,31 @@
 {% extends 'templates/lcr.html' %}
+
+{% block fixed %}
+{% include "circles/widgets/requests.html" %}
+{% include "circles/forms/update.html" %}
+{% endblock %}
+
+{% block left %}
+    {% with member=circle.founder %}
+        {% include "circles/cards/object/member.html" %}
+    {% endwith %}
+    {% for member in circle.members.all %}
+        {% include "circles/cards/object/member.html" %}
+    {% endfor %}
+{% endblock %}
+
+{% block center %}
+<section class="widget">
+    <section class="cards-w">
+        {% include "user/cards/navigate/settings.html" %}
+        {% include "circles/cards/function/opened.html" %}
+    </section>
+</section>
+<section class="widget">
+    <section class="cards-w">
+        {% include "circles/cards/form/update.html" %}
+        {% include "circles/cards/function/invite.html" %}
+        {% include "circles/cards/aside/requests.html" %}
+    </section>
+</section>
+{% endblock %}
