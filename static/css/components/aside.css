@@ -32,13 +32,13 @@ aside {
     left: 0px;
 }
 
-aside div.wrapper #aside-l-button {
+aside.aside-r div.wrapper > button {
     position: absolute;
     bottom: 8px;
     right: 8px;
 }
 
-aside div.wrapper #aside-r-button {
+aside.aside-l div.wrapper > button {
     position: absolute;
     bottom: 8px;
     left: 8px;
@@ -91,7 +91,7 @@ main.lcr-grid #center #left-pin {
 @media (width >= 720px) {
 
     main.lr-grid #left #right-pin,
-    main.lr-grid #right.aside-r #aside-r-button {
+    main.lr-grid #right.aside-r .wrapper > button {
         display: none;
     }
 
@@ -102,9 +102,9 @@ main.lcr-grid #center #left-pin {
     main.cr-grid #center #right-pin,
     main.lc-grid #center #left-pin,
     main.lcr-grid #center #left-pin,
-    main.cr-grid #right.aside-r #aside-r-button,
-    main.lc-grid #left.aside-l #aside-l-button,
-    main.lcr-grid #left.aside-l #aside-l-button {
+    main.cr-grid #right.aside-r .wrapper > button,
+    main.lc-grid #left.aside-l .wrapper > button,
+    main.lcr-grid #left.aside-l .wrapper > button {
         display: none;
     }
 
@@ -113,7 +113,7 @@ main.lcr-grid #center #left-pin {
 @media (width >= 1440px) {
 
     main.lcr-grid #center #right-pin, 
-    main.lcr-grid #right.aside-r #aside-r-button {
+    main.lcr-grid #right.aside-r .wrapper > button {
         display: none;
     }
 
