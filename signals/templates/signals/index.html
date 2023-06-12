@@ -1,0 +1,20 @@
+{% extends 'templates/lcr.html' %}
+
+{% block fixed %}
+{% include "signals/asides/signals.html" %}
+{% include "signals/forms/opportunity.html" %}
+{% include "signals/forms/problem.html" %}
+{% endblock %}
+
+{% block left %}
+{% include "circles/cards/function/opened.html" %}
+{% include "user/cards/navigate/settings.html" %}
+{% endblock %}
+
+{% block center %}
+<section class="cards-w">
+    {% include "signals/cards/describe/signal.html" %}
+    {% include "signals/cards/form/problem.html" %}
+    {% include "signals/cards/form/opportunity.html" %}
+</section>
+{% endblock %}

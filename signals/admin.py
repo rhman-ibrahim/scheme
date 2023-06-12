@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Signal, Comment
+from .models import Opportunity, Problem
 
-
-admin.site.register(Signal)
-admin.site.register(Comment)
+admin.site.register(Opportunity)
+admin.site.register(Problem)

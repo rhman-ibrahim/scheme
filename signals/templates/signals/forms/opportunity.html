@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'signals:create_opportunity' %}" id="opportunity-create-form">
+    {% with form=forms.signal %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
