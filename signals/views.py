@@ -11,7 +11,7 @@ from circles.models import Circle
 from circles.decorators import circle_session
 # Signals
 from .forms.signal import SignalForm
-from .models import Problem, Opportunity
+from .models import Problem, Opportunity, Signal
 
 
 @circle_session
@@ -20,8 +20,8 @@ def create_problem(request):
         form = SignalForm(request.POST)
         if form.is_valid():
             problem        = Problem(**form.cleaned_data)
-            problem.author = request.user
             problem.circle = Circle.objects.get(uuid=request.session.get('circle'))
+            problem.author = request.user
             problem.save()
             messages.success(request, "your signal has been sent successfully")
         else: get_form_errors(request, form)
@@ -33,8 +33,8 @@ def create_opportunity(request):
         form = SignalForm(request.POST)
         if form.is_valid():
             opportunity        = Opportunity(**form.cleaned_data)
-            opportunity.author = request.user
             opportunity.circle = Circle.objects.get(uuid=request.session.get('circle'))
+            opportunity.author = request.user
             opportunity.save()
             messages.success(request, "your signal is sent successfully")
         else: get_form_errors(request, form)
@@ -45,19 +45,17 @@ def create_opportunity(request):
 def index(request):
 
     circle        = Circle.objects.get(uuid=request.session.get('circle'))
-    opportunities = Opportunity.objects._mptt_filter(circle=circle)
-    problems      = Problem.objects._mptt_filter(circle=circle)
+    opportunities = Opportunity.objects.filter(circle=circle)
+    problems      = Problem.objects.filter(circle=circle)
 
-    combined_list = list(chain(opportunities, problems))
+    combined_list = set(list(chain(opportunities, problems)))
     signals       = sorted(combined_list, key=attrgetter('created'))
 
     return render(
         request,
         "signals/index.html",
         {
-            "hypothesis": {
-                'list': signals,
-            },
+            'list': signals,
             "forms": {
                 'signal': SignalForm,
             }

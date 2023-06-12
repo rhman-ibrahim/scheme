@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.fields import GenericForeignKey
+# from django.contrib.contenttypes.models import ContentType
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -34,60 +34,31 @@ class Signal(MPTTModel):
     approved    = models.BooleanField(default=False)
 
     class MPTTMeta:
-        order_insertion_by=['-created']    
+        abstract = True
+    
+    def get_icon(self):
+
+        if isinstance(self, Problem):
+            return self.problem.icon
+        
+        if isinstance(self, Opportunity):
+            return self.opportunity.icon
 
 
 class Problem(Signal):
     
+    icon = models.CharField(default="psychology_alt", editable=False, max_length=64)
+
     def __str__(self):
         return f'Problem, posted by {self.author.username}'
 
 
 class Opportunity(Signal):
 
+    icon = models.CharField(default="psychology", editable=False, max_length=64)
+
     def __str__(self):
         return f'Opportunity, posted by {self.author.username}'
     
     class Meta:
         verbose_name_plural = "Opportunities"
-
-
-class Hypothesis(Signal):
-
-    content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id      = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    
-    def __str__(self):
-        return f'Hypothesis, posted by {self.user.username}'
-
-
-class SignalThread(Signal):
-
-    connector = models.ForeignKey("signals.Hypothesis", on_delete=models.CASCADE)
-    
-
-# Observation, Insight, Decisions
-class LearningThread(SignalThread):
-
-    type = models.IntegerField(choices=LEARNING_THREAD_SIGNAL_TYPES, blank=True, null=True)
-    
-    def __str__(self):
-        return f'{ self.type } by {self.user.username}'
-    
-    def pre_save(self, *args, **kwargs):
-        self.type = self.level
-        super().pre_save(*args, **kwargs)
-
-
-# Test, Metric, Criteria
-class TestingThread(SignalThread):
-
-    type = models.IntegerField(choices=TEST_THREAD_SIGNAL_TYPES, blank=True, null=True)
-    
-    def __str__(self):
-        return f'{ self.type } by {self.user.username}'
-    
-    def pre_save(self, *args, **kwargs):
-        self.type = self.level
-        super().pre_save(*args, **kwargs)

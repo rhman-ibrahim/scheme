@@ -9,7 +9,7 @@ class SignalForm(forms.ModelForm):
         required=True,
         widget=forms.Textarea(
             attrs = {
-                'data-field':"signal",
+                'data-field':"body",
                 'autocomplete':"off",
                 'maxlength':512,
             }

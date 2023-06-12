@@ -12,9 +12,18 @@
 {% endblock %}
 
 {% block center %}
-<section class="cards-w">
-    {% include "signals/cards/describe/signal.html" %}
-    {% include "signals/cards/form/problem.html" %}
-    {% include "signals/cards/form/opportunity.html" %}
-</section>
+{% for signal in list %}
+<div class="card">
+    <h3 class="title">
+        <i class="material-symbols-outlined">{{ signal.icon }}</i>
+    </h3>
+    <p>{{ signal.body }}</p>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block right %}
+{% include "signals/cards/describe/signal.html" %}
+{% include "signals/cards/form/problem.html" %}
+{% include "signals/cards/form/opportunity.html" %}
 {% endblock %}
