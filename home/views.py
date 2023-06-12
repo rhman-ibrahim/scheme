@@ -1,5 +1,5 @@
 # Django
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # User
 from user.forms import (
     SignUpForm, SignInForm, VerifyForm
@@ -46,8 +46,10 @@ def circles(request):
         }
     )
 
-@is_authenticated(False)
 def signals(request):
+    if request.user.is_authenticated:
+        return redirect("signals:hypotheses")
+    
     return render(
         request,
         "home/signals.html",
