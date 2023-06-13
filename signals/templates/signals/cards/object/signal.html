@@ -1,0 +1,14 @@
+{% load user_filters %}
+{% load filters %}
+
+<div class="card">
+    <h4>{{ signal.created|ago }}</h4>
+    <h3 class="title">
+        <img class="circle-24" src="{{ signal.author|profile_picture_url }}">
+        <span>{{ signal.author.username }}</span>
+    </h3>
+    <p>{{ signal.body }}</p>
+    <nav class="end">
+        <a class="material-symbols-outlined" href="{{ signal.url }}">{{ signal.icon }}</a>
+    </nav>
+</div>
