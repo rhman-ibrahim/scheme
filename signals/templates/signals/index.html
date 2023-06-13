@@ -1,4 +1,6 @@
 {% extends 'templates/lcr.html' %}
+{% load user_filters %}
+
 
 {% block fixed %}
 {% include "signals/asides/signals.html" %}
@@ -13,12 +15,7 @@
 
 {% block center %}
 {% for signal in list %}
-<div class="card">
-    <h3 class="title">
-        <i class="material-symbols-outlined">{{ signal.icon }}</i>
-    </h3>
-    <p>{{ signal.body }}</p>
-</div>
+{% include "signals/cards/object/signal.html" %}
 {% endfor %}
 {% endblock %}
 
