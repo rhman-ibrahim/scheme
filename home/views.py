@@ -48,7 +48,7 @@ def circles(request):
 
 def signals(request):
     if request.user.is_authenticated:
-        return redirect("signals:hypotheses")
+        return redirect("signals:list")
     
     return render(
         request,
