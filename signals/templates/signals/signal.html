@@ -1,0 +1,23 @@
+{% extends 'templates/lcr.html' %}
+
+{% block fixed %}
+{% include "signals/forms/hypothesis.html" %}
+{% endblock %}
+
+{% block left %}
+{% include "circles/cards/function/opened.html" %}
+{% include "user/cards/navigate/settings.html" %}
+{% endblock %}
+
+{% block center %}
+<section class="widget">
+    {% include "signals/cards/object/signal.html" %}
+    <section class="cards-w">
+        {% include "components/cards/hidden.html" %}
+        {% include "signals/cards/form/hypothesis.html" %}
+    </section>
+</section>
+{% for signal in signal.get_children %}
+{% include "signals/cards/object/signal.html" %}
+{% endfor %}
+{% endblock %}
