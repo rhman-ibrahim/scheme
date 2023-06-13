@@ -39,6 +39,7 @@ python3 manage.py migrate
 
 # Load fixtures
 python3 manage.py loaddata user/fixtures/users.json
+python3 manage.py loaddata circles/fixtures/circles.json
 
 # Restart Redis service
 sudo systemctl restart redis.service
