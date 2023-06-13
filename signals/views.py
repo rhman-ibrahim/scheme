@@ -11,7 +11,7 @@ from circles.models import Circle
 from circles.decorators import circle_session
 # Signals
 from .forms.signal import SignalForm
-from .models import Problem, Opportunity, Signal
+from .models import Signal
 
 
 @circle_session
@@ -19,10 +19,12 @@ def create_problem(request):
     if  request.method == "POST":
         form = SignalForm(request.POST)
         if form.is_valid():
-            problem        = Problem(**form.cleaned_data)
-            problem.circle = Circle.objects.get(uuid=request.session.get('circle'))
-            problem.author = request.user
-            problem.save()
+            signal                = form.save(commit=False)
+            signal.circle         = Circle.objects.get(uuid=request.session.get('circle'))
+            signal.classification = 0
+            signal.author         = request.user
+            signal.icon           = "psychology_alt"
+            form.save()
             messages.success(request, "your signal has been sent successfully")
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -32,24 +34,36 @@ def create_opportunity(request):
     if  request.method == "POST":
         form = SignalForm(request.POST)
         if form.is_valid():
-            opportunity        = Opportunity(**form.cleaned_data)
-            opportunity.circle = Circle.objects.get(uuid=request.session.get('circle'))
-            opportunity.author = request.user
-            opportunity.save()
+            signal                = form.save(commit=False)
+            signal.circle         = Circle.objects.get(uuid=request.session.get('circle'))
+            signal.classification = 1
+            signal.author         = request.user
+            signal.icon           = "psychology"
+            form.save()
             messages.success(request, "your signal is sent successfully")
         else: get_form_errors(request, form)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@circle_session
+def create_hypothesis(request):
+    if  request.method == "POST":
+        form = SignalForm(request.POST)
+        if form.is_valid():
+            signal                = form.save(commit=False)
+            signal.circle         = Circle.objects.get(uuid=request.session.get('circle'))
+            signal.classification = 2
+            signal.author         = request.user
+            signal.icon           = "cognition"
+            form.save()
+            messages.success(request, "your signal is sent successfully")
+        else: get_form_errors(request, form)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @circle_session
-def index(request):
+def list(request):
 
-    circle        = Circle.objects.get(uuid=request.session.get('circle'))
-    opportunities = Opportunity.objects.filter(circle=circle)
-    problems      = Problem.objects.filter(circle=circle)
-
-    combined_list = set(list(chain(opportunities, problems)))
-    signals       = sorted(combined_list, key=attrgetter('created'))
+    circle  = Circle.objects.get(uuid=request.session.get('circle'))
+    signals = Signal.objects.filter(circle=circle, classification__lte=1)
 
     return render(
         request,
@@ -58,6 +72,24 @@ def index(request):
             'list': signals,
             "forms": {
                 'signal': SignalForm,
+            }
+        }
+    )
+
+@circle_session
+def detail(request, uuid):
+    signal = Signal.objects.get(serial=uuid)
+    return render(
+        request,
+        "signals/signal.html",
+        {
+            'signal': signal,
+            'forms': {
+                'hypothesis' : SignalForm(
+                    initial = {
+                        'parent' : signal
+                    }
+                )
             }
         }
     )
