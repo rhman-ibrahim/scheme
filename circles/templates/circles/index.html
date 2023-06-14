@@ -1,4 +1,9 @@
 {% extends 'templates/lcr.html' %}
+{% load static %}
+
+{% block head %}
+<script src="{% get_static_prefix %}spaces/js/master.js" defer></script>
+{% endblock %}
 
 {% block fixed %}
 {% include "circles/widgets/requests.html" %}
@@ -28,8 +33,15 @@
         {% include "circles/cards/aside/requests.html" %}
     </section>
 </section>
+<section class="widget">
+    <section class="cards-w">
+        {% include "signals/cards/navigate/app.html" %}
+    </section>
+</section>
 {% endblock %}
 
 {% block right %}
-{% include "signals/cards/navigate/app.html" %}
+{% with serial=circle.uuid %}
+{% include "spaces/widgets/space.html" %}
+{% endwith %}
 {% endblock %}

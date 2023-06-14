@@ -1,3 +1,5 @@
+{% load user_filters %}
+
 {% if request.user == circle.founder %}
 <aside class="aside-r" id="requests">
     <div class="wrapper">
@@ -10,7 +12,7 @@
         {% for ask in circle.circlerequests_set.all %}
         <div class="card" role="navigate">
             <h4 class="title">
-                <img src="{{ ask.user.profile.picture.url }}" alt="" class="circle-24">
+                <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
                 <span>{{ ask.user.username }}</span>
             </h4>
             <h5>{{ user.circlerequests.timestamp }}</h5>
