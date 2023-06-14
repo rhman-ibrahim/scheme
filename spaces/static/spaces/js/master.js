@@ -34,7 +34,7 @@ sendButton.onclick = e => {
 
 socket.onmessage = e => {
     const data   = JSON.parse(e.data);
-    if (data.class === 'messages' && loaded == false) {
+    if (data.class === 'load' && loaded == false) {
         let fragment = document.createDocumentFragment();
         data.messages.forEach(
             message => {
@@ -43,7 +43,7 @@ socket.onmessage = e => {
                 let usernameSpan         = document.createElement('span');
                 let messageSpan          = document.createElement('span');
                 li.classList.add((username == content.username) ? 'out':'in');
-                usernameSpan.textContent = content.username;
+                usernameSpan.textContent = content.sender;
                 messageSpan.textContent  = content.message;
                 li.appendChild(usernameSpan);
                 li.appendChild(messageSpan);

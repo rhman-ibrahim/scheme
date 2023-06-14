@@ -32,7 +32,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             json.dumps
             (
                 {
-                    'username': message.account.username,
+                    'sender': message.sender.username,
                     'message': message.body
                 }
             )
@@ -66,7 +66,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.group_name,
                 {
                     'type': 'load',                                                         # the handler.
-                    'messages': await self.load_messages(self.room)                         # sending the room object to get the messages.
+                    'load': await self.load_messages(self.room)                         # sending the room object to get the messages.
                 }
             )
             await self.channel_layer.group_send(                                            # background worker.
@@ -108,8 +108,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(                                            
             text_data=json.dumps(
                 {
-                    'class': 'messages',
-                    'messages': event['messages']
+                    'class': 'load',
+                    'messages': event['load']
                 }
             )
         )
