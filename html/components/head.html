@@ -15,9 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 <!-- CSS -->
 <link rel="stylesheet" href="{% static 'css/init.css' %}?v={% now "U" %}"/>
-<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}{{ request.resolver_match.app_name }}/css/master.css?v={% now "U" %}"/>
 <!-- JS -->
 <script src="{% static 'js/master.js' %}?v={% now "U" %}" defer></script>
-<script src="{% get_static_prefix %}{{ request.resolver_match.app_name }}/js/master.js" defer></script>
 <!-- Title -->
 <title>{{ request.resolver_match.app_name|capfirst }} | {{ request.resolver_match.url_name|replace_underscores }}</title>
