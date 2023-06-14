@@ -4,7 +4,16 @@ from pathlib import Path
 BASE_DIR       = Path(__file__).resolve().parent.parent
 SECRET_KEY     = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u3@cx'
 
+DEBUG            = True
+
+ALLOWED_HOSTS    = [
+    '127.0.0.1',
+    '192.168.1.10',
+    '192.168.1.24'
+]
+
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -19,8 +28,8 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'home.apps.HomeConfig',
     # Third Party
-    'rest_framework',
-    'mptt'
+    'channels',
+    'mptt',
 ]
 
 MIDDLEWARE     = [
@@ -32,6 +41,8 @@ MIDDLEWARE     = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ROOT_URLCONF     = 'scheme.urls'
 
 TEMPLATES      = [
     {
@@ -55,6 +66,10 @@ TEMPLATES      = [
     },
 ]
 
+# Web
+
+WSGI_APPLICATION = 'scheme.wsgi.application'
+
 # Database
 DATABASES          = {
     'default': {
@@ -62,25 +77,6 @@ DATABASES          = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Web
-DEBUG            = True
-ROOT_URLCONF     = 'scheme.urls'
-WSGI_APPLICATION = 'scheme.wsgi.application'
-ALLOWED_HOSTS    = [
-    '127.0.0.1',
-    '192.168.1.10',
-    '192.168.1.24'
-]
-
-# User
-AUTH_USER_MODEL  = 'user.Account'
-
-# Default profile picture (guests)
-DEFAULT_PROFILE_PICTURE_URL = '/media/user/profile/default.jpg'
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -104,9 +100,6 @@ TIME_ZONE     = 'Africa/Cairo'
 USE_I18N      = True
 USE_TZ        = True
 
-# Messages
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 # Static files (CSS, JavaScript, Images)
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
@@ -117,3 +110,28 @@ STATIC_ROOT         = 'scheme'
 # Media
 MEDIA_URL           = '/media/'
 MEDIA_ROOT          = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# User
+AUTH_USER_MODEL  = 'user.Account'
+
+# Default profile picture (guests)
+DEFAULT_PROFILE_PICTURE_URL = '/media/user/profile/default.jpg'
+
+# Messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# ASGI
+ASGI_APPLICATION = 'scheme.asgi.application'
+
+# Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
