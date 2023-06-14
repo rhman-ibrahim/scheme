@@ -1,0 +1,10 @@
+<ul id="space">
+    <input type="hidden" name="room" value="{{ serial }}">
+    <input type="hidden" name="username" value="{{ request.user.username }}">
+</ul>
+<footer class="card">
+    <div class="end">
+        <input type="text" name="message" placeholder="message" id="message" style="flex:auto;">
+        <button type="button" id="sendButton" class="pin material-symbols-outlined">send</button>
+    </div>
+</footer>
