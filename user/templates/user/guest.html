@@ -7,7 +7,14 @@
 {% endblock %}
 
 {% block center %}
+<section class="widget">
+    <section class="cards-w">
+        {% include "user/cards/navigate/settings.html" %}
+        {% include "circles/cards/function/opened.html" %}
+    </section>
+</section>
 {% endblock %}
 
 {% block right %}
+{% include "user/widgets/circles.html" %}
 {% endblock %}
