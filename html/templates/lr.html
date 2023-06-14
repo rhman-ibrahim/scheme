@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
     {% include "components/head.html" %}
+    {% block head %}
+    {% endblock sheet %}
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
