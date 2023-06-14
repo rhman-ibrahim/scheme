@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DJANGO_SETTINGS_MODULE=scheme.settings
+
 # Find all PNG files
 png_files=$(find . -wholename "/media/user/tokens/*.png")
 
