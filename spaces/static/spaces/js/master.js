@@ -1,79 +1,80 @@
-let loaded       = false;
+const SPACE         = document.querySelector('#space');
+const SERIAL        = document.querySelector('#space input[name=room]').value;
+const USERNAME      = document.querySelector('#space input[name=username]').value;
 
-const serial     = document.querySelector('#space input[name=room]').value;
-const socket     = new WebSocket(`ws://${window.location.host}/spaces/${serial}/`);
-const username   = document.querySelector('#space input[name=username]').value;
-const sendButton = document.querySelector('#sendButton');
-const chat       = document.querySelector('#space');
+const SOCKET        = new WebSocket(`ws://${window.location.host}/spaces/${SERIAL}/`);
+const BUTTON        = document.querySelector('#sendButton');
 
-function scrollToEnd () {
-    if (Template.isThere('#chat li:last-child')) {
-        chat.querySelector('li:last-child')
-        .scrollIntoView(
-            {
-                behavior: "smooth",
-                inline: "nearest",
-                block: "start"
-            }
-        );
+let load_event_flag = false;
+
+
+function messageUlElement (destination, data) {
+    let ulElement          = document.createElement('ul');
+    let mLiElement         = document.createElement('li');
+    let uLiElement         = document.createElement('li');
+    uLiElement.textContent = data.sender;
+    mLiElement.textContent = data.body;
+    ulElement.appendChild(uLiElement);
+    ulElement.appendChild(mLiElement);
+    ulElement.setAttribute('data-direction', (USERNAME == data.sender) ? 'out':'in');
+    ulElement.setAttribute('data-sender', data.sender);
+    destination.appendChild(ulElement);
+}
+
+function messageLiElement(destination, data) {
+    let liElement         = document.createElement('li');
+    liElement.textContent = data.body;
+    destination.querySelector('ul:last-of-type').appendChild(liElement);
+}
+
+function messageAppend (destination, data) {
+    if (
+        destination.querySelector('ul:last-of-type') &&
+        destination.querySelector('ul:last-of-type').dataset.sender == data.sender
+    ) {
+        messageLiElement(destination, data);
+    } else {
+        messageUlElement(destination, data);
     }
 }
 
-sendButton.onclick = e => {
-    let message = document.querySelector('#message').value;
-    socket.send(
+
+BUTTON.onclick = e => {
+    SOCKET.send(
         JSON.stringify(
             {
-                'username': username,
-                'message': message
+                'username': String(USERNAME),
+                'message': String(document.querySelector('#message').value)
             }
         )
     );
     document.querySelector('#message').value = '';
 }
 
-socket.onmessage = e => {
-    const data   = JSON.parse(e.data);
-    if (data.class === 'load' && loaded == false) {
-        let fragment = document.createDocumentFragment();
+SOCKET.onmessage = e => {
+    const data = JSON.parse(e.data);
+    if (data.event === 'load' && load_event_flag == false) {
+        const FRAGMENT = document.createDocumentFragment();
         data.messages.forEach(
             message => {
-                let content              = JSON.parse(message);
-                let li                   = document.createElement('li');
-                let usernameSpan         = document.createElement('span');
-                let messageSpan          = document.createElement('span');
-                li.classList.add((username == content.username) ? 'out':'in');
-                usernameSpan.textContent = content.sender;
-                messageSpan.textContent  = content.message;
-                li.appendChild(usernameSpan);
-                li.appendChild(messageSpan);
-                fragment.appendChild(li);
+                messageAppend(FRAGMENT, JSON.parse(message));
             }
         );
-        chat.appendChild(fragment);
-        scrollToEnd();
-        loaded = true;
+        SPACE.append(FRAGMENT);
+        load_event_flag = true;
     }
-    if (data.class === 'notice') {
-        let notice = String(data.user);
-        if (!notice.includes(username.value)) {
+
+    if (data.event === 'message') {
+        messageAppend(SPACE, data);
+    }
+
+    if (data.event === 'notify') {
+        let notification = String(data.user);
+        if (!notification.includes(USERNAME)) {
             let li         = document.createElement('li');
-            li.textContent = `${notice}`;
-            li.classList.add('notice');
-            chat.appendChild(li);
-            scrollToEnd();
+            li.textContent = `${notification}`;
+            li.classList.add('notification');
+            SPACE.appendChild(li);
         };
-    }
-    if (data.class === 'message') {
-        let li                   = document.createElement('li');
-        let usernameSpan         = document.createElement('span');
-        let messageSpan          = document.createElement('span');
-        li.classList.add((username == data.username) ? 'out':'in');
-        usernameSpan.textContent = data.username;
-        messageSpan.textContent  = data.message;
-        chat.appendChild(li);
-        li.appendChild(usernameSpan);
-        li.appendChild(messageSpan);
-        scrollToEnd();
     }
 }
