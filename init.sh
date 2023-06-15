@@ -1,4 +1,5 @@
 source venv/bin/activate
+export DJANGO_SETTINGS_MODULE=scheme.settings
 
 # Kill Redis port PID
 if sudo lsof -i :6379
@@ -16,3 +17,5 @@ gnome-terminal --tab --title "Celery/Worker" -- bash -c "celery -A scheme worker
 
 # 4 - Run Celery Beat
 gnome-terminal --tab --title "Celery/Beat" -- bash -c "celery -A scheme beat -l info"
+
+code .

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source venv/bin/activate
 export DJANGO_SETTINGS_MODULE=scheme.settings
 
 # Find all PNG files
@@ -62,3 +62,6 @@ gnome-terminal --window --working-directory "$PWD" --title "Celery/Worker" -- ba
 
 # 4 - Run Celery Beat
 gnome-terminal --window --working-directory "$PWD" --title "Celery/Beat" -- bash -c "celery -A scheme beat -l info"
+
+
+code .
