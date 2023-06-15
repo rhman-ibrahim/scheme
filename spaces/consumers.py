@@ -5,35 +5,31 @@ from .models import Room, Message
 from user.models import Account
 import json
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def is_member(self, user, room):
-        # check if user is a member of the room.
-        if user == room.circle.founder or user in room.circle.members.all():
+        if  room.circle.user_role(user) != None:
             return True
         return False
 
     @database_sync_to_async
     def get_room(self, serial):
-        # get the room object using serial.
         return Room.objects.get(space=serial)
     
     @database_sync_to_async
     def get_user(self, username):
-        # get the user object using username.
         return Account.objects.get(username=username)
     
     @database_sync_to_async
     def load_messages(self, room):
-        # Query the last 100 messages in the room,
-        # return a Json list of messages.
         return [
             json.dumps
             (
                 {
                     'sender': message.sender.username,
-                    'message': message.body
+                    'body': message.body,
                 }
             )
             for message in Message.objects.filter(room=room)[:100]
@@ -41,7 +37,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def save(self, room, user, body):
-        # save the message to the database.
         message = Message.objects.create(room=room, sender=user, body=body)
         message.save()
 
@@ -55,7 +50,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         if not self.room or not self.member:
             await self.close()                                                              # close connection if the user is not a memmber.
-        
         else:
             await self.channel_layer.group_add(                                             # add the new connected channel to the group.
                 self.group_name,                                                            # the group  name.
@@ -66,14 +60,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.group_name,
                 {
                     'type': 'load',                                                         # the handler.
-                    'load': await self.load_messages(self.room)                         # sending the room object to get the messages.
+                    'load': await self.load_messages(self.room)                             # sending the room object to get the messages.
                 }
             )
             await self.channel_layer.group_send(                                            # background worker.
                 self.group_name,
                 {
-                    'type': 'notice',                                                       # the handler.
-                    'user': f'{self.username} has joined the room',                         # the 'notice' data.
+                    'type': 'notify',                                                       # the handler.
+                    'user': f'{self.username} has joined the room',                         # the 'notification' data.
                 },
             )
 
@@ -85,8 +79,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.group_name,
             {
                 'type':'message',                                                           # the handler.
+                'username':data['username'],
                 'message':data['message'],
-                'username':data['username']
             }
         )
 
@@ -94,7 +88,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_send(                                                # background worker.
             self.group_name,
             {
-                'type': 'notice',                                                           # the handler.
+                'type': 'notify',                                                           # the handler.
                 'user': f'{self.username} has left the room',
             }
         )
@@ -103,36 +97,36 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+    # defining the background worker handler.
+    async def notify(self, event):
+        await self.send(
+            text_data = json.dumps(
+                {
+                    'event': 'notify',
+                    'user': event['user']
+                }
+            )
+        )
+        
+    # defining the background worker handler.
     async def load(self, event):
-        # defining the background worker handler.
         await self.send(                                            
             text_data=json.dumps(
                 {
-                    'class': 'load',
+                    'event': 'load',
                     'messages': event['load']
                 }
             )
         )
         
-    async def notice(self, event):
-        # defining the background worker handler.
-        await self.send(
-            text_data = json.dumps(
-                {
-                    'class': 'notice',
-                    'user': event['user']
-                }
-            )
-        )
-    
+    # defining the background worker handler.
     async def message(self, event):
-        # defining the background worker handler.
         await self.send(
             text_data=json.dumps(
                 {
-                    'class': 'message',
-                    'username': event['username'],
-                    'message': event['message']
+                    'event': 'message',
+                    'body': event['message'],
+                    'sender': event['username']
                 }
             )
         )
