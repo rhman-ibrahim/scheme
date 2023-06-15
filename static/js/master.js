@@ -261,3 +261,33 @@ class Thread {
         }
     }
 }
+
+class Space {
+    static messageUlElement = (destination, data) => {
+        let ulElement          = document.createElement('ul');
+        let mLiElement         = document.createElement('li');
+        let uLiElement         = document.createElement('li');
+        uLiElement.textContent = data.sender;
+        mLiElement.textContent = data.body;
+        ulElement.appendChild(uLiElement);
+        ulElement.appendChild(mLiElement);
+        ulElement.setAttribute('data-direction', (USERNAME == data.sender) ? 'out':'in');
+        ulElement.setAttribute('data-sender', data.sender);
+        destination.appendChild(ulElement);
+    }
+    static messageLiElement = (destination, data) => {
+        let liElement         = document.createElement('li');
+        liElement.textContent = data.body;
+        destination.querySelector('ul:last-of-type').appendChild(liElement);
+    }
+    static messageAppend = (destination, data) => {
+        if (
+            destination.querySelector('ul:last-of-type') &&
+            destination.querySelector('ul:last-of-type').dataset.sender == data.sender
+        ) {
+            Space.messageLiElement(destination, data);
+        } else {
+            Space.messageUlElement(destination, data);
+        }
+    }
+}
