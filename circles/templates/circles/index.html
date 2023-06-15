@@ -1,10 +1,6 @@
 {% extends 'templates/lcr.html' %}
 {% load static %}
 
-{% block head %}
-<script src="{% get_static_prefix %}spaces/js/master.js" defer></script>
-{% endblock %}
-
 {% block fixed %}
 {% include "circles/widgets/requests.html" %}
 {% include "circles/forms/update.html" %}
@@ -44,4 +40,9 @@
 {% with serial=circle.uuid %}
 {% include "spaces/widgets/space.html" %}
 {% endwith %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% get_static_prefix %}spaces/css/master.css">
+<script src="{% get_static_prefix %}spaces/js/master.js" defer></script>
 {% endblock %}
