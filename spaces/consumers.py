@@ -10,8 +10,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def is_member(self, user, room):
-        if  room.circle.user_role(user) != None:
-            return True
+        if  room.circle.user_role(user) != None: return True
         return False
 
     @database_sync_to_async
@@ -24,15 +23,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     
     @database_sync_to_async
     def load_messages(self, room):
+        # Convert the messages from Python dicts to JSON objects.
         return [
             json.dumps
             (
                 {
-                    'sender': message.sender.username,
-                    'body': message.body,
+                    'body': message_DICT_data.body,
+                    'sender': message_DICT_data.sender.username
                 }
             )
-            for message in Message.objects.filter(room=room)[:100]
+            for message_DICT_data in Message.objects.filter(room=room)[:100]
         ]
 
     @database_sync_to_async
@@ -42,91 +42,123 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
 
-        self.user       = self.scope["user"]                                                # get the user object (scope).
-        self.room       = await self.get_room(self.scope['url_route']['kwargs']['serial'])  # get room id (scope) to get the room object.
-        self.member     = await self.is_member(self.user, self.room)                        # check if user is a member of the room.
-        self.username   = self.user.username                                                # extract username from user object.
-        self.group_name = self.room.space                                                    # create a name for the group.
+        self.user       = self.scope["user"]                                                # Get the user object (scope),
+        self.room       = await self.get_room(self.scope['url_route']['kwargs']['serial'])  # get room id (scope) to get the room object,
+        self.member     = await self.is_member(self.user, self.room)                        # check if user is a member of the room,
+        self.username   = self.user.username                                                # extract username from user object,
+        self.group_name = self.room.space                                                   # set the group name.
 
         if not self.room or not self.member:
-            await self.close()                                                              # close connection if the user is not a memmber.
+
+            # Close connection if the user is not a memmber.
+            await self.close()
+
         else:
-            await self.channel_layer.group_add(                                             # add the new connected channel to the group.
-                self.group_name,                                                            # the group  name.
-                self.channel_name                                                           # the self assigned channel name.
-            )
-            await self.accept()                                                             # accept the connection.
-            await self.channel_layer.group_send(                                            # background worker.
+            
+            # Accept the connection.
+            await self.accept()
+            
+            # Add the new connected channel to the group.
+            await self.channel_layer.group_add(self.group_name, self.channel_name)
+            
+            # Directly after accepting the connection.
+
+            # 1 - Send the 'messages' data to the channels' group,
+            # through the 'load' background worker.
+            await self.channel_layer.group_send(
                 self.group_name,
                 {
-                    'type': 'load',                                                         # the handler.
-                    'load': await self.load_messages(self.room)                             # sending the room object to get the messages.
+                    'type': 'load',
+                    'messages': await self.load_messages(self.room)
                 }
             )
-            await self.channel_layer.group_send(                                            # background worker.
+            
+            # 2 - Send the 'notification' data to the channels' group.
+            # through the 'notify' background worker.
+            await self.channel_layer.group_send(
                 self.group_name,
                 {
-                    'type': 'notify',                                                       # the handler.
-                    'user': f'{self.username} has joined the room',                         # the 'notification' data.
+                    
+                    'type': 'notify',
+                    'notification': f'{self.username} has joined the room',
                 },
             )
 
     async def receive(self, text_data):
-        data = json.loads(text_data)                                                        # load the data sent by the client.
-        user = await self.get_user(data['username'])                                        # get the user's object of the sender client.
-        await self.save(self.room, user, data['message'])                                   # save the message object to the database.
-        await self.channel_layer.group_send(                                                # background worker
+
+        # Parse the receivied JSON data.
+        sever_DICT_data = json.loads(text_data)
+        
+        # Save the message to the database.
+        await self.save(
+            self.room,
+            await self.get_user(sever_DICT_data['sender']),
+            sever_DICT_data['body']
+        )
+        
+        # Send the 'message' data to the channels' group.
+        # through the 'message' background worker.
+        await self.channel_layer.group_send(
             self.group_name,
             {
-                'type':'message',                                                           # the handler.
-                'username':data['username'],
-                'message':data['message'],
+                'type':'message',
+                'body':sever_DICT_data['body'],
+                'sender':sever_DICT_data['sender']
             }
         )
 
     async def disconnect(self, code):
-        await self.channel_layer.group_send(                                                # background worker.
-            self.group_name,
+        
+        # Send the 'notification' data to the channels' group.
+        # through the 'notify' background worker.
+        await self.channel_layer.group_send(                                                
+            self.group_name, 
             {
-                'type': 'notify',                                                           # the handler.
-                'user': f'{self.username} has left the room',
+                'type': 'notify', 
+                'notification': f'{self.username} has left the room',
             }
         )
-        await self.channel_layer.group_discard(                                             # removing the connected channel from the group.
+
+        # Removing the connected channel from the group.
+        await self.channel_layer.group_discard(
             self.group_name,
             self.channel_name
         )
 
-    # defining the background worker handler.
-    async def notify(self, event):
+
+    # The background workers, convreting the data sent by the server
+    # to JSON objects & sending it to the each client channel in real-time.
+
+    # 'notification' 
+    async def notify(self, server_DICT_data):
         await self.send(
             text_data = json.dumps(
                 {
                     'event': 'notify',
-                    'user': event['user']
+                    'notification': server_DICT_data['notification']
                 }
             )
         )
-        
-    # defining the background worker handler.
-    async def load(self, event):
+    
+    # 'messages'
+    async def load(self, server_DICT_data):
         await self.send(                                            
-            text_data=json.dumps(
+            text_data = json.dumps(
                 {
                     'event': 'load',
-                    'messages': event['load']
+                    'messages': server_DICT_data['messages']
                 }
             )
         )
-        
-    # defining the background worker handler.
-    async def message(self, event):
+    
+    # 'message'
+    async def message(self, server_DICT_data):
         await self.send(
-            text_data=json.dumps(
+            text_data = json.dumps(
                 {
                     'event': 'message',
-                    'body': event['message'],
-                    'sender': event['username']
+                    'body': server_DICT_data['body'],
+                    'sender': server_DICT_data['sender']
                 }
             )
         )
