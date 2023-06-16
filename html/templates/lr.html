@@ -13,16 +13,16 @@
     <main class="lr-grid">
         <aside id="left">
             <div class="wrapper">
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#right')" id="right-pin">chevron_left</button>
                 {% block left %}
                 {% endblock %}
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#right')" id="right-pin">chevron_left</button>
             </div>
         </aside>
         <aside class="aside-r" id="right">
             <div class="wrapper">
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-r-button">chevron_right</button>
                 {% block right %}
                 {% endblock %}
+                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-r-button">chevron_right</button>
             </div>
         </aside>
     </main>

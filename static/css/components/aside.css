@@ -8,6 +8,11 @@ aside {
     transition-duration: 1s;
 }
 
+.aside-l .wrapper,
+.aside-r .wrapper {
+    padding-top: 56px;
+}
+
 .aside-r {
     position: fixed;
     transition-property: right;
@@ -34,14 +39,14 @@ aside {
 
 aside.aside-r div.wrapper > button {
     position: absolute;
-    bottom: 8px;
     right: 8px;
+    top: 8px;
 }
 
 aside.aside-l div.wrapper > button {
     position: absolute;
-    bottom: 8px;
     left: 8px;
+    top: 8px;
 }
 
 .pin {
@@ -95,6 +100,10 @@ main.lcr-grid #center #left-pin {
         display: none;
     }
 
+    main.lr-grid #right {
+        padding-top: 8px;
+    }
+
 }
 
 @media (width >= 1080px) {
@@ -108,6 +117,12 @@ main.lcr-grid #center #left-pin {
         display: none;
     }
 
+    main.cr-grid #right.aside-r .wrapper,
+    main.lc-grid #left.aside-l .wrapper,
+    main.lcr-grid #left.aside-l .wrapper {
+        padding-top: 8px;
+    }
+
 }
 
 @media (width >= 1440px) {
@@ -115,6 +130,10 @@ main.lcr-grid #center #left-pin {
     main.lcr-grid #center #right-pin, 
     main.lcr-grid #right.aside-r .wrapper > button {
         display: none;
+    }
+
+    main.lcr-grid #right.aside-r .wrapper {
+        padding-top: 8px;
     }
 
 }
