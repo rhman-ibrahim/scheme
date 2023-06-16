@@ -1,10 +1,6 @@
 const SPACE         = document.querySelector('#space');
-const SERIAL        = document.querySelector('#space input[name=room]').value;
-const USERNAME      = document.querySelector('#space input[name=username]').value;
-
-const SOCKET        = new WebSocket(`ws://${window.location.host}/spaces/${SERIAL}/`);
+const SOCKET        = new WebSocket(`ws://${window.location.host}/spaces/${SPACE.dataset.serial}/`);
 const BUTTON        = document.querySelector('#sendButton');
-
 let load_event_flag = false;
 
 SOCKET.onerror = function(error) {
@@ -15,7 +11,7 @@ BUTTON.onclick = e => {
     SOCKET.send(
         JSON.stringify(
             {
-                'sender': String(USERNAME),
+                'sender': String(SPACE.dataset.username),
                 'body': String(document.querySelector('#message').value)
             }
         )
@@ -44,7 +40,7 @@ SOCKET.onmessage = e => {
 
     if (data.event === 'notify') {
         let notification = String(data.notification);
-        if (!notification.includes(USERNAME)) {
+        if (!notification.includes(SPACE.dataset.username)) {
             let li         = document.createElement('li');
             li.textContent = `${notification}`;
             li.classList.add('notification');

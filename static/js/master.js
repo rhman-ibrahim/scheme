@@ -271,7 +271,7 @@ class Space {
         mLiElement.textContent = data.body;
         ulElement.appendChild(uLiElement);
         ulElement.appendChild(mLiElement);
-        ulElement.setAttribute('data-direction', (USERNAME == data.sender) ? 'out':'in');
+        ulElement.setAttribute('data-direction', (SPACE.dataset.username == data.sender) ? 'out':'in');
         ulElement.setAttribute('data-sender', data.sender);
         destination.appendChild(ulElement);
     }
