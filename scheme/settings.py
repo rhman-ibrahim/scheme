@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'home.apps.HomeConfig',
     # Third Party
+    'rest_framework',
     'channels',
     'mptt',
 ]
