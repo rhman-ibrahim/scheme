@@ -32,40 +32,6 @@ form.active fieldset nav {
   top: 32px;
 }
 
-/*
-div
-*/
-
-form fieldset div {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 4px;
-  gap: 4px;
-}
-
-form fieldset div input,
-form fieldset div textarea {
-  resize: none;
-  display: block;
-  background: var(--d2);
-  font-size: 1rem !important;
-  border-radius: 4px;
-  padding: 8px;
-  width: 100%;
-}
-
-form fieldset div textarea {
-  height: min-content;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-form fieldset div textarea::-webkit-scrollbar {
-  display: none;
-}
-
 form fieldset div small {
   display: inline-block;
   font-size: .75rem;
@@ -75,6 +41,41 @@ form fieldset div small {
 
 form fieldset div small::first-letter {
   text-transform: capitalize;
+}
+/*
+  div
+*/
+
+form fieldset div {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 4px;
+  gap: 4px;
+}
+
+input,
+textarea {
+  border: none;
+  resize: none;
+  outline: none;
+  display: block;
+  background: var(--d2);
+  font-size: 1rem !important;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+}
+
+textarea {
+  height: min-content;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
 }
 
 /*
@@ -101,7 +102,7 @@ div.check div.container [type=checkbox] + h6 {
 }
 
 /*
-div.radio
+  div.radio
 */
 
 div.radio h5 {
@@ -136,7 +137,7 @@ div.radio div.container input:checked + h6 {
 }
 
 /*
-div.file
+  div.file
 */
 
 form div.file label {
@@ -151,9 +152,9 @@ form fieldset div.file input {
 }
 
 /*
-div.text
-div.text-area
-div.password
+  div.text
+  div.text-area
+  div.password
 */
 
 div.text label,

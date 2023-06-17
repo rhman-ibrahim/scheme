@@ -69,39 +69,39 @@ form {
     fill: none !important;
 }
 
-form fieldset div input,
-form fieldset div textarea {
+input,
+textarea {
     color: var(--d4);
     outline: 1px solid var(--d2);
     background: none;
     border: none;
 }
 
-form fieldset div input:focus,
-form fieldset div textarea:focus {
+input:focus,
+textarea:focus {
   outline-color: var(--d3);
 }
 
-form fieldset div.check div.container [type=checkbox] + h6 {
+div.check div.container [type=checkbox] + h6 {
   outline: 1px solid var(--d2);
 }
 
-form fieldset div.check div.container [type=checkbox]:checked + h6 {
+div.check div.container [type=checkbox]:checked + h6 {
   outline-color: var(--d4);
   background: var(--d4);
 }
 
-form fieldset div.radio div.container input + h6 {
+div.radio div.container input + h6 {
   outline: 1px solid var(--d2);
   background: var(--d1);
 }
 
-form fieldset div.radio div.container input:checked + h6 {
+div.radio div.container input:checked + h6 {
   outline-color: var(--d4);
   background: var(--d4);
 }
 
-form div.file label {
+div.file label {
   outline: 1px solid var(--d2);
 }
 
