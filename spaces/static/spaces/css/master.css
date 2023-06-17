@@ -1,0 +1,33 @@
+#right div.wrapper {
+    position: relative;
+}
+
+#space {
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    overflow: scroll;
+}
+
+#space::-webkit-scrollbar {
+    display: none;
+}
+
+#space-chat-box {
+    padding: 8px;
+    height: 56px;
+    display: flex;
+    background: var(--d3);
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    gap: 8px;
+}
+
+#space-chat-box input {
+    flex: auto;
+}
+
+#space-chat-box input {
+    flex: content;
+}
