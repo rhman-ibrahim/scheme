@@ -22,20 +22,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return Account.objects.get(username=username)
     
     @database_sync_to_async
-    def load_messages(self, room):
-        # Convert the messages from Python dicts to JSON objects.
-        return [
-            json.dumps
-            (
-                {
-                    'body': message_DICT_data.body,
-                    'sender': message_DICT_data.sender.username
-                }
-            )
-            for message_DICT_data in Message.objects.filter(room=room)[:100]
-        ]
-
-    @database_sync_to_async
     def save(self, room, user, body):
         message = Message.objects.create(room=room, sender=user, body=body)
         message.save()
@@ -61,19 +47,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # Add the new connected channel to the group.
             await self.channel_layer.group_add(self.group_name, self.channel_name)
             
-            # Directly after accepting the connection.
-
-            # 1 - Send the 'messages' data to the channels' group,
-            # through the 'load' background worker.
-            await self.channel_layer.group_send(
-                self.group_name,
-                {
-                    'type': 'load',
-                    'messages': await self.load_messages(self.room)
-                }
-            )
-            
-            # 2 - Send the 'notification' data to the channels' group.
+            # Send the 'notification' data to the channels' group.
             # through the 'notify' background worker.
             await self.channel_layer.group_send(
                 self.group_name,
@@ -136,17 +110,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 {
                     'event': 'notify',
                     'notification': server_DICT_data['notification']
-                }
-            )
-        )
-    
-    # 'messages'
-    async def load(self, server_DICT_data):
-        await self.send(                                            
-            text_data = json.dumps(
-                {
-                    'event': 'load',
-                    'messages': server_DICT_data['messages']
                 }
             )
         )

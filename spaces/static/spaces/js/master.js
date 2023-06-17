@@ -1,11 +1,29 @@
 const SPACE         = document.querySelector('#space');
 const SOCKET        = new WebSocket(`ws://${window.location.host}/spaces/${SPACE.dataset.serial}/`);
 const BUTTON        = document.querySelector('#sendButton');
-let load_event_flag = false;
+
+fetch(`http://${window.location.host}/spaces/${SPACE.dataset.serial}/`)
+.then(response => response.json())
+.then(
+    data => {
+        const FRAGMENT = document.createDocumentFragment();
+        data.forEach(
+            message => {
+                Space.messageAppend(FRAGMENT, message);
+            }
+        );
+        SPACE.append(FRAGMENT);
+    }
+).catch(
+    error => {
+        console.log(error)
+    }
+)
+
 
 SOCKET.onerror = function(error) {
     console.error('WebSocket error:', error);
-  };
+};
 
 BUTTON.onclick = e => {
     SOCKET.send(
@@ -23,17 +41,6 @@ SOCKET.onmessage = e => {
 
     const data = JSON.parse(e.data);
     
-    if (data.event === 'load' && load_event_flag == false) {
-        const FRAGMENT = document.createDocumentFragment();
-        data.messages.forEach(
-            message => {
-                Space.messageAppend(FRAGMENT, JSON.parse(message));
-            }
-        );
-        SPACE.append(FRAGMENT);
-        load_event_flag = true;
-    }
-
     if (data.event === 'message') {
         Space.messageAppend(SPACE, data);
     }
