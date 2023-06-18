@@ -24,16 +24,18 @@
 </section>
 <section class="widget">
     <section class="cards-w">
-        {% include "circles/cards/form/update.html" %}
+        {% include "signals/cards/navigate/app.html" %}
         {% include "circles/cards/function/invite.html" %}
+    </section>
+</section>
+{% if request.user == circle.founder %}
+<section class="widget">
+    <section class="cards-w">
+        {% include "circles/cards/form/update.html" %}
         {% include "circles/cards/aside/requests.html" %}
     </section>
 </section>
-<section class="widget">
-    <section class="cards-w">
-        {% include "signals/cards/navigate/app.html" %}
-    </section>
-</section>
+{% endif %}
 {% endblock %}
 
 {% block right %}

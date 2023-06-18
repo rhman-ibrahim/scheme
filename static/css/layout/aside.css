@@ -12,6 +12,11 @@
     padding-bottom: 8px;
 }
 
+#left .aside-nav,
+aside.left  .aside-nav {
+    justify-content: flex-start;
+}
+
 #left,
 #right,
 aside.left,
