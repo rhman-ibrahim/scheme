@@ -13,13 +13,16 @@
 }
 
 #left,
-#right {
+#right,
+aside.left,
+aside.right {
     transition-timing-function: ease-in-out;
     transition-duration: 1s;
     width: 100%;
 }
 
-#right {
+#right,
+aside.right {
     position: fixed;
     transition-property: right;
     right: -400%;
@@ -27,7 +30,8 @@
     top: 0px;
 }
 
-#left {
+#left,
+aside.left {
     position: fixed;
     transition-property: left;
     left: -400%;
@@ -35,23 +39,29 @@
     top: 0px;
 }
 
-#right.active {
+#right.active,
+aside.right.active {
     right: 0px;
 }
 
-#left.active {
+#left.active,
+aside.left.active {
     left: 0px;
 }
 
 @media (width > 360px) {
     #left,
-    #right {
+    #right,
+    aside.right,
+    aside.left {
         width: 360px;
     }
-    #right {
+    #right,
+    aside.right {
         right: calc(-360px * 4);
     }
-    #left {
+    #left,
+    aside.left {
         left: calc(-360px * 4);
     }
 }
