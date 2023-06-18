@@ -227,7 +227,6 @@ class Thread {
         thread.querySelector(`.card:nth-child(${index})`)
         .scrollIntoView(
             {
-                threshold: 1,
                 behavior: 'smooth'
             }
         );
@@ -274,11 +273,25 @@ class Space {
         ulElement.setAttribute('data-direction', (SPACE.dataset.username == data.sender) ? 'out':'in');
         ulElement.setAttribute('data-sender', data.sender);
         destination.appendChild(ulElement);
+        destination.querySelector('ul:last-of-type').scrollIntoView(
+            {
+                block: 'end',
+                inline: 'nearest',
+                behavior:'smooth',
+            }
+        );
     }
     static messageLiElement = (destination, data) => {
         let liElement         = document.createElement('li');
         liElement.textContent = data.body;
         destination.querySelector('ul:last-of-type').appendChild(liElement);
+        destination.querySelector('ul:last-of-type').scrollIntoView(
+            {
+                block: 'end',
+                inline: 'nearest',
+                behavior:'smooth',
+            }
+        );
     }
     static messageAppend = (destination, data) => {
         if (
