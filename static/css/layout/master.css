@@ -4,41 +4,46 @@
 }
 
 html,
-body,
-main,
-aside,
-aside div.wrapper {
-    scrollbar-width: none;
-    scroll-behavior: smooth;
+body {
+    height: var(--wh);
     overflow-x: hidden;
     overflow-y: scroll;
-    height: var(--wh);
+    scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-main::-webkit-scrollbar,
-aside::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none;
 }
 
-main {
+body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     overflow: hidden;
     margin: auto;
 }
 
-div.wrapper {
-    width: 100%;
+main,
+aside {
     display: flex;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
     flex-direction: column;
-    padding: 8px 8px 96px 8px;
+    height: var(--wh);
+    padding: 8px;
     gap: 8px;
 }
 
-main.lr-grid #left,
-#center {
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar {
+    display: none;
+}
+
+#center,
+.lr-grid #left {
     grid-column: 1/13;
 }
 
@@ -57,11 +62,11 @@ main.lr-grid #left,
         L = R (6 columns)
     */
 
-    main.lr-grid #left {
+    .lr-grid #left {
         grid-column: 1/7;
     }
-
-    main.lr-grid #right {
+    
+    .lr-grid #right {
         display: flex;
         z-index: initial;
         position: static;
@@ -69,17 +74,27 @@ main.lr-grid #left,
         width: 100%;
     }
 
+    .lr-grid .aside-nav {
+        display: none;
+    }
+
 }
 
 @media (width >= 1080px) {
 
-    main.cr-grid #right,
-    main.lc-grid #left,
-    main.lcr-grid #left {
+    .cr-grid #right,
+    .lc-grid #left,
+    .lcr-grid #left {
         z-index: initial;
         position: static;
         display: flex;
         width: 100%;
+    }
+
+    .cr-grid .aside-nav,
+    .lc-grid .aside-nav,
+    .lcr-grid #left .aside-nav {
+        display: none;
     }
 
     /*
@@ -88,11 +103,11 @@ main.lr-grid #left,
         C = 2R  (8 columns)
     */
 
-    main.cr-grid #center {
+    .cr-grid #center {
         grid-column: 1/9;
     }
 
-    main.cr-grid #right {
+    .cr-grid #right {
         grid-column: 9/13;
     }
 
@@ -106,42 +121,41 @@ main.lr-grid #left,
         as LC-Grid and R will be completely ignored.
     */
 
-    main.lc-grid #left,
-    main.lcr-grid #left {
+    .lc-grid #left,
+    .lcr-grid #left {
         grid-column: 1/5;
     }
 
-    main.lc-grid #center,
-    main.lcr-grid #center {
+    .lc-grid #center,
+    .lcr-grid #center {
         grid-column: 5/13;
     }
 
 }
 
 @media (width >= 1440px) {
-    
+ 
     /*
         CR-Grid
         C = 3R  (9 columns)
         R = 312 (3 columns) 
     */
-
-    main.cr-grid #center {
+ 
+    .cr-grid #center {
         grid-column: 1/10;
     }
-
-    main.cr-grid #right {
+    .cr-grid #right {
         grid-column: 10/13;
     }
-
+ 
     /*
         LC-Grid &
         LCR-Grid
         L = 312 (3 columns)
     */
-
-    main.lc-grid #left,
-    main.lcr-grid #left {
+ 
+    .lc-grid #left,
+    .lcr-grid #left {
         grid-column: 1/4;
     }
 
@@ -149,8 +163,8 @@ main.lr-grid #left,
         LC-Grid
         C = 3L (9 columns)
     */
-    
-    main.lc-grid #center {
+
+    .lc-grid #center {
         grid-column: 4/13;
     }
 
@@ -160,11 +174,11 @@ main.lr-grid #left,
         R = 312 (3 columns)
     */
 
-    main.lcr-grid #center {
+    .lcr-grid #center {
         grid-column: 4/10;
     }
 
-    main.lcr-grid #right {
+    .lcr-grid #right {
         display: flex;
         z-index: initial;
         position: static;
@@ -172,4 +186,7 @@ main.lr-grid #left,
         width: 100%;
     }
 
+    .lcr-grid .aside-nav {
+        display: none;
+    }
 }
