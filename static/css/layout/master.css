@@ -93,6 +93,7 @@ aside::-webkit-scrollbar {
 
     .cr-grid .aside-nav,
     .lc-grid .aside-nav,
+    .lcr-grid #center .aside-nav #left-open-icon,
     .lcr-grid #left .aside-nav {
         display: none;
     }

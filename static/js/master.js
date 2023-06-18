@@ -23,6 +23,10 @@ class Template {
     static init = () => {
         document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
         document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
+        if (Template.isThere('#space')) {
+            const BOX = document.querySelector('#space-chat-box');
+            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
+        }
     }
     static isThere = selector => {
         if (document.body.contains(document.querySelector(`${selector}`))) return true;
@@ -265,25 +269,11 @@ class Space {
         ulElement.setAttribute('data-direction', (SPACE.dataset.username == data.sender) ? 'out':'in');
         ulElement.setAttribute('data-sender', data.sender);
         destination.appendChild(ulElement);
-        destination.querySelector('ul:last-of-type').scrollIntoView(
-            {
-                block: 'start',
-                inline: 'nearest',
-                behavior:'smooth',
-            }
-        );
     }
     static messageLiElement = (destination, data) => {
         let liElement         = document.createElement('li');
         liElement.textContent = data.body;
         destination.querySelector('ul:last-of-type').appendChild(liElement);
-        destination.querySelector('ul:last-of-type').scrollIntoView(
-            {
-                block: 'start',
-                inline: 'nearest',
-                behavior:'smooth',
-            }
-        );
     }
     static messageAppend = (destination, data) => {
         if (
@@ -294,5 +284,15 @@ class Space {
         } else {
             Space.messageUlElement(destination, data);
         }
+        Space.scrollToDestination(destination);
+    }
+    static scrollToDestination = destination => {
+        destination.querySelector('ul:last-of-type').scrollIntoView(
+            {
+                block: 'start',
+                inline: 'nearest',
+                behavior:'smooth',
+            }
+        );
     }
 }
