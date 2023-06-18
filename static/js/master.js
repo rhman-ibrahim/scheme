@@ -1,9 +1,11 @@
 class Handler {
     static init = () => {
+        Template.blurOff();
         Template.init();
+        Aside.clear();
+        Thread.init();
         Theme.init();
         Form.init();
-        Thread.init();
     }
     static copy = (element, attribute) => {
         let dataToCopy = element.getAttribute(`data-${attribute}`);
@@ -29,30 +31,20 @@ class Template {
     static isVisible = element => {
         if (window.getComputedStyle(element).display === 'block') return element;
     }
-    static blur = (state, selector) => {
-        const elem = document.querySelector(`${selector}`);
-        const main = document.querySelector('main');
-        if (state == true) {
-            if (main.contains(elem)) {
-                document.querySelectorAll('aside:not(.active)').forEach(
-                    column => {
-                        column.style.filter = "blur(5px)";
-                    }
-                );
-            } else {
-                document.querySelector('main').style.filter = "blur(5px)";
+    static blurOff = () => {
+        document.querySelectorAll('body > *').forEach(
+            column => {
+                column.style.filter = "none";
             }
-        } else {
-            if (main.contains(elem)) {
-                document.querySelectorAll('aside').forEach(
-                    column => {
-                        column.style.filter = "none";
-                    }
-                );
-            } else {
-                document.querySelector('main').style.filter = "none";
+        );
+    }
+    static blurOn = selector => {
+        document.querySelectorAll('main, aside').forEach(
+            column => {
+                column.style.filter = "blur(5px)";
             }
-        }
+        );
+        document.querySelector(`${selector}`).style.filter = "none";
     }
 }
 
@@ -61,12 +53,12 @@ class Aside {
         Aside.clear();
         document.querySelector(`${selector}`).classList.add('active');
         localStorage.setItem('aside', selector);
-        Template.blur(true, selector);
+        Template.blurOn(selector);
     }
     static close = selector => {
         document.querySelector(`${selector}`).classList.remove('active');
         localStorage.removeItem('aside');
-        Template.blur(false, selector);
+        Template.blurOff();
     }
     static clear = () => {
         let aside = localStorage.getItem('aside');
@@ -151,7 +143,7 @@ class Theme {
 
 class Message {
     static close = button => {
-        document.body.removeChild(button.parentNode);
+        document.body.removeChild(button.parentNode.parentNode);
     }
 }
 
