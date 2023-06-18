@@ -48,11 +48,13 @@
         width: 360px;
     }
 }
+
 @media (width >= 720px) {
     #space-chat-box {
         width: calc((100vw / 12) * 3);
     }
 }
+
 @media (width >= 1440px) {
     #space-chat-box {
         right: 0px;

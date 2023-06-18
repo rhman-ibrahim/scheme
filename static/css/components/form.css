@@ -1,5 +1,6 @@
 form {
-  width: 360px;
+  width: 100%;
+  padding: 8px;
   height: var(--wh);
   transition: left 1s ease-in-out;
   bottom: 0px;
@@ -175,4 +176,16 @@ div.text label,
 div.text-area label, 
 div.password label {
   line-height: 1.4;
+}
+
+@media (width > 360px) {
+  form {
+    width: 360px;
+  }
+}
+
+@media (width >= 720px) {
+  form {
+    width: calc((100vw / 12) * 3);
+  }
 }

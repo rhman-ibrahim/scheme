@@ -60,9 +60,16 @@ aside {
 */
 
 form {
-    border-right: 1.32px solid var(--d3);   
     background: var(--d1);
     fill: none !important;
+}
+
+form.left {
+    border-right: 1.32px solid var(--d3);   
+}
+
+form.right {
+    border-left: 1.32px solid var(--d3);   
 }
 
 input,
@@ -181,20 +188,15 @@ div.file label {
 /*
     .log
 */
+
 .log li i.add {
     color: var(--li);
 }
+
 .log li i.change {
     color: var(--lw);
 }
+
 .log li i.delete {
     color: var(--ld);
-}
-/*
-    Rules Of accent
-    theme colors
-*/
-mark {
-    color: var(--a1);
-    background: none;
 }
