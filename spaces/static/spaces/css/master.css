@@ -4,6 +4,7 @@
     scrollbar-width: none;
     scroll-behavior: smooth;
     height: calc(100vh - 56px);
+    padding: 8px 8px 64px 8px;
 }
 
 #space ul {
