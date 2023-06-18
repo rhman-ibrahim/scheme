@@ -1,0 +1,57 @@
+.pin {
+    border-radius: 100%;
+    height: 40px;
+    padding: 8px;
+    width: 40px;
+}
+
+.aside-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+}
+
+#left,
+#right {
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+    width: 100%;
+}
+
+#right {
+    position: fixed;
+    transition-property: right;
+    right: -400%;
+    bottom: 0px;
+    top: 0px;
+}
+
+#left {
+    position: fixed;
+    transition-property: left;
+    left: -400%;
+    bottom: 0px;
+    top: 0px;
+}
+
+#right.active {
+    right: 0px;
+}
+
+#left.active {
+    left: 0px;
+}
+
+@media (width > 360px) {
+    #left,
+    #right {
+        width: 360px;
+    }
+    #right {
+        right: calc(-360px * 4);
+    }
+    #left {
+        left: calc(-360px * 4);
+    }
+}

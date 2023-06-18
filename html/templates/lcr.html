@@ -6,33 +6,31 @@
     {% block head %}
     {% endblock head %}
 </head>
-<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
+<body class="lcr-grid" onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
+    <aside id="left">
+        <nav class="aside-nav">
+            <i class="material-symbols-outlined" id="left-close-icon" onclick="Aside.clear()">chevron_left</i>
+        </nav>
+        {% block left %}
+        {% endblock %}
+    </aside>
+    <main id="center">
+        <nav class="aside-nav">
+            <i class="material-symbols-outlined" id="right-open-icon" onclick="Aside.open('#right')">chevron_left</i>
+            <i class="material-symbols-outlined" id="left-open-icon" onclick="Aside.open('#left')">chevron_right</i>
+        </nav>
+        {% block center %}
+        {% endblock %}
+    </main>
+    <aside id="right">
+        <nav class="aside-nav">
+            <i class="material-symbols-outlined" id="right-close-icon" onclick="Aside.clear()">chevron_right</i>
+        </nav>
+        {% block right %}
+        {% endblock %}
+    </aside>
     {% block fixed %}
     {% endblock %}
-    <main class="lcr-grid">
-        <aside class="aside-l" id="left">
-            <div class="wrapper">
-                {% block left %}
-                {% endblock %}
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-l-button">chevron_left</button>
-            </div>
-        </aside>
-        <aside id="center">
-            <div class="wrapper">
-                {% block center %}
-                {% endblock %}
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#left')" id="left-pin">chevron_right</button>
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.open('#right')" id="right-pin">chevron_left</button>
-            </div>
-        </aside>
-        <aside class="aside-r" id="right">
-            <div class="wrapper">
-                {% block right %}
-                {% endblock %}
-                <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()" id="aside-r-button">chevron_right</button>
-            </div>
-        </aside>
-    </main>
 </body>
 </html>

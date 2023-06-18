@@ -4,19 +4,15 @@
 <head>
     {% include "components/head.html" %}
     {% block head %}
-    {% endblock head %}
+    {% endblock %}
 </head>
-<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
+<body class="c-grid" onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
-    {% block fixed %}
-    {% endblock fixed %}
-    <main class="c-grid">
-        <aside id="center">
-            <div class="wrapper">
-                {% block main %}
-                {% endblock %}
-            </div>
-        </aside>
+    <main id="center">
+        {% block main %}
+        {% endblock %}
     </main>
+    {% block fixed %}
+    {% endblock %}
 </body>
 </html>
