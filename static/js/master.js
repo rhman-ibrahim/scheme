@@ -275,7 +275,7 @@ class Space {
         destination.appendChild(ulElement);
         destination.querySelector('ul:last-of-type').scrollIntoView(
             {
-                block: 'end',
+                block: 'start',
                 inline: 'nearest',
                 behavior:'smooth',
             }
@@ -287,7 +287,7 @@ class Space {
         destination.querySelector('ul:last-of-type').appendChild(liElement);
         destination.querySelector('ul:last-of-type').scrollIntoView(
             {
-                block: 'end',
+                block: 'start',
                 inline: 'nearest',
                 behavior:'smooth',
             }
