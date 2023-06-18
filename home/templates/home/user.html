@@ -1,4 +1,5 @@
 {% extends 'templates/lcr.html' %}
+{% load static %}
 
 {% block fixed %}
 {% include "circles/forms/create.html" %}
@@ -28,4 +29,8 @@
 {% include "user/cards/form/signin.html" %}
 {% include "user/cards/form/verify.html" %}
 {% include "circles/cards/form/create.html" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% get_static_prefix %}home/css/master.css">
 {% endblock %}
