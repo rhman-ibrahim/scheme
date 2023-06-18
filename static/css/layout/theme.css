@@ -58,11 +58,13 @@ aside {
 /*
     form
 */
+
 form {
     border-right: 1.32px solid var(--d3);   
     background: var(--d1);
     fill: none !important;
 }
+
 input,
 textarea {
     color: var(--d4);
@@ -70,82 +72,112 @@ textarea {
     background: none;
     border: none;
 }
+
 input:focus,
 textarea:focus {
   outline-color: var(--d3);
 }
+
 div.check div.container [type=checkbox] + h6 {
   outline: 1px solid var(--d2);
 }
+
 div.check div.container [type=checkbox]:checked + h6 {
   outline-color: var(--d4);
   background: var(--d4);
 }
+
 div.radio div.container input + h6 {
   outline: 1px solid var(--d2);
   background: var(--d1);
 }
+
 div.radio div.container input:checked + h6 {
   outline-color: var(--d4);
   background: var(--d4);
 }
+
 div.file label {
   outline: 1px solid var(--d2);
 }
+
 /*
     .card
 */
+
 .card {
     outline: 1.32px solid var(--d3);
     background: var(--d2);
 }
+
 .cards-v .verticl-line {
     background: var(--d2);
 }
+
 /*
     .pin
 */
+
 .pin {
     outline: 1.32px solid var(--d3);
     background: var(--d2);
     color: var(--d4);
 }
+
 /*
     Rules Of alert
     theme colors
     .card
 */
+
 .card.info {
     outline: 1.32px solid var(--li);
 }
+
 .card.warning {
     outline: 1.32px solid var(--lw);
 }
+
 .card.danger {
     outline: 1.32px solid var(--ld);
 }
+
 .card.success {
     outline: 1.32px solid var(--ls);
 }
+
 /*
     .message
 */
+
 .message.info {
     outline: 1.32px solid var(--di);
-    background: var(--li);
 }
+.message.info .material-icons {
+    color: var(--di);
+}
+
 .message.error {
     outline: 1.32px solid var(--dd);
-    background: var(--ld);
 }
+.message.error .material-icons {
+    color: var(--dd);
+}
+
 .message.warning {
     outline: 1.32px solid var(--dw);
-    background: var(--lw);
 }
+.message.warning .material-icons {
+    color: var(--dw);
+}
+
 .message.success {
     outline: 1.32px solid var(--ds);
-    background: var(--ls);
 }
+.message.success .material-icons {
+    color: var(--ds);
+}
+
 /*
     .log
 */

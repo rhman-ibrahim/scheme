@@ -1,8 +1,12 @@
 {% load filters %}
 {% for message in messages %}
-<h3 class="title message {{ message.tags }}">
-    <span class="material-icons">{{ message.tags|message_tag_icon }}</span>
-    <span>{{ message }}</span>
-    <span class="material-icons" onclick="Message.close(this)">close</span>
-</h3>
+<ul class="card message {{ message.tags }}">
+    <li class="title">
+        <i class="material-icons">{{ message.tags|message_tag_icon }}</i>
+        <span>{{ message }}</span>
+    </li>
+    <ul class="end">
+        <li class="material-icons" onclick="Message.close(this)">close</li>
+    </ul>
+</ul>
 {% endfor %}
