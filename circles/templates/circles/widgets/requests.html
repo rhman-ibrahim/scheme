@@ -2,27 +2,27 @@
 
 {% if request.user == circle.founder %}
 <aside class="aside-r" id="requests">
-    <div class="wrapper">
-        <div class="card">
-            <p>These requests have been received, sorted from oldest to newest.</p>
-            <ul class="end">
-                <li><b>{{ circle.circlerequests_set.count }}</b></li>
-            </ul>
-        </div>
-        {% for ask in circle.circlerequests_set.all %}
-        <div class="card" role="navigate">
-            <h4 class="title">
-                <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
-                <span>{{ ask.user.username }}</span>
-            </h4>
-            <h5>{{ user.circlerequests.timestamp }}</h5>
-            <nav class="end">
-                <a href="{% url 'circle:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
-                <a href="{% url 'circle:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
-            </nav>
-        </div>
-        {% endfor %}
-        <button class="pin material-symbols-outlined" type="button" onclick="Aside.clear()">chevron_right</button>
+    <nav class="aside-nav">
+        <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_right</i>
+    </nav>
+    <div class="card">
+        <p>These requests have been received, sorted from oldest to newest.</p>
+        <ul class="end">
+            <li><b>{{ circle.circlerequests_set.count }}</b></li>
+        </ul>
     </div>
+    {% for ask in circle.circlerequests_set.all %}
+    <div class="card" role="navigate">
+        <h4 class="title">
+            <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
+            <span>{{ ask.user.username }}</span>
+        </h4>
+        <h5>{{ user.circlerequests.timestamp }}</h5>
+        <nav class="end">
+            <a href="{% url 'circle:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
+            <a href="{% url 'circle:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
+        </nav>
+    </div>
+    {% endfor %}
 </aside>
 {% endif %}
