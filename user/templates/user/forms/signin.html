@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'user:signin' %}" id="sign-in-form">
+<form method="POST" action="{% url 'user:signin' %}" class="right" id="sign-in-form">
     {% with form=forms.signin password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}

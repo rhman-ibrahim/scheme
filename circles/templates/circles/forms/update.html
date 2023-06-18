@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'circle:create' %}" id="circle-update-form">
+<form method="POST" action="{% url 'circle:create' %}" class="left" id="circle-update-form">
     {% with form=forms.circle %}
     {% include "components/form/base.html" %}
     {% endwith %}

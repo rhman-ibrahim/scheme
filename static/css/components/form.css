@@ -2,13 +2,27 @@ form {
   width: 360px;
   height: var(--wh);
   transition: left 1s ease-in-out;
-  position: fixed;
-  left: calc(var(--ww) * -1);
   bottom: 0px;
 }
 
-form.active {
+form.left {
+  position: fixed;
+  transition-property: left;
+  left: calc(-360px * 4);
+}
+
+form.right {
+  position: fixed;
+  transition-property: right;
+  right: calc(-360px * 4);
+}
+
+form.left.active {
   left: 0px;
+}
+
+form.right.active {
+  right: 0px;
 }
 
 form nav {
