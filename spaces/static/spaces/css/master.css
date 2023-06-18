@@ -1,11 +1,13 @@
-#right div.wrapper {
-    position: relative;
-}
-
 #space {
+    overflow-x: hidden;
+    overflow-y: scroll;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    overflow: scroll;
+    height: calc(100vh - 56px);
+}
+
+#space ul {
+    margin: 8px 0px;
 }
 
 #space::-webkit-scrollbar {
@@ -13,14 +15,18 @@
 }
 
 #space-chat-box {
-    padding: 8px;
+    width: 100%;
     height: 56px;
+    padding: 8px;
     display: flex;
+    align-items: center;
     background: var(--d3);
-    position: absolute;
+    transition-timing-function: ease-in-out;
+    transition-property: right;
+    transition-duration: 1s;
+    position: fixed;
+    right: calc(-360px * 4);
     bottom: 0px;
-    right: 0px;
-    left: 0px;
     gap: 8px;
 }
 
@@ -30,4 +36,24 @@
 
 #space-chat-box input {
     flex: content;
+}
+
+.active #space-chat-box {
+    right: 0px;
+}
+
+@media (width > 360px) {
+    #space-chat-box {
+        width: 360px;
+    }
+}
+@media (width >= 720px) {
+    #space-chat-box {
+        width: calc((100vw / 12) * 3);
+    }
+}
+@media (width >= 1440px) {
+    #space-chat-box {
+        right: 0px;
+    }   
 }
