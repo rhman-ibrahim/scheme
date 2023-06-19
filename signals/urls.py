@@ -8,5 +8,5 @@ urlpatterns = [
     path('create/opportunity/', views.create_opportunity, name="create_opportunity"),
     path('create/problem/', views.create_problem, name="create_problem"),
     path('create/hypothesis/', views.create_hypothesis, name="create_hypothesis"),
-    path('<str:uuid>/', views.detail, name="signal")
+    path('<str:serial>/', views.detail, name="signal")
 ]

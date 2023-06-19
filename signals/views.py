@@ -75,13 +75,14 @@ def list(request):
     )
 
 @circle_session
-def detail(request, uuid):
-    signal = Signal.objects.get(serial=uuid)
+def detail(request, serial):
+    signal = Signal.objects.get(serial=serial)
     return render(
         request,
         "signals/signal.html",
         {
             'signal': signal,
+            'room_serial': signal.serial,
             'forms': {
                 'hypothesis' : SignalForm(
                     initial = {

@@ -1,5 +1,4 @@
-{% extends 'templates/lcr.html' %}
-{% load static %}
+{% extends 'spaces/room.html' %}
 
 {% block fixed %}
 {% include "signals/forms/hypothesis.html" %}
@@ -11,7 +10,6 @@
 {% endblock %}
 
 {% block center %}
-{{ request.GET.serial }}
 <section class="widget">
     {% include "signals/cards/object/signal.html" %}
     <section class="cards-w">
@@ -22,15 +20,4 @@
 {% for signal in signal.get_children %}
 {% include "signals/cards/object/signal.html" %}
 {% endfor %}
-{% endblock %}
-
-{% block right %}
-{% with serial=signal.serial %}
-{% include "spaces/widgets/space.html" %}
-{% endwith %}
-{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" href="{% get_static_prefix %}spaces/css/master.css">
-<script src="{% get_static_prefix %}spaces/js/master.js" defer></script>
 {% endblock %}
