@@ -1,13 +1,16 @@
 {% load user_filters %}
 <div class="card" role="navigate">
     <h3 class="title">
-        <i class="material-icons">settings</i>
+        <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
         <b>{{ request.user.username }}</b>
     </h3>
     <p>Manage your account, recovery token, circles, profile and theme.</p>
     <picture class="end">
         <a href="{% url 'user:settings' %}">
-            <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
+            <i class="material-icons">radio_button_checked</i>
+        </a>
+        <a href="{% url 'user:signout' %}">
+            <i class="material-icons">logout</i>
         </a>
     </picture>
 </div>

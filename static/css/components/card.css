@@ -4,6 +4,11 @@
     gap: 8px;
 }
 
+.widget > .title {
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+}
+
 /*
     .cards-v
 */

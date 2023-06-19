@@ -11,21 +11,35 @@
 
 {% block center %}
 <section class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">fork_right</i>
+        <span>navigate</span>
+    </h3>
     <section class="cards-w">
         {% include "user/cards/navigate/settings.html" %}
         {% include "circles/cards/function/opened.html" %}
+        {% include "user/cards/navigate/signout.html" %}
     </section>
 </section>
 <section class="widget">
-    <section class="cards-w">
-        {% include "circles/cards/form/create.html" %}
-        {% include "user/cards/function/token.html" %}
-        {% include "home/cards/function/theme.html" %}
-    </section>
+    <h3 class="title">
+        <i class="material-symbols-outlined">manage_accounts</i>
+        <span>manage</span>
+    </h3>
     <section class="cards-w">
         {% include "user/cards/form/profile.html" %}
         {% include "user/cards/form/password.html" %}
-        {% include "user/cards/navigate/signout.html" %}
+        {% include "user/cards/function/token.html" %}
+    </section>
+</section>
+<section class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">terminal</i>
+        <span>actions</span>
+    </h3>
+    <section class="cards-w">
+        {% include "circles/cards/form/create.html" %}
+        {% include "home/cards/function/theme.html" %}
     </section>
 </section>
 {% endblock %}

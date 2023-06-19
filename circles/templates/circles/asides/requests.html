@@ -1,9 +1,9 @@
 {% load user_filters %}
 
 {% if request.user == circle.founder %}
-<aside id="requests" class="left">
+<aside id="requests" class="right">
     <nav class="aside-nav">
-        <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_left</i>
+        <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_right</i>
     </nav>
     <div class="card">
         <p>These requests have been received, sorted from oldest to newest.</p>
