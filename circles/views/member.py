@@ -8,18 +8,18 @@ from circles.forms import CircleForm
 @is_authenticated(True)
 def open(request, serial):
 
-    circle = Circle.objects.get(uuid=serial)
+    circle = Circle.objects.get(serial=serial)
     role   = circle.user_role(request.user)
     
     if 'circle' in request.session:
-        if circle.uuid == request.session.get('circle'):
+        if circle.serial == request.session.get('circle'):
             return redirect("circle:browse")
         else:
             messages.info(request, "close the opened circle")
             return redirect("user:navigate")
     else:
         if role != None:
-            request.session['circle'] = circle.uuid
+            request.session['circle'] = circle.serial
             return redirect("circle:browse")
         else:
             messages.warning(request, "you are not a member")
@@ -32,13 +32,13 @@ def browse(request):
     if not 'circle' in request.session:
         return redirect("user:navigate")
 
-    circle = Circle.objects.get(uuid=request.session.get('circle'))
+    circle = Circle.objects.get(serial=request.session.get('circle'))
     return render(
         request,
         "circles/index.html",
         {
             'circle': circle,
-            'room_serial': circle.uuid,
+            'room_serial': circle.serial,
             'forms': {
                 'circle': CircleForm(instance=circle)
             }

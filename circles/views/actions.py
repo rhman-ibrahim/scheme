@@ -32,10 +32,10 @@ def create(request):
         except IntegrityError:
             messages.warning(request, "you have a circle with this name")
             return redirect("user:navigate")
-    return redirect("circle:open", circle.uuid)
+    return redirect("circle:open", circle.serial)
 
 def link(request, serial):
-    circle = Circle.objects.get(uuid=serial)
+    circle = Circle.objects.get(serial=serial)
     if request.user.is_authenticated:
         if circle.user_role(request.user):
             messages.info(request, "you are already a membre.")

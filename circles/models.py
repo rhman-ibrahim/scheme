@@ -9,7 +9,7 @@ from django.db import models, IntegrityError
 class Circle(models.Model):
 
     name        = models.CharField(max_length=32, null=False, blank=False)
-    uuid        = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
+    serial      = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
     requested   = models.ManyToManyField("user.Account", blank=True, related_name="requested", through="CircleRequests")
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="CircleMembership")
@@ -32,10 +32,10 @@ class Circle(models.Model):
         return reverse("circle:close")
             
     def open(self):
-        return reverse("circle:open", args=[str(self.uuid)])
+        return reverse("circle:open", args=[str(self.serial)])
 
     def link(self):
-        return str(reverse("circle:link", args=[str(self.uuid)]))
+        return str(reverse("circle:link", args=[str(self.serial)]))
 
     def logs(self):
         return LogEntry.objects.filter(
