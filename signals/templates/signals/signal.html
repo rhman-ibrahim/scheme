@@ -16,7 +16,13 @@
         <i class="material-symbols-outlined">{{ signal.icon }}</i>
         <span>{{ signal.get_classification_display }}</span>
     </h3>
-    {% include "signals/cards/object/signal.html" %}
+    <section class="cards-v">
+        <div class="verticl-line"></div>
+        {% with signal=signal.parent %}
+        {% include "signals/cards/object/signal.html" %}
+        {% endwith %}
+        {% include "signals/cards/object/signal.html" %}
+    </section>
 </section>
 <section class="widget">
     <h3 class="title">
