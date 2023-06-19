@@ -74,7 +74,8 @@ aside::-webkit-scrollbar {
         width: 100%;
     }
 
-    .lr-grid .aside-nav {
+    #left .aside-nav,
+    #right .aside-nav {
         display: none;
     }
 
@@ -91,8 +92,8 @@ aside::-webkit-scrollbar {
         width: 100%;
     }
 
-    .cr-grid .aside-nav,
-    .lc-grid .aside-nav,
+    .cr-grid #right .aside-nav,
+    .lc-grid #left .aside-nav,
     .lcr-grid #center .aside-nav #left-open-icon,
     .lcr-grid #left .aside-nav {
         display: none;
@@ -187,7 +188,7 @@ aside::-webkit-scrollbar {
         width: 100%;
     }
 
-    .lcr-grid .aside-nav {
+    .lcr-grid #right .aside-nav {
         display: none;
     }
 }
