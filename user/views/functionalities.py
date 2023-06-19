@@ -40,6 +40,8 @@ def update_token(request):
 
 @is_authenticated(True)
 def signout(request):
+    if 'circle' in request.session:
+        request.session.pop('circle')
     log(
         request.user.id,
         request.user,
