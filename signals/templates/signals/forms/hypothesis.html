@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'signals:create_hypothesis' %}" class="right" id="hypothesis-create-form">
+<form method="POST" action="{% url 'signals:create_hypothesis' %}" class="left" id="hypothesis-create-form">
     {% with form=forms.hypothesis %}
     {% include "components/form/base.html" %}
     {% endwith %}
