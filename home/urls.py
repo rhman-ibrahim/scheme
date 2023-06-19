@@ -10,4 +10,5 @@ urlpatterns = [
     path('spaces/', views.spaces, name="spaces"),
     path('signals/', views.signals, name="signals"),
     path('tasks/', views.tasks, name="tasks"),
+    path('back/', views.back, name="back")
 ]

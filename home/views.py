@@ -1,5 +1,6 @@
 # Django
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 # User
 from user.forms import (
     SignUpForm, SignInForm, VerifyForm
@@ -77,3 +78,6 @@ def tasks(request):
             'forms':context
         }
     )
+
+def back(request):
+     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
