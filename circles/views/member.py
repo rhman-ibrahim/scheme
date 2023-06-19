@@ -38,6 +38,7 @@ def browse(request):
         "circles/index.html",
         {
             'circle': circle,
+            'room_serial': circle.uuid,
             'forms': {
                 'circle': CircleForm(instance=circle)
             }

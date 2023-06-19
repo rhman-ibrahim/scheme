@@ -1,4 +1,4 @@
-{% extends 'templates/lcr.html' %}
+{% extends 'spaces/room.html' %}
 {% load static %}
 
 {% block fixed %}
@@ -36,15 +36,4 @@
     </section>
 </section>
 {% endif %}
-{% endblock %}
-
-{% block right %}
-{% with serial=circle.uuid %}
-{% include "spaces/widgets/space.html" %}
-{% endwith %}
-{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" href="{% get_static_prefix %}spaces/css/master.css">
-<script src="{% get_static_prefix %}spaces/js/master.js" defer></script>
 {% endblock %}
