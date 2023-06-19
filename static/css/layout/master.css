@@ -188,6 +188,7 @@ aside::-webkit-scrollbar {
         width: 100%;
     }
 
+    .lcr-grid #center .aside-nav,
     .lcr-grid #right .aside-nav {
         display: none;
     }
