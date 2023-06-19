@@ -2,13 +2,17 @@
 {% load filters %}
 
 <div class="card">
-    <h4>{{ signal.created|ago }}</h4>
-    <h3 class="title">
-        <img class="circle-24" src="{{ signal.author|profile_picture_url }}">
-        <span>{{ signal.author.username }}</span>
-    </h3>
+    <div class="end">
+        <small>{{ signal.created|ago_shorten }}</small>
+    </div>
+    <h4 class="title">
+        <img class="circle-24" src="{{ signal.user|profile_picture_url }}">
+        <span>{{ signal.user.username }}</span>
+    </h4>
     <p>{{ signal.body }}</p>
-    <nav class="end">
-        <a class="material-symbols-outlined" href="{{ signal.url }}">{{ signal.icon }}</a>
-    </nav>
+    <div class="end">
+        <a href="{{ signal.url }}">
+            <i class="material-symbols-outlined">{{ signal.icon }}</i>
+        </a>
+    </div>
 </div>

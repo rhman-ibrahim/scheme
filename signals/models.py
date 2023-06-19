@@ -11,8 +11,7 @@ SIGNAL_CLASSIFICATION   = (
 )
 SIGNAL_STATUS = (
     (0, "Opened"),
-    (1, "On Hold"),
-    (2, "Closed")
+    (1, "Closed")
 )
 LEARNING_THREAD_SIGNAL_TYPES = (
     (0, "Observation"),
@@ -38,8 +37,8 @@ class Signal(MPTTModel):
     body           = models.TextField(max_length=512, blank=False, null=False)
     # Users
     circle         = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
-    author         = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False, related_name="author")
-    contributor    = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="contributor")
+    owner          = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False, related_name="owner")
+    user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="user")
     # Time
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
@@ -48,3 +47,10 @@ class Signal(MPTTModel):
 
     def url(self):
         return reverse("signals:signal", args=[str(self.serial)])
+    
+    def get_status_icon(self):
+        if self.status == 0: return "line_start_circle"
+        return "line_end_circle"
+    
+    def update_status(self):
+        return reverse("signals:update_status", args=[str(self.serial)])

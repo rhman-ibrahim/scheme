@@ -5,14 +5,26 @@
 {% endblock %}
 
 {% block left %}
-{% include "circles/cards/function/opened.html" %}
 {% include "user/cards/navigate/settings.html" %}
+{% include "circles/cards/function/opened.html" %}
+{% include "signals/cards/navigate/app.html" %}
 {% endblock %}
 
 {% block center %}
 <section class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">{{ signal.icon }}</i>
+        <span>{{ signal.get_classification_display }}</span>
+    </h3>
     {% include "signals/cards/object/signal.html" %}
+</section>
+<section class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">bubble_chart</i>
+        <span>signal</span>
+    </h3>
     <section class="cards-w">
+        {% include "signals/cards/function/status.html" %}
         {% include "signals/cards/form/hypothesis.html" %}
         {% include "spaces/cards/describe/space.html" %}
     </section>
