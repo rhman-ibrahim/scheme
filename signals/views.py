@@ -61,10 +61,8 @@ def create_hypothesis(request):
 
 @circle_session
 def list(request):
-
     circle  = Circle.objects.get(uuid=request.session.get('circle'))
-    signals = Signal.objects.filter(circle=circle, classification__lte=1)
-
+    signals = Signal.objects.filter(circle=circle, classification__lte=1).order_by('-created')
     return render(
         request,
         "signals/index.html",
