@@ -12,8 +12,8 @@
     </nav>
     {% else %}
     <nav class="end">
-        <img class="circle-24" src="{{ signal.owner|profile_picture_url }}">
-        <img class="circle-24" src="{{ signal.user|profile_picture_url }}">
+        <img class="circle-24" src="{{ signal.user|profile_picture_url }}" title="Contributor">
+        <img class="circle-24" src="{{ signal.owner|profile_picture_url }}" title="Author">
     </nav>
     {% endif %}
 </div>
