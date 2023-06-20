@@ -5,16 +5,14 @@ from django.urls import reverse
 
 
 SIGNAL_CLASSIFICATION   = (
-    # Root
     (0, "Problem"),
     (1, "Opportunity"),
-    # Child
     (2, "Hypothesis"),
-    # Grand Child (Learning Card)
+
     (3, "Observation"),
     (4, "Insight"),
     (5, "Decision"),
-    # Grand Child (Testing Card)
+    
     (6, "Test"),
     (7, "Metric"),
     (8, "Criteria")
