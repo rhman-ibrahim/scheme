@@ -1,4 +1,5 @@
 {% extends 'spaces/room.html' %}
+{% load filters %}
 
 {% block fixed %}
 {% include "signals/forms/hypothesis.html" %}
@@ -11,33 +12,7 @@
 {% endblock %}
 
 {% block center %}
-<section class="widget">
-    <h3 class="title">
-        <i class="material-symbols-outlined">{{ signal.icon }}</i>
-        <span>{{ signal.get_classification_display }}</span>
-    </h3>
-    <section class="cards-v">
-        <div class="verticl-line"></div>
-        {% with signal=signal.parent %}
-        {% include "signals/cards/object/signal.html" %}
-        {% endwith %}
-        {% include "signals/cards/object/signal.html" %}
-    </section>
-</section>
-<section class="widget">
-    <h3 class="title">
-        <i class="material-symbols-outlined">bubble_chart</i>
-        <span>signal</span>
-    </h3>
-    <section class="cards-w">
-        {% include "signals/cards/function/status.html" %}
-        {% include "signals/cards/form/hypothesis.html" %}
-        {% with room=signal  %}
-        {% include "spaces/cards/describe/space.html" %}
-        {% endwith %}
-    </section>
-</section>
-{% for signal in signal.get_children %}
-{% include "signals/cards/object/signal.html" %}
-{% endfor %}
+{% include "signals/widgets/main.html" %}
+{% include "signals/widgets/head.html" %}
+{% include "signals/widgets/tail.html" %}
 {% endblock %}

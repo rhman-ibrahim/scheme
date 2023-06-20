@@ -1,0 +1,13 @@
+{% if signal.get_children %}
+<section class="widget">
+    <h3 class="title">
+        {% with first=signal.get_children|first %}
+        <i class="material-symbols-outlined">{{ first.icon }}</i>
+        <span>{{ first.get_classification_display }} signals ({{ first.parent.get_children.count }})</span>
+        {% endwith %}
+    </h3>
+    {% for signal in signal.get_children %}
+    {% include "signals/cards/object/signal.html" %}
+    {% endfor %}
+</section>
+{% endif %}
