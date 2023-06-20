@@ -14,50 +14,18 @@ from .models import Signal
 
 
 @circle_session
-def create_problem(request):
+def create_signal(request):
     if  request.method == "POST":
         form = SignalForm(request.POST)
         if form.is_valid():
             signal                = form.save(commit=False)
             signal.circle         = Circle.objects.get(serial=request.session.get('circle'))
-            signal.classification = 0
+            signal.classification = request.POST['classification']
+            signal.icon           = request.POST['icon']
             signal.owner          = request.user
             signal.user           = request.user
-            signal.icon           = "psychology_alt"
             form.save()
             messages.success(request, "your signal has been sent successfully")
-        else: get_form_errors(request, form)
-    return redirect("home:back")
-
-@circle_session
-def create_opportunity(request):
-    if  request.method == "POST":
-        form = SignalForm(request.POST)
-        if form.is_valid():
-            signal                = form.save(commit=False)
-            signal.circle         = Circle.objects.get(serial=request.session.get('circle'))
-            signal.classification = 1
-            signal.owner          = request.user
-            signal.user           = request.user
-            signal.icon           = "psychology"
-            form.save()
-            messages.success(request, "your signal is sent successfully")
-        else: get_form_errors(request, form)
-    return redirect("home:back")
-
-@circle_session
-def create_hypothesis(request):
-    if  request.method == "POST":
-        form = SignalForm(request.POST)
-        if form.is_valid():
-            signal                = form.save(commit=False)
-            signal.circle         = Circle.objects.get(serial=request.session.get('circle'))
-            signal.classification = 2
-            signal.owner          = form.cleaned_data['parent'].owner
-            signal.user           = request.user
-            signal.icon           = "cognition"
-            form.save()
-            messages.success(request, "your signal is sent successfully")
         else: get_form_errors(request, form)
     return redirect("home:back")
 
@@ -96,7 +64,7 @@ def detail(request, serial):
             'signal': signal,
             'room_serial': signal.serial,
             'forms': {
-                'hypothesis' : SignalForm(
+                'signal' : SignalForm(
                     initial = {
                         'parent' : signal
                     }
