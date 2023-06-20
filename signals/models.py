@@ -5,23 +5,23 @@ from django.urls import reverse
 
 
 SIGNAL_CLASSIFICATION   = (
+    # Root
     (0, "Problem"),
     (1, "Opportunity"),
-    (2, "Hypothesis")
+    # Child
+    (2, "Hypothesis"),
+    # Grand Child (Learning Card)
+    (3, "Observation"),
+    (4, "Insight"),
+    (5, "Decision"),
+    # Grand Child (Testing Card)
+    (6, "Test"),
+    (7, "Metric"),
+    (8, "Criteria")
 )
 SIGNAL_STATUS = (
     (0, "Opened"),
     (1, "Closed")
-)
-LEARNING_THREAD_SIGNAL_TYPES = (
-    (0, "Observation"),
-    (1, "Insight"),
-    (2, "Decision")
-)
-TEST_THREAD_SIGNAL_TYPES = (
-    (0, "Test"),
-    (1, "Metric"),
-    (2, "Criteria")
 )
 
 
