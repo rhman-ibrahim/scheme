@@ -2,7 +2,17 @@
 {% load filters %}
 
 {% block fixed %}
+{% if signal.classification == 0 or signal.classification == 1 %}
 {% include "signals/forms/hypothesis.html" %}
+{% elif signal.classification == 3 %}
+{% include "signals/forms/insight.html" %}
+{% elif signal.classification == 4 %}
+{% include "signals/forms/decision.html" %}
+{% elif signal.classification == 6 %}
+{% include "signals/forms/metric.html" %}
+{% elif signal.classification == 7 %}
+{% include "signals/forms/criteria.html" %}
+{% endif %}
 {% endblock %}
 
 {% block left %}
@@ -12,7 +22,7 @@
 {% endblock %}
 
 {% block center %}
-{% include "signals/widgets/main.html" %}
-{% include "signals/widgets/head.html" %}
-{% include "signals/widgets/tail.html" %}
+{% include "signals/widgets/parent.html" %}
+{% include "signals/widgets/signal.html" %}
+{% include "signals/widgets/child.html" %}
 {% endblock %}
