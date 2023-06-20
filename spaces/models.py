@@ -1,6 +1,12 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+
+ROOM_STATUS = (
+    (0, "Opened"),
+    (1, "Closed")
+)
+
 class Room(models.Model):
 
     circle  = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
@@ -15,6 +21,7 @@ class Room(models.Model):
         blank      = False,
         null       = False,
     )
+    status         = models.IntegerField(choices=ROOM_STATUS, default=0, blank=False, null=False)
 
     def __str__(self):
         return self.space

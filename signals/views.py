@@ -6,6 +6,8 @@ from helpers.functions import get_form_errors
 # Circles
 from circles.models import Circle
 from circles.decorators import circle_session
+# Spaces
+from spaces.models import Room
 # Signals
 from .forms.signal import SignalForm
 from .models import Signal
@@ -76,8 +78,11 @@ def list(request):
 
 def update_status(request, serial):
     signal        = Signal.objects.get(serial=serial)
+    room          = Room.objects.get(space=serial)
     signal.status = 0 if signal.status else 1
+    room.status = signal.status
     signal.save()
+    room.save()
     return redirect("home:back")
 
 
