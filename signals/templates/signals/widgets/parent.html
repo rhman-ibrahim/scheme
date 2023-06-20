@@ -1,0 +1,14 @@
+{% if signal.level > 0 %}
+<section class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">{{ signal.get_root.icon }}</i>
+        <span>{{ signal.get_root.get_classification_display }}</span>
+    </h3>
+    <section class="cards-v">
+        <div class="verticl-line"></div>
+        {% for signal in signal.get_ancestors %}
+        {% include "signals/cards/object/signal.html" %}
+        {% endfor %}
+    </section>
+</section>
+{% endif %}
