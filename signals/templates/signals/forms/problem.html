@@ -1,5 +1,7 @@
-<form method="POST" action="{% url 'signals:create_problem' %}" class="right" id="problem-create-form">
+<form method="POST" action="{% url 'signals:create_signal' %}" class="right" id="problem-create-form">
     {% with form=forms.signal %}
     {% include "components/form/base.html" %}
     {% endwith %}
+    <input type="hidden" name="icon" value="psychology">
+    <input type="hidden" name="classification" value="0">
 </form>
