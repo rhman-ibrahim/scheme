@@ -59,27 +59,40 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
 
     async def receive(self, text_data):
+        
+        # Check if the room is opened
+        if self.room.status:
 
-        # Parse the receivied JSON data.
-        sever_DICT_data = json.loads(text_data)
-        
-        # Save the message to the database.
-        await self.save(
-            self.room,
-            await self.get_user(sever_DICT_data['sender']),
-            sever_DICT_data['body']
-        )
-        
-        # Send the 'message' data to the channels' group.
-        # through the 'message' background worker.
-        await self.channel_layer.group_send(
-            self.group_name,
+            await self.channel_layer.group_send(                                                
+            self.group_name, 
             {
-                'type':'message',
-                'body':sever_DICT_data['body'],
-                'sender':sever_DICT_data['sender']
+                'type': 'notify', 
+                'notification': "the room has been closed by the signal's author",
             }
         )
+            
+        else:
+
+            # Parse the receivied JSON data.
+            sever_DICT_data = json.loads(text_data)
+            
+            # Save the message to the database.
+            await self.save(
+                self.room,
+                await self.get_user(sever_DICT_data['sender']),
+                sever_DICT_data['body']
+            )
+            
+            # Send the 'message' data to the channels' group.
+            # through the 'message' background worker.
+            await self.channel_layer.group_send(
+                self.group_name,
+                {
+                    'type':'message',
+                    'body':sever_DICT_data['body'],
+                    'sender':sever_DICT_data['sender']
+                }
+            )
 
     async def disconnect(self, code):
         

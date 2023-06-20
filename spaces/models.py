@@ -26,6 +26,10 @@ class Room(models.Model):
     def __str__(self):
         return self.space
     
+    def get_status_icon(self):
+        if self.status == 0: return "line_start_circle"
+        return "line_end_circle"
+    
 
 class Message(models.Model):
 

@@ -32,7 +32,9 @@
     <section class="cards-w">
         {% include "signals/cards/function/status.html" %}
         {% include "signals/cards/form/hypothesis.html" %}
+        {% with room=signal  %}
         {% include "spaces/cards/describe/space.html" %}
+        {% endwith %}
     </section>
 </section>
 {% for signal in signal.get_children %}
