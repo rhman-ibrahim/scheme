@@ -1,17 +1,38 @@
 # Django
-from django.contrib import messages
-from django.http import HttpResponse
-from django.contrib.admin.models import CHANGE
 from django.utils.crypto import get_random_string
+from django.contrib.admin.models import CHANGE
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.contrib import messages
 # Scheme
 from scheme.settings import MEDIA_ROOT
 # Helpers
 from helpers.functions import log
+# Circles
+from circles.forms import CircleForm
 # User
 from user.decorators import is_authenticated, is_guest
+from user.forms import  (
+    ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm
+)
 
+
+@is_authenticated(True)
+@is_guest(False)
+def settings(request):
+    return render(
+        request,
+        "user/index.html",
+        {
+            'forms': {
+                'info': ProfileInfoForm(instance=request.user.profile),
+                'password': PasswordUpdateForm(False),
+                'picture': ProfilePictureForm,
+                'circle': CircleForm
+            }
+        }
+    )
 
 def navigate(request):
     if request.user.is_authenticated:
