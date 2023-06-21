@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'user:reset' %}" id="reset-form">
+<form method="POST" action="{% url 'user:reset' %}" class="right" id="reset-form">
     {% with form=forms.reset password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}

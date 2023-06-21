@@ -17,8 +17,7 @@ urlpatterns = [
     path("navigate/", views.navigate, name="navigate"),
     path('signout/', views.signout, name='signout'),
     # Templates
-    path('guest/', views.guest, name="guest"),
-    path('identified/', views.identified, name="identified"),
     path('settings/', views.settings, name="settings"),
+    # Files
     path('token/', views.token, name='token')
 ]

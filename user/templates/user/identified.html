@@ -1,7 +1,13 @@
-{% extends 'templates/c.html' %}
+{% extends 'templates/lcr.html' %}
 
 {% block fixed %}
+
 {% endblock %}
 
-{% block main %}
+{% block center %}
+<section class="widget">
+    <section class="cards-w">
+        {% include "user/cards/form/reset.html" %}
+    </section>
+</section>
 {% endblock %}
