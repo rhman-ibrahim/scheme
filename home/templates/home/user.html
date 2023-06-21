@@ -6,6 +6,9 @@
 {% include "user/forms/signup.html" %}
 {% include "user/forms/signin.html" %}
 {% include "user/forms/verify.html" %}
+{% if 'token' in request.session %}
+{% include "user/forms/reset.html" %}
+{% endif %}
 {% endblock %}
 
 {% block left %}
@@ -29,6 +32,9 @@
 {% include "user/cards/form/signin.html" %}
 {% include "user/cards/form/verify.html" %}
 {% include "circles/cards/form/create.html" %}
+{% if 'token' in request.session %}
+{% include "user/cards/form/reset.html" %}
+{% endif %}
 {% endblock %}
 
 {% block head %}

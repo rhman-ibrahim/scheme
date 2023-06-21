@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 # User
 from user.forms import (
-    SignUpForm, SignInForm, VerifyForm
+    SignUpForm, SignInForm, VerifyForm, PassWordResetForm
 )
 from user.decorators import is_authenticated
 # Circles
@@ -14,7 +14,8 @@ context = {
     'signup': SignUpForm,
     'signin': SignInForm,
     'circle': CircleForm,
-    'verify': VerifyForm
+    'verify': VerifyForm,
+    'reset': PassWordResetForm(False)
 }
 
 @is_authenticated(False)
