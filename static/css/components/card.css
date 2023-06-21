@@ -102,26 +102,7 @@
     flex-direction: column;
     border-radius: 8px;
     padding: 16px;
-    gap: 8px;
-}
-
-.card.row,
-.card.center,
-.card.end {
-    flex-direction: row;
-    align-items: center;
-}
-
-.card.row {
-    justify-content: flex-start;
-}
-
-.card.center {
-    justify-content: center;
-}
-
-.card.end {
-    justify-content: flex-end;
+    gap: 4px;
 }
 
 .card .row,
@@ -143,6 +124,13 @@
 
 .card .end {
     justify-content: flex-end;
+}
+
+.card .col {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .card p {

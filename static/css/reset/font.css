@@ -73,7 +73,7 @@ body {
 }
 
 h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 
 h2 {
@@ -81,7 +81,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 small {
@@ -95,19 +95,19 @@ small {
 h1.title,
 h1.title i.material-icons,
 h1.title i.material-symbols-outlined {
-    font-size: 2.625rem;
+    font-size: 2;
 }
 
 h2.title,
 h2.title i.material-icons,
 h2.title i.material-symbols-outlined {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
 }
 
 h2.title,
 h2.title i.material-icons,
 h2.title i.material-symbols-outlined {
-    font-size: 1.875rem;
+    font-size: 1rem;
 }
 
 /*
@@ -149,5 +149,5 @@ button {
 
 a {
     text-decoration: none;
-    color: var(--fc);
+    color: var(--d4);
 }
