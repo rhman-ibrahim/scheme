@@ -1,5 +1,12 @@
 {% extends 'spaces/room.html' %}
 {% load filters %}
+{% load static %}
+
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% get_static_prefix %}signals/css/master.css">
+{% endblock %}
 
 {% block fixed %}
 {% if signal.classification == 0 or signal.classification == 1 %}

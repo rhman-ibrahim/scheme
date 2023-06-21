@@ -1,0 +1,17 @@
+.card.signal p {
+    text-indent: 28px;
+}
+
+.card.signal a {
+    transition-timing-function: ease-in-out;
+    transition-property: background;
+    transition-duration: .5s;
+    background: var(--d3);
+    border-radius: 4px;
+    font-size: .75rem;
+    padding: 4px;
+}
+
+.card.signal a:hover {
+    background: var(--di);
+}

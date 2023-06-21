@@ -1,18 +1,17 @@
 {% load user_filters %}
 {% load filters %}
 
-<div class="card">
-    <div class="end">
+<div class="card signal">
+    <h4 class="end">
         <small>{{ signal.created|ago_shorten }}</small>
-    </div>
-    <h4 class="title">
         <img class="circle-24" src="{{ signal.user|profile_picture_url }}">
-        <span>{{ signal.user.username }}</span>
     </h4>
-    <p>{{ signal.body }}</p>
+    <h4 class="title">
+        <i class="material-symbols-outlined">{{ signal.icon }}</i>
+        <span>{{ signal.get_classification_display }}</span>
+    </h4>
+    <p>{{ signal.body|linebreaks }}</p>
     <div class="end">
-        <a href="{{ signal.url }}">
-            <i class="material-symbols-outlined">{{ signal.icon }}</i>
-        </a>
+        <a class="material-symbols-outlined" href="{{ signal.url }}">keyboard_return</a>
     </div>
 </div>
