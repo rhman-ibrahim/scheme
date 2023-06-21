@@ -18,4 +18,4 @@
 <!-- JS -->
 <script src="{% static 'js/master.js' %}?v={% now "U" %}" defer></script>
 <!-- Title -->
-<title>{{ request.resolver_match.app_name|capfirst }} | {{ request.resolver_match.url_name|replace_underscores }}</title>
+<title>Scheme / {{ request.resolver_match.app_name|capfirst }}</title>
