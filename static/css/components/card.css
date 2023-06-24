@@ -133,6 +133,11 @@
     gap: 2px;
 }
 
+.card h3.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
 .card p {
     margin: 0px;
 }
