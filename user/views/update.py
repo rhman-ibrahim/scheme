@@ -25,7 +25,7 @@ def update_profile_picture(request):
             messages.success(request, "profile picture updated successfully")
         else:
             get_form_errors(request, form)
-    return redirect('home:user')
+    return redirect('user:back')
 
 @is_authenticated(True)
 @is_guest(False)
@@ -37,10 +37,10 @@ def update_password(request):
             update_session_auth_hash(request, user)
             log(request.user.id, request.user, CHANGE, "updated password")
             messages.success(request, 'password has been updated successfully')
-            return redirect("home:user")
+            return redirect("user:back")
         else:
             get_form_errors(request, form)
-    return redirect('home:user')
+    return redirect('user:back')
 
 @is_authenticated(True)
 @is_guest(False)

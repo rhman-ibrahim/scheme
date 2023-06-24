@@ -19,4 +19,5 @@ urlpatterns = [
     path('settings/', views.settings, name="settings"),
     path("navigate/", views.navigate, name="navigate"),
     path('signout/', views.signout, name='signout'),
+    path('back/', views.back, name='back'),
 ]

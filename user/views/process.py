@@ -31,7 +31,7 @@ def signup(request):
             messages.success(request, "your account has been created successfully.")
         else:
             get_form_errors(request, form)
-        return redirect("home:user")
+        return redirect("user:back")
     
 @is_authenticated(False)    
 def signin(request):
@@ -50,7 +50,7 @@ def signin(request):
                 return redirect("user:settings")
         else:
             get_form_errors(request, form)
-    return redirect("home:user")
+    return redirect("user:back")
 
 @is_authenticated(False)
 def verify(request):
@@ -83,7 +83,7 @@ def reset(request):
             form.save()
             messages.success(request, 'password has been reset successfully')
             del request.session['token']
-            return redirect("home:user")
+            return redirect("home:index")
         else:
             get_form_errors(request, form)
-    return redirect('home:user')
+    return redirect('user:back')
