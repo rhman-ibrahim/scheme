@@ -7,10 +7,8 @@
     <p>{{ circle.description }}</p>
     {% endif %}
     <nav class="end">
-        <a class="material-icons" href="{{ circle.link }}">content_copy</a>
         {% if opened_circle and circle.id == opened_circle.id %}
         <a class="material-icons" href="{{ circle.browse }}">radio_button_checked</a>
-        <a class="material-icons" href="{{ circle.close }}">logout</a>
         {% endif %}
         {% if opened_circle and circle.id != opened_circle.id %}
         <a class="material-icons" href="{{ circle.open }}" disabled>login</a>

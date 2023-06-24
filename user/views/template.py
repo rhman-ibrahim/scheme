@@ -42,7 +42,7 @@ def navigate(request):
     if request.user.is_authenticated:
         if request.user.is_guest: return redirect("user:guest")
         else: return redirect("user:settings")
-    return redirect("user:back")
+    return redirect("home:index")
 
 @is_authenticated(True)
 @is_guest(False)
@@ -75,4 +75,4 @@ def signout(request):
     )
     logout(request)
     messages.success(request, 'signed out successfully')
-    return redirect('user:back')
+    return redirect('home:index')

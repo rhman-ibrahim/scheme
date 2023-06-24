@@ -17,23 +17,20 @@
 
 {% block center %}
 <header class="widget">
+    <h3 class="title">
+        <i class="material-symbols-outlined">terminal</i>
+        <span>the project</span>
+    </h3>
     {% include "home/cards/describe/project.html" %}
-    <section class="cards-w">
-        {% include "home/cards/describe/what.html" %}
-        {% include "home/cards/describe/why.html" %}
-        {% include "home/cards/describe/how.html" %}
+    <section class="cards-s" id="apps">
+        {% include "user/cards/describe/app.html" %}
+        {% include "circles/cards/describe/app.html" %}
+        {% include "signals/cards/describe/app.html" %}
+        {% include "spaces/cards/describe/app.html" %}
+        {% include "tasks/cards/describe/app.html" %}
     </section>
 </header>
-<section class="widget">
-    {% include "home/cards/describe/app.html" %}
-    <section class="cards-s" id="apps">
-        {% include "user/cards/navigate/app.html" %}
-        {% include "circles/cards/navigate/app.html" %}
-        {% include "signals/cards/navigate/app.html" %}
-        {% include "spaces/cards/navigate/app.html" %}
-        {% include "tasks/cards/navigate/app.html" %}
-    </section>
-</section>
+{% include "home/widgets/about.html" %}
 {% include "home/widgets/guide.html" %}
 {% endblock %}
 
