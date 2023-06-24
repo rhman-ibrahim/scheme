@@ -7,9 +7,17 @@
 {% endblock %}
 
 {% block left %}
+    <h4 class="title">
+        <i class="material-symbols-outlined">admin_panel_settings</i>
+        <span>founder</span>
+    </h4>
     {% with member=circle.founder %}
     {% include "circles/cards/object/member.html" %}
     {% endwith %}
+    <h4 class="title">
+        <i class="material-icons">group</i>
+        <span>members</span>
+    </h4>
     {% for member in circle.members.all %}
     {% include "circles/cards/object/member.html" %}
     {% endfor %}
@@ -21,4 +29,4 @@
 {% endif %}
 {% include "circles/widgets/navigate.html" %}
 {% include "circles/widgets/actions.html" %}
-{% endblock %}
+{% endblock %}///////

@@ -8,22 +8,13 @@
 {% endblock %}
 
 {% block fixed %}
-{% if signal.classification == 0 or signal.classification == 1 %}
-{% include "signals/forms/hypothesis.html" %}
-{% elif signal.classification == 3 %}
-{% include "signals/forms/insight.html" %}
-{% elif signal.classification == 4 %}
-{% include "signals/forms/decision.html" %}
-{% elif signal.classification == 6 %}
-{% include "signals/forms/metric.html" %}
-{% elif signal.classification == 7 %}
-{% include "signals/forms/criteria.html" %}
-{% endif %}
+{% include "signals/widgets/forms.html" %}
 {% endblock %}
 
 {% block left %}
+{% include "circles/cards/function/opened/browse.html" %}
+{% include "circles/cards/function/opened/close.html" %}
 {% include "user/cards/navigate/settings.html" %}
-{% include "circles/cards/function/opened.html" %}
 {% include "signals/cards/navigate/app.html" %}
 {% endblock %}
 

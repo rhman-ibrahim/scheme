@@ -1,0 +1,8 @@
+{% if opened_circle %}
+<div class="card" role="function">
+    <p>To browse another circle close the connection with this circle!.</p>
+    <nav class="end">
+        <a class="material-icons" href="{{ opened_circle.browse }}">logout</a>
+    </nav>
+</div>
+{% endif %}

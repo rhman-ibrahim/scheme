@@ -1,0 +1,8 @@
+{% if opened_circle %}
+<div class="card" role="function">
+    <p>You are connected to <b>{{ opened_circle.name }}</b> now. Use the icons to navigate.</p>
+    <nav class="end">
+        <a class="material-symbols-outlined" href="{{ opened_circle.browse }}">diversity_2</a>
+    </nav>
+</div>
+{% endif %}
