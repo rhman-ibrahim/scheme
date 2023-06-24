@@ -1,10 +1,10 @@
-<form method="POST" enctype="multipart/form-data" action="{% url 'user:picture' %}" class="left" id="picture-form">
-    {% with form=forms.picture %}
+<form method="POST" action="{% url 'user:info' %}" class="left" id="info-form">
+    {% with form=forms.info %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
-<form method="POST" action="{% url 'user:info' %}" class="left" id="info-form">
-    {% with form=forms.info %}
+<form method="POST" enctype="multipart/form-data" action="{% url 'user:picture' %}" class="right" id="picture-form">
+    {% with form=forms.picture %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
