@@ -2,6 +2,7 @@
 from django.utils.crypto import get_random_string
 from django.contrib.admin.models import CHANGE
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.contrib import messages
@@ -33,6 +34,9 @@ def settings(request):
             }
         }
     )
+
+def back(request):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def navigate(request):
     if request.user.is_authenticated:

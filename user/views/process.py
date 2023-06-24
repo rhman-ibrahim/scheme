@@ -72,7 +72,7 @@ def verify(request):
                 messages.error(request, "invalid or used token")
         else:
             get_form_errors(request, form)
-    return redirect('user:identified')
+    return redirect('home:index')
 
 @is_authenticated(False)
 def reset(request):
