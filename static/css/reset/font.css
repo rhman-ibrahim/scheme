@@ -1,69 +1,4 @@
 /*
-    @imports
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-/*
-    .
-*/
-
-/*
-    .title
-*/
-
-.line,
-.title {
-    display: table-cell;
-}
-.line *,
-.title * {
-    vertical-align: middle;
-}
-
-.title {
-    text-transform: capitalize;
-}
-
-.text-left {
-    text-align: left;
-}
-
-/*
-    .text-*
-*/
-
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
-}
-
-/*
-    .log
-*/
-
-.log li,
-.log li .material-icons {
-    font-size: .84rem;
-}
-
-.log li:nth-child(1),
-.log li:nth-child(1) .material-icons {
-    font-size: .88rem;
-}
-
-/*
-    .aside-nav
-*/
-
-.aside-nav i {
-    font-size: 1.5rem;
-}
-
-/*
     <>
 */
 
@@ -72,58 +7,59 @@ body {
     font-size: 16px;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
+    display: table-cell;
+}
+
+h1,
+h1 .material-icons,
+h1 .material-symbols-outlined {
     font-size: 2rem;
 }
 
-h2 {
+h2,
+h2 .material-icons,
+h2 .material-symbols-outlined {
     font-size: 1.5rem;
 }
 
-h3 {
+h3,
+h3 .material-icons,
+h3 .material-symbols-outlined {
     font-size: 1rem;
 }
 
-small {
-    font-size: smaller !important;
+h4,
+h4 .material-icons,
+h4 .material-symbols-outlined {
+    font-size: .85rem;
 }
 
-/*
-    .<>
-*/
-
-h1.title,
-h1.title i.material-icons,
-h1.title i.material-symbols-outlined {
-    font-size: 2;
+h1 *,
+h2 *,
+h3 *,
+h4 * {
+    vertical-align: middle;
 }
-
-h2.title,
-h2.title i.material-icons,
-h2.title i.material-symbols-outlined {
-    font-size: 1.5rem;
-}
-
-h2.title,
-h2.title i.material-icons,
-h2.title i.material-symbols-outlined {
-    font-size: 1rem;
-}
-
-/*
-    <>
-*/
 
 p {
-    margin: 12px 0px;
     text-transform: none;
     font-weight: 300;
     line-height: 1.4;
     font-size: 1rem;
 }
 
-p span {
+span {
     display: inline-block;
+}
+
+small,
+small .material-icons,
+small .material-symbols-outlined {
+    font-size: .75rem;
 }
 
 b {
@@ -150,4 +86,32 @@ button {
 a {
     text-decoration: none;
     color: var(--d4);
+}
+
+/*
+    .text-*
+*/
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-lower {
+    text-transform: lowercase;
+}
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
 }

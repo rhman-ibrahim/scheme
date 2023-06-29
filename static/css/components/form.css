@@ -2,18 +2,21 @@ form {
   width: 100%;
   padding: 8px;
   height: var(--wh);
-  transition: left 1s ease-in-out;
+  background: var(--d1);
+  fill: none !important;
   bottom: 0px;
 }
 
 form.left {
   position: fixed;
+  border-right: 1.32px solid var(--d3);   
   transition-property: left;
   left: calc(-360px * 4);
 }
 
 form.right {
   position: fixed;
+  border-left: 1.32px solid var(--d3);   
   transition-property: right;
   right: calc(-360px * 4);
 }
@@ -57,6 +60,7 @@ form fieldset div small {
 form fieldset div small::first-letter {
   text-transform: capitalize;
 }
+
 /*
   div
 */
@@ -70,21 +74,23 @@ form fieldset div {
 
 input,
 textarea {
+  display: block;
+  outline: 1px solid var(--d2);
+  font-size: 1rem !important;
+  background: var(--d2);
+  border-radius: 4px;
+  color: var(--d4);
+  outline: none;
   border: none;
   resize: none;
-  outline: none;
-  display: block;
-  background: var(--d2);
-  font-size: 1rem !important;
-  border-radius: 4px;
   padding: 8px;
   width: 100%;
 }
 
 textarea {
-  height: min-content;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  height: min-content;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -93,8 +99,14 @@ textarea::-webkit-scrollbar {
   display: none;
 }
 
+input:focus,
+textarea:focus {
+  outline-color: var(--d3);
+}
+
+
 /*
-div.check
+  div.check
 */
 
 div.check h5 {
@@ -110,10 +122,16 @@ div.check div.container [type=checkbox] {
 }
 
 div.check div.container [type=checkbox] + h6 {
-  cursor: pointer;
-  font-weight: bold;
-  display: inline-block;
+  outline: 1px solid var(--d2);
   text-transform: capitalize;
+  display: inline-block;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+div.check div.container [type=checkbox]:checked + h6 {
+  outline-color: var(--d4);
+  background: var(--d4);
 }
 
 /*
@@ -142,12 +160,16 @@ div.radio div.container input {
 }
 
 div.radio div.container input + h6 {
+  outline: 1px solid var(--d2);
   text-transform: capitalize;
   display: inline-block;
+  background: var(--d1);
   cursor: pointer;
 }
 
 div.radio div.container input:checked + h6 {
+  outline-color: var(--d4);
+  background: var(--d4);
   font-weight: bolder;
 }
 
@@ -155,14 +177,15 @@ div.radio div.container input:checked + h6 {
   div.file
 */
 
-form div.file label {
+div.file label {
   display: block;
   cursor: pointer;
   text-align: center;
+  outline: 1px solid var(--d2);
   text-transform: capitalize;
 }
 
-form fieldset div.file input {
+div.file input {
   display: none;
 }
 

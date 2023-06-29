@@ -1,4 +1,4 @@
-.card.message {
+.message {
     position: fixed;
     border-radius: 8px;
     height: fit-content;
@@ -10,8 +10,43 @@
     gap: 2px;
 }
 
+.message.info {
+    outline: 1.32px solid var(--di);
+}
+.message.info .material-icons {
+    color: var(--di);
+}
+
+.message.error {
+    outline: 1.32px solid var(--dd);
+}
+.message.error .material-icons {
+    color: var(--dd);
+}
+
+.message.warning {
+    outline: 1.32px solid var(--dw);
+}
+.message.warning .material-icons {
+    color: var(--dw);
+}
+
+.message.success {
+    outline: 1.32px solid var(--ds);
+}
+.message.success .material-icons {
+    color: var(--ds);
+}
+
+/*
+   .pin
+*/
+
 .pin {
+    outline: 1.32px solid var(--d3);
+    background: var(--d2);
     border-radius: 100%;
+    color: var(--d4);
     height: 40px;
     padding: 8px;
     width: 40px;

@@ -4,7 +4,10 @@
     gap: 8px;
 }
 
-.widget > .title {
+.widget > h1,
+.widget > h2,
+.widget > h3,
+.widget > h4 {
     font-weight: 700 !important;
     line-height: 1.5 !important;
 }
@@ -23,8 +26,9 @@ aside .cards {
 
 aside .cards .verticl-line {
     width: 4px;
-    content: "";
+    background: var(--d3);
     position: absolute;
+    content: "";
     bottom: 0px; 
     left: 16px;
     top: 0px;
@@ -101,23 +105,40 @@ main .cards-w .card {
 
 .card {
     display: flex;
+    outline: 1.32px solid var(--d3);
     flex-direction: column;
+    background: var(--d2);
     border-radius: 8px;
     padding: 16px;
     gap: 4px;
 }
 
-.card .row,
+.card.info {
+    outline: 1.32px solid var(--li);
+}
+
+.card.warning {
+    outline: 1.32px solid var(--lw);
+}
+
+.card.danger {
+    outline: 1.32px solid var(--ld);
+}
+
+.card.success {
+    outline: 1.32px solid var(--ls);
+}
+
+.card .start,
 .card .center,
 .card .end {
     display: flex;
     flex-direction: row;
     align-items: center;
-    outline: none !important;
     gap: 8px;
 }
 
-.card .row {
+.card .start {
     justify-content: flex-start;
 }
 
@@ -127,10 +148,6 @@ main .cards-w .card {
 
 .card .end {
     justify-content: flex-end;
-}
-
-.card p {
-    margin: 0px;
 }
 
 /*

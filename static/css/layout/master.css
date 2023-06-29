@@ -10,6 +10,8 @@ body {
     overflow-y: scroll;
     scrollbar-width: none;
     scroll-behavior: smooth;
+    background: var(--d1);
+    color: var(--d4);
 }
 
 html::-webkit-scrollbar,
@@ -32,7 +34,9 @@ aside {
     scrollbar-width: none;
     scroll-behavior: smooth;
     flex-direction: column;
+    background: var(--d1);
     height: var(--wh);
+    filter: none;
     padding: 8px;
     gap: 8px;
 }
