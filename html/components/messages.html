@@ -1,7 +1,7 @@
 {% load filters %}
 {% for message in messages %}
 <ul class="card message {{ message.tags }}">
-    <li class="title">
+    <li class="text-capitalize">
         <i class="material-icons">{{ message.tags|message_tag_icon }}</i>
         <span>{{ message }}</span>
     </li>
