@@ -1,9 +1,9 @@
 <section class="widget">
     <h3 class="title">
         <i class="material-symbols-outlined">fork_right</i>
-        <span>navigate</span>
+        <span>{{ request.user.username }}</span>
     </h3>
-    <section class="cards-w">
+    <section class="cards">
         {% include "user/cards/navigate/settings.html" %}
         {% include "circles/cards/function/opened/browse.html" %}
         {% include "user/cards/navigate/signout.html" %}

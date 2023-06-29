@@ -1,10 +1,9 @@
 {% load user_filters %}
 <div class="card" role="navigate">
-    <h3 class="title">
+    <p>Manage your account, recovery token, circles, profile and theme.</p>
+    <nav class="end">
         <a href="{% url 'user:settings' %}">
             <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
         </a>
-        <b>{{ request.user.username }}</b>
-    </h3>
-    <p>Manage your account, recovery token, circles, profile and theme.</p>
+    </nav>
 </div>

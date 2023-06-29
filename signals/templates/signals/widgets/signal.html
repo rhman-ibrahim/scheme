@@ -4,7 +4,7 @@
         <span>{{ signal.get_classification_display }}</span>
     </h3>
     {% include "signals/cards/object/signal.html" %}
-    <section class="cards-w">
+    <section class="cards">
         {% include "signals/cards/function/status.html" %}
         {% include "spaces/cards/describe/space.html" %}
         {% if signal.classification == 0 or signal.classification == 1 %}

@@ -1,10 +1,10 @@
 {% if request.user.is_authenticated %}
 {% include "user/cards/guest/manage.html" %}
-<section class="cards-w">
+<section class="cards">
     {% include "user/cards/navigate/guest.html" %}
 </section>
 {% else %}
-<section class="cards-w">
+<section class="cards">
     {% include "user/cards/describe/guest.html" %}
     {% include "user/cards/navigate/guest.html" %}
 </section>

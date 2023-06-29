@@ -3,10 +3,12 @@
         <i class="material-icons">person</i>
         <span>user</span>
     </h3>
-    {% include "user/cards/form/signup.html" %}
-    {% include "user/cards/form/signin.html" %}
-    {% include "user/cards/form/verify.html" %}
-    {% if 'token' in request.session %}
-    {% include "user/cards/form/reset.html" %}
-    {% endif %}
+    <section class="cards">
+        {% include "user/cards/form/signup.html" %}
+        {% include "user/cards/form/signin.html" %}
+        {% include "user/cards/form/verify.html" %}
+        {% if 'token' in request.session %}
+        {% include "user/cards/form/reset.html" %}
+        {% endif %}
+    </section>
 </section>
