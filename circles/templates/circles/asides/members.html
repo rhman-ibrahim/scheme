@@ -1,0 +1,36 @@
+{% load user_filters %}
+<section class="widget">
+    <h4 class="title">
+        <i class="material-icons">admin_panel_settings</i>
+        <span>founder</span>
+    </h4>
+    {% with member=circle.founder %}
+    <ul class="row">
+        <li>
+            <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
+            <span>{{ member.username }}</span>
+        </li>
+        <li>
+        </li>
+    </ul>
+    {% endwith %}
+</section>
+<section class="widget">
+    <h4 class="title text-right">
+        <span>members</span>
+        <i class="material-icons">group</i>
+    </h4>
+    <div id="members">
+        {% for member in circle.members.all %}
+        <ul class="row">
+            <li>
+                <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
+                <span>{{ member.username }}</span>
+            </li>
+            <li>
+                <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</section>
