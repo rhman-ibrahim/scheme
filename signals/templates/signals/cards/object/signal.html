@@ -6,7 +6,7 @@
         <small>{{ signal.created|ago_shorten }}</small>
         <img class="circle-24" src="{{ signal.user|profile_picture_url }}">
     </h4>
-    <h4 class="title">
+    <h4 class="text-capitalize">
         <i class="material-symbols-outlined">{{ signal.icon }}</i>
         <span>{{ signal.get_classification_display }}</span>
     </h4>
