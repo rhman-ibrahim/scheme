@@ -1,32 +1,24 @@
 {% extends 'spaces/room.html' %}
 {% load static %}
 
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% get_static_prefix %}circles/css/master.css">
+{% endblock %}
+
 {% block fixed %}
 {% include "circles/asides/requests.html" %}
 {% include "circles/forms/update.html" %}
 {% endblock %}
 
 {% block left %}
-    <h4 class="title">
-        <i class="material-symbols-outlined">admin_panel_settings</i>
-        <span>founder</span>
-    </h4>
-    {% with member=circle.founder %}
-    {% include "circles/cards/object/member.html" %}
-    {% endwith %}
-    <h4 class="title">
-        <i class="material-icons">group</i>
-        <span>members</span>
-    </h4>
-    {% for member in circle.members.all %}
-    {% include "circles/cards/object/member.html" %}
-    {% endfor %}
+{% include "circles/asides/members.html" %}    
 {% endblock %}
 
 {% block center %}
+{% include "circles/widgets/navigate.html" %}
 {% if request.user == circle.founder %}
 {% include "circles/widgets/manage.html" %}
 {% endif %}
-{% include "circles/widgets/navigate.html" %}
-{% include "circles/widgets/actions.html" %}
-{% endblock %}///////
+{% include "home/widgets/actions.html" %}
+{% endblock %}

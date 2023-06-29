@@ -1,9 +1,9 @@
 <section class="widget">
     <h3 class="title">
-        <i class="material-symbols-outlined">fork_right</i>
-        <span>navigate</span>
+        <i class="material-symbols-outlined">diversity_2</i>
+        <span>{{ request.user.username }} / {{ circle.name }}</span>
     </h3>
-    <section class="cards-w">
+    <section class="cards">
         {% include "user/cards/navigate/settings.html" %}
         {% include "circles/cards/function/opened/close.html" %}
         {% include "signals/cards/navigate/app.html" %}
