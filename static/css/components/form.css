@@ -4,20 +4,17 @@ form {
   height: var(--wh);
   background: var(--d1);
   fill: none !important;
-  bottom: 0px;
 }
 
 form.left {
   position: fixed;
   border-right: 1.32px solid var(--d3);   
-  transition-property: left;
   left: calc(-360px * 4);
 }
 
 form.right {
   position: fixed;
   border-left: 1.32px solid var(--d3);   
-  transition-property: right;
   right: calc(-360px * 4);
 }
 
