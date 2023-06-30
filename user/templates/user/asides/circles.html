@@ -1,18 +1,24 @@
-<div class="card">
-    <p>The circles that you have created, sorted from oldest to newest.</p>
-    <ul class="end">
-        <li><b>{{ request.user.scheme.circles.as_founder.count }}</b></li>
-    </ul>
-</div>
-{% for circle in request.user.scheme.circles.as_founder %}
-{% include "circles/rows/circle.html" %}
-{% endfor %}
-<div class="card">
-    <p>The circles that you have entered, sorted from oldest to newest.</p>
-    <ul class="end">
-        <li><b>{{ request.user.scheme.circles.as_member.count }}</b></li>
-    </ul>
-</div>
-{% for circle in request.user.scheme.circles.as_member %}
-{% include "circles/rows/circle.html" %}
-{% endfor %}
+<section class="widget">
+    <h3 class="text-capitalize">
+        <i class="material-symbols-outlined">diversity_2</i>
+        <span>circles</span>
+    </h3>
+    <div class="card">
+        <p>The circles that you have created, sorted from oldest to newest.</p>
+        <ul class="end">
+            <li><b>{{ request.user.scheme.circles.as_founder.count }}</b></li>
+        </ul>
+    </div>
+    {% for circle in request.user.scheme.circles.as_founder %}
+    {% include "circles/rows/circle.html" %}
+    {% endfor %}
+    <div class="card">
+        <p>The circles that you have entered, sorted from oldest to newest.</p>
+        <ul class="end">
+            <li><b>{{ request.user.scheme.circles.as_member.count }}</b></li>
+        </ul>
+    </div>
+    {% for circle in request.user.scheme.circles.as_member %}
+    {% include "circles/rows/circle.html" %}
+    {% endfor %}
+</section>

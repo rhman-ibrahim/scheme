@@ -27,12 +27,16 @@ def settings(request):
         request,
         "user/index.html",
         {
-            'logs': LogEntry.objects.filter(user=request.user),
             'forms': {
                 'info': ProfileInfoForm(instance=request.user.profile),
                 'password': PasswordUpdateForm(False),
                 'picture': ProfilePictureForm,
                 'circle': CircleForm
+            },
+            'logs': LogEntry.objects.filter(user=request.user),
+            'icons': {
+                'right':"diversity_2",
+                'left':"history"
             }
         }
     )
