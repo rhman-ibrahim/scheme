@@ -1,9 +1,9 @@
 {% load user_filters %}
 <section class="widget">
-    <h4 class="text-capitalize">
+    <h3 class="text-capitalize">
         <i class="material-icons">admin_panel_settings</i>
         <span>founder</span>
-    </h4>
+    </h3>
     {% with member=circle.founder %}
     <ul class="row">
         <li>
@@ -16,10 +16,10 @@
     {% endwith %}
 </section>
 <section class="widget">
-    <h4 class="title text-right">
+    <h3 class="text-capitalize text-right">
         <span>members</span>
         <i class="material-icons">group</i>
-    </h4>
+    </h3>
     <div id="members">
         {% for member in circle.members.all %}
         <ul class="row">
@@ -28,7 +28,9 @@
                 <span>{{ member.username }}</span>
             </li>
             <li>
+                {% if request.user == circles.founder %}
                 <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
+                {% endif %}
             </li>
         </ul>
         {% endfor %}

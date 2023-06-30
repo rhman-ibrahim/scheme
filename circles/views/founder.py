@@ -1,6 +1,6 @@
 # Django
 from django.shortcuts import render, redirect
-from django.contrib.admin.models import ADDITION, CHANGE
+from django.contrib.admin.models import CHANGE
 # Circles
 from circles.models import Circle
 # User

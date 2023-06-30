@@ -1,0 +1,14 @@
+<div class="card" role="function">
+    {% if request.user == circle.founder %}
+    <p>Click the icon below to leave the circle. <span>This circle</span> will be
+    deleted and all of it's content and <b style="color:var(--ld)">this
+    action cannot be undone!</b>.</p>
+    {% else %}
+    <p>Click below to leave the circle. Your contributions will be deleted,
+    you could request again and, <b style="color:var(--ld)">this action
+    cannot be undone!</b>.</p>
+    {% endif %}
+    <nav class="end">
+        <a href="{% url 'circle:leave' %}" class="material-symbols-outlined" style="color:var(--ld);">logout</a>
+    </nav>
+</div>

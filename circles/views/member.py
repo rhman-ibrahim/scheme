@@ -1,16 +1,20 @@
-from django.shortcuts import redirect, render
+# Django
 from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.contrib.admin.models import CHANGE, DELETION
+# Helpers
+from helpers.functions import log
+# User
 from user.decorators import is_authenticated
+# Circles
 from circles.models import Circle
 from circles.forms import CircleForm
 
 
 @is_authenticated(True)
 def open(request, serial):
-
     circle = Circle.objects.get(serial=serial)
     role   = circle.user_role(request.user)
-    
     if 'circle' in request.session:
         if circle.serial == request.session.get('circle'):
             return redirect("circle:browse")
@@ -28,19 +32,21 @@ def open(request, serial):
 
 @is_authenticated(True)
 def browse(request):
-
     if not 'circle' in request.session:
         return redirect("user:navigate")
-
     circle = Circle.objects.get(serial=request.session.get('circle'))
     return render(
         request,
         "circles/index.html",
         {
-            'circle': circle,
-            'room_serial': circle.serial,
             'forms': {
                 'circle': CircleForm(instance=circle)
+            },
+            'circle': circle,
+            'room_serial': circle.serial,
+            'icons': {
+                'left':"groups",
+                "right":"forum"
             }
         }
     )
@@ -50,3 +56,20 @@ def browse(request):
 def close(request):
     request.session.pop('circle')
     return redirect('user:navigate')
+
+@is_authenticated(True)
+def leave(request):
+    circle = Circle.objects.get(serial=request.session.get('circle'))
+    role   = circle.user_role(request.user)
+    if role == "member":
+        circle.members.remove(request.user)
+        log(request.user.id, circle, CHANGE,
+            f"left the circle ({circle.name})."
+        )
+        circle.save()
+    elif role == "founder":
+        log(request.user.id, circle, DELETION,
+            f"deleted the circle ({circle.name})."
+        )
+        circle.delete()
+    return redirect("circle:close")
