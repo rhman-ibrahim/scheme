@@ -1,7 +1,9 @@
-import uuid
+# Django
 from django.db import models
-from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
+from django.utils.crypto import get_random_string
+# MPTT
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 SIGNAL_CLASSIFICATION   = (
@@ -26,7 +28,7 @@ SIGNAL_STATUS = (
 class Signal(MPTTModel):
 
     # Identify
-    serial         = models.UUIDField(default=uuid.uuid4, editable=False)
+    serial         = models.CharField(max_length=36, default=get_random_string(length=32), null=False, blank=False)
     icon           = models.CharField(default="bubble_chart", max_length=64)
     # Classify
     parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')    

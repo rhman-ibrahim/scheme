@@ -46,7 +46,7 @@ def list(request):
 
 def update_status(request, serial):
     signal        = Signal.objects.get(serial=serial)
-    room          = Room.objects.get(space=serial)
+    room          = Room.objects.get(serial=serial)
     signal.status = 0 if signal.status else 1
     room.status = signal.status
     signal.save()
@@ -62,7 +62,7 @@ def detail(request, serial):
         "signals/signal.html",
         {
             'signal': signal,
-            'room_serial': signal.serial,
+            'room': Room.objects.get(serial=signal.serial),
             'forms': {
                 'signal' : SignalForm(
                     initial = {
