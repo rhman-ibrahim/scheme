@@ -6,5 +6,8 @@
     <section class="cards">
         {% include "circles/cards/form/update.html" %}
         {% include "circles/cards/aside/requests.html" %}
+        {% if not circle.room_members_synced %}
+        {% include "circles/cards/function/room.html" %}
+        {% endif %}
     </section>
 </section>

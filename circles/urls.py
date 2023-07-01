@@ -10,6 +10,7 @@ urlpatterns = [
     path('reject/<int:user_id>/', views.reject, name="reject"),
     path('remove/<int:user_id>/', views.remove, name="remove"),
     path('open/<str:serial>/', views.open, name="open"),
+    path('refresh/', views.refresh, name="refresh"),
     path('browse/', views.browse, name="browse"),
     path('close/', views.close, name="close"),
     path('leave/', views.leave, name="leave"),

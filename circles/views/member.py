@@ -6,6 +6,8 @@ from django.contrib.admin.models import CHANGE, DELETION
 from helpers.functions import log
 # User
 from user.decorators import is_authenticated
+# Spaces
+from spaces.models import Room
 # Circles
 from circles.models import Circle
 from circles.forms import CircleForm
@@ -43,7 +45,7 @@ def browse(request):
                 'circle': CircleForm(instance=circle)
             },
             'circle': circle,
-            'room_serial': circle.serial,
+            'room': Room.objects.get(serial=circle.serial),
             'icons': {
                 'left':"groups",
                 "right":"forum"

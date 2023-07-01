@@ -3,18 +3,21 @@ from django.contrib.admin.models import LogEntry
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.urls import reverse
-from django.db import models, IntegrityError
+from django.db import models
+from spaces.models import Room
 
 
 class Circle(models.Model):
 
+    # Identify
     name        = models.CharField(max_length=32, null=False, blank=False)
-    serial      = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
+    serial      = models.CharField(max_length=36, default=get_random_string(length=32), null=False, blank=False)
+    description = models.TextField(max_length=512, blank=True)
+    # Users
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
     requested   = models.ManyToManyField("user.Account", blank=True, related_name="requested", through="CircleRequests")
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="CircleMembership")
-    connected   = models.ManyToManyField("user.Account", blank=True, related_name="connected")
-    description = models.TextField(max_length=512, blank=True)
+    # Time
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
 
@@ -50,6 +53,15 @@ class Circle(models.Model):
             return "founder"
         return None
     
+    @property
+    def room_members_synced(self):
+        room           = Room.objects.get(serial=self.serial)
+        circle_members = [member.id for member in self.members.all()]
+        circle_members.append(self.founder.id)
+        if set(circle_members) == set([member.id for member in room.members.all()]):
+            return True
+        return False
+    
     class Meta:
         unique_together = ('founder', 'name')
 
@@ -62,6 +74,7 @@ class CircleRequests(models.Model):
 
     def __str__(self):
         return f"{self.user.username} requested to join {self.circle.name}."
+
 
 class CircleMembership(models.Model):
 

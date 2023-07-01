@@ -1,11 +1,13 @@
 # Django
 from django.shortcuts import render, redirect
 from django.contrib.admin.models import CHANGE
-# Circles
-from circles.models import Circle
+# Spaces
+from spaces.models import Room
 # User
 from user.decorators import is_authenticated
 from user.functions import log
+# Circles
+from circles.models import Circle
 
     
 @is_authenticated(True)
@@ -43,4 +45,11 @@ def remove(request, user_id):
         request.user.id, circle, CHANGE,
         f"removed ({user.username}) from the circle ({circle.name})."
     )
+    return redirect("circle:browse")
+
+@is_authenticated(True)
+def refresh(request):
+    circle = Circle.objects.get(serial=request.session.get('circle'))
+    room = Room.objects.get(serial=request.session.get('circle'))
+    room.members.set([circle.founder, *circle.members.all()])
     return redirect("circle:browse")
