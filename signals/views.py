@@ -27,7 +27,7 @@ def create_signal(request):
             form.save()
             messages.success(request, "your signal has been sent successfully")
         else: get_form_errors(request, form)
-    return redirect("home:back")
+    return redirect("user:back")
 
 @circle_session
 def list(request):
@@ -51,7 +51,7 @@ def update_status(request, serial):
     room.status = signal.status
     signal.save()
     room.save()
-    return redirect("home:back")
+    return redirect("user:back")
 
 
 @circle_session
