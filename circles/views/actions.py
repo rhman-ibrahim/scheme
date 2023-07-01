@@ -25,7 +25,7 @@ def create(request):
                 log(request.user.id, circle, ADDITION,
                     f"created the circle ({circle.name})."
                 )
-                request.session['circle'] = f'{circle.id}'
+                request.session['circle'] = f'{circle.serial}'
                 messages.success(request, "your circle is created successfully")
             else:
                 get_form_errors(request, form)

@@ -4,14 +4,12 @@ from django.contrib import messages
 
 
 def opened_circle(request):
-        try:
-            session = True if 'circle' in request.session else False
-            serial  = request.session.get('circle') if session else None 
-            circle  = Circle.objects.get(serial=serial) if serial else None
-        except Circle.DoesNotExist:
-            request.session.pop('circle')
-            messages.warning(request, "circle does not exsit")
-            return redirect('user:navigate')
-        return {
-            'opened_circle': circle
-        }
+        if 'circle' in request.session:
+            try:
+                return {
+                    'opened_circle': Circle.objects.get(serial=request.session.get('circle'))
+                }
+            except Circle.DoesNotExist:
+                messages.warning(request, "circle does not exsit")
+                request.session.pop('circle')
+        return {}
