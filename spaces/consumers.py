@@ -10,7 +10,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def is_member(self, user, room):
-        if  room.circle.user_role(user) != None: return True
+        if user in room.members.all(): return True
         return False
 
     @database_sync_to_async
