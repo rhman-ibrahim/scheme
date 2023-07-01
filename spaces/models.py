@@ -9,8 +9,9 @@ ROOM_STATUS = (
 
 class Room(models.Model):
 
-    circle  = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
-    space   = models.CharField(
+    circle   = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
+    members  = models.ManyToManyField("user.Account")
+    space    = models.CharField(
         max_length = 36,
         validators = [
             RegexValidator(
