@@ -6,6 +6,7 @@
       "name": "Scheme",
       "serial": "5e8caa73-1b1e-4f3d-8e6a-6f1f6b6c4b8c",
       "founder": 1,
+      "members": [2,3,4,5,6],
       "description": "This is Scheme's public circle.",
       "created": "2022-10-1T00:00:00+00:00",
       "updated": "2022-10-1T00:00:00+00:00"
