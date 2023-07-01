@@ -16,25 +16,23 @@
     {% endwith %}
 </section>
 {% if circle.members.count %}
-<section class="widget">
+<section class="widget" id="members">
     <h3 class="text-capitalize text-right">
         <span>members</span>
         <i class="material-icons">group</i>
     </h3>
-    <div id="members">
-        {% for member in circle.members.all %}
-        <ul class="row">
-            <li>
-                <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
-                <span>{{ member.username }}</span>
-            </li>
-            <li>
-                {% if request.user == circles.founder %}
-                <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
-                {% endif %}
-            </li>
-        </ul>
-        {% endfor %}
-    </div>
+    {% for member in circle.members.all %}
+    <ul class="row">
+        <li>
+            <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
+            <span>{{ member.username }}</span>
+        </li>
+        <li>
+            {% if request.user == circles.founder %}
+            <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
+            {% endif %}
+        </li>
+    </ul>
+    {% endfor %}
 </section>
 {% endif %}
