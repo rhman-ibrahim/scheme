@@ -6,12 +6,12 @@ from .models import Room
 
 
 @receiver(post_save, sender=Circle)
-def reader(sender, instance, created, **kwargs):
-    if created:
-        Room.objects.create(circle=instance, space=instance.serial)
-
-
 @receiver(post_save, sender=Signal)
-def reader(sender, instance, created, **kwargs):
+def circle_room(sender, instance, created, **kwargs):
     if created:
-        Room.objects.create(circle=instance.circle, space=instance.serial)
+        if isinstance(instance, Circle):
+            circle   = instance
+        if isinstance(instance, Signal):
+            circle   = instance.circle
+        room = Room.objects.create(circle=circle, space=instance.serial)
+        room.members.set([circle.founder, *circle.members.all()])
