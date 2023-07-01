@@ -5,7 +5,6 @@ from .models import Message
 
 @api_view(['GET'])
 def room_messages(request, serial):
-
     messages   = [
         {'body':message.body, 'sender':message.sender.username}
         for message in Message.objects.filter(room__space=serial)[:100]
