@@ -7,7 +7,7 @@ from .models import Message
 def room_messages(request, serial):
     messages   = [
         {'body':message.body, 'sender':message.sender.username}
-        for message in Message.objects.filter(room__space=serial)[:100]
+        for message in Message.objects.filter(room__serial=serial)[:100]
     ]
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)

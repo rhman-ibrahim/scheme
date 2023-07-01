@@ -6,12 +6,17 @@ from .models import Room
 
 
 @receiver(post_save, sender=Circle)
+def circle_room(sender, instance, created, **kwargs):
+    if created:
+        Room.objects.create(circle=instance, serial=instance.serial)
+    room = Room.objects.get(serial=instance.serial)
+    room.members.set([instance.founder, *instance.members.all()])
+    print([instance.founder, *instance.members.all()])
+
 @receiver(post_save, sender=Signal)
 def circle_room(sender, instance, created, **kwargs):
     if created:
-        if isinstance(instance, Circle):
-            circle   = instance
-        if isinstance(instance, Signal):
-            circle   = instance.circle
-        room = Room.objects.create(circle=circle, space=instance.serial)
-        room.members.set([circle.founder, *circle.members.all()])
+        Room.objects.create(circle=instance.circle, serial=instance.serial)
+    room = Room.objects.get(serial=instance.serial)
+    room.members.set([instance.circle.founder, *instance.circle.members.all()])
+    print([instance.circle.founder, *instance.circle.members.all()])
