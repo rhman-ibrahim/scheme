@@ -54,6 +54,7 @@ def list(request):
                 "right":"forum"
             },
             'list': signals,
+            'room': Room.objects.get(serial=circle.serial)
         }
     )
     
