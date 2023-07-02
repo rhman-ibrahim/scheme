@@ -1,8 +1,0 @@
-body[data-app="home"] #left .card[data-app="home"],
-body[data-app="user"] #left .card[data-app="user"],
-body[data-app="circles"] #left .card[data-app="circles"],
-body[data-app="spaces"] #left .card[data-app="spaces"],
-body[data-app="signals"] #left .card[data-app="signals"],
-body[data-app="tasks"] #left .card[data-app="tasks"] {
-    outline-color: var(--di);
-}
