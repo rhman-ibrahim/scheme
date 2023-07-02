@@ -1,11 +1,11 @@
 <section class="widget">
     <h3 class="text-capitalize">
         <i class="material-symbols-outlined">diversity_2</i>
-        <span>{{ request.user.username }} / {{ circle.name }}</span>
+        <span>navigate</span>
     </h3>
     <section class="cards">
         {% include "user/cards/navigate/settings.html" %}
-        {% include "circles/cards/function/opened/close.html" %}
         {% include "signals/cards/navigate/app.html" %}
+        {% include "circles/cards/function/opened/close.html" %}
     </section>
 </section>

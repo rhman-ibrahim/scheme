@@ -10,7 +10,7 @@
         </ul>
     </div>
     {% for circle in request.user.scheme.circles.as_founder %}
-    {% include "circles/rows/circle.html" %}
+    {% include "user/rows/circle.html" %}
     {% endfor %}
     <div class="card">
         <p>The circles that you have entered, sorted from oldest to newest.</p>
@@ -19,6 +19,6 @@
         </ul>
     </div>
     {% for circle in request.user.scheme.circles.as_member %}
-    {% include "circles/rows/circle.html" %}
+    {% include "user/rows/circle.html" %}
     {% endfor %}
 </section>

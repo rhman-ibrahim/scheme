@@ -1,3 +1,4 @@
+{% if request.user == circle.founder %}
 <section class="widget">
     <h3 class="text-capitalize">
         <i class="material-icons">settings</i>
@@ -11,3 +12,4 @@
         {% endif %}
     </section>
 </section>
+{% endif %}

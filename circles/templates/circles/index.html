@@ -1,11 +1,6 @@
 {% extends 'spaces/lcr.html' %}
 {% load static %}
 
-{% block head %}
-{{ block.super }}
-<link rel="stylesheet" href="{% get_static_prefix %}circles/css/master.css">
-{% endblock %}
-
 {% block fixed %}
 {% include "circles/asides/requests.html" %}
 {% include "circles/forms/update.html" %}
@@ -17,8 +12,6 @@
 
 {% block center %}
 {% include "circles/widgets/navigate.html" %}
-{% if request.user == circle.founder %}
 {% include "circles/widgets/manage.html" %}
-{% endif %}
-{% include "circles/widgets/actions.html" %}
+{% include "circles/widgets/action.html" %}
 {% endblock %}

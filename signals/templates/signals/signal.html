@@ -8,18 +8,16 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "signals/widgets/forms.html" %}
+{% include "signals/forms/index.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "circles/cards/function/opened/browse.html" %}
-{% include "circles/cards/function/opened/close.html" %}
-{% include "user/cards/navigate/settings.html" %}
-{% include "signals/cards/navigate/app.html" %}
+{% include "circles/widgets/navigate.html" %}
 {% endblock %}
 
 {% block center %}
 {% include "signals/widgets/parent.html" %}
+{% include "signals/widgets/detail.html" %}
 {% include "signals/widgets/signal.html" %}
 {% include "signals/widgets/child.html" %}
 {% endblock %}

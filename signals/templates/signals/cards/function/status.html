@@ -1,8 +1,7 @@
 {% load user_filters %}
-
 <div class="card">
     <h3 class="text-capitalize">
-        <i class="material-symbols-outlined">{{ signal.get_status_icon }}</i>
+        <i class="material-symbols-outlined">forum</i>
         <span>{{ signal.get_status_display }}</span>
     </h3>
     <p>Signal <b>status</b> is updated by the its creator, or the contributor.</p>
@@ -12,8 +11,8 @@
     </nav>
     {% else %}
     <nav class="end">
-        <img class="circle-24" src="{{ signal.user|profile_picture_url }}" title="Contributor">
-        <img class="circle-24" src="{{ signal.owner|profile_picture_url }}" title="Author">
+        <img class="circle-24" src="{{ signal.owner|profile_picture_url }}" title="{{ signal.owner.username }}" id="owner">
+        <img class="circle-24" src="{{ signal.user|profile_picture_url }}" title="{{ signal.user.username }}" id="user">
     </nav>
     {% endif %}
 </div>
