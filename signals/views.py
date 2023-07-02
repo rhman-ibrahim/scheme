@@ -29,21 +29,6 @@ def create_signal(request):
         else: get_form_errors(request, form)
     return redirect("user:back")
 
-@circle_session
-def list(request):
-    circle  = Circle.objects.get(serial=request.session.get('circle'))
-    signals = Signal.objects.filter(circle=circle, classification__lte=1).order_by('-created')
-    return render(
-        request,
-        "signals/index.html",
-        {
-            'list': signals,
-            "forms": {
-                'signal': SignalForm,
-            }
-        }
-    )
-
 def update_status(request, serial):
     signal        = Signal.objects.get(serial=serial)
     room          = Room.objects.get(serial=serial)
@@ -53,7 +38,25 @@ def update_status(request, serial):
     room.save()
     return redirect("user:back")
 
-
+@circle_session
+def list(request):
+    circle  = Circle.objects.get(serial=request.session.get('circle'))
+    signals = Signal.objects.filter(circle=circle, classification__lte=1).order_by('-created')
+    return render(
+        request,
+        "signals/index.html",
+        {
+            "forms": {
+                'signal': SignalForm,
+            },
+            'icons': {
+                'left':"diversity_2",
+                "right":"forum"
+            },
+            'list': signals,
+        }
+    )
+    
 @circle_session
 def detail(request, serial):
     signal = Signal.objects.get(serial=serial)
@@ -61,14 +64,18 @@ def detail(request, serial):
         request,
         "signals/signal.html",
         {
-            'signal': signal,
-            'room': Room.objects.get(serial=signal.serial),
             'forms': {
                 'signal' : SignalForm(
                     initial = {
                         'parent' : signal
                     }
                 )
-            }
+            },
+            'icons': {
+                'left':"diversity_2",
+                "right":"forum"
+            },
+            'signal': signal,
+            'room': Room.objects.get(serial=signal.serial),
         }
     )
