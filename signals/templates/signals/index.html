@@ -1,14 +1,6 @@
-{% extends 'templates/lcr.html' %}
-{% load user_filters %}
-{% load static %}
-
-{% block head %}
-{{ block.super }}
-<link rel="stylesheet" href="{% get_static_prefix %}signals/css/master.css">
-{% endblock %}
+{% extends 'spaces/lcr.html' %}
 
 {% block fixed %}
-{% include "signals/asides/signals.html" %}
 {% include "signals/forms/opportunity.html" %}
 {% include "signals/forms/problem.html" %}
 {% endblock %}
@@ -18,11 +10,6 @@
 {% endblock %}
 
 {% block center %}
+{% include "signals/widgets/index.html" %}
 {% include "signals/widgets/list.html" %}
-{% endblock %}
-
-{% block right %}
-{% include "signals/cards/describe/signal.html" %}
-{% include "signals/cards/form/problem.html" %}
-{% include "signals/cards/form/opportunity.html" %}
 {% endblock %}

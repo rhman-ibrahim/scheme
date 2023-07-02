@@ -1,11 +1,4 @@
 {% extends 'spaces/lcr.html' %}
-{% load filters %}
-{% load static %}
-
-{% block head %}
-{{ block.super }}
-<link rel="stylesheet" href="{% get_static_prefix %}signals/css/master.css">
-{% endblock %}
 
 {% block fixed %}
 {% include "signals/forms/index.html" %}
@@ -16,8 +9,8 @@
 {% endblock %}
 
 {% block center %}
-{% include "signals/widgets/parent.html" %}
+{% include "signals/widgets/ancestors.html" %}
 {% include "signals/widgets/detail.html" %}
-{% include "signals/widgets/signal.html" %}
-{% include "signals/widgets/child.html" %}
+{% include "signals/widgets/index.html" %}
+{% include "signals/widgets/children.html" %}
 {% endblock %}
