@@ -17,15 +17,19 @@
     In <aside>
 */
 
-aside .cards {
+.cards {
     display: flex;
     position: relative;
     flex-direction: column;
     gap: 8px;
 }
 
-.cards .verticl-line {
-    width: 4px;
+.cards .card {
+    z-index: 2;
+}
+
+.cards .vertical-line {
+    width: 1.32px;
     background: var(--d3);
     position: absolute;
     content: "";

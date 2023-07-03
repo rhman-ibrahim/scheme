@@ -15,3 +15,11 @@
 .card.signal a:hover {
     background: var(--di);
 }
+
+#signals-beam-widget .vertical-line {
+    background: var(--lw);
+}
+
+#signals-beam-widget .vertical-line + .card {
+    outline-color: var(--lw);
+}
