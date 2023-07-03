@@ -24,7 +24,7 @@ aside .cards {
     gap: 8px;
 }
 
-aside .cards .verticl-line {
+.cards .verticl-line {
     width: 4px;
     background: var(--d3);
     position: absolute;
@@ -52,17 +52,17 @@ main .cards-w .card {
 
 @media (width >= 720px) {
 
-    main .cards {
+    main .cards:not(.rows) {
         flex-wrap: wrap;
         flex-direction: row;
     }
 
-    main .cards .card {
+    main .cards:not(.rows) .card {
         max-width: calc(calc(100% - 8px) / 2);
         flex: calc(calc(100% - 8px) / 2);
     }
 
-    main .cards .card.fw {
+    main .cards:not(.rows) .card.fw {
         max-width: 100%;
         flex: 100%;
     }

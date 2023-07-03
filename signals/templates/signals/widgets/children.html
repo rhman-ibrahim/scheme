@@ -22,7 +22,7 @@
     {% endif %}
         <span>({{ signal.get_children.count }})</span>
     </h3>
-    <section class="cards">
+    <section class="cards rows">
         {% for signal in signal.get_children %}
         {% include "signals/cards/object/signal.html" %}
         {% endfor %}
