@@ -5,43 +5,33 @@
     </h3>
     <section class="cards">
         {% if request.resolver_match.url_name == "list" %}
-        
-        {% include "signals/cards/form/problem.html" %}
-        {% include "signals/cards/form/opportunity.html" %}
-        
+            {% include "signals/cards/form/problem.html" %}
+            {% include "signals/cards/form/opportunity.html" %}
         {% elif request.resolver_match.url_name == "signal" %}
-        
-        {% if signal.classification == 0 or signal.classification == 1 %}
-        {% include "signals/cards/form/hypothesis.html" %}
-        {% endif %}
-
-        {% if signal.classification == 2 %}
-        {% include "signals/cards/form/observation.html" %}
-        {% include "signals/cards/form/test.html" %}
-        {% endif %}
-
-        {% if signal.classification == 3 %}
-        {% include "signals/cards/form/insight.html" %}
-        {% endif %}
-
-        {% if signal.classification == 4 %}
-        {% include "signals/cards/form/decision.html" %}
-        {% endif %}
-
-        {% if signal.classification == 6 %}
-        {% include "signals/cards/form/metric.html" %}
-        {% endif %}
-
-        {% if signal.classification == 7 %}
-        {% include "signals/cards/form/criteria.html" %}
-        {% endif %}
-
-        {% if signal.user == request.user %}
-        {% include "signals/cards/function/status.html" %}
-        {% else %}
-        {% include "spaces/cards/describe/space.html" %}
-        {% endif %}
-
+            {% if signal.classification == 0 or signal.classification == 1 %}
+                {% include "signals/cards/form/hypothesis.html" %}
+            {% endif %}
+            {% if signal.classification == 2 %}
+                {% include "signals/cards/form/observation.html" %}
+                {% include "signals/cards/form/test.html" %}
+            {% endif %}
+            {% if signal.classification == 3 %}
+               {% include "signals/cards/form/insight.html" %}
+            {% endif %}
+            {% if signal.classification == 4 %}
+                {% include "signals/cards/form/decision.html" %}
+            {% endif %}
+            {% if signal.classification == 6 %}
+                {% include "signals/cards/form/metric.html" %}
+            {% endif %}
+            {% if signal.classification == 7 %}
+                {% include "signals/cards/form/criteria.html" %}
+            {% endif %}
+            {% if signal.user == request.user %}
+                {% include "signals/cards/function/status.html" %}
+            {% else %}
+                {% include "spaces/cards/describe/space.html" %}
+            {% endif %}
         {% endif %}
     </section>
 </section>
