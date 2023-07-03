@@ -1,5 +1,4 @@
 import qrcode
-
 # Django
 from django.db.models import Q
 from django.contrib.admin.models import LogEntry
@@ -8,13 +7,10 @@ from django.core.validators import RegexValidator, FileExtensionValidator
 from django.utils.crypto import get_random_string
 from django.contrib.admin.models import LogEntry
 from django.db import models
-
 # Scheme
 from scheme.settings import MEDIA_ROOT
-
 # Helpers
 from helpers.functions import completion
-
 # Circles
 from circles.models import Circle
 
@@ -24,27 +20,21 @@ def profile_picture_path_handler(instance, filename):
     return f'user/profile/pictures/{instance.account.username}.{filename.split(".")[-1]}'
 
 class UserManager(BaseUserManager):
-
+    
     def create_user(self, username, password=None):
-        
         if not username or not password:
             raise ValueError('a username and a password are required.')
-        
         user = self.model(username=username)
         user.set_password(password)
         user.save(using=self._db)
-
         return user
-    
+
     def create_guest(self, username, password=None):
-        
         if not username or not password:
             raise ValueError('a username and a password are required.')
-        
         user = self.model(username=username, is_guest=True)
         user.set_password(password)
         user.save(using=self._db)
-        
         return user
 
     def create_superuser(self, username, password):

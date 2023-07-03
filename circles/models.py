@@ -1,17 +1,19 @@
+# Django
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
-from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.urls import reverse
 from django.db import models
+# Spaces
 from spaces.models import Room
-
+# Helpers
+from helpers.functions import generate_serial
 
 class Circle(models.Model):
 
     # Identify
     name        = models.CharField(max_length=32, null=False, blank=False)
-    serial      = models.CharField(max_length=36, default=get_random_string(length=32), null=False, blank=False)
+    serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
     # Users
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)

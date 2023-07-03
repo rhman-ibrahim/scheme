@@ -1,9 +1,10 @@
 # Django
 from django.db import models
 from django.urls import reverse
-from django.utils.crypto import get_random_string
 # MPTT
 from mptt.models import MPTTModel, TreeForeignKey
+# Helpers
+from helpers.functions import generate_serial
 
 
 SIGNAL_CLASSIFICATION   = (
@@ -24,11 +25,10 @@ SIGNAL_STATUS = (
     (1, "Closed")
 )
 
-
 class Signal(MPTTModel):
 
     # Identify
-    serial         = models.CharField(max_length=36, default=get_random_string(length=32), null=False, blank=False)
+    serial         = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     icon           = models.CharField(default="bubble_chart", max_length=64)
     # Classify
     parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')    
@@ -44,6 +44,9 @@ class Signal(MPTTModel):
     updated        = models.DateTimeField(auto_now=True)
     #
     approved       = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.serial}"
 
     def url(self):
         return reverse("signals:signal", args=[str(self.serial)])

@@ -1,8 +1,13 @@
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
+
+from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 
+
+def generate_serial():
+    return get_random_string(length=32)
 
 def log(user_id, instance, flag, message=""):
     # Create the log entry for C_UD operations.

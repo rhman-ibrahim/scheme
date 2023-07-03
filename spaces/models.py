@@ -1,5 +1,8 @@
+# Django
 from django.db import models
 from django.utils.crypto import get_random_string
+# Helpers
+from helpers.functions import generate_serial
 
 
 ROOM_STATUS = (
@@ -11,7 +14,7 @@ class Room(models.Model):
 
     circle   = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
     members  = models.ManyToManyField("user.Account")
-    serial   = models.CharField(max_length=36, default=get_random_string(length=32), null=False, blank=False)
+    serial   = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     status   = models.IntegerField(choices=ROOM_STATUS, default=0, blank=False, null=False)
 
     def __str__(self):
