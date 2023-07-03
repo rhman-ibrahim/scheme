@@ -1,9 +1,15 @@
-<section class="widget" id="signal-detail-widget">
+<section class="widget" id="signals-beam-widget">
     <h3 class="text-capitalize">
         <i class="material-symbols-outlined">{{ signal.icon }}</i>
         <span>{{ signal.get_classification_display }}</span>
     </h3>
     <section class="cards rows">
+        {% if signal.level > 0 %}
+        {% for signal in signal.get_ancestors %}
+        {% include "signals/cards/object/signal.html" %}
+        {% endfor %}
+        <div class="vertical-line"></div>
+        {% endif %}
         {% include "signals/cards/object/signal.html" %}
     </section>
 </section>

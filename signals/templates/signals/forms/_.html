@@ -1,5 +1,8 @@
 {% if signal.classification == 0 or signal.classification == 1 %}
 {% include "signals/forms/hypothesis.html" %}
+{% elif signal.classification == 2 %}
+{% include "signals/forms/observation.html" %}
+{% include "signals/forms/test.html" %}
 {% elif signal.classification == 3 %}
 {% include "signals/forms/insight.html" %}
 {% elif signal.classification == 4 %}
@@ -8,4 +11,7 @@
 {% include "signals/forms/metric.html" %}
 {% elif signal.classification == 7 %}
 {% include "signals/forms/criteria.html" %}
+{% else %}
+{% include "signals/forms/opportunity.html" %}
+{% include "signals/forms/problem.html" %}
 {% endif %}

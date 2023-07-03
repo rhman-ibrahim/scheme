@@ -1,7 +1,7 @@
 {% extends 'spaces/lcr.html' %}
 
 {% block fixed %}
-{% include "signals/forms/index.html" %}
+{% include "signals/forms/_.html" %}
 {% endblock %}
 
 {% block left %}
@@ -9,8 +9,7 @@
 {% endblock %}
 
 {% block center %}
+{% include "signals/widgets/beam.html" %}
 {% include "signals/widgets/index.html" %}
-{% include "signals/widgets/ancestors.html" %}
-{% include "signals/widgets/detail.html" %}
 {% include "signals/widgets/children.html" %}
 {% endblock %}
