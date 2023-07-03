@@ -1,5 +1,2 @@
-from django.shortcuts import render
-
-
-def index(request):
-    return render(request, "spaces/index.html")
+# Django
+from django.shortcuts import render, redirect
