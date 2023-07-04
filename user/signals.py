@@ -1,4 +1,5 @@
-from user.models import Account, Token, Profile, Scheme
+from user.models import Account, Token
+from mates.models import Profile, Scheme
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 

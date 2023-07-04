@@ -14,10 +14,9 @@ from helpers.functions import log
 # Circles
 from circles.forms import CircleForm
 # User
+from mates.forms import ProfilePictureForm, ProfileInfoForm
 from user.decorators import is_authenticated, is_guest
-from user.forms import  (
-    ProfilePictureForm, PasswordUpdateForm, ProfileInfoForm
-)
+from user.forms import  PasswordUpdateForm
 
 
 @is_authenticated(True)
