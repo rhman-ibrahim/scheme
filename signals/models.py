@@ -7,18 +7,19 @@ from mptt.models import MPTTModel, TreeForeignKey
 from helpers.functions import generate_serial
 
 
-SIGNAL_CLASSIFICATION   = (
-    (0, "Problem"),
-    (1, "Opportunity"),
-    (2, "Hypothesis"),
-
-    (3, "Observation"),
-    (4, "Insight"),
-    (5, "Decision"),
-    
-    (6, "Test"),
-    (7, "Metric"),
-    (8, "Criteria")
+SIGNAL_CLASSIFICATION = (
+    (1, "Comment"),
+    (2, "Criteria"),
+    (3, "Decision"),
+    (4, "Hypothesis"),
+    (5, "Insight"),
+    (6, "Metric"),
+    (7, "Observation"),
+    (8, "Opportunity"),
+    (9, "Porblem"),
+    (10, "Question"),
+    (11, "Signal"),
+    (12, "Test"),
 )
 SIGNAL_STATUS = (
     (0, "Opened"),

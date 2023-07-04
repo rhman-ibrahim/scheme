@@ -1,3 +1,13 @@
+.signal-form-card ul.end li span {
+    font-size: smaller;
+    font-weight: 700;
+    display: none;
+}
+
+.signal-form-card ul.end li:hover span {
+    display: inline-block;   
+}
+
 .card.signal p {
     text-indent: 28px;
 }

@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'signals:create_signal' %}" class="left" id="signal-create-form">
+    {% with form=forms.signal %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+    <input type="hidden" name="icon" value="bubble_chart">
+    <input type="hidden" name="classification" value="11">
+</form>
