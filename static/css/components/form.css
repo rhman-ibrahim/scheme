@@ -2,7 +2,7 @@ form {
   width: 100%;
   padding: 8px;
   height: var(--wh);
-  background: var(--d1);
+  background: var(--d2);
   fill: none !important;
 }
 
@@ -72,12 +72,11 @@ form fieldset div {
 input,
 textarea {
   display: block;
-  outline: 1px solid var(--d2);
+  outline: 1px solid var(--d3);
   font-size: 1rem !important;
-  background: var(--d2);
+  background: var(--d1);
   border-radius: 4px;
   color: var(--d4);
-  outline: none;
   border: none;
   resize: none;
   padding: 8px;
@@ -95,12 +94,6 @@ textarea {
 textarea::-webkit-scrollbar {
   display: none;
 }
-
-input:focus,
-textarea:focus {
-  outline-color: var(--d3);
-}
-
 
 /*
   div.check
