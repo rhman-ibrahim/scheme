@@ -6,10 +6,10 @@
     <section class="cards rows">
         {% if signal.level > 0 %}
         {% for signal in signal.get_ancestors %}
-        {% include "signals/cards/object/signal.html" %}
+        {% include "blog/cards/object/signal.html" %}
         {% endfor %}
         <div class="vertical-line"></div>
         {% endif %}
-        {% include "signals/cards/object/signal.html" %}
+        {% include "blog/cards/object/signal.html" %}
     </section>
 </section>

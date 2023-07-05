@@ -1,13 +1,11 @@
-{% if list.count > 0 %}
 <section class="widget" id="signal-list-widget">
     <h3 class="text-capitalize">
         <i class="material-icons">bubble_chart</i>
         <span>signals</span>
     </h3>
     <section class="cards rows">
-        {% for signal in list %}
-        {% include "signals/cards/object/signal.html" %}
+        {% for signal in signals %}
+        {% include "blog/cards/object/signal.html" %}
         {% endfor %}
     </section>
 </section>
-{% endif %}

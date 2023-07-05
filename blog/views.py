@@ -41,10 +41,10 @@ def update_status(request, serial):
 @circle_session
 def list(request):
     circle  = Circle.objects.get(serial=request.session.get('circle'))
-    signals = Signal.objects.filter(circle=circle, classification__lte=1).order_by('-created')
+    signals = Signal.objects.filter(circle=circle).order_by('-created')
     return render(
         request,
-        "signals/index.html",
+        "blog/index.html",
         {
             "forms": {
                 'signal': SignalForm,
@@ -53,7 +53,7 @@ def list(request):
                 'left':"diversity_2",
                 "right":"forum"
             },
-            'list': signals,
+            'signals': signals,
             'room': Room.objects.get(serial=circle.serial)
         }
     )
@@ -63,7 +63,7 @@ def detail(request, serial):
     signal = Signal.objects.get(serial=serial)
     return render(
         request,
-        "signals/signal.html",
+        "blog/signal.html",
         {
             'forms': {
                 'signal' : SignalForm(
