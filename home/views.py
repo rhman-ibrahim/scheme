@@ -6,7 +6,7 @@ from user.forms import (
 )
 from user.decorators import is_authenticated
 # Circles
-from circles.forms import CircleForm
+from team.forms import CircleForm
 
 
 @is_authenticated(False)

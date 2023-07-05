@@ -6,8 +6,8 @@ from django.urls import path
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
-# Spaces
-from spaces.consumers import ChatConsumer
+# Ping
+from ping.consumers import ChatConsumer
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scheme.settings")
 
@@ -20,7 +20,7 @@ application = ProtocolTypeRouter({
     "websocket": AllowedHostsOriginValidator(
         AuthMiddlewareStack(
             URLRouter([
-                path('spaces/<str:serial>/', ChatConsumer.as_asgi()),
+                path('ping/<str:serial>/', ChatConsumer.as_asgi()),
             ])
         )
     ),

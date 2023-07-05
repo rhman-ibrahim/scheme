@@ -1,14 +1,14 @@
-{% extends 'spaces/lcr.html' %}
+{% extends 'ping/lcr.html' %}
 
 {% block fixed %}
-{% include "signals/forms/_.html" %}
+{% include "blog/forms/_.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "signals/widgets/index.html" %}
+{% include "blog/widgets/index.html" %}
 {% endblock %}
 
 {% block center %}
-{% include "circles/widgets/navigate.html" %}
-{% include "signals/widgets/list.html" %}
+{% include "team/widgets/navigate.html" %}
+{% include "blog/widgets/list.html" %}
 {% endblock %}

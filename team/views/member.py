@@ -6,9 +6,9 @@ from django.contrib.admin.models import CHANGE, DELETION
 from helpers.functions import log
 # User
 from user.decorators import is_authenticated
-# Spaces
-from spaces.models import Room
-# Circles
+# Ping
+from ping.models import Room
+# Team
 from team.models import Circle
 from team.forms import CircleForm
 

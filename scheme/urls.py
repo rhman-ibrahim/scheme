@@ -5,11 +5,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('circles/', include('circles.urls'), name="circle"),
-    path('signals/', include('signals.urls'), name="signal"),
-    path('spaces/', include('spaces.urls'), name="spaces"),
-    path('tasks/', include('tasks.urls'), name="task"),
     path('user/', include('user.urls'), name="user"),
+    path('mate/', include('mate.urls'), name="mate"),
+    path('team/', include('team.urls'), name="team"),
+    path('blog/', include('blog.urls'), name="blog"),
+    path('ping/', include('ping.urls'), name="ping"),
     path('home/', include('home.urls'), name="home"),
 ]
 

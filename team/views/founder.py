@@ -1,12 +1,12 @@
 # Django
 from django.shortcuts import render, redirect
 from django.contrib.admin.models import CHANGE
-# Spaces
-from spaces.models import Room
+# Ping
+from ping.models import Room
 # User
 from user.decorators import is_authenticated
 from user.functions import log
-# Circles
+# Team
 from team.models import Circle
 
     

@@ -7,7 +7,7 @@ from django.db import models
 # Helpers
 from helpers.functions import completion
 # Circles
-from circles.models import Circle
+from team.models import Circle
 
 
 def profile_picture_path_handler(instance, filename):

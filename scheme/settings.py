@@ -20,11 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Scheme
-    'circles.apps.CirclesConfig',
-    'signals.apps.SignalsConfig',
-    'spaces.apps.SpacesConfig',
-    'tasks.apps.TasksConfig',
     'user.apps.UserConfig',
+    'mate.apps.MateConfig',
+    'team.apps.TeamConfig',
+    'blog.apps.BlogConfig',
+    'ping.apps.PingConfig',
     'home.apps.HomeConfig',
     # Third Party
     'rest_framework',
@@ -55,10 +55,12 @@ TEMPLATES      = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'circles.processors.opened_circle'
+                # Scheme
+                'team.processors.opened_circle'
             ],
+            # Scheme
             'libraries':{
-                'circle_filters':'circles.filters',
+                'team_filters':'team.filters',
                 'user_filters':'user.filters',
                 'filters':'helpers.filters'
             }

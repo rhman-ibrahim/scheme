@@ -12,9 +12,9 @@ from scheme.settings import MEDIA_ROOT
 # Helpers
 from helpers.functions import log
 # Circles
-from circles.forms import CircleForm
+from team.forms import CircleForm
 # User
-from mates.forms import ProfilePictureForm, ProfileInfoForm
+from mate.forms import ProfilePictureForm, ProfileInfoForm
 from user.decorators import is_authenticated, is_guest
 from user.forms import  PasswordUpdateForm
 

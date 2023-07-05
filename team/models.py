@@ -4,8 +4,8 @@ from django.contrib.admin.models import LogEntry
 from django.utils import timezone
 from django.urls import reverse
 from django.db import models
-# Spaces
-from spaces.models import Room
+# Ping
+from ping.models import Room
 # Helpers
 from helpers.functions import generate_serial
 

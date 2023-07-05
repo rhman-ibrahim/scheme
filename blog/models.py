@@ -37,7 +37,7 @@ class Signal(MPTTModel):
     status         = models.IntegerField(choices=SIGNAL_STATUS, default=0, blank=False, null=False)
     body           = models.TextField(max_length=512, blank=False, null=False)
     # Users
-    circle         = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
+    circle         = models.ForeignKey("team.Circle", on_delete=models.CASCADE)
     owner          = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False, related_name="owner")
     user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="user")
     # Time

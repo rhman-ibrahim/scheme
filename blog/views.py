@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 # Helpers
 from helpers.functions import get_form_errors
-# Circles
-from circles.models import Circle
-from circles.decorators import circle_session
-# Spaces
-from spaces.models import Room
+# Team
+from team.models import Circle
+from team.decorators import circle_session
+# Ping
+from ping.models import Room
 # Blog
 from .forms import SignalForm
 from .models import Signal
