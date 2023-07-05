@@ -5,6 +5,7 @@ migrations
 db.sqlite3
 .vscode
 
+.~lock.audit.ods#
 celerybeat-schedule
 dump.rdb
 
