@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from circles.processors import opened_circle
+from team.processors import opened_circle
 
 
 def circle_session(view):

@@ -1,5 +1,4 @@
 from django import template
-from circles.models import Circle
 from user.models import Account
 
 

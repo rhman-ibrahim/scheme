@@ -31,16 +31,16 @@ class Circle(models.Model):
         return False if not bool(self.description) else True
 
     def browse(self):
-        return reverse("circle:browse")
+        return reverse("team:browse")
 
     def close(self):
-        return reverse("circle:close")
+        return reverse("team:close")
             
     def open(self):
-        return reverse("circle:open", args=[str(self.serial)])
+        return reverse("team:open", args=[str(self.serial)])
 
     def link(self):
-        return str(reverse("circle:link", args=[str(self.serial)]))
+        return str(reverse("team:link", args=[str(self.serial)]))
 
     def logs(self):
         return LogEntry.objects.filter(
@@ -71,7 +71,7 @@ class Circle(models.Model):
 class CircleRequests(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    circle    = models.ForeignKey('circles.Circle', on_delete=models.CASCADE)
+    circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -81,7 +81,7 @@ class CircleRequests(models.Model):
 class CircleMembership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    circle    = models.ForeignKey('circles.Circle', on_delete=models.CASCADE)
+    circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

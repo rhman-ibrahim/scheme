@@ -5,10 +5,10 @@
         <span>manage</span>
     </h3>
     <section class="cards">
-        {% include "circles/cards/form/update.html" %}
-        {% include "circles/cards/aside/requests.html" %}
+        {% include "team/cards/form/update.html" %}
+        {% include "team/cards/aside/requests.html" %}
         {% if not circle.room_members_synced %}
-        {% include "circles/cards/function/room.html" %}
+        {% include "team/cards/function/room.html" %}
         {% endif %}
     </section>
 </section>

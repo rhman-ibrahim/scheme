@@ -28,8 +28,8 @@
             <span>{{ member.username }}</span>
         </li>
         <li>
-            {% if request.user == circles.founder %}
-            <a href="{% url 'circle:remove' member.id %}" class="material-icons">close</a>
+            {% if request.user == circle.founder %}
+            <a href="{% url 'team:remove' member.id %}" class="material-icons">close</a>
             {% endif %}
         </li>
     </ul>

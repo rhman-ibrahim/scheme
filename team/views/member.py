@@ -9,8 +9,8 @@ from user.decorators import is_authenticated
 # Spaces
 from spaces.models import Room
 # Circles
-from circles.models import Circle
-from circles.forms import CircleForm
+from team.models import Circle
+from team.forms import CircleForm
 
 
 @is_authenticated(True)
@@ -19,14 +19,14 @@ def open(request, serial):
     role   = circle.user_role(request.user)
     if 'circle' in request.session:
         if circle.serial == request.session.get('circle'):
-            return redirect("circle:browse")
+            return redirect("team:browse")
         else:
             messages.info(request, "close the opened circle")
             return redirect("user:navigate")
     else:
         if role != None:
             request.session['circle'] = circle.serial
-            return redirect("circle:browse")
+            return redirect("team:browse")
         else:
             messages.warning(request, "you are not a member")
             return redirect("user:navigate")
@@ -39,7 +39,7 @@ def browse(request):
     circle = Circle.objects.get(serial=request.session.get('circle'))
     return render(
         request,
-        "circles/index.html",
+        "team/index.html",
         {
             'forms': {
                 'circle': CircleForm(instance=circle)
@@ -74,4 +74,4 @@ def leave(request):
             f"deleted the circle ({circle.name})."
         )
         circle.delete()
-    return redirect("circle:close")
+    return redirect("team:close")

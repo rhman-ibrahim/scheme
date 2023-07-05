@@ -7,8 +7,8 @@ from helpers.functions import get_form_errors, log
 # User
 from user.functions import create_a_guest_user
 # Circles
-from circles.forms import CircleForm
-from circles.models import Circle
+from team.forms import CircleForm
+from team.models import Circle
 from django.db import IntegrityError
 
 
@@ -32,7 +32,7 @@ def create(request):
         except IntegrityError:
             messages.warning(request, "you have a circle with this name")
             return redirect("user:navigate")
-    return redirect("circle:open", circle.serial)
+    return redirect("team:open", circle.serial)
 
 def link(request, serial):
     circle = Circle.objects.get(serial=serial)

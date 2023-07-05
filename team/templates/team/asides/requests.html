@@ -17,8 +17,8 @@
             <span>{{ ask.user.username }}</span>
         </li>
         <li>
-            <a href="{% url 'circle:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
-            <a href="{% url 'circle:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
+            <a href="{% url 'team:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
+            <a href="{% url 'team:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
         </li>
     </ul>
     {% endfor %}

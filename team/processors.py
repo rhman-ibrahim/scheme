@@ -1,4 +1,4 @@
-from circles.models import Circle
+from team.models import Circle
 from django.shortcuts import redirect
 from django.contrib import messages
 
