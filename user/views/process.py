@@ -27,31 +27,12 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save() 
+            form.save()
             messages.success(request, "your account has been created successfully.")
         else:
             get_form_errors(request, form)
         return redirect("user:back")
     
-@is_authenticated(False)    
-def signin(request):
-    end_token_session(request)
-    if request.method == 'POST':
-        form = SignInForm(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
-            )
-            if user is not None:
-                login(request, user)
-                log(request.user.id, request.user, CHANGE, "signed in")
-                messages.success(request, 'signed in successfully')
-                return redirect("user:settings")
-        else:
-            get_form_errors(request, form)
-    return redirect("user:back")
-
 @is_authenticated(False)
 def verify(request):
     if request.method == 'POST':
@@ -87,3 +68,22 @@ def reset(request):
         else:
             get_form_errors(request, form)
     return redirect('user:back')
+
+@is_authenticated(False)    
+def signin(request):
+    end_token_session(request)
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
+            if user is not None:
+                login(request, user)
+                log(request.user.id, request.user, CHANGE, "signed in")
+                messages.success(request, 'signed in successfully')
+                return redirect("user:settings")
+        else:
+            get_form_errors(request, form)
+    return redirect("user:back")
