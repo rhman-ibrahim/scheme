@@ -1,5 +1,5 @@
 const SPACE         = document.querySelector('#space');
-const SOCKET        = new WebSocket(`ws://${window.location.host}/spaces/${SPACE.dataset.serial}/`);
+const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${SPACE.dataset.serial}/`);
 const BUTTON        = document.querySelector('#sendButton');
 
 SOCKET.onerror = function(error) {
@@ -35,7 +35,7 @@ SOCKET.onmessage = e => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch(`http://${window.location.host}/spaces/${SPACE.dataset.serial}/`)
+    fetch(`http://${window.location.host}/ping/${SPACE.dataset.serial}/`)
     .then(response => response.json())
     .then(
         data => {

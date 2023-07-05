@@ -12,10 +12,10 @@ ROOM_STATUS = (
 
 class Room(models.Model):
 
-    circle   = models.ForeignKey("circles.Circle", on_delete=models.CASCADE)
-    members  = models.ManyToManyField("user.Account")
+    circle   = models.ForeignKey("team.Circle", on_delete=models.CASCADE, null=True, blank=False)
     serial   = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     status   = models.IntegerField(choices=ROOM_STATUS, default=0, blank=False, null=False)
+    members  = models.ManyToManyField("user.Account")
 
     def __str__(self):
         return self.serial

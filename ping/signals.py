@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from circles.models import Circle
-from signals.models import Signal
+from team.models import Circle
+from blog.models import Signal
 from .models import Room
 
 
