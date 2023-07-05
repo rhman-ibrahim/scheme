@@ -9,17 +9,10 @@
 <body class="lcr-grid" onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
     {% include "components/messages.html" %}
     <aside id="left">
-        <nav class="aside-nav">
-            <i class="material-symbols-outlined" id="left-close-icon" onclick="Aside.clear()">chevron_left</i>
-        </nav>
         {% block left %}
         {% endblock %}
     </aside>
     <main id="center">
-        <nav class="aside-nav">
-            <i class="material-symbols-outlined" id="left-open-icon" onclick="Aside.open('#left')">{{ icons.left }}</i>
-            <i class="material-symbols-outlined" id="right-open-icon" onclick="Aside.open('#right')">{{ icons.right }}</i>
-        </nav>
         {% block center %}
         {% endblock %}
     </main>

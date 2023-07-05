@@ -24,6 +24,8 @@
     gap: 8px;
 }
 
+
+
 .cards .card {
     z-index: 2;
 }
@@ -66,7 +68,7 @@ main .cards-w .card {
         flex: calc(calc(100% - 8px) / 2);
     }
 
-    main .cards:not(.rows) .card.fw {
+    main .cards:not(.rows) .card.row {
         max-width: 100%;
         flex: 100%;
     }
