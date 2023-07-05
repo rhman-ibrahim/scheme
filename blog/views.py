@@ -8,8 +8,8 @@ from circles.models import Circle
 from circles.decorators import circle_session
 # Spaces
 from spaces.models import Room
-# Signals
-from .forms.signal import SignalForm
+# Blog
+from .forms import SignalForm
 from .models import Signal
 
 

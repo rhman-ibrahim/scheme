@@ -1,4 +1,4 @@
-from signals.models import Signal
+from blog.models import Signal
 from django import forms
 
 

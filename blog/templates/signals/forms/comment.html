@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'signals:create_signal' %}" class="left" id="comment-create-form">
+<form method="POST" action="{% url 'blog:create_signal' %}" class="left" id="comment-create-form">
     {% with form=forms.signal %}
     {% include "components/form/base.html" %}
     {% endwith %}

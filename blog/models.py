@@ -50,11 +50,11 @@ class Signal(MPTTModel):
         return f"{self.serial}"
 
     def url(self):
-        return reverse("signals:signal", args=[str(self.serial)])
+        return reverse("blog:signal", args=[str(self.serial)])
     
     def get_status_icon(self):
         if self.status == 0: return "line_start_circle"
         return "line_end_circle"
     
     def update_status(self):
-        return reverse("signals:update_status", args=[str(self.serial)])
+        return reverse("blog:update_status", args=[str(self.serial)])
