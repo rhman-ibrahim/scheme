@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 
-app_name    = "circle"
+app_name    = "team"
 urlpatterns = [
     path('create/', views.create, name="create"),
     path('link/<str:serial>/', views.link, name="link"),
