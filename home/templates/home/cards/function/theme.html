@@ -1,9 +1,8 @@
 <div class="card" role="function">
-    <p>The <b>theme</b> settings follow your device mode configurations.
-    Toggle between dark and light modes or set it to your device default.</p>
+    <p>Dark theme, light theme, or follow your system default settings.</p>
     <ul class="end">
-        <li class="material-symbols-outlined" onclick="Theme.light()">light_mode</li>
-        <li class="material-symbols-outlined" onclick="Theme.dark()">dark_mode</li>
-        <li class="material-symbols-outlined" onclick="Theme.default()">contrast</li>
+        <li class="material-symbols-outlined" onclick="Theme.dark()" data-mode="dark">dark_mode</li>
+        <li class="material-symbols-outlined" onclick="Theme.light()" data-mode="light">light_mode</li>
+        <li class="material-symbols-outlined" onclick="Theme.default()" data-mode="default">contrast</li>
     </ul>
 </div>
