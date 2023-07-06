@@ -21,10 +21,6 @@ def index(request):
                 'circle': CircleForm,
                 'verify': VerifyForm,
                 'reset': PassWordResetForm(False)
-            },
-            'icons': {
-                'left':'bolt',
-                'right':'person'
             }
         }
     )

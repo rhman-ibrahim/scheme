@@ -45,7 +45,8 @@ def back(request):
 
 def navigate(request):
     if request.user.is_authenticated:
-        if request.user.is_guest: return redirect("user:guest")
+        if request.user.is_guest:
+            return redirect("user:signout")
         else: return redirect("user:settings")
     return redirect("home:index")
 

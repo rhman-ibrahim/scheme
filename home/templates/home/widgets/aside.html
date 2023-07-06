@@ -5,13 +5,17 @@
     </h3>
     <section class="cards">
         <div class="card" id="left-aside-card">
+            <p>View more: create a circle as a guest, change the display theme.</p>
             <nav class="end">
-                <i class="material-symbols-outlined" onclick="Aside.open('#left')">{{ icons.left }}</i>
+                <i class="material-symbols-outlined" onclick="Aside.open('#left')">bolt</i>
             </nav>
         </div>
         <div class="card" id="right-aside-card">
+            <p>A user?, <b onclick="Aside.open('#sign-up-form')">sign-up</b>,
+            <b onclick="Aside.open('#sign-in-form')">sign-in</b> or
+            <b onclick="Aside.open('#verify-form')">verify</b> if you forgot your password.</p>
             <nav class="end">
-                <i class="material-symbols-outlined" onclick="Aside.open('#right')">{{ icons.right }}</i>
+                <i class="material-symbols-outlined" onclick="Aside.open('#right')">person</i>
             </nav>
         </div>
     </section>
