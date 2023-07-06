@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import MessageSerializer
-from .models import Message
+from ping.models import Message
 
 @api_view(['GET'])
 def room_messages(request, serial):

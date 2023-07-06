@@ -37,7 +37,7 @@ if (Template.isThere('#space')) {
     }
     
     document.addEventListener('DOMContentLoaded', () => {
-        fetch(`http://${window.location.host}/ping/${SPACE.dataset.serial}/`)
+        fetch(`http://${window.location.host}/dapi/${SPACE.dataset.serial}/`)
         .then(response => response.json())
         .then(
             data => {
@@ -50,7 +50,7 @@ if (Template.isThere('#space')) {
                 SPACE.append(FRAGMENT);
         }).catch(
             error => {
-                console.log(error);
+                console.log(error)
             }
         )
     })

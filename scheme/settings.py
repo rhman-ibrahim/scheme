@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'ping.apps.PingConfig',
     'home.apps.HomeConfig',
+    # reset framework
+    'dapi.apps.DapiConfig',
     # Third Party
     'rest_framework',
     'channels',

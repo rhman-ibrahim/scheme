@@ -11,6 +11,7 @@ urlpatterns = [
     path('blog/', include('blog.urls'), name="blog"),
     path('ping/', include('ping.urls'), name="ping"),
     path('home/', include('home.urls'), name="home"),
+    path('dapi/', include('dapi.urls'), name="dapi"),
 ]
 
 urlpatterns += static(
