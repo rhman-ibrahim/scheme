@@ -1,9 +1,12 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import MessageSerializer
 from ping.models import Message
 
+
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def room_messages(request, serial):
     messages   = [
         {'body':message.body, 'sender':message.sender.username}
