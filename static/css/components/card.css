@@ -119,20 +119,41 @@ main .cards-w .card {
     gap: 4px;
 }
 
+.card mark {
+    background: none;
+    font-weight: bold;   
+}
+
 .card.info {
     outline: 1.32px solid var(--li);
+}
+
+.card.info mark {
+    color: var(--di);
 }
 
 .card.warning {
     outline: 1.32px solid var(--lw);
 }
 
+.card.warning mark {
+    color: var(--dw);
+}
+
 .card.danger {
     outline: 1.32px solid var(--ld);
 }
 
+.card.danger mark {
+    color: var(--dd);
+}
+
 .card.success {
     outline: 1.32px solid var(--ls);
+}
+
+.card.success mark {
+    color: var(--ds);
 }
 
 .card .start,
