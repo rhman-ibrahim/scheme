@@ -23,7 +23,7 @@ if (Template.isThere('#space')) {
     SOCKET.onmessage    = e => {
         const data      = JSON.parse(e.data);
         if (data.event === 'message') {
-            Space.messageAppend(SPACE, data);
+            ConversationUI.messageAppend(SPACE, data);
         }
         if (data.event === 'notify') {
             let notification = String(data.notification);
@@ -31,7 +31,7 @@ if (Template.isThere('#space')) {
                 let li         = document.createElement('li');
                 li.textContent = `${notification}`;
                 li.classList.add('notification');
-                SPACE.appendChild(li);
+                ConversationUI.appendChild(li);
             };
         }
     }
@@ -44,13 +44,13 @@ if (Template.isThere('#space')) {
                 const FRAGMENT = document.createDocumentFragment();
                 data.forEach(
                     message => {
-                        Space.messageAppend(FRAGMENT, message);
+                        ConversationUI.messageAppend(FRAGMENT, message);
                     }
                 );
                 SPACE.append(FRAGMENT);
         }).catch(
             error => {
-                console.log(error)
+                console.log(error);
             }
         )
     })

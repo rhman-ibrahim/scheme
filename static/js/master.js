@@ -257,7 +257,10 @@ class Thread {
     }
 }
 
-class Space {
+class ConversationUI {
+    static getSpace = () => {
+        return document.querySelector('#space');
+    }
     static messageUlElement = (destination, data) => {
         let ulElement          = document.createElement('ul');
         let mLiElement         = document.createElement('li');
@@ -266,7 +269,7 @@ class Space {
         mLiElement.textContent = data.body;
         ulElement.appendChild(uLiElement);
         ulElement.appendChild(mLiElement);
-        ulElement.setAttribute('data-direction', (SPACE.dataset.username == data.sender) ? 'out':'in');
+        ulElement.setAttribute('data-direction', (ConversationUI.getSpace().dataset.username == data.sender) ? 'out':'in');
         ulElement.setAttribute('data-sender', data.sender);
         destination.appendChild(ulElement);
     }
@@ -280,11 +283,11 @@ class Space {
             destination.querySelector('ul:last-of-type') &&
             destination.querySelector('ul:last-of-type').dataset.sender == data.sender
         ) {
-            Space.messageLiElement(destination, data);
+            ConversationUI.messageLiElement(destination, data);
         } else {
-            Space.messageUlElement(destination, data);
+            ConversationUI.messageUlElement(destination, data);
         }
-        Space.scrollToDestination(destination);
+        ConversationUI.scrollToDestination(destination);
     }
     static scrollToDestination = destination => {
         destination.querySelector('ul:last-of-type').scrollIntoView(
