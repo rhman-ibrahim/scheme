@@ -9,7 +9,6 @@ from user.decorators import is_authenticated
 from team.forms import CircleForm
 
 
-@is_authenticated(False)
 def index(request):
     return render(
         request,

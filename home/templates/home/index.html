@@ -1,23 +1,29 @@
 {% extends 'templates/lcr.html' %}
 
-{% block fixed %}
-{% include "team/forms/create.html" %}
-{% include "user/forms/signup.html" %}
-{% include "user/forms/signin.html" %}
-{% include "user/forms/verify.html" %}
-{% include "user/forms/reset.html" %}
-{% endblock %}
+{% if not request.user.is_authenticated %}
+    {% block fixed %}
+        {% include "team/forms/create.html" %}
+        {% include "user/forms/signup.html" %}
+        {% include "user/forms/signin.html" %}
+        {% include "user/forms/verify.html" %}
+        {% include "user/forms/reset.html" %}
+    {% endblock %}
+{% endif %}
 
 {% block left %}
-{% include "home/widgets/action.html" %}
+    {% include "home/widgets/action.html" %}
 {% endblock %}
 
 {% block center %}
-{% include "home/widgets/about.html" %}
-{% include "home/widgets/guide.html" %}
-{% include "home/widgets/aside.html" %}
+    {% include "home/widgets/about.html" %}
+    {% include "home/widgets/guide.html" %}
+    {% include "home/widgets/aside.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "home/widgets/user.html" %}
+    {% if request.user.is_authenticated %}
+        {% include "user/widgets/navigate.html" %}
+    {% else %}
+        {% include "home/widgets/user.html" %}
+    {% endif %}
 {% endblock %}
