@@ -6,19 +6,21 @@
     {% block head %}
     {% endblock %}
 </head>
-<body class="cr-grid" onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
-    {% include "components/messages.html" %}
-    <main id="center">
-        {% block center %}
-        {% endblock %}
+<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
+    <main data-url="{{ request.resolver_match.url_name }}" id="cr-grid">
+        <section class="column" id="center">
+            {% include "components/messages.html" %}
+            {% block center %}
+            {% endblock %}
+        </section>
+        <section class="column" id="right">
+            <nav class="aside-nav">
+                <i class="pin material-symbols-outlined" onclick="Aside.clear()">chevron_right</i>
+            </nav>
+            {% block right %}
+            {% endblock %}
+        </section>
     </main>
-    <aside id="right">
-        <nav class="aside-nav">
-            <i class="pin material-symbols-outlined" id="right-close-icon" onclick="Aside.clear()">chevron_right</i>
-        </nav>
-        {% block right %}
-        {% endblock %}
-    </aside>
     {% block fixed %}
     {% endblock %}
 </body>

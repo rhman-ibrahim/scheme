@@ -6,18 +6,20 @@
     {% block head %}
     {% endblock head %}
 </head>
-<body class="lc-grid" onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}" data-url="{{ request.resolver_match.url_name }}">
-    {% include "components/messages.html" %}
-    <aside id="left">
-        <nav class="aside-nav">
-            <i class="material-symbols-outlined" id="left-close-icon" onclick="Aside.clear()">chevron_left</i>
-        </nav>
-        {% block left %}
-        {% endblock %}
-    </aside>
-    <main id="center">
-        {% block center %}
-        {% endblock %}
+<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
+    <main data-url="{{ request.resolver_match.url_name }}" id="lc-grid">
+        <section class="column" id="left">
+            <nav class="aside-nav">
+                <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_left</i>
+            </nav>
+            {% block left %}
+            {% endblock %}
+        </section>
+        <section class="column" id="center">
+            {% include "components/messages.html" %}
+            {% block center %}
+            {% endblock %}
+        </section>
     </main>
     {% block fixed %}
     {% endblock %}
