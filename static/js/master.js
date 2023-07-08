@@ -36,14 +36,14 @@ class Template {
         if (window.getComputedStyle(element).display === 'block') return element;
     }
     static blurOff = () => {
-        document.querySelectorAll('body > *').forEach(
+        document.querySelectorAll('main > *').forEach(
             column => {
                 column.style.filter = "none";
             }
         );
     }
     static blurOn = selector => {
-        document.querySelectorAll('main, aside').forEach(
+        document.querySelectorAll('main > *').forEach(
             column => {
                 column.style.filter = "blur(5px)";
             }

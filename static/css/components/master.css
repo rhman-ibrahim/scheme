@@ -1,3 +1,25 @@
+/*
+    .widget
+*/
+
+.widget {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.widget > h1,
+.widget > h2,
+.widget > h3,
+.widget > h4 {
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+}
+
+/*
+    .message
+*/
+
 .message {
     position: fixed;
     border-radius: 8px;
@@ -39,15 +61,21 @@
 }
 
 /*
-   .pin
+    .log
 */
 
-.pin {
-    outline: 1.32px solid var(--d3);
-    background: var(--d2);
-    border-radius: 100%;
-    color: var(--d4);
-    height: 40px;
-    padding: 8px;
-    width: 40px;
+.log {
+    z-index: 2;
+}
+
+.log i.add {
+    color: var(--li);
+}
+
+.log i.change {
+    color: var(--lw);
+}
+
+.log i.delete {
+    color: var(--ld);
 }

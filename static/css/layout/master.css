@@ -4,51 +4,148 @@
 }
 
 html,
-body {
-    height: var(--wh);
+body,
+aside,
+footer,
+header,
+.column {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
     overflow-x: hidden;
     overflow-y: scroll;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-    background: var(--d1);
-    color: var(--d4);
+    filter: none;
 }
 
 html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+aside::-webkit-scrollbar,
+footer::-webkit-scrollbar,
+header::-webkit-scrollbar,
+.column::-webkit-scrollbar {
     display: none;
 }
 
-body {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    overflow: hidden;
-    margin: auto;
+html,
+body,
+main {
+    background: var(--d1);
+    height: var(--wh);
+    color: var(--d4);
 }
 
-main,
-aside {
+aside,
+footer, 
+header {
+    background: var(--d2);
+    width: 100%;
+}
+
+/*
+    .widget
+*/
+
+.column {
     display: flex;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
     flex-direction: column;
     background: var(--d1);
     height: var(--wh);
-    filter: none;
     padding: 8px;
     gap: 8px;
 }
 
-main::-webkit-scrollbar,
-aside::-webkit-scrollbar {
-    display: none;
+/*
+    aside
+*/
+
+#left,
+#right,
+aside {
+    max-width: 360px;
 }
 
-#center,
-.lr-grid #left {
-    grid-column: 1/13;
+#left,
+aside.left {
+    position: fixed;
+    border-right: 1.32px solid var(--d3);
+    transition: left 1s ease-in-out;
+    left: -360px;
+    bottom: 0px;
+    top: 0px;
+}
+
+#right,
+aside.right {
+    position: fixed;
+    border-left: 1.32px solid var(--d3);
+    transition: right 1s ease-in-out;
+    right: -360px;
+    bottom: 0px;
+    top: 0px;
+}
+
+#left.active,
+aside.left.active {
+    left: 0px;
+}
+
+#right.active,
+aside.right.active {
+    right: 0px;
+}
+
+.aside-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    gap: 8px;
+}
+
+#left .aside-nav,
+aside.left .aside-nav {
+    justify-content: flex-end;
+}
+
+#right .aside-nav,
+aside.right .aside-nav {
+    justify-content: flex-start;
+}
+
+/*
+    header &
+    footer
+*/
+
+header,
+footer {
+    max-height: 50vh;
+    height: max-content;
+}
+
+header {
+    border-bottom: 1.32px solid var(--d3);
+    transition: top 1s ease-in-out;
+    position: fixed;
+    right: 0px;
+    top: -50vh;
+    left: 0px;
+}
+
+header.active {
+    top: 0px;
+}
+
+footer {
+    border-top: 1.32px solid var(--d3);
+    transition: bottom 1s ease-in-out;
+    position: fixed;
+    bottom: -50vh;
+    right: 0px;
+    left: 0px;
+}
+
+footer.active {
+    bottom: 0px;
 }
 
 /*
@@ -57,145 +154,4 @@ aside::-webkit-scrollbar {
 
 [data-state=False] {
     display: none !important;
-}
-
-@media (width >= 720px) {
-    /*
-        LR-Grid
-        L = R (6 columns)
-    */
-
-    .lr-grid #left {
-        grid-column: 1/7;
-    }
-    
-    .lr-grid #right {
-        display: flex;
-        z-index: initial;
-        position: static;
-        grid-column: 7/13;
-        width: 100%;
-    }
-
-    .lr-grid #left #asides-widget,
-    .lr-grid #right .aside-nav {
-        display: none;
-    }
-
-}
-
-@media (width >= 1080px) {
-
-    .cr-grid #right,
-    .lc-grid #left,
-    .lcr-grid #left {
-        z-index: initial;
-        position: static;
-        display: flex;
-        width: 100%;
-    }
-
-    .cr-grid #asides-widget,
-    .cr-grid #right .aside-nav,
-    .lc-grid #left #asides-widget,
-    .lc-grid #left .aside-nav,
-    .lcr-grid #center #asides-widget #left-aside-card,
-    .lcr-grid #left .aside-nav {
-        display: none;
-    }
-
-    /*
-        CR-Grid
-        R = 312 (4 columns)
-        C = 2R  (8 columns)
-    */
-
-    .cr-grid #center {
-        grid-column: 1/9;
-    }
-
-    .cr-grid #right {
-        grid-column: 9/13;
-    }
-
-    /*
-        LC-Grid &
-        LCR-Grid
-        L = 312 (4 columns)
-        C = 2L  (8 columns)
-
-        In this width LCR-Grid will be treated
-        as LC-Grid and R will be completely ignored.
-    */
-
-    .lc-grid #left,
-    .lcr-grid #left {
-        grid-column: 1/5;
-    }
-
-    .lc-grid #center,
-    .lcr-grid #center {
-        grid-column: 5/13;
-    }
-
-}
-
-@media (width >= 1440px) {
- 
-    /*
-        CR-Grid
-        C = 3R  (9 columns)
-        R = 312 (3 columns) 
-    */
- 
-    .cr-grid #center {
-        grid-column: 1/10;
-    }
-    .cr-grid #right {
-        grid-column: 10/13;
-    }
- 
-    /*
-        LC-Grid &
-        LCR-Grid
-        L = 312 (3 columns)
-    */
- 
-    .lc-grid #left,
-    .lcr-grid #left {
-        grid-column: 1/4;
-    }
-
-    /*
-        LC-Grid
-        C = 3L (9 columns)
-    */
-
-    .lc-grid #center {
-        grid-column: 4/13;
-    }
-
-    /*
-        LCR-Grid
-        C = 2L  (6 columns)
-        R = 312 (3 columns)
-    */
-
-    .lcr-grid #center {
-        grid-column: 4/10;
-    }
-
-    .lcr-grid #right {
-        display: flex;
-        z-index: initial;
-        position: static;
-        grid-column: 10/13;
-        width: 100%;
-    }
-
-    .lcr-grid #center #asides-widget #right-aside-card,
-    .lcr-grid #center #asides-widget,
-    .lcr-grid #right .aside-nav {
-        display: none;
-    }
 }
