@@ -6,9 +6,10 @@
     <section class="cards">
         {% include "user/cards/form/signup.html" %}
         {% include "user/cards/form/signin.html" %}
-        {% include "user/cards/form/verify.html" %}
         {% if 'token' in request.session %}
         {% include "user/cards/form/reset.html" %}
+        {% else %}
+        {% include "user/cards/form/verify.html" %}
         {% endif %}
     </section>
 </section>

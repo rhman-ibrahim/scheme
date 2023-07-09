@@ -1,29 +1,24 @@
-{% extends 'templates/lcr.html' %}
-
-{% if not request.user.is_authenticated %}
-    {% block fixed %}
-        {% include "team/forms/create.html" %}
-        {% include "user/forms/signup.html" %}
-        {% include "user/forms/signin.html" %}
-        {% include "user/forms/verify.html" %}
-        {% include "user/forms/reset.html" %}
-    {% endblock %}
-{% endif %}
+{% extends 'templates/lc.html' %}
 
 {% block left %}
-    {% include "home/widgets/action.html" %}
+{% include "home/widgets/user.html" %}
 {% endblock %}
 
 {% block center %}
-    {% include "home/widgets/about.html" %}
-    {% include "home/widgets/guide.html" %}
-    {% include "home/widgets/aside.html" %}
+{% include "home/widgets/header.html" %}
+{% include "home/widgets/benefits.html" %}
+{% include "home/widgets/features.html" %}
+{% include "home/widgets/CTA.html" %}
+{% include "home/widgets/about.html" %}
+{% include "home/widgets/FAQs.html" %}
 {% endblock %}
 
-{% block right %}
-    {% if request.user.is_authenticated %}
-        {% include "user/widgets/navigate.html" %}
-    {% else %}
-        {% include "home/widgets/user.html" %}
-    {% endif %}
+{% block fixed %}
+{% include "user/forms/signup.html" %}
+{% include "user/forms/signin.html" %}
+{% if 'token' in request.session %}
+{% include "user/forms/reset.html" %}
+{% else %}
+{% include "user/forms/verify.html" %}
+{% endif %}
 {% endblock %}
