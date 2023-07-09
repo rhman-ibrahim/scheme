@@ -24,14 +24,7 @@ class Grid {
 
 class Aside {
     static close = selector => {
-        document.querySelector(`${selector}`)
-        .addEventListener(
-            'transitionend', () => {
-                Template.blurOff();
-            },{
-                once: true
-            }
-        );
+        Template.blurOff();
         document.querySelector(`${selector}`).classList.remove('active');
         localStorage.removeItem('aside');
     }
