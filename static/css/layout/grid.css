@@ -1,4 +1,5 @@
 main {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     overflow: hidden;
@@ -10,16 +11,12 @@ main {
     grid-column: 1/13;
 }
 
+#c-grid,
+#lr-grid {
+    max-width: 720px;
+}
+
 @media (width >= 720px) {
-
-    main {
-        width: 720px;
-    }
-
-    /*
-        LR-Grid
-        L = R (6 columns)
-    */
 
     #lr-grid #left {
         grid-column: 1/7;
@@ -33,18 +30,22 @@ main {
         width: 100%;
     }
 
-    #lr-grid #left #asides-widget,
-    #lr-grid #right .aside-nav {
+    /*
+        .aside-nav
+    */
+
+    #lr-grid .right-column-contorl {
         display: none;
     }
 
 }
 
-@media (width >= 1080px) {
+#cr-grid,
+#lc-grid {
+    max-width: 1080px;
+}
 
-    main {
-        width: 1080px;
-    }
+@media (width >= 1080px) {
 
     #cr-grid #right,
     #lc-grid #left,
@@ -55,21 +56,6 @@ main {
         width: 100%;
     }
 
-    #cr-grid #asides-widget,
-    #cr-grid #right .aside-nav,
-    #lc-grid #left #asides-widget,
-    #lc-grid #left .aside-nav,
-    #lcr-grid #center #asides-widget #left-aside-card,
-    #lcr-grid #left .aside-nav {
-        display: none;
-    }
-
-    /*
-        CR-Grid
-        R = 312 (4 columns)
-        C = 2R  (8 columns)
-    */
-
     #cr-grid #center {
         grid-column: 1/9;
     }
@@ -77,16 +63,6 @@ main {
     #cr-grid #right {
         grid-column: 9/13;
     }
-
-    /*
-        LC-Grid &
-        LCR-Grid
-        L = 312 (4 columns)
-        C = 2L  (8 columns)
-
-        In this width LCR-Grid will be treated
-        as LC-Grid and R will be completely ignored.
-    */
 
     #lc-grid #left,
     #lcr-grid #left {
@@ -98,52 +74,27 @@ main {
         grid-column: 5/13;
     }
 
+    /*
+        .aside-nav
+    */
+
+    #cr-grid .right-column-control,
+    #lc-grid .left-column-control,
+    #lcr-grid .left-column-control {
+        display: none;
+    }
+
+}
+
+#lcr-grid {
+    max-width: 1440px;
 }
 
 @media (width >= 1440px) {
     
-    main {
-        width: 1440px;
-    }
-
-    /*
-        CR-Grid
-        C = 3R  (9 columns)
-        R = 312 (3 columns) 
-    */
- 
-    #cr-grid #center {
-        grid-column: 1/10;
-    }
-    #cr-grid #right {
-        grid-column: 10/13;
-    }
- 
-    /*
-        LC-Grid &
-        LCR-Grid
-        L = 312 (3 columns)
-    */
- 
-    #lc-grid #left,
     #lcr-grid #left {
         grid-column: 1/4;
     }
-
-    /*
-        LC-Grid
-        C = 3L (9 columns)
-    */
-
-    #lc-grid #center {
-        grid-column: 4/13;
-    }
-
-    /*
-        LCR-Grid
-        C = 2L  (6 columns)
-        R = 312 (3 columns)
-    */
 
     #lcr-grid #center {
         grid-column: 4/10;
@@ -157,9 +108,11 @@ main {
         width: 100%;
     }
 
-    #lcr-grid #center #asides-widget #right-aside-card,
-    #lcr-grid #center #asides-widget,
-    #lcr-grid #right .aside-nav {
+    /*
+        .aside-nav
+    */
+
+    #lcr-grid #center #asides-widget {
         display: none;
     }
 }

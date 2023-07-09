@@ -3,13 +3,11 @@
 <html lang="en">
 <head>
     {% include "components/head.html" %}
-    {% block head %}
-    {% endblock head %}
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="lc-grid">
         <section class="column" id="left">
-            <nav class="aside-nav">
+            <nav class="aside-nav left-column-control">
                 <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_left</i>
             </nav>
             {% block left %}

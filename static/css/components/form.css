@@ -1,60 +1,16 @@
-form {
-  width: 100%;
-  padding: 8px;
-  height: var(--wh);
-  background: var(--d2);
-  fill: none !important;
+form label {
+  line-height: 1.4;
 }
 
-form.left {
-  position: fixed;
-  border-right: 1.32px solid var(--d3);   
-  left: calc(-360px * 4);
-}
-
-form.right {
-  position: fixed;
-  border-left: 1.32px solid var(--d3);   
-  right: calc(-360px * 4);
-}
-
-form.left.active {
-  left: 0px;
-}
-
-form.right.active {
-  right: 0px;
-}
-
-form nav {
-  display: flex;
-  background: none;
-  height: max-content;
-  position: absolute;
-  z-index: 16;
-  bottom: 8px;
-  right: 8px;
-  gap: 8px;
-}
-
-form fieldset {
-  height: var(--wh);
-  overflow: hidden;
-  width: 100%;
-}
-
-form.active fieldset nav {
-  top: 32px;
-}
-
-form fieldset div small {
+form small {
   display: inline-block;
   font-size: .75rem;
   font-weight: 500;
   line-height: 1.2;
 }
 
-form fieldset div small::first-letter {
+form label::first-letter,
+form small::first-letter {
   text-transform: capitalize;
 }
 
@@ -62,12 +18,16 @@ form fieldset div small::first-letter {
   div
 */
 
-form fieldset div {
+fieldset div {
   display: flex;
   flex-direction: column;
   padding: 8px 4px;
   gap: 4px;
 }
+
+/*
+  fields
+*/
 
 input,
 textarea {
@@ -177,28 +137,4 @@ div.file label {
 
 div.file input {
   display: none;
-}
-
-/*
-  div.text
-  div.text-area
-  div.password
-*/
-
-div.text label,
-div.text-area label, 
-div.password label {
-  line-height: 1.4;
-}
-
-@media (width > 360px) {
-  form {
-    width: 360px;
-  }
-}
-
-@media (width >= 720px) {
-  form {
-    width: calc((100vw / 12) * 3);
-  }
 }
