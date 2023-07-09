@@ -5,7 +5,6 @@ class Handler {
         Aside.clear();
         Thread.init();
         Theme.init();
-        Form.init();
     }
     static copy = (element, attribute) => {
         let dataToCopy = element.getAttribute(`data-${attribute}`);
@@ -80,19 +79,8 @@ class Aside {
 }
 
 class Form {
-    static init = () => {
-        if (Form.collect().length > 0) Form.correctHeights();
-    }
-    static collect = () => {
-        return document.querySelectorAll('form').length;
-    }
-    static correctHeights = () => {
-        for (const form in document.querySelectorAll('form')) {
-            form.style.height = `-${form.offsetHeight * 2}px`;
-        }
-    }
-    static passwordToggle = grandChild => {
-        document.querySelectorAll(`#${grandChild.parentNode.parentNode.parentNode.id} input.password`)
+    static passwordToggle = passwordToggleIcon => {
+        document.querySelectorAll(`#${passwordToggleIcon.parentNode.parentNode.id} input.password`)
             .forEach(
                 input => {
                     const type = input.getAttribute("type") === "password" ? "text" : "password";
