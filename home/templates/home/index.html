@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block fixed %}
+{% include "team/forms/create.html" %}
 {% include "user/forms/signup.html" %}
 {% include "user/forms/signin.html" %}
 {% if 'token' in request.session %}

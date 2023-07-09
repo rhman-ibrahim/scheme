@@ -1,8 +1,8 @@
 <section class="widget" id="home-user-widget">
-    <h2 class="text-capitalize">
+    <h3 class="text-capitalize">
         <i class="material-icons">person</i>
         <span>user</span>
-    </h2>
+    </h3>
     <section class="cards">
         {% include "user/cards/form/signup.html" %}
         {% include "user/cards/form/signin.html" %}
@@ -11,6 +11,6 @@
         {% else %}
         {% include "user/cards/form/verify.html" %}
         {% endif %}
-        {% include "team/cards/form/create.html" %}
+        {% include "home/cards/theme.html" %}
     </section>
 </section>
