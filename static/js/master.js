@@ -1,62 +1,34 @@
-class Handler {
-    static init = () => {
-        Template.blurOff();
-        Template.init();
-        Aside.clear();
-        Theme.init();
+class Grid {
+    static dimensions = () => {
+        document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
+        document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
     }
-    static copy = (element, attribute) => {
-        let dataToCopy = element.getAttribute(`data-${attribute}`);
-        navigator.clipboard.writeText(dataToCopy)
-        .then(function() {
-            alert("Link copied to clipboard!");
-        })
-        .catch(function() {
-            alert("Failed to copy link to clipboard.");
-        });
+    static justifyColumnContent = () => {
+        document.querySelectorAll('main > section.column:not(#center)')
+        .forEach(
+            section => {
+                let totalWidgetsHeight = 0;
+                section.querySelectorAll('.widget')
+                .forEach(
+                    widget => {
+                        totalWidgetsHeight += widget.clientHeight;
+                });
+                if (totalWidgetsHeight/window.innerHeight < 0.75) {
+                    section.style.justifyContent = "center";
+                }
+            }
+        );
     }
 }
 
-class Template {
-    static init = () => {
-        document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
-        document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
-        if (Template.isThere('#space')) {
-            const BOX = document.querySelector('#space-chat-box');
-            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
-        }
-    }
-    static isThere = selector => {
-        if (document.body.contains(document.querySelector(`${selector}`))) return true;
-        return false;
-    }
-    static isVisible = element => {
-        if (window.getComputedStyle(element).display === 'block') return element;
-    }
-    static blurOff = () => {
-        document.querySelectorAll('main > *').forEach(
-            column => {
-                column.style.filter = "none";
-            }
-        );
-    }
-    static blurOn = selector => {
-        document.querySelectorAll('main > *').forEach(
-            column => {
-                column.style.filter = "blur(5px)";
-            }
-        );
-        document.querySelector(`${selector}`).style.filter = "none";
-    }
-}
 
 class Aside {
     static close = selector => {
-        document.querySelector(`${selector}`).addEventListener(
+        document.querySelector(`${selector}`)
+        .addEventListener(
             'transitionend', () => {
                 Template.blurOff();
-            },
-            {
+            },{
                 once: true
             }
         );
@@ -84,18 +56,61 @@ class Aside {
     }
 }
 
+
+class Template {
+    static isThere = selector => {
+        if (document.body.contains(document.querySelector(`${selector}`))) return true;
+        return false;
+    }
+    static isVisible = element => {
+        if (window.getComputedStyle(element).display === 'block') return element;
+    }
+    static blurOff = () => {
+        document.querySelectorAll('main > *').forEach(
+            column => {
+                column.style.filter = "none";
+            }
+        );
+    }
+    static blurOn = selector => {
+        document.querySelectorAll('main > *').forEach(
+            column => {
+                column.style.filter = "blur(5px)";
+            }
+        );
+        document.querySelector(`${selector}`).style.filter = "none";
+    }
+    static writeToClipboard = (element, attribute) => {
+        let dataToCopy = element.getAttribute(`data-${attribute}`);
+        navigator.clipboard.writeText(dataToCopy)
+        .then(
+            () => alert("Link copied to clipboard!"))
+        .catch(
+            () => alert("Failed to copy link to clipboard.")
+        )
+    }
+}
+
 class Form {
     static passwordToggle = passwordToggleIcon => {
         document.querySelectorAll(`#${passwordToggleIcon.parentNode.parentNode.id} input.password`)
-            .forEach(
-                input => {
-                    const type = input.getAttribute("type") === "password" ? "text" : "password";
-                    input.setAttribute("type", type);
-                }
-            );
+        .forEach(
+            input => {
+                const type = input.getAttribute("type") === "password" ? "text" : "password";
+                input.setAttribute("type", type);
+            }
+        );
         grandChild.innerHTML = grandChild.innerHTML === "visibility" ? "visibility_off" : "visibility";
     }
 }
+
+
+class Message {
+    static close = button => {
+        document.body.removeChild(button.parentNode.parentNode);
+    }
+}
+
 
 class Theme {
     static init = () => {
@@ -139,11 +154,56 @@ class Theme {
     }
 }
 
-class Message {
-    static close = button => {
-        document.body.removeChild(button.parentNode.parentNode);
+
+class ConversationUI {
+    static init = () => {
+        if (Template.isThere('#space')) {
+            const BOX = document.querySelector('#space-chat-box');
+            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
+        }
+    }
+    static getSpace = () => {
+        return document.querySelector('#space');
+    }
+    static messageUlElement = (destination, data) => {
+        let ulElement          = document.createElement('ul');
+        let mLiElement         = document.createElement('li');
+        let uLiElement         = document.createElement('li');
+        uLiElement.textContent = data.sender;
+        mLiElement.textContent = data.body;
+        ulElement.appendChild(uLiElement);
+        ulElement.appendChild(mLiElement);
+        ulElement.setAttribute('data-direction', (ConversationUI.getSpace().dataset.username == data.sender) ? 'out':'in');
+        ulElement.setAttribute('data-sender', data.sender);
+        destination.appendChild(ulElement);
+    }
+    static messageLiElement = (destination, data) => {
+        let liElement         = document.createElement('li');
+        liElement.textContent = data.body;
+        destination.querySelector('ul:last-of-type').appendChild(liElement);
+    }
+    static messageAppend = (destination, data) => {
+        if (
+            destination.querySelector('ul:last-of-type') &&
+            destination.querySelector('ul:last-of-type').dataset.sender == data.sender
+        ) {
+            ConversationUI.messageLiElement(destination, data);
+        } else {
+            ConversationUI.messageUlElement(destination, data);
+        }
+        ConversationUI.scrollToDestination(destination);
+    }
+    static scrollToDestination = destination => {
+        destination.querySelector('ul:last-of-type').scrollIntoView(
+            {
+                block: 'start',
+                inline: 'nearest',
+                behavior:'smooth',
+            }
+        );
     }
 }
+
 
 class Thread {
     static init = () => {
@@ -251,45 +311,14 @@ class Thread {
     }
 }
 
-class ConversationUI {
-    static getSpace = () => {
-        return document.querySelector('#space');
-    }
-    static messageUlElement = (destination, data) => {
-        let ulElement          = document.createElement('ul');
-        let mLiElement         = document.createElement('li');
-        let uLiElement         = document.createElement('li');
-        uLiElement.textContent = data.sender;
-        mLiElement.textContent = data.body;
-        ulElement.appendChild(uLiElement);
-        ulElement.appendChild(mLiElement);
-        ulElement.setAttribute('data-direction', (ConversationUI.getSpace().dataset.username == data.sender) ? 'out':'in');
-        ulElement.setAttribute('data-sender', data.sender);
-        destination.appendChild(ulElement);
-    }
-    static messageLiElement = (destination, data) => {
-        let liElement         = document.createElement('li');
-        liElement.textContent = data.body;
-        destination.querySelector('ul:last-of-type').appendChild(liElement);
-    }
-    static messageAppend = (destination, data) => {
-        if (
-            destination.querySelector('ul:last-of-type') &&
-            destination.querySelector('ul:last-of-type').dataset.sender == data.sender
-        ) {
-            ConversationUI.messageLiElement(destination, data);
-        } else {
-            ConversationUI.messageUlElement(destination, data);
-        }
-        ConversationUI.scrollToDestination(destination);
-    }
-    static scrollToDestination = destination => {
-        destination.querySelector('ul:last-of-type').scrollIntoView(
-            {
-                block: 'start',
-                inline: 'nearest',
-                behavior:'smooth',
-            }
-        );
+
+class Handler {
+    static init = () => {
+        Grid.dimensions();
+        Grid.justifyColumnContent();
+        Aside.clear();
+        Template.blurOff();
+        Theme.init();
+        ConversationUI.init();
     }
 }
