@@ -1,8 +1,10 @@
 .message {
-    z-index: 32px;
+    z-index: 32;
 }
 
-body > form {
+aside,
+header,
+footer {
     z-index: 16;
 }
 

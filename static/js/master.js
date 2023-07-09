@@ -3,7 +3,6 @@ class Handler {
         Template.blurOff();
         Template.init();
         Aside.clear();
-        Thread.init();
         Theme.init();
     }
     static copy = (element, attribute) => {
@@ -52,22 +51,29 @@ class Template {
 }
 
 class Aside {
-    static open = selector => {
-        Aside.clear();
-        document.querySelector(`${selector}`).classList.add('active');
-        localStorage.setItem('aside', selector);
-        Template.blurOn(selector);
-    }
     static close = selector => {
+        document.querySelector(`${selector}`).addEventListener(
+            'transitionend', () => {
+                Template.blurOff();
+            },
+            {
+                once: true
+            }
+        );
         document.querySelector(`${selector}`).classList.remove('active');
         localStorage.removeItem('aside');
-        Template.blurOff();
     }
     static clear = () => {
         let aside = localStorage.getItem('aside');
         if (aside !== null && Template.isThere(`${localStorage.getItem('aside')}`)) {
             Aside.close(aside);
         }
+    }
+    static open = selector => {
+        Aside.clear();
+        Template.blurOn(selector);
+        document.querySelector(`${selector}`).classList.add('active');
+        localStorage.setItem('aside', selector);
     }
     static toggle = selector => {
         if (selector == localStorage.getItem('aside')) {
