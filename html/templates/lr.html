@@ -7,7 +7,6 @@
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="lr-grid">
         <section class="column" id="left">
-            {% include "components/messages.html" %}
             {% block left %}
             {% endblock %}
         </section>
@@ -19,6 +18,7 @@
             {% endblock %}
         </section>
     </main>
+    {% include "components/messages.html" %}
     {% block fixed %}
     {% endblock %}
 </body>

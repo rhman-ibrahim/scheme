@@ -14,11 +14,11 @@
             {% endblock %}
         </section>
         <section class="column" id="center">
-            {% include "components/messages.html" %}
             {% block center %}
             {% endblock %}
         </section>
     </main>
+    {% include "components/messages.html" %}
     {% block fixed %}
     {% endblock %}
 </body>

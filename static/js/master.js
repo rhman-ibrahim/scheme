@@ -84,22 +84,34 @@ class Template {
 
 
 class Form {
-    static passwordToggle = passwordToggleIcon => {
-        document.querySelectorAll(`#${passwordToggleIcon.parentNode.parentNode.id} input.password`)
+    static passwordToggle = passwordToggleButton => {
+        document.querySelectorAll(`#${passwordToggleButton.parentNode.parentNode.id} input.password`)
         .forEach(
             input => {
                 const type = input.getAttribute("type") === "password" ? "text" : "password";
                 input.setAttribute("type", type);
             }
         );
-        grandChild.innerHTML = grandChild.innerHTML === "visibility" ? "visibility_off" : "visibility";
     }
 }
 
 
 class Message {
-    static close = button => {
-        document.body.removeChild(button.parentNode.parentNode);
+    static list = () => {
+        const messagesIdSelectors = []; 
+        document.querySelectorAll('.message').forEach(message => messagesIdSelectors.push(message.id));
+        return messagesIdSelectors;
+    }
+    static init = () => {
+        if (Message.list().length) Aside.open(`#${Message.list()[0]}`);
+    }
+    static next = selector => {
+        Aside.close(`#${selector}`);
+        const list      = Message.list();
+        const index     = list.indexOf(selector);
+        const nextIndex = index + 1;
+        list.splice(index, 1);
+        if (list.length >= nextIndex) Aside.open(`#${Message.list()[nextIndex]}`);
     }
 }
 
@@ -196,5 +208,6 @@ class Handler {
         Grid.init();
         Aside.init();
         Theme.init();
+        Message.init();
     }
 }

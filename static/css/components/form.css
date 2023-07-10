@@ -1,3 +1,41 @@
+form nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+form button {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  text-align: center;
+}
+
+form button.pin.form-close-button {
+  background: var(--ld);
+}
+
+form button.pin.form-close-button:hover {
+  background: var(--dd);
+}
+
+form button.pin.password-toggle-button {
+  background: var(--lw);
+}
+
+form button.pin.password-toggle-button:hover {
+  background: var(--dw);
+}
+
+form button.pin.form-submit-button {
+  background: var(--ls);
+}
+
+form button.pin.form-submit-button:hover {
+  background: var(--ds);
+}
+
 form label {
   line-height: 1.4;
 }

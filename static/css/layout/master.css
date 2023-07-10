@@ -41,7 +41,7 @@ header {
 }
 
 /*
-    .widget
+    .column
 */
 
 .column {
@@ -51,6 +51,17 @@ header {
     height: var(--wh);
     padding: 8px;
     gap: 8px;
+}
+
+
+/*
+    fixed
+*/
+
+aside,
+footer,
+header {
+    padding: 8px;
 }
 
 /*

@@ -21,44 +21,26 @@
     .message
 */
 
-.message {
-    position: fixed;
-    border-radius: 8px;
-    height: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: calc(var(--ww) / 2);
-    right: calc(var(--ww) / 4);
-    left: calc(var(--ww) / 4);
-    top: 8px;
-    gap: 2px;
+.message nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .message.info {
-    outline: 1.32px solid var(--di);
-}
-.message.info .material-icons {
-    color: var(--di);
+    background: var(--di);
 }
 
 .message.error {
-    outline: 1.32px solid var(--dd);
-}
-.message.error .material-icons {
-    color: var(--dd);
+    background: var(--dd);
 }
 
 .message.warning {
-    outline: 1.32px solid var(--dw);
-}
-.message.warning .material-icons {
-    color: var(--dw);
+    background: var(--dw);
 }
 
 .message.success {
-    outline: 1.32px solid var(--ds);
-}
-.message.success .material-icons {
-    color: var(--ds);
+    background: var(--ds);
 }
 
 /*

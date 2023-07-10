@@ -7,7 +7,6 @@
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="cr-grid">
         <section class="column" id="center">
-            {% include "components/messages.html" %}
             {% block center %}
             {% endblock %}
         </section>
@@ -19,6 +18,7 @@
             {% endblock %}
         </section>
     </main>
+    {% include "components/messages.html" %}
     {% block fixed %}
     {% endblock %}
 </body>
