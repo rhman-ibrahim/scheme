@@ -4,7 +4,6 @@ from django.shortcuts import render
 from user.forms import (
     SignUpForm, SignInForm, VerifyForm, PassWordResetForm
 )
-from user.decorators import is_authenticated
 # Circles
 from team.forms import CircleForm
 
