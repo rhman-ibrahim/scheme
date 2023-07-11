@@ -2,6 +2,7 @@ class Grid {
     static init = () => {
         Grid.setDimensions();
         Grid.fixChatBoxWidth();
+        Grid.justifyColumnContent();
     }
     static setDimensions = () => {
         document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
@@ -12,6 +13,20 @@ class Grid {
             const BOX = document.querySelector('#space-chat-box');
             BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
         }
+    }
+    static justifyColumnContent = () => {
+        document.querySelectorAll('#left, #right')
+        .forEach(
+            column => {
+                let widgetsTotalHeights = 0;
+                column.querySelectorAll('.widget, .aside-nav')
+                .forEach(
+                    widget => widgetsTotalHeights += widget.clientHeight);
+                if ((widgetsTotalHeights / window.innerHeight) < .75) {
+                    column.style.justifyContent = "center";
+                }    
+            }
+        );
     }
 }
 
@@ -167,7 +182,6 @@ class Theme {
             document.body.classList.remove("dark", "light");
             document.body.classList.add(localStorage.getItem('theme'));
         }
-        Theme.setIcon();
     }
     static default = () => {
         document.body.classList.remove("dark", "light");
@@ -195,9 +209,9 @@ class Theme {
         Theme.setIcon();
     }
     static setIcon = () => {
-        if (Template.isThere('#theme')) {
+        if (Template.isThere('#theme-icon')) {
             const icon = (localStorage.getItem("theme") == "dark") ? "dark_mode":"light_mode";
-            document.querySelector('#theme').textContent = icon;
+            document.querySelector('#theme-icon').textContent = icon;
         }
     }
 }
