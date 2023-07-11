@@ -1,8 +1,8 @@
 class Grid {
     static init = () => {
         Grid.setDimensions();
-        Grid.fixChatBoxWidth();
         Grid.justifyColumnContent();
+        Grid.fixChatBoxWidth();
     }
     static setDimensions = () => {
         document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
@@ -200,12 +200,6 @@ class Theme {
         document.body.classList.remove(localStorage.getItem('theme'));
         localStorage.setItem("theme", "light");
         document.body.classList.add(localStorage.getItem('theme'), "light");
-        Theme.setIcon();
-    }
-    static toggle = () => {
-        document.body.classList.remove(localStorage.getItem('theme'));
-        localStorage.setItem("theme", (localStorage.getItem("theme") == "dark") ? "light" : "dark");
-        document.body.classList.add(localStorage.getItem('theme'));
         Theme.setIcon();
     }
     static setIcon = () => {

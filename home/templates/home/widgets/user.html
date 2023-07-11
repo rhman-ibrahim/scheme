@@ -1,9 +1,9 @@
 <section class="widget" id="home-user-widget">
-    <h3 class="text-capitalize">
+    <h2>
         <i class="material-icons">person</i>
-        <span>user</span>
-    </h3>
-    <section class="cards">
+        <b>user</b>
+    </h2>
+    <section class="flex-container">
         {% include "user/cards/form/signup.html" %}
         {% include "user/cards/form/signin.html" %}
         {% if 'token' in request.session %}

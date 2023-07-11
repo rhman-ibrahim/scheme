@@ -13,6 +13,7 @@ h2,
 h3,
 h4,
 .cell {
+    text-transform: capitalize;
     display: table-cell;
 }
 
@@ -52,6 +53,7 @@ p {
     text-transform: none;
     font-weight: 300;
     line-height: 1.4;
+    padding: 0px 4px;
     font-size: 1rem;
 }
 
@@ -96,26 +98,26 @@ a {
     .text-*
 */
 
-.text-left {
+.text-align-left {
     text-align: left;
 }
 
-.text-center {
+.text-align-center {
     text-align: center;
 }
 
-.text-right {
+.text-align-right {
     text-align: right;
 }
 
-.text-lower {
+.text-transform-lower {
     text-transform: lowercase;
 }
 
-.text-upper {
+.text-transform-upper {
     text-transform: uppercase;
 }
 
-.text-capitalize {
+.text-transform-capitalize {
     text-transform: capitalize;
 }

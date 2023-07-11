@@ -1,0 +1,98 @@
+.widget,
+.flex-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.widget {
+    padding: 8px 0px;
+    gap: 12px;
+}
+
+.flex-box-col,
+.flex-box-row {
+    z-index: 2;
+    display: flex;
+    outline: 1.32px solid var(--d3);
+    background: var(--d2);
+    border-radius: 8px;
+    padding: 16px;
+    gap: 4px;
+    flex: 1;
+}
+
+.flex-box-col {
+    flex-direction: column;
+}
+
+.flex-box-row {
+    flex-direction: row;
+}
+
+.flex-box-col > *,
+.flex-box-row > * {
+    flex: 1;
+}
+
+.flex-justify-start {
+    justify-content: flex-start;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-justify-end {
+    justify-content: flex-end;
+}
+
+@media (width >= 720px) {
+
+    #center .flex-container:not(.flex-rows) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #center .flex-container:not(.flex-rows) .flex-box-col {
+        max-width: calc(calc(100% - 8px) / 2);
+        flex: calc(calc(100% - 8px) / 2);
+    }
+
+    #center .flex-container:not(.flex-rows) .flex-box-col.full-row {
+        max-width: 100%;
+        flex: 100%;
+    }
+
+}
+
+
+/*
+
+.cards-s {
+    display: flex;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: auto;
+    padding: 2px;
+    gap: 8px;
+}
+
+.cards-s::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-s .card {
+    width: 340px !important;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+}
+
+@media screen {
+    .cards-s .card {
+        width: calc((100% - 8px) / 2);
+    }
+}
+
+*/

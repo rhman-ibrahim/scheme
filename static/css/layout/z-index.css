@@ -13,9 +13,11 @@ footer {
     z-index: 8;
 }
 
-.cards-v .card {
+.flex-box .flex-col,
+.flex-box .flex-row {
     z-index: 2;
 }
-.cards-v .cards-v_line {
+
+.flex-box .vertical-line {
     z-index: 1;
 }

@@ -18,6 +18,6 @@
     components
 */
 
-@import url("components/card.css");
-@import url("components/form.css");
 @import url("components/master.css");
+@import url("components/widget.css");
+@import url("components/form.css");

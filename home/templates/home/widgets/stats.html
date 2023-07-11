@@ -1,17 +1,35 @@
 <section class="widget" id="home-about-widget">
-    <h2 class="text-capitalize">
+    <h2>
         <i class="material-icons">equalizer</i>
         <span>stats</span>
     </h2>
-    <section class="cards">
-        <div class="card" role="describe">
-            <!-- users -->
-        </div>
-        <div class="card" role="describe">
-            <!-- circles -->
-        </div>
-        <div class="card" role="describe">
-            <!-- interactions -->
-        </div>
+    <section class="flex-container">
+        <ul class="flex-box-row">
+            <h2>
+                <i class="material-icons">groups</i>
+                <span>users</span>
+            </h2>
+            <h2 class="text-align-right">
+                <b>{{ stats.users }}</b>
+            </h2>
+        </ul>
+        <ul class="flex-box-row">
+            <h2>
+                <i class="material-icons">diversity_2</i>
+                <span>circles</span>
+            </h2>
+            <h2 class="text-align-right">
+                <b>{{ stats.circles }}</b>
+            </h2>
+        </ul>
+        <ul class="flex-box-row">
+            <h2>
+                <i class="material-icons">bubble_chart</i>
+                <span>signals</span>
+            </h2>
+            <h2 class="text-align-right">
+                <b>{{ stats.interactions }}</b>
+            </h2>
+        </ul>
     </section>
 </section>
