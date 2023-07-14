@@ -1,6 +1,7 @@
 {% extends 'templates/cr.html' %}
 
 {% block fixed %}
+{% include "team/fixed/requests.html" %}
 {% include "mate/forms/picture.html" %}
 {% include "mate/forms/request.html" %}
 {% include "team/forms/create.html" %}
@@ -11,8 +12,8 @@
 {% block center %}
 {% include "user/widgets/navigate.html" %}
 {% include "user/widgets/security.html" %}
-{% include "user/widgets/circles.html" %}
 {% include "user/widgets/friends.html" %}
+{% include "user/widgets/circles.html" %}
 {% endblock %}
 
 {% block right %}

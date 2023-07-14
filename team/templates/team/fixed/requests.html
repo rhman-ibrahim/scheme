@@ -1,9 +1,10 @@
-{% if request.user == circle.founder %}
 {% load user_filters %}
-<aside id="requests" class="right">
-    <nav class="aside-nav">
-        <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_right</i>
+
+<aside id="requests" class="left">
+    <nav class="text-align-right">
+        <i class="material-symbols-outlined" onclick="Aside.clear()">close</i>
     </nav>
+    {% if request.resolver_match.app_name == "user" and request.user == circle.founder %}
     <div class="card" role="describe">
         <p>These requests have been received, sorted from oldest to newest.</p>
         <ul class="end">
@@ -22,5 +23,6 @@
         </li>
     </ul>
     {% endfor %}
+    {% elif request.resolver_match.app_name == "team" %}
+    {% endif %}
 </aside>
-{% endif %}

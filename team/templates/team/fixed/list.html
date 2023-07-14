@@ -1,21 +1,15 @@
+{% if request.user.scheme.circles.all.count %}
 <aside class="left" id="circles">
     <nav class="text-align-right">
         <i class="material-icons" onclick="Aside.clear()">close</i>
     </nav>
     <section class="widget">
         <div class="flex-box-col">
-            <p>The circles that you have created, sorted from oldest to newest.</p>
-            <nav class="text-align-right">
-                <b>{{ request.user.scheme.circles.as_founder.count }}</b>
-            </nav>
+            <p>As a founder, you are connected to
+            <span><b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
         </div>
-        <div class="flex-box-col">
-            <p>The circles that you have entered, sorted from oldest to newest.</p>
-            <nav class="text-align-right">
-                <b>{{ request.user.scheme.circles.as_member.count }}</b>
-            </nav>
-        </div>
-        {% for circle in request.user.scheme.circles.all %}
+        {% if request.user.scheme.circles.as_founder.count %}
+        {% for circle in request.user.scheme.circles.as_founder.all %}
         <nav class="flex-box-row">
             <h3>{{ circle.name }}</h3>
             <h3 class="text-align-right">
@@ -31,5 +25,29 @@
             </h3>
         </nav>
         {% endfor %}
+        {% endif %}
+        <div class="flex-box-col">
+            <p>As a member, you are connected to
+            <span><b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
+        </div>
+        {% if request.user.scheme.circles.as_member.count %}
+        {% for circle in request.user.scheme.circles.as_member.all %}
+        <nav class="flex-box-row">
+            <h3>{{ circle.name }}</h3>
+            <h3 class="text-align-right">
+                {% if opened_circle is not None %}
+                    {% if circle.id != opened_circle.id %}
+                    <a class="material-icons" href="{{ circle.login }}" disabled>login</a>
+                    {% else %}
+                    <a class="material-icons" href="{{ circle.browse }}">radio_button_checked</a>
+                    {% endif %}
+                {% else %}
+                <a class="material-icons" href="{{ circle.open }}">login</a>
+                {% endif %}
+            </h3>
+        </nav>
+        {% endfor %}
+        {% endif %}
     </section>
 </aside>
+{% endif %}
