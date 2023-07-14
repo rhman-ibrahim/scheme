@@ -1,6 +1,14 @@
 {% extends 'templates/lc.html' %}
 
+{% block fixed %}
+{% include "team/forms/create.html" %}
+{% include "user/forms/signup.html" %}
+{% include "user/forms/signin.html" %}
+{% include "user/forms/token.html" %}
+{% endblock %}
+
 {% block left %}
+{% include "home/widgets/theme.html" %}
 {% include "home/widgets/user.html" %}
 {% endblock %}
 
@@ -12,15 +20,4 @@
 {% include "home/widgets/FAQs.html" %}
 {% include "home/widgets/about.html" %}
 {% include "home/widgets/CTA.html" %}
-{% endblock %}
-
-{% block fixed %}
-{% include "team/forms/create.html" %}
-{% include "user/forms/signup.html" %}
-{% include "user/forms/signin.html" %}
-{% if 'token' in request.session %}
-{% include "user/forms/reset.html" %}
-{% else %}
-{% include "user/forms/verify.html" %}
-{% endif %}
 {% endblock %}

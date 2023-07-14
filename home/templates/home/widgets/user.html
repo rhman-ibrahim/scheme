@@ -1,16 +1,17 @@
 <section class="widget" id="home-user-widget">
-    <h2>
+    <h3>
         <i class="material-icons">person</i>
         <b>user</b>
-    </h2>
+    </h3>
     <section class="flex-container">
-        {% include "user/cards/form/signup.html" %}
-        {% include "user/cards/form/signin.html" %}
-        {% if 'token' in request.session %}
-        {% include "user/cards/form/reset.html" %}
+        {% if request.user.is_authenticated %}
+            {% include "user/cards/view/settings.html" %}
+            {% include "user/cards/token/download.html" %}
+            {% include "user/cards/view/signout.html" %}
         {% else %}
-        {% include "user/cards/form/verify.html" %}
+            {% include "user/cards/form/signup.html" %}
+            {% include "user/cards/form/signin.html" %}
+            {% include "user/cards/form/token.html" %}
         {% endif %}
-        {% include "home/cards/theme.html" %}
     </section>
 </section>

@@ -1,16 +1,17 @@
 # Django
 from django.shortcuts import render
 # User
+from user.forms import SignUpForm, SignInForm, VerifyForm, PassWordResetForm
+from user.decorators import is_authenticated
 from user.models import Account
-from user.forms import (
-    SignUpForm, SignInForm, VerifyForm, PassWordResetForm
-)
 # Circles
-from team.models import Circle
 from team.forms import CircleForm
+from team.models import Circle
 # Signal
 from blog.models import Signal
 
+
+@is_authenticated(False)
 def index(request):
     return render(
         request,
