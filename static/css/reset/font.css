@@ -121,3 +121,7 @@ a {
 .text-transform-capitalize {
     text-transform: capitalize;
 }
+
+.text-transform-none {
+    text-transform: none;
+}

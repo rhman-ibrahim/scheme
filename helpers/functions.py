@@ -29,3 +29,8 @@ def completion(fields):
     if any(field is None or field == '' for field in fields) is True:
         incomplete += 1
     return round((len(fields) - incomplete) / len(fields), 2)
+
+
+def profile_picture_path_handler(instance, filename):
+    # renames the updated profile picture with the user's username.
+    return f'user/profile/pictures/{instance.account.username}.{filename.split(".")[-1]}'

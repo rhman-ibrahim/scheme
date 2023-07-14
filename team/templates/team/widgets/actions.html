@@ -5,11 +5,11 @@
     </h3>
     <section class="cards">
         {% if request.user == circle.founder %}
-        {% include "team/cards/form/update.html" %}
-        {% include "team/cards/aside/requests.html" %}
-        {% if not circle.room_members_synced %}
-        {% include "team/cards/function/room.html" %}
-        {% endif %}
+            {% include "team/cards/form/update.html" %}
+            {% include "team/cards/aside/requests.html" %}
+            {% if not circle.room_members_synced %}
+                {% include "team/cards/function/room.html" %}
+            {% endif %}
         {% endif %}
         {% include "team/cards/function/invite.html" %}
         {% include "team/cards/function/leave.html" %}

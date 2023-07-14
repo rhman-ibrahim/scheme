@@ -9,20 +9,14 @@ from user.functions import log
 # Team
 from team.models import Circle
 
-    
-@is_authenticated(True)
-def approve(request, user_id):
-    circle = Circle.objects.get(serial=request.session.get('circle'))
-    user   = circle.requested.get(id=int(user_id))
-    circle.members.add(user)
-    circle.requested.remove(user)
-    circle.save()
-    log(
-        request.user.id, circle, CHANGE,
-        f"approved ({user.username}) joining the circle ({circle.name})."
-    )
-    return redirect("team:browse")    
 
+@is_authenticated(True)
+def refresh(request):
+    circle = Circle.objects.get(serial=request.session.get('circle'))
+    room = Room.objects.get(serial=request.session.get('circle'))
+    room.members.set([circle.founder, *circle.members.all()])
+    return redirect("team:browse")
+    
 @is_authenticated(True)
 def reject(request, user_id):
     circle = Circle.objects.get(serial=request.session.get('circle'))
@@ -48,8 +42,14 @@ def remove(request, user_id):
     return redirect("team:browse")
 
 @is_authenticated(True)
-def refresh(request):
+def approve(request, user_id):
     circle = Circle.objects.get(serial=request.session.get('circle'))
-    room = Room.objects.get(serial=request.session.get('circle'))
-    room.members.set([circle.founder, *circle.members.all()])
+    user   = circle.requested.get(id=int(user_id))
+    circle.members.add(user)
+    circle.requested.remove(user)
+    circle.save()
+    log(
+        request.user.id, circle, CHANGE,
+        f"approved ({user.username}) joining the circle ({circle.name})."
+    )
     return redirect("team:browse")

@@ -48,10 +48,12 @@ class Aside {
         }
     }
     static open = selector => {
-        Aside.clear();
-        Template.blurOn(selector);
-        document.querySelector(`${selector}`).classList.add('active');
-        localStorage.setItem('aside', selector);
+        if (Template.isThere(selector)) {
+            Aside.clear();
+            Template.blurOn(selector);
+            document.querySelector(`${selector}`).classList.add('active');
+            localStorage.setItem('aside', selector);
+        }
     }
     static toggle = selector => {
         if (selector == localStorage.getItem('aside')) {
@@ -182,6 +184,7 @@ class Theme {
             document.body.classList.remove("dark", "light");
             document.body.classList.add(localStorage.getItem('theme'));
         }
+        Theme.setIcon();
     }
     static default = () => {
         document.body.classList.remove("dark", "light");

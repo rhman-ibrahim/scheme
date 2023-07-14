@@ -13,7 +13,7 @@ from django.db import IntegrityError
 
 
 def create(request):
-    if  request.method == "POST":
+    if request.method == "POST":
         form = CircleForm(request.POST)
         if not request.user.is_authenticated:
             create_a_guest_user(request)

@@ -104,24 +104,6 @@ aside.right.active {
     right: 0px;
 }
 
-.aside-nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    font-size: 1.5rem;
-    gap: 8px;
-}
-
-#left .aside-nav,
-aside.left .aside-nav {
-    justify-content: flex-end;
-}
-
-#right .aside-nav,
-aside.right .aside-nav {
-    justify-content: flex-start;
-}
-
 /*
     header &
     footer

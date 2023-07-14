@@ -1,5 +1,7 @@
-<form method="POST" action="{% url 'team:create' %}" class="left" id="circle-create-form">
-    {% with form=forms.circle %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+<footer id="circle-create-form-footer">
+    <form method="POST" action="{% url 'team:create' %}" class="left" id="circle-create-form">
+        {% with form=forms.circle %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</footer>

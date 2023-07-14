@@ -14,7 +14,24 @@ from team.forms import CircleForm
 
 
 @is_authenticated(True)
-def open(request, serial):
+def leave(request):
+    circle = Circle.objects.get(serial=request.session.get('circle'))
+    role   = circle.user_role(request.user)
+    if role == "member":
+        circle.members.remove(request.user)
+        log(request.user.id, circle, CHANGE,
+            f"left the circle ({circle.name})."
+        )
+        circle.save()
+    elif role == "founder":
+        log(request.user.id, circle, DELETION,
+            f"deleted the circle ({circle.name})."
+        )
+        circle.delete()
+    return redirect("team:close")
+
+@is_authenticated(True)
+def login(request, serial):
     circle = Circle.objects.get(serial=serial)
     role   = circle.user_role(request.user)
     if 'circle' in request.session:
@@ -31,6 +48,10 @@ def open(request, serial):
             messages.warning(request, "you are not a member")
             return redirect("user:navigate")
 
+@is_authenticated(True)
+def logout(request):
+    request.session.pop('circle')
+    return redirect('user:navigate')
 
 @is_authenticated(True)
 def browse(request):
@@ -52,26 +73,3 @@ def browse(request):
             }
         }
     )
-
-
-@is_authenticated(True)
-def close(request):
-    request.session.pop('circle')
-    return redirect('user:navigate')
-
-@is_authenticated(True)
-def leave(request):
-    circle = Circle.objects.get(serial=request.session.get('circle'))
-    role   = circle.user_role(request.user)
-    if role == "member":
-        circle.members.remove(request.user)
-        log(request.user.id, circle, CHANGE,
-            f"left the circle ({circle.name})."
-        )
-        circle.save()
-    elif role == "founder":
-        log(request.user.id, circle, DELETION,
-            f"deleted the circle ({circle.name})."
-        )
-        circle.delete()
-    return redirect("team:close")

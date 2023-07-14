@@ -5,7 +5,9 @@
     </h3>
     <section class="cards">
         {% include "user/cards/navigate/settings.html" %}
-        {% include "blog/cards/navigate/app.html" %}
-        {% include "team/cards/function/opened/close.html" %}
+        {% if opened_circle %}
+        {% include "team/cards/view/browse.html" %}
+        {% endif %}
+        {% include "blog/cards/view/list.html" %}
     </section>
 </section>

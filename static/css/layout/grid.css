@@ -112,7 +112,8 @@ main {
         .aside-nav
     */
 
-    #lcr-grid #center #asides-widget {
+    #lcr-grid #center #asides-widget,
+    #lcr-grid #right .right-column-control {
         display: none;
     }
 }

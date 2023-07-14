@@ -5,14 +5,10 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.admin.models import LogEntry
 from django.db import models
 # Helpers
-from helpers.functions import completion
+from helpers.functions import completion, profile_picture_path_handler
 # Circles
 from team.models import Circle
 
-
-def profile_picture_path_handler(instance, filename):
-    # renames the updated profile picture with the user's username.
-    return f'user/profile/pictures/{instance.account.username}.{filename.split(".")[-1]}'
 
 class Profile(models.Model):
     
@@ -27,6 +23,7 @@ class Profile(models.Model):
             FileExtensionValidator(allowed_extensions=["jpg","jpeg"])
         ]
     )
+    friends = models.ManyToManyField("user.Account", related_name="friends")
 
     def __str__(self):
         return f"{self.user.username}'s profile"
@@ -48,17 +45,27 @@ class Profile(models.Model):
         return False if not bool(self.about) else True
 
 
+class FriendRequest(models.Model):
+
+    receiver = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="receiver")
+    sender   = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="sender")
+    status   = models.BooleanField(default=False)
+
+    def accept(self):
+        if self.status:
+            self.receiver.profile.friends.add(self.sender)
+            self.sender.profile.friends.add(self.receiver)
+
+
 class Scheme(models.Model):
-
     user = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
-
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
-    
     @property
     def circles(self):
         return {
             'as_founder':Circle.objects.filter(founder=self.user),
-            'as_member':Circle.objects.filter(Q(members=self.user))
+            'as_member':Circle.objects.filter(members=self.user),
+            'all': Circle.objects.filter(Q(founder=self.user) or Q(members=self.user))
         }

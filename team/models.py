@@ -9,6 +9,7 @@ from ping.models import Room
 # Helpers
 from helpers.functions import generate_serial
 
+
 class Circle(models.Model):
 
     # Identify
@@ -17,7 +18,7 @@ class Circle(models.Model):
     description = models.TextField(max_length=512, blank=True)
     # Users
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
-    requested   = models.ManyToManyField("user.Account", blank=True, related_name="requested", through="CircleRequests")
+    requested   = models.ManyToManyField("user.Account", blank=True, related_name="requested", through="CircleRequest")
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="CircleMembership")
     # Time
     created     = models.DateTimeField(auto_now_add=True)
@@ -33,11 +34,11 @@ class Circle(models.Model):
     def browse(self):
         return reverse("team:browse")
 
-    def close(self):
-        return reverse("team:close")
+    def logout(self):
+        return reverse("team:logout")
             
-    def open(self):
-        return reverse("team:open", args=[str(self.serial)])
+    def login(self):
+        return reverse("team:login", args=[str(self.serial)])
 
     def link(self):
         return str(reverse("team:link", args=[str(self.serial)]))
@@ -68,7 +69,7 @@ class Circle(models.Model):
         unique_together = ('founder', 'name')
 
 
-class CircleRequests(models.Model):
+class CircleRequest(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)

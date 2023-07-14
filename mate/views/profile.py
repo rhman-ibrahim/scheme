@@ -7,7 +7,7 @@ from helpers.functions import get_form_errors, log
 # User
 from user.decorators import is_authenticated, is_guest
 # Mates
-from .forms import  ProfilePictureForm, ProfileInfoForm
+from mate.forms import  ProfilePictureForm, ProfileInfoForm
 
 
 @is_authenticated(True)
