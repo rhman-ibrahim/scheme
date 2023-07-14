@@ -1,24 +1,21 @@
-{% extends 'templates/lcr.html' %}
+{% extends 'templates/cr.html' %}
 
-{% block left %}
-    {% include "components/widgets/logs.html" %}
+{% block fixed %}
+{% include "mate/forms/picture.html" %}
+{% include "mate/forms/request.html" %}
+{% include "team/forms/create.html" %}
+{% include "team/fixed/list.html" %}
+{% include "mate/forms/info.html" %}
 {% endblock %}
 
 {% block center %}
-    {% include "user/widgets/navigate.html" %}
-    {% include "user/widgets/security.html" %}
-    {% include "mate/widgets/profile.html" %}
-    {% include "home/widgets/action.html" %}
-    {% include "user/widgets/aside.html" %}
+{% include "user/widgets/navigate.html" %}
+{% include "user/widgets/security.html" %}
+{% include "user/widgets/circles.html" %}
+{% include "user/widgets/friends.html" %}
 {% endblock %}
 
 {% block right %}
-    {% include "user/asides/circles.html" %}
-{% endblock %}
-
-{% block fixed %}
-    {% include "user/forms/password.html" %}
-    {% include "mate/forms/picture.html" %}
-    {% include "team/forms/create.html" %}
-    {% include "mate/forms/info.html" %}
+{% include "mate/widgets/profile.html" %}
+{% include "home/widgets/theme.html" %}
 {% endblock %}

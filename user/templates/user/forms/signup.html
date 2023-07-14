@@ -1,5 +1,7 @@
-<form method="POST" action="{% url 'user:signup' %}" class="right" id="sign-up-form">
-    {% with form=forms.signup password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+<aside class="left" id="sign-up-form-aside">
+    <form method="POST" action="{% url 'user:signup' %}" class="right" id="sign-up-form">
+        {% with form=forms.signup password=1 %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</aside>

@@ -1,5 +1,7 @@
-<form method="POST" enctype="multipart/form-data" action="{% url 'user:verify' %}" class="right" id="verify-form">
-    {% with form=forms.verify password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
+<footer class="left" id="verify-form-footer">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'user:verify' %}" class="right" id="verify-form">
+        {% with form=forms.verify password=1 %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</footer>

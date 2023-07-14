@@ -6,8 +6,9 @@ from django.contrib import messages
 # Helpers
 from helpers.functions import get_form_errors, log
 # User
+from user.models import Token
 from user.decorators import is_authenticated, is_guest
-from user.forms import PasswordUpdateForm
+from user.forms import PasswordUpdateForm, PassWordResetForm
 
 
 @is_authenticated(True)
@@ -21,6 +22,20 @@ def update_password(request):
             log(request.user.id, request.user, CHANGE, "updated password")
             messages.success(request, 'password has been updated successfully')
             return redirect("user:back")
+        else:
+            get_form_errors(request, form)
+    return redirect('user:back')
+
+@is_authenticated(False)
+def reset(request):
+    if 'token' in request.session and request.method == "POST":
+        token = Token.objects.get(value=request.session['token'])
+        form = PassWordResetForm(token.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'password has been reset successfully')
+            del request.session['token']
+            return redirect("home:index")
         else:
             get_form_errors(request, form)
     return redirect('user:back')
