@@ -1,0 +1,13 @@
+<section class="widget">
+    {% if request.user.friends.count %}
+    {% for circle in request.user.friends.all %}
+    <nav class="flex-box-row">
+        <h3>{{ circle.name }}</h3>
+    </nav>
+    {% endfor %}
+    {% else %}
+    <div class="flex-box-col">
+        <p></p>
+    </div>
+    {% endif %}
+</section>
