@@ -2,17 +2,11 @@ class Grid {
     static init = () => {
         Grid.setDimensions();
         Grid.justifyColumnContent();
-        Grid.fixChatBoxWidth();
+        ROOM.fixChatBoxWidth();
     }
     static setDimensions = () => {
         document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
         document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
-    }
-    static fixChatBoxWidth = () => {
-        if (Template.isThere('#space')) {
-            const BOX = document.querySelector('#space-chat-box');
-            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
-        }
     }
     static justifyColumnContent = () => {
         document.querySelectorAll('#left, #right')
@@ -133,7 +127,22 @@ class Message {
 }
 
 
-class ConversationUI {
+class ROOM {
+    static UI = () => {
+        return document.querySelector('#room');
+    }
+    static data = () => {
+        return {
+            username: document.getElementById('room-input_button-container').dataset.username,
+            serial: document.getElementById('room').dataset.serial,
+        };
+    }
+    static fixChatBoxWidth = () => {
+        if (Template.isThere('#room')) {
+            const BOX       = document.querySelector('#room-input_button-container');
+            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
+        }
+    }
     static messageUlElement = (destination, data) => {
         let ulElement          = document.createElement('ul');
         let mLiElement         = document.createElement('li');
@@ -143,7 +152,7 @@ class ConversationUI {
         ulElement.appendChild(uLiElement);
         ulElement.appendChild(mLiElement);
         ulElement.setAttribute(
-            'data-direction', (document.querySelector('#space').dataset.username == data.sender) ? 'out':'in'
+            'data-direction', (document.querySelector('#room').dataset.username == data.sender) ? 'out':'in'
         );
         ulElement.setAttribute(
             'data-sender', data.sender
@@ -160,11 +169,11 @@ class ConversationUI {
             destination.querySelector('ul:last-of-type') &&
             destination.querySelector('ul:last-of-type').dataset.sender == data.sender
         ) {
-            ConversationUI.messageLiElement(destination, data);
+            ROOM.messageLiElement(destination, data);
         } else {
-            ConversationUI.messageUlElement(destination, data);
+            ROOM.messageUlElement(destination, data);
         }
-        ConversationUI.scrollToDestination(destination);
+        ROOM.scrollToDestination(destination);
     }
     static scrollToDestination = destination => {
         destination.querySelector('ul:last-of-type').scrollIntoView(

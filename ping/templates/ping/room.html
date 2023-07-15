@@ -1,0 +1,6 @@
+<ul data-serial="{{ room.serial }}" ondblclick="Aside.open('#room-input_button-container')" id="room">
+</ul>
+<nav data-username="{{ request.user.username }}" id="room-input_button-container">
+    <input type="text" name="message" placeholder="type...." id="message">
+    <button type="button" class="material-symbols-outlined" id="sendButton">send</button>
+</nav>

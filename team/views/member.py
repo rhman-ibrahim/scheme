@@ -55,9 +55,10 @@ def logout(request):
 
 @is_authenticated(True)
 def browse(request):
-    if not 'circle' in request.session:
-        return redirect("user:navigate")
-    circle = Circle.objects.get(serial=request.session.get('circle'))
+    circle = Circle.objects.first()
+    # if not 'circle' in request.session:
+    #     return redirect("user:navigate")
+    # circle = Circle.objects.get(serial=request.session.get('circle'))
     return render(
         request,
         "team/index.html",

@@ -107,7 +107,9 @@ USE_TZ        = True
 # Static files (CSS, JavaScript, Images)
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
+    BASE_DIR / 'ping/static',
 ]
+
 STATIC_URL          = '/static/'
 STATIC_ROOT         = 'scheme'
 

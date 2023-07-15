@@ -1,1 +1,12 @@
-{% extends 'ping/lcr.html' %}
+{% extends 'templates/cr.html' %}
+{% load static %}
+
+{% block head %}
+<title>{{ circle.name|lower }} by {{ circle.founder.username }}</title>
+<link rel="stylesheet" href="{% static 'ping/css/master.css' %}">
+<script src="{% static 'ping/js/master.js' %}" defer></script>
+{% endblock %}
+
+{% block right %}
+{% include "ping/room.html" %}
+{% endblock %}

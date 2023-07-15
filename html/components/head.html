@@ -15,10 +15,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 <!-- CSS -->
 <link rel="stylesheet" href="{% static 'css/init.css' %}?v={% now "U" %}"/>
-<link rel="stylesheet" href="{% get_static_prefix %}ping/css/master.css">
-<link rel="stylesheet" href="{% get_static_prefix %}blog/css/master.css">
 <!-- JS -->
 <script src="{% static 'js/master.js' %}?v={% now "U" %}" defer></script>
-<script src="{% get_static_prefix %}ping/js/master.js" defer></script>
-<!-- Title -->
-<title>Scheme / {{ request.resolver_match.app_name|capfirst }}</title>

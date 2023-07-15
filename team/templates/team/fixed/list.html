@@ -1,4 +1,3 @@
-{% if request.user.scheme.circles.all.count %}
 <aside class="left" id="circles">
     <nav class="text-align-right">
         <i class="material-icons" onclick="Aside.clear()">close</i>
@@ -13,15 +12,7 @@
         <nav class="flex-box-row">
             <h3>{{ circle.name }}</h3>
             <h3 class="text-align-right">
-                {% if opened_circle is not None %}
-                    {% if circle.id != opened_circle.id %}
-                    <a class="material-icons" href="{{ circle.login }}" disabled>login</a>
-                    {% else %}
-                    <a class="material-icons" href="{{ circle.browse }}">radio_button_checked</a>
-                    {% endif %}
-                {% else %}
-                <a class="material-icons" href="{{ circle.open }}">login</a>
-                {% endif %}
+                <a class="material-icons" href="{{ circle.browse }}">login</a>
             </h3>
         </nav>
         {% endfor %}
@@ -35,19 +26,10 @@
         <nav class="flex-box-row">
             <h3>{{ circle.name }}</h3>
             <h3 class="text-align-right">
-                {% if opened_circle is not None %}
-                    {% if circle.id != opened_circle.id %}
-                    <a class="material-icons" href="{{ circle.login }}" disabled>login</a>
-                    {% else %}
-                    <a class="material-icons" href="{{ circle.browse }}">radio_button_checked</a>
-                    {% endif %}
-                {% else %}
-                <a class="material-icons" href="{{ circle.open }}">login</a>
-                {% endif %}
+                <a class="material-icons" href="{{ circle.browse }}">login</a>
             </h3>
         </nav>
         {% endfor %}
         {% endif %}
     </section>
 </aside>
-{% endif %}
