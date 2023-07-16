@@ -1,8 +1,8 @@
 {% if request.resolver_match.app_name == "user" %}
-<div class="flex-box-col" role="aside">
+<div class="flex-box-col" role="Fixed">
     <p><b>Review</b> sent joining requests, to view its state or to cancel it.</p>
     <ul class="text-align-right">
-        <li class="material-icons" onclick="Aside.open('#requests')">mark_email_unread</li>
+        <li class="material-icons" onclick="Fixed.open('#requests')">mark_email_unread</li>
     </ul>
 </div>
 {% elif request.resolver_match.app_name == "team" %}

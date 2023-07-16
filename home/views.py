@@ -1,5 +1,6 @@
 # Django
 from django.shortcuts import render
+from django.contrib import messages
 # User
 from user.forms import SignUpForm, SignInForm, VerifyForm, PassWordResetForm
 from user.decorators import is_authenticated
