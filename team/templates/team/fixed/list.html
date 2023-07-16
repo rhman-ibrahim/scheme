@@ -1,35 +1,37 @@
 <aside class="left" id="circles">
-    <nav class="text-align-right">
-        <i class="material-icons" onclick="Fixed.clear()">close</i>
-    </nav>
-    <section class="widget">
-        <div class="flex-box-col">
-            <p>As a founder, you are connected to
-            <span><b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
-        </div>
-        {% if request.user.scheme.circles.as_founder.count %}
-        {% for circle in request.user.scheme.circles.as_founder.all %}
-        <nav class="flex-box-row">
-            <h3>{{ circle.name }}</h3>
-            <h3 class="text-align-right">
-                <a class="material-icons" href="{{ circle.browse }}">login</a>
-            </h3>
-        </nav>
-        {% endfor %}
-        {% endif %}
-        <div class="flex-box-col">
-            <p>As a member, you are connected to
-            <span><b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
-        </div>
-        {% if request.user.scheme.circles.as_member.count %}
-        {% for circle in request.user.scheme.circles.as_member.all %}
-        <nav class="flex-box-row">
-            <h3>{{ circle.name }}</h3>
-            <h3 class="text-align-right">
-                <a class="material-icons" href="{{ circle.browse }}">login</a>
-            </h3>
-        </nav>
-        {% endfor %}
-        {% endif %}
-    </section>
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="widget">
+            <div class="flex-box-col">
+                <p>As a founder, you are connected to
+                <span><b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
+            </div>
+            {% if request.user.scheme.circles.as_founder.count %}
+            {% for circle in request.user.scheme.circles.as_founder.all %}
+            <nav class="flex-box-row">
+                <h3>{{ circle.name }}</h3>
+                <h3 class="text-align-right">
+                    <a class="material-icons" href="{{ circle.browse }}">login</a>
+                </h3>
+            </nav>
+            {% endfor %}
+            {% endif %}
+        </section>
+        <section class="widget">
+            <div class="flex-box-col">
+                <p>As a member, you are connected to
+                <span><b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
+            </div>
+            {% if request.user.scheme.circles.as_member.count %}
+            {% for circle in request.user.scheme.circles.as_member.all %}
+            <nav class="flex-box-row">
+                <h3>{{ circle.name }}</h3>
+                <h3 class="text-align-right">
+                    <a class="material-icons" href="{{ circle.browse }}">login</a>
+                </h3>
+            </nav>
+            {% endfor %}
+            {% endif %}
+        </section>
+    </div>
 </aside>

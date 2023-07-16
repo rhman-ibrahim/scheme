@@ -27,6 +27,9 @@ def settings(request):
                 'picture': ProfilePictureForm,
                 'circle': CircleForm,
                 'mate': AccountUsernameForm
+            },
+            'column': {
+                'icon': 'person'
             }
         }
     )

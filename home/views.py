@@ -29,6 +29,9 @@ def index(request):
                 'interactions': Signal.objects.count(),
                 'circles': Circle.objects.count(),
                 'users': Account.objects.count(),
+            },
+            'column': {
+                'icon': 'person'
             }
         }
     )

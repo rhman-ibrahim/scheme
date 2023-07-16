@@ -4,14 +4,8 @@
         <b>user</b>
     </h3>
     <section class="flex-container">
-        {% if request.user.is_authenticated %}
-            {% include "user/cards/view/settings.html" %}
-            {% include "user/cards/token/download.html" %}
-            {% include "user/cards/view/signout.html" %}
-        {% else %}
-            {% include "user/cards/form/signup.html" %}
-            {% include "user/cards/form/signin.html" %}
-            {% include "user/cards/form/token.html" %}
-        {% endif %}
+        {% include "user/cards/form/signup.html" %}
+        {% include "user/cards/form/signin.html" %}
+        {% include "user/cards/form/token.html" %}
     </section>
 </section>
