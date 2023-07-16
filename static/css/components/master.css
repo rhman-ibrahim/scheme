@@ -1,8 +1,9 @@
 #blurred-layer {
+
     /*
-        The glass effect:
-        https://css.glass
+        The glass effect is from: https://css.glass
     */
+
     width: 100vw;
     height: 100vh;
     background: rgba(255, 255, 255, 0.2);
@@ -104,12 +105,56 @@
     buttons
 */
 
-button.info-button,
-button.danger-button,
-button.warning-button,
-button.success-button {
+.info-button,
+.danger-button,
+.warning-button,
+.success-button {
     border-radius: 100%;
     text-align: center;
     height: 18px;
     width: 18px;
+}
+
+.column-button {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    line-height: 24px;
+    outline: 1.32px solid var(--d3);
+    background: var(--d2);
+    border-radius: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+@media (width > 360px) {
+
+    aside .column-button,
+    #left .column-button,
+    #right .column-button {
+        display: none;
+    }
+    
+}
+
+@media (width >= 720px) {
+
+    #lr-grid #left .column-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1080px) {
+
+    #lc-grid .column-button,
+    #cr-grid .column-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1440px) {
+    
 }

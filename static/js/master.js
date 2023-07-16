@@ -45,11 +45,11 @@ class Grid {
         document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
     }
     static justifyColumnContent = () => {
-        document.querySelectorAll('#left, #right')
+        document.querySelectorAll('#left > div.column, #right > div.column')
         .forEach(
             column => {
                 let widgetsTotalHeights = 0;
-                column.querySelectorAll('.widget, .aside-nav')
+                column.querySelectorAll('.widget')
                 .forEach(
                     widget => widgetsTotalHeights += widget.clientHeight);
                 if ((widgetsTotalHeights / window.innerHeight) < .75) {
@@ -115,6 +115,7 @@ class Fixed {
         Fixed.close(localStorage.getItem('fixed'));
     }
     static open = selector => {
+        Fixed.clear();
         Blurred.append()
         .then(
             () => {
@@ -130,10 +131,7 @@ class Fixed {
         if (Fixed.collected()) Fixed.open(localStorage.getItem('fixed')); else localStorage.removeItem('fixed');         
     }
     static toggle = selector => {
-        if (localStorage.getItem('fixed')) {
-            if (localStorage.getItem('fixed') == selector) Fixed.close(selector); else Fixed.open(selector);
-        }
-        Fixed.open(selector);
+        localStorage.getItem('fixed') == selector ? Fixed.close(selector) : Fixed.open(selector);
     }
 }
 

@@ -13,7 +13,7 @@ header,
     scrollbar-width: none;
     overflow-x: hidden;
     overflow-y: scroll;
-    filter: none;
+    height: var(--wh);
 }
 
 html::-webkit-scrollbar,
@@ -27,11 +27,36 @@ header::-webkit-scrollbar,
 
 html,
 body,
-main {
+main,
+#left,
+#center,
+#right,
+aside,
+.column {
     background: var(--d1);
     height: var(--wh);
     color: var(--d4);
 }
+
+main {
+    overflow: hidden;
+}
+
+/*
+    .column
+*/
+
+.column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px 40px 8px;
+    gap: 8px;
+}
+
+/*
+    fixed
+*/
 
 aside,
 footer, 
@@ -40,27 +65,8 @@ header {
     width: var(--ww);
 }
 
-/*
-    .column
-*/
-
-.column {
-    display: flex;
-    flex-direction: column;
-    background: var(--d1);
-    height: var(--wh);
-    padding: 8px;
-    gap: 8px;
-}
-
-
-/*
-    fixed
-*/
-
-aside,
-footer,
-header {
+header,
+footer {
     padding: 8px;
 }
 
@@ -111,16 +117,16 @@ aside.right.active {
 
 header,
 footer {
-    max-height: 50vh;
     height: max-content;
+    max-height: 50vh;
 }
 
 header {
     border-bottom: 1.32px solid var(--d3);
     transition: top 1s ease-in-out;
     position: fixed;
-    right: 0px;
     top: -50vh;
+    right: 0px;
     left: 0px;
 }
 
@@ -147,12 +153,4 @@ footer.active {
 
 [data-state=False] {
     display: none !important;
-}
-
-@media (width > 360px) {
-    section.column > nav.flex-row-end,
-    form > nav.flex-row-end .danger-button,
-    aside > nav.flex-row.end {
-        display: none;
-    }
 }

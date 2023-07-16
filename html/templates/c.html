@@ -8,9 +8,11 @@
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="c-grid">
-        <section class="column" id="center">
-            {% block center %}
-            {% endblock %}
+        <section id="center">
+            <div class="column">
+                {% block center %}
+                {% endblock %}
+            </div>
         </section>
     </main>
     {% include "components/messages.html" %}
