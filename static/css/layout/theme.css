@@ -27,6 +27,13 @@ body,
     --d4: var(--fw);
 }
 
+aside,
+footer,
+header,
+section.active {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;   
+}
+
 .info-dark-outline {
     outline: 1.32px solid var(--di);
 }
@@ -89,4 +96,32 @@ body,
 
 .success-light-color {
     color: var(--ls);
+}
+
+.danger-button {
+    background: var(--ld);
+}
+.danger-button:hover {
+    background: var(--dd);
+}
+
+.warning-button {
+    background: var(--lw);
+}
+.warning-button:hover {
+    background: var(--dw);
+}
+
+.success-button {
+    background: var(--ls);
+}
+.success-button:hover {
+    background: var(--ds);
+}
+
+.info-button {
+    background: var(--li);
+}
+.info-button:hover {
+    background: var(--di);
 }

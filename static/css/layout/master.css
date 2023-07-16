@@ -37,7 +37,7 @@ aside,
 footer, 
 header {
     background: var(--d2);
-    width: 100%;
+    width: var(--ww);
 }
 
 /*
@@ -147,4 +147,12 @@ footer.active {
 
 [data-state=False] {
     display: none !important;
+}
+
+@media (width > 360px) {
+    section.column > nav.flex-row-end,
+    form > nav.flex-row-end .danger-button,
+    aside > nav.flex-row.end {
+        display: none;
+    }
 }

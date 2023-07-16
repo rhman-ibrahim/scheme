@@ -1,16 +1,17 @@
 .message {
-    z-index: 32;
+    z-index: 16;
 }
 
 aside,
 header,
-footer {
-    z-index: 16;
-}
-
+footer,
 #left,
 #right {
     z-index: 8;
+}
+
+#blurred-layer {
+    z-index: 4;
 }
 
 .flex-box .flex-col,

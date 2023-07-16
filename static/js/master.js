@@ -1,191 +1,3 @@
-class Grid {
-    static init = () => {
-        Grid.setDimensions();
-        Grid.justifyColumnContent();
-        ROOM.fixChatBoxWidth();
-    }
-    static setDimensions = () => {
-        document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
-        document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
-    }
-    static justifyColumnContent = () => {
-        document.querySelectorAll('#left, #right')
-        .forEach(
-            column => {
-                let widgetsTotalHeights = 0;
-                column.querySelectorAll('.widget, .aside-nav')
-                .forEach(
-                    widget => widgetsTotalHeights += widget.clientHeight);
-                if ((widgetsTotalHeights / window.innerHeight) < .75) {
-                    column.style.justifyContent = "center";
-                }    
-            }
-        );
-    }
-}
-
-
-class Aside {
-    static init = () => {
-        let asideSelector = String(localStorage.getItem('aside'));
-        if (asideSelector.includes('form')) Aside.open(asideSelector); else Aside.clear();
-    }
-    static close = selector => {
-        Template.blurOff();
-        document.querySelector(`${selector}`).classList.remove('active');
-        localStorage.removeItem('aside');
-    }
-    static clear = () => {
-        let aside = localStorage.getItem('aside');
-        if (aside !== null && Template.isThere(`${localStorage.getItem('aside')}`)) {
-            Aside.close(aside);
-        }
-    }
-    static open = selector => {
-        if (Template.isThere(selector)) {
-            Aside.clear();
-            Template.blurOn(selector);
-            document.querySelector(`${selector}`).classList.add('active');
-            localStorage.setItem('aside', selector);
-        }
-    }
-    static toggle = selector => {
-        if (selector == localStorage.getItem('aside')) {
-            (Template.isThere(selector)) ? Aside.close(selector) : Aside.open(selector);
-        } else {
-            Aside.open(selector);
-        }
-    }
-}
-
-
-class Template {
-    static isThere = selector => {
-        if (document.body.contains(document.querySelector(`${selector}`))) return true;
-        return false;
-    }
-    static isVisible = element => {
-        if (window.getComputedStyle(element).display === 'block') return element;
-    }
-    static blurOff = () => {
-        document.querySelectorAll('main > *').forEach(
-            column => {
-                column.style.filter = "none";
-            }
-        );
-    }
-    static blurOn = selector => {
-        document.querySelectorAll('main > *').forEach(
-            column => {
-                column.style.filter = "blur(5px)";
-            }
-        );
-        document.querySelector(`${selector}`).style.filter = "none";
-    }
-    static writeToClipboard = (element, attribute) => {
-        let dataToCopy = element.getAttribute(`data-${attribute}`);
-        navigator.clipboard.writeText(dataToCopy)
-        .then(
-            () => alert("Link copied to clipboard!"))
-        .catch(
-            () => alert("Failed to copy link to clipboard.")
-        )
-    }
-}
-
-
-class Form {
-    static passwordToggle = passwordToggleButton => {
-        document.querySelectorAll(`#${passwordToggleButton.parentNode.parentNode.id} input.password`)
-        .forEach(
-            input => {
-                const type = input.getAttribute("type") === "password" ? "text" : "password";
-                input.setAttribute("type", type);
-            }
-        );
-    }
-}
-
-
-class Message {
-    static list = () => {
-        const messagesIdSelectors = []; 
-        document.querySelectorAll('.message').forEach(message => messagesIdSelectors.push(message.id));
-        return messagesIdSelectors;
-    }
-    static init = () => {
-        if (Message.list().length) Aside.open(`#${Message.list()[0]}`);
-    }
-    static next = selector => {
-        Aside.close(`#${selector}`);
-        const list      = Message.list();
-        const index     = list.indexOf(selector);
-        const nextIndex = index + 1;
-        list.splice(index, 1);
-        if (list.length >= nextIndex) Aside.open(`#${Message.list()[nextIndex]}`);
-    }
-}
-
-
-class ROOM {
-    static UI = () => {
-        return document.querySelector('#room');
-    }
-    static data = () => {
-        return {
-            username: document.getElementById('room-input_button-container').dataset.username,
-            serial: document.getElementById('room').dataset.serial,
-        };
-    }
-    static fixChatBoxWidth = () => {
-        if (Template.isThere('#room')) {
-            const BOX       = document.querySelector('#room-input_button-container');
-            BOX.style.width = `${BOX.parentElement.offsetWidth}px`;
-        }
-    }
-    static messageUlElement = (destination, data) => {
-        let ulElement          = document.createElement('ul');
-        let mLiElement         = document.createElement('li');
-        let uLiElement         = document.createElement('li');
-        uLiElement.textContent = data.sender;
-        mLiElement.textContent = data.body;
-        ulElement.appendChild(uLiElement);
-        ulElement.appendChild(mLiElement);
-        ulElement.setAttribute(
-            'data-direction', (document.querySelector('#room').dataset.username == data.sender) ? 'out':'in'
-        );
-        ulElement.setAttribute(
-            'data-sender', data.sender
-        );
-        destination.appendChild(ulElement);
-    }
-    static messageLiElement = (destination, data) => {
-        let liElement         = document.createElement('li');
-        liElement.textContent = data.body;
-        destination.querySelector('ul:last-of-type').appendChild(liElement);
-    }
-    static messageAppend = (destination, data) => {
-        if (
-            destination.querySelector('ul:last-of-type') &&
-            destination.querySelector('ul:last-of-type').dataset.sender == data.sender
-        ) {
-            ROOM.messageLiElement(destination, data);
-        } else {
-            ROOM.messageUlElement(destination, data);
-        }
-        ROOM.scrollToDestination(destination);
-    }
-    static scrollToDestination = destination => {
-        destination.querySelector('ul:last-of-type').scrollIntoView(
-            {
-                block: 'start',
-                inline: 'nearest',
-                behavior:'smooth',
-            }
-        );
-    }
-}
-
 class Theme {
     static init = () => {
         if (localStorage.getItem('theme') == null) Theme.default();
@@ -223,11 +35,171 @@ class Theme {
 }
 
 
+class Grid {
+    static init = () => {
+        Grid.setDimensions();
+        Grid.justifyColumnContent();
+    }
+    static setDimensions = () => {
+        document.documentElement.style.setProperty('--wh', `${window.innerHeight}px`);
+        document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
+    }
+    static justifyColumnContent = () => {
+        document.querySelectorAll('#left, #right')
+        .forEach(
+            column => {
+                let widgetsTotalHeights = 0;
+                column.querySelectorAll('.widget, .aside-nav')
+                .forEach(
+                    widget => widgetsTotalHeights += widget.clientHeight);
+                if ((widgetsTotalHeights / window.innerHeight) < .75) {
+                    column.style.justifyContent = "center";
+                }    
+            }
+        );
+    }
+}
+
+class Blurred {
+    static append = () => {
+        return new Promise(
+            resolve => {
+                if (!Template.isThere('#blurred-layer')) {
+                    const blurredLayer = document.createElement('div');
+                    blurredLayer.setAttribute('onclick', 'Blurred.check()');
+                    blurredLayer.setAttribute('id', 'blurred-layer');
+                    document.body.appendChild(blurredLayer);
+                }
+                resolve();       
+            }
+        )
+    }
+    static check = () => {
+        if (Fixed.collected() != null) {
+            if (Fixed.collected().classList.contains('message')) {
+                Message.next(Fixed.collected().id);
+                if (Message.list().length == 0) Fixed.clear();
+            } else {
+                Fixed.clear();
+            }
+        } else {
+            Fixed.clear();
+        }
+    }
+    static remove = () => {
+        return new Promise(
+            resolve => {
+                Template.remove('#blurred-layer');
+                resolve();
+            }
+        )
+    }
+}
+
+class Fixed {
+    static collected = () => {
+         return localStorage.getItem('fixed') ? document.querySelector(localStorage.getItem('fixed')) : null;
+    }
+    static close = selector => {
+        Blurred.remove()
+        .then(
+            () => {
+                if (Template.isThere(selector)) {
+                    document.querySelector(selector).classList.remove('active');
+                }
+                localStorage.removeItem('fixed');
+            }
+        )
+    }
+    static clear = () => {
+        Fixed.close(localStorage.getItem('fixed'));
+    }
+    static open = selector => {
+        Blurred.append()
+        .then(
+            () => {
+                if (Template.isThere(selector)) {
+                    document.querySelector(`${selector}`).classList.add('active');
+                    localStorage.setItem('fixed', selector);
+                }
+            }
+        )
+    }
+    
+    static init = () => {
+        if (Fixed.collected()) Fixed.open(localStorage.getItem('fixed')); else localStorage.removeItem('fixed');         
+    }
+    static toggle = selector => {
+        if (localStorage.getItem('fixed')) {
+            if (localStorage.getItem('fixed') == selector) Fixed.close(selector); else Fixed.open(selector);
+        }
+        Fixed.open(selector);
+    }
+}
+
+
+class Message {
+    static list = () => {
+        const messagesIdSelectors = []; 
+        document.querySelectorAll('.message').forEach(message => messagesIdSelectors.push(message.id));
+        return messagesIdSelectors;
+    }
+    static init = () => {
+        if (Message.list().length) Fixed.open(`#${Message.list()[0]}`);
+    }
+    static next = selector => {
+        Template.remove(`#${selector}`);
+        const list      = Message.list();
+        const index     = list.indexOf(selector);
+        const nextIndex = index + 1;
+        if (list.length >= nextIndex) Fixed.open(`#${Message.list()[nextIndex]}`);
+    }
+    static index = selector => {
+        const list = Message.list();
+        return (list.indexOf(selector) / list.length)
+    }
+}
+
+class Form {
+    static passwordToggle = passwordToggleButton => {
+        document.querySelectorAll(`#${passwordToggleButton.parentNode.parentNode.id} input.password`)
+        .forEach(
+            input => {
+                const type = input.getAttribute("type") === "password" ? "text" : "password";
+                input.setAttribute("type", type);
+            }
+        );
+    }
+}
+
+
+class Template {
+    static isThere = selector => {
+        if (document.body.contains(document.querySelector(`${selector}`))) return true;
+        return false;
+    }
+    static isVisible = element => {
+        if (window.getComputedStyle(element).display === 'block') return element;
+    }
+    static remove = selector => {
+        let element = document.querySelector(selector);
+        if (document.body.contains(element)) document.body.removeChild(element);
+    }
+    static writeToClipboard = (element, attribute) => {
+        let dataToCopy = element.getAttribute(`data-${attribute}`);
+        navigator.clipboard.writeText(dataToCopy)
+        .then(
+            () => alert("Link copied to clipboard!"))
+        .catch(
+            () => alert("Failed to copy link to clipboard.")
+        )
+    }
+}
+
 class Handler {
     static init = () => {
-        Grid.init();
-        Aside.init();
         Theme.init();
+        Grid.init();
         Message.init();
     }
 }

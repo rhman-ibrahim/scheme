@@ -30,14 +30,6 @@ main {
         width: 100%;
     }
 
-    /*
-        .aside-nav
-    */
-
-    #lr-grid .right-column-contorl {
-        display: none;
-    }
-
 }
 
 #cr-grid,
@@ -74,16 +66,6 @@ main {
         grid-column: 5/13;
     }
 
-    /*
-        .aside-nav
-    */
-
-    #cr-grid .right-column-control,
-    #lc-grid .left-column-control,
-    #lcr-grid .left-column-control {
-        display: none;
-    }
-
 }
 
 #lcr-grid {
@@ -108,12 +90,4 @@ main {
         width: 100%;
     }
 
-    /*
-        .aside-nav
-    */
-
-    #lcr-grid #center #asides-widget,
-    #lcr-grid #right .right-column-control {
-        display: none;
-    }
 }
