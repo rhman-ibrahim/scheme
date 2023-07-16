@@ -6,10 +6,5 @@
         <span>{{ message.tags }}</span>
     </h3>
     <p>{{ message }}</p>
-    <nav>
-        <button onclick="Message.next('{{ message.tags }}-message-number-{{ forloop.counter }}')">
-            <i class="material-icons">close</i>
-        </button>
-    </nav>
 </header>
 {% endfor %}

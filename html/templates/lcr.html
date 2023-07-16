@@ -9,8 +9,8 @@
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="lcr-grid">
         <section class="column" id="left">
-            <nav class="text-align-right aside-nav left-column-control">
-                <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_left</i>
+            <nav class="flex-row-end">
+                <button type="button" onclick="Fixed.clear()" class="danger-button"></button>
             </nav>
             {% block left %}
             {% endblock %}
@@ -20,8 +20,8 @@
             {% endblock %}
         </section>
         <section class="column" id="right">
-            <nav class="text-align-left aside-nav right-column-control">
-                <i class="material-symbols-outlined" onclick="Aside.clear()">chevron_right</i>
+            <nav class="flex-row-end">
+                <button type="button" onclick="Fixed.clear()" class="danger-button"></button>
             </nav>
             {% block right %}
             {% endblock %}
