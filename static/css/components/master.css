@@ -121,6 +121,7 @@
     font-size: 24px;
     line-height: 24px;
     outline: 1.32px solid var(--d3);
+    box-shadow: var(--bs);
     background: var(--d2);
     border-radius: 100%;
     position: absolute;

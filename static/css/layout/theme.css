@@ -8,6 +8,7 @@
     --ds: #007E33;
     --di: #0099CC;
     --a1: #77216F;
+    --bs: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     --fb: #000000;
     --fw: #FFFFFF;
 }
@@ -31,7 +32,7 @@ aside,
 footer,
 header,
 section.active {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;   
+    box-shadow: var(--bs);   
 }
 
 .info-dark-outline {
