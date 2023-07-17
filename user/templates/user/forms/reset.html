@@ -1,9 +1,9 @@
 {% if 'token' in request.session %}
-<aside class="right" id="reset-form-aside">
+<footer class="right" id="reset-form-footer">
     <form method="POST" action="{% url 'user:reset' %}" id="reset-form">
         {% with form=forms.reset password=1 %}
         {% include "components/form/base.html" %}
         {% endwith %}
     </form>
-</aside>
+</footer>
 {% endif %}

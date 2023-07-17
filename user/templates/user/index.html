@@ -1,11 +1,16 @@
 {% extends 'templates/cr.html' %}
 
+{% block head %}
+<title>@{{ request.user.username }} / Settings</title>
+{% endblock %}
+
 {% block fixed %}
-{% include "team/fixed/requests.html" %}
-{% include "mate/forms/picture.html" %}
-{% include "mate/forms/request.html" %}
-{% include "team/forms/create.html" %}
 {% include "team/fixed/list.html" %}
+{% include "team/forms/create.html" %}
+{% include "team/fixed/requests.html" %}
+{% include "user/forms/password.html" %}
+{% include "mate/forms/request.html" %}
+{% include "mate/forms/picture.html" %}
 {% include "mate/forms/info.html" %}
 {% endblock %}
 
