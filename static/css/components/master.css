@@ -1,19 +1,3 @@
-#blurred-layer {
-
-    /*
-        The glass effect is from: https://css.glass
-    */
-
-    width: 100vw;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    position: fixed;
-    inset: 0px;
-}
-
 /*
     .message
 */
@@ -22,40 +6,20 @@
     border-bottom: none !important;
 }
 
-.message.info {
-    background: var(--di);
-}
-
-.message.error {
-    background: var(--dd);
-}
-
-.message.warning {
-    background: var(--dw);
-}
-
-.message.success {
-    background: var(--ds);
-}
-
 /*
-    .log
+    #blurred-layer
+    The glass effect is from: https://css.glass
 */
 
-.log {
-    z-index: 2;
-}
-
-.log i.add {
-    color: var(--li);
-}
-
-.log i.change {
-    color: var(--lw);
-}
-
-.log i.delete {
-    color: var(--ld);
+#blurred-layer {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    inset: 0px;
 }
 
 /*
@@ -87,18 +51,6 @@
     bottom: 0px; 
     left: 16px;
     top: 0px;
-}
-
-/*
-    .flex-end
-*/
-
-.flex-row-end {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
 }
 
 /*

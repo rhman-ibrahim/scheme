@@ -35,94 +35,103 @@ section.active {
     box-shadow: var(--bs);   
 }
 
+/*
+    outline
+*/
+
 .info-dark-outline {
     outline: 1.32px solid var(--di);
 }
-
 .danger-dark-outline {
     outline: 1.32px solid var(--dd);
 }
-
 .warning-dark-outline {
     outline: 1.32px solid var(--dw);
 }
-
 .success-dark-outline {
     outline: 1.32px solid var(--ds);
 }
 
-.info-dark-outline {
-    outline: 1.32px solid var(--di);
+.info-light-outline {
+    outline: 1.32px solid var(--li);
 }
-
 .danger-light-outline {
     outline: 1.32px solid var(--ld);
 }
-
 .warning-light-outline {
     outline: 1.32px solid var(--lw);
 }
-
 .success-light-outline {
     outline: 1.32px solid var(--ls);
 }
 
+/*
+    color
+*/
+
 .info-dark-color {
     color: var(--di);
 }
-
 .danger-dark-color {
     color: var(--dd);
 }
-
 .warning-dark-color {
     color: var(--dw);
 }
-
 .success-dark-color {
     color: var(--ds);
 }
 
+.log i.add,
 .info-light-color {
     color: var(--li);
 }
-
+.log i.delete,
 .danger-light-color {
     color: var(--ld);
 }
-
+.log i.change,
 .warning-light-color {
     color: var(--lw);
 }
-
 .success-light-color {
     color: var(--ls);
 }
 
-.danger-button {
-    background: var(--ld);
+/*
+    background
+*/
+
+.info-button:hover,
+.info-dark-background {
+    color: var(--di);
 }
-.danger-button:hover {
+.danger-button:hover,
+.danger-dark-background {
     background: var(--dd);
 }
-
-.warning-button {
-    background: var(--lw);
-}
-.warning-button:hover {
+.warning-button:hover,
+.warning-dark-background {
     background: var(--dw);
 }
-
-.success-button {
-    background: var(--ls);
-}
-.success-button:hover {
+.success-button:hover,
+.success-dark-background {
     background: var(--ds);
 }
 
-.info-button {
+.info-button,
+.info-light-background {
     background: var(--li);
 }
-.info-button:hover {
-    background: var(--di);
+.danger-button,
+.danger-light-background {
+    background: var(--ld);
+}
+.warning-button,
+.warning-light-background {
+    background: var(--lw);
+}
+.success-button,
+.success-light-background {
+    background: var(--ls);
 }
