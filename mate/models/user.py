@@ -7,6 +7,7 @@ from django.db import models
 
 # Models
 from django.contrib.admin.models import LogEntry
+from mate.models.friends import FriendRequest
 from team.models import Circle
 
 # Helpers
@@ -28,7 +29,6 @@ class Profile(models.Model):
             FileExtensionValidator(allowed_extensions=["jpg","jpeg"])
         ]
     )
-    friends = models.ManyToManyField("user.Account", related_name="friends")
 
     def __str__(self):
         return f"{self.user.username}'s profile"
@@ -36,47 +36,32 @@ class Profile(models.Model):
     @property
     def completion_percentage(self):
         return completion([self.name, self.email, self.about])
-    
     @property
     def has_name(self):
         return False if not bool(self.name) else True
-    
     @property
     def has_email(self):
         return False if not bool(self.email) else True
-    
     @property
     def has_about(self):
         return False if not bool(self.about) else True
 
 
-class FriendRequest(models.Model):
-
-    receiver = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="receiver")
-    sender   = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="sender")
-    status   = models.BooleanField(default=False)
-
-    def accept(self):
-        if self.status:
-            self.receiver.profile.friends.add(self.sender)
-            self.sender.profile.friends.add(self.receiver)
-
 
 class Scheme(models.Model):
 
-    user = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+    user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+    friends = models.ManyToManyField("user.Account", related_name="friends", related_query_name="friends")
 
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
-
     @property
     def friend_requests(self):
         return {
-            'received': FriendRequest.objects.filter(receiver=self.user).order_by('-id'),
-            'sent': FriendRequest.objects.filter(sender=self.user).order_by('-id')
+            'received': FriendRequest.objects.filter(receiver=self.user, status=2).order_by('-id'),
+            'sent': FriendRequest.objects.filter(sender=self.user, status=2).order_by('-id')
         }
-    
     @property
     def circles(self):
         return {

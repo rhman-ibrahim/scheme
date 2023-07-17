@@ -4,11 +4,8 @@
     <div class="column">
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
-            <h3>
-                <i class="material-icons"></i>
-                <span></span>
-            </h3>
             <section class="flex-container">
+                {% if request.user.scheme.friend_requests.sent.count %}
                 {% for req in request.user.scheme.friend_requests.sent %}
                 <div class="flex-box-row">
                     <div class="flex-row-start">
@@ -16,10 +13,18 @@
                         <h4>{{ req.receiver.username }}</h4>
                     </div>
                     <nav class="flex-row-end">
-                        <a href="#" class="material-icons">close</a>
+                        <a href="{{ req.cancel }}" class="material-icons">close</a>
                     </nav>
-                </ul>
+                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="flex-box-col">
+                    <p>There are no pending requests that have been sent, <b>Add</b> a friend?</p>
+                    <ul class="text-align-right">
+                        <li class="material-icons" onclick="Fixed.open('#mate-form-footer')">outgoing_mail</li>
+                    </ul>
+                </div>
+                {% endif %}
             </section>
         </section>
     </div>

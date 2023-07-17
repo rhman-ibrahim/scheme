@@ -1,2 +1,2 @@
-from .friendship import *
+from .friends import *
 from .profile import *
