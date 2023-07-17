@@ -1,0 +1,27 @@
+{% load user_filters %}
+
+<aside class="left" id="received-requests-aside">
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="widget">
+            <h3>
+                <i class="material-icons"></i>
+                <span></span>
+            </h3>
+            <section class="flex-container">
+                {% for req in request.user.scheme.friend_requests.received %}
+                <ul class="flex-box-row">
+                    <div class="flex-row-start">
+                        <img src="{{ req.sender|profile_picture_url }}" alt="" class="circle-24">
+                        <h4>{{ req.sender.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <a href="#" class="material-icons">check</a>
+                        <a href="#" class="material-icons">close</a>
+                    </nav>
+                </ul>
+                {% endfor %}
+            </section>
+        </section>
+    </div>
+</aside>

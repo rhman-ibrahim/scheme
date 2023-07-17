@@ -1,13 +1,18 @@
-# Django
-from django.db.models import Q
-from django.contrib.admin.models import LogEntry
+# Validators
 from django.core.validators import FileExtensionValidator
-from django.contrib.admin.models import LogEntry
+
+# DB
+from django.db.models import Q
 from django.db import models
-# Helpers
-from helpers.functions import completion, profile_picture_path_handler
-# Circles
+
+# Models
+from django.contrib.admin.models import LogEntry
 from team.models import Circle
+
+# Helpers
+from helpers.functions import (
+    completion, profile_picture_path_handler
+)
 
 
 class Profile(models.Model):
@@ -58,14 +63,24 @@ class FriendRequest(models.Model):
 
 
 class Scheme(models.Model):
+
     user = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
+
+    @property
+    def friend_requests(self):
+        return {
+            'received': FriendRequest.objects.filter(receiver=self.user).order_by('-id'),
+            'sent': FriendRequest.objects.filter(sender=self.user).order_by('-id')
+        }
+    
     @property
     def circles(self):
         return {
+            'all': Circle.objects.filter(Q(founder=self.user) or Q(members=self.user)).order_by('-created'),
             'as_founder':Circle.objects.filter(founder=self.user).order_by('-created'),
-            'as_member':Circle.objects.filter(members=self.user).order_by('-created'),
-            'all': Circle.objects.filter(Q(founder=self.user) or Q(members=self.user)).order_by('-created')
+            'as_member':Circle.objects.filter(members=self.user).order_by('-created')
         }
