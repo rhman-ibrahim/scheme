@@ -18,4 +18,5 @@ gnome-terminal --tab --title "Celery/Worker" -- bash -c "celery -A scheme worker
 # 4 - Run Celery Beat
 gnome-terminal --tab --title "Celery/Beat" -- bash -c "celery -A scheme beat -l info"
 
+# 5 - Open VSCODE
 code .
