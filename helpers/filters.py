@@ -6,8 +6,34 @@ from django import template
 
 register = template.Library()
 
-# Model
+# Message
+@register.filter
+def message(tag, prop):
 
+    tags = {
+        "error": {
+            'color':'danger-dark-color',
+            'icon':'error'
+        },
+        "info": {
+            'color':'info-dark-color',
+            'icon':'info'
+        },
+        "warning": {
+            'color':'warning-dark-color',
+            'icon':'warning'
+        },
+        "success": {
+            'color':'success-dark-color',
+            'icon':'done'
+        },
+    }
+
+    tag_props = tags.get(tag, {})
+    return tag_props.get(prop, '')
+
+
+# Model
 @register.filter
 def get_class(value):
     return value.__class__.__name__
@@ -15,23 +41,28 @@ def get_class(value):
 # Time
 @register.filter
 def ago(time_stamp):
-    if isinstance(time_stamp, stamp): return timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc))
+    if isinstance(time_stamp, stamp):
+        return timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc))
     return "---"
-
-
 @register.filter
 def ago_shorten(time_stamp):
     if isinstance(time_stamp, stamp):
         statment = str(timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc)))
-        if "second" in statment: return statment.replace("second", "sec")
-        if "minute" in statment: return statment.replace("minute", "min")
-        if "month" in statment: return statment.replace("month", "mth")
-        if "week" in statment: return statment.replace("week", "wk")
-        if "year" in statment: return statment.replace("year", "yr")
-        if "hour" in statment: return statment.replace("hour", "hr")
-        if "day" in statment: return statment.replace("day", "dy")
-    return "--"
-
+        if "second" in statment:
+            return statment.replace("second", "sec")
+        if "minute" in statment:
+            return statment.replace("minute", "min")
+        if "month" in statment:
+            return statment.replace("month", "mth")
+        if "week" in statment:
+            return statment.replace("week", "wk")
+        if "year" in statment:
+            return statment.replace("year", "yr")
+        if "hour" in statment:
+            return statment.replace("hour", "hr")
+        if "day" in statment:
+            return statment.replace("day", "dy")
+    return statment
 
 # Numbers
 @register.filter
@@ -44,18 +75,12 @@ def float_to_percentage(fraction):
 def replace_underscores(text):
     return str(text).replace("_", " ").title()
 
-# Message
-@register.filter
-def message_tag_icon(tag):
-    if tag in ["error", "info", "warning"]:
-        return tag
-    elif tag == "success":
-        return "check_circle"
-    else:
-        return "mail"
-
 # Logs
 @register.filter
 def flag_repr(index):
-    flags = {"1":"add", "2":"change", "3":"delete"}
+    flags = {
+        "1":"add",
+        "2":"change",
+        "3":"delete"
+    }
     return flags[f'{index}']

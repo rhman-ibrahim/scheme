@@ -1,8 +1,9 @@
 {% load filters %}
+
 {% for message in messages %}
-<header class="message {{ message.tags }}-dark-background" id="{{ message.tags }}-message-number-{{ forloop.counter }}">
-    <h3 class="text-capitalize">
-        <i class="material-icons">{{ message.tags|message_tag_icon }}</i>
+<header class="message" id="{{ message.tags }}-message-number-{{ forloop.counter }}">
+    <h3 class="text-capitalize {{ message.tags|message:"color" }}">
+        <i class="material-icons">{{ message.tags|message:"icon" }}</i>
         <span>{{ message.tags }}</span>
     </h3>
     <p>{{ message }}</p>

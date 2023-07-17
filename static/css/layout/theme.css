@@ -36,69 +36,6 @@ section.active {
 }
 
 /*
-    outline
-*/
-
-.info-dark-outline {
-    outline: 1.32px solid var(--di);
-}
-.danger-dark-outline {
-    outline: 1.32px solid var(--dd);
-}
-.warning-dark-outline {
-    outline: 1.32px solid var(--dw);
-}
-.success-dark-outline {
-    outline: 1.32px solid var(--ds);
-}
-
-.info-light-outline {
-    outline: 1.32px solid var(--li);
-}
-.danger-light-outline {
-    outline: 1.32px solid var(--ld);
-}
-.warning-light-outline {
-    outline: 1.32px solid var(--lw);
-}
-.success-light-outline {
-    outline: 1.32px solid var(--ls);
-}
-
-/*
-    color
-*/
-
-.info-dark-color {
-    color: var(--di);
-}
-.danger-dark-color {
-    color: var(--dd);
-}
-.warning-dark-color {
-    color: var(--dw);
-}
-.success-dark-color {
-    color: var(--ds);
-}
-
-.log i.add,
-.info-light-color {
-    color: var(--li);
-}
-.log i.delete,
-.danger-light-color {
-    color: var(--ld);
-}
-.log i.change,
-.warning-light-color {
-    color: var(--lw);
-}
-.success-light-color {
-    color: var(--ls);
-}
-
-/*
     background
 */
 
@@ -134,4 +71,64 @@ section.active {
 .success-button,
 .success-light-background {
     background: var(--ls);
+}
+
+/*
+    color
+*/
+
+.info-dark-color {
+    color: var(--di);
+}
+.danger-dark-color {
+    color: var(--dd);
+}
+.warning-dark-color {
+    color: var(--dw);
+}
+.success-dark-color {
+    color: var(--ds);
+}
+
+.info-light-color {
+    color: var(--li);
+}
+.danger-light-color {
+    color: var(--ld);
+}
+.warning-light-color {
+    color: var(--lw);
+}
+.success-light-color {
+    color: var(--ls);
+}
+
+/*
+    outline
+*/
+
+.info-dark-outline {
+    outline: 1.32px solid var(--di);
+}
+.danger-dark-outline {
+    outline: 1.32px solid var(--dd);
+}
+.warning-dark-outline {
+    outline: 1.32px solid var(--dw);
+}
+.success-dark-outline {
+    outline: 1.32px solid var(--ds);
+}
+
+.info-light-outline {
+    outline: 1.32px solid var(--li);
+}
+.danger-light-outline {
+    outline: 1.32px solid var(--ld);
+}
+.warning-light-outline {
+    outline: 1.32px solid var(--lw);
+}
+.success-light-outline {
+    outline: 1.32px solid var(--ls);
 }

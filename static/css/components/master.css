@@ -3,7 +3,9 @@
 */
 
 .message {
-    border-bottom: none !important;
+    box-shadow: var(--bs);
+    background: var(--d1);
+    border-bottom: none;
 }
 
 /*
