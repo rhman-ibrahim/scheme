@@ -1,3 +1,6 @@
+# URLS
+from django.urls import reverse
+
 # Validators
 from django.core.validators import FileExtensionValidator
 
@@ -30,6 +33,9 @@ class Profile(models.Model):
         ]
     )
 
+    def index(self):
+        return reverse("mate:profile", args=[str(self.user.username)])
+
     def __str__(self):
         return f"{self.user.username}'s profile"
 
@@ -45,7 +51,7 @@ class Profile(models.Model):
     @property
     def has_about(self):
         return False if not bool(self.about) else True
-
+    
 
 
 class Scheme(models.Model):
@@ -53,15 +59,20 @@ class Scheme(models.Model):
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
     friends = models.ManyToManyField("user.Account", related_name="friends", related_query_name="friends")
 
+    def __str__(self):
+        return self.user.username
+
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
+    
     @property
     def friend_requests(self):
         return {
             'received': FriendRequest.objects.filter(receiver=self.user, status=2).order_by('-id'),
             'sent': FriendRequest.objects.filter(sender=self.user, status=2).order_by('-id')
         }
+    
     @property
     def circles(self):
         return {

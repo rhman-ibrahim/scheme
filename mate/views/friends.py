@@ -1,15 +1,20 @@
 # Django
-from django.contrib.admin.models import ADDITION, CHANGE, DELETION
 from django.shortcuts import redirect
 from django.contrib import messages
+
+# Errors
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
+
+# Models
+from django.contrib.admin.models import ADDITION, CHANGE, DELETION
+from mate.models import FriendRequest
+from user.models import Account
 
 # Functions & Decorators
 from user.decorators import is_authenticated, is_guest
 from helpers.functions import get_form_errors, log
 
-# Models
-from mate.models import FriendRequest
-from user.models import Account
 
 # Forms
 from mate.forms import AccountUsernameForm
@@ -21,38 +26,38 @@ def create_friend_request(request):
 
     if request.method == "POST":
     
-        form = AccountUsernameForm(request.POST)
+        try:
     
-        if form.is_valid():
-    
-            try:
-
+            form = AccountUsernameForm(request.POST)
+            if form.is_valid():
                 if form.cleaned_data['username'] == request.user.username:
                     messages.info(
                         request,
                         "it is good to try to know yourself more, take some rest and meditate"
                     )
                     return redirect("user:back")
-
                 account = Account.objects.get(username=form.cleaned_data['username'])
-                f_req   = FriendRequest.objects.create(
-                    receiver=account,
-                    sender=request.user
-                )
-                
+                f_req   = FriendRequest.objects.create(receiver=account, sender=request.user)
                 messages.success(
                     request,
                     f"friend request was sent successfully to {account.username}"
                 )
-
-                log(request.user.id, f_req, ADDITION,
+                log(
+                    request.user.id, f_req, ADDITION,
                     f"sent {account.username} a friend request"
                 )
+        
+        except Account.DoesNotExist:
+            messages.error(request, "no account was found")
 
-            except Account.DoesNotExist:
-                messages.error(request, "no account was found")
-        else:
-            get_form_errors(request, form)
+        except ValidationError as e:
+            messages.error(request, e.messages[0])
+
+        except IntegrityError:
+            messages.error(request, "you can't send this user a friend request")
+            messages.info(request, "there is a pending or a previous request")
+
+        else: get_form_errors(request, form)
     return redirect("user:back") 
 
 @is_authenticated(True)

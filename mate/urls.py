@@ -4,6 +4,8 @@ from . import views
 
 app_name    = "mate"
 urlpatterns = [
+    # Template
+    path('<str:username>/', views.profile, name='profile'),
     # Update
     path('update/info/', views.update_profile_info, name='info'),
     path('update/picture/', views.update_profile_picture, name='picture'),

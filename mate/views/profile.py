@@ -1,14 +1,51 @@
 # Django
 from django.contrib.admin.models import CHANGE
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib import messages
-# Helpers
+
+# Models
+from django.db.models import Q, Count
+from mate.models import FriendRequest
+from ping.models import Room
+from user.models import Account
+
+# Functions & Decorators
 from helpers.functions import get_form_errors, log
-# User
 from user.decorators import is_authenticated, is_guest
-# Mates
+
+
+# Forms
 from mate.forms import  ProfilePictureForm, ProfileInfoForm
 
+
+@is_authenticated(True)
+@is_guest(False)
+def profile(request, username):
+    
+    instance  = Account.objects.get(username=username)
+    friendsip = FriendRequest.objects.filter(
+        (Q(receiver=instance) & Q(sender=request.user)) |
+        (Q(sender=instance) & Q(receiver=request.user)) &
+        Q(status=1)
+    )
+
+    if friendsip.exists():
+        room    = Room.objects.get(serial=friendsip.first().serial)
+    else:
+        messages.info(request, "shhhh !!")
+        return redirect("user:back")
+    
+    return render(
+        request,
+        "mate/index.html",
+            {
+                'profile': instance.profile,
+                'room': room,
+                'column': {
+                    'icon':'person'
+                }
+            }
+        )
 
 @is_authenticated(True)
 @is_guest(False)

@@ -9,9 +9,10 @@ def reader(sender, instance, created, **kwargs):
     if int(instance.status) == 1:
 
         receiver = Scheme.objects.get(user=instance.receiver)
-        receiver.friends.add(sender.user)
-        receiver.save()
-
         sender   = Scheme.objects.get(user=instance.sender)
+
+        receiver.friends.add(sender.user)
         sender.friends.add(receiver.user)
+        
+        receiver.save()
         sender.save()

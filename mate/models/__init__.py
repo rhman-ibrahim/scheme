@@ -1,2 +1,2 @@
 from .friends import FriendRequest
-from .user import Profile, Scheme
+from .profile import Profile, Scheme
