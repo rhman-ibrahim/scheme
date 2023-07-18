@@ -18,7 +18,7 @@ main {
 
 @media (width >= 720px) {
 
-    #lr-grid #left {
+    #lr-grid #center {
         grid-column: 1/7;
     }
     

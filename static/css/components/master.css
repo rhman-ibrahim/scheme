@@ -86,7 +86,6 @@
 @media (width > 360px) {
 
     aside .column-button,
-    #left .column-button,
     #right .column-button {
         display: none;
     }
@@ -95,7 +94,7 @@
 
 @media (width >= 720px) {
 
-    #lr-grid #left .column-button {
+    #lr-grid #center .column-button {
         display: none;
     }
 
