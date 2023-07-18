@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "team/fixed/list.html" %}
 {% include "team/forms/create.html" %}
 {% include "team/fixed/requests.html" %}
-{% include "user/forms/password.html" %}
+{% include "team/fixed/list.html" %}
+{% include "mate/forms/info.html" %}
 {% include "mate/forms/request.html" %}
 {% include "mate/forms/picture.html" %}
-{% include "mate/forms/info.html" %}
+{% include "mate/fixed/received.html" %}
+{% include "mate/fixed/friends.html" %}
+{% include "mate/fixed/sent.html" %}
+{% include "user/forms/password.html" %}
 {% endblock %}
 
 {% block center %}

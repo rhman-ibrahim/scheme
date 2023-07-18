@@ -58,7 +58,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     objects        = UserManager()
 
     def __str__(self):
-        return f"{self.username}'s account"
+        return self.username
     
     @property
     def state(self):

@@ -1,14 +1,13 @@
-# Django
-from django.shortcuts import render, redirect
+# Response
 from django.http import HttpResponseRedirect
-# Team
-from team.forms import CircleForm
-# Mate
-from mate.forms import AccountUsernameForm
-# User
-from mate.forms import ProfilePictureForm, ProfileInfoForm
+from django.shortcuts import render, redirect
+# Decorators
 from user.decorators import is_authenticated, is_guest
+# Forms
+from mate.forms import ProfilePictureForm, ProfileInfoForm
+from mate.forms import AccountUsernameForm
 from user.forms import  PasswordUpdateForm
+from team.forms import CircleForm
 
 
 def back(request):
