@@ -8,7 +8,7 @@
 </head>
 <body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
     <main data-url="{{ request.resolver_match.url_name }}" id="c-grid">
-        <section id="center">
+        <section id="main">
             <div class="column">
                 {% block center %}
                 {% endblock %}

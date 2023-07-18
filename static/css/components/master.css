@@ -94,7 +94,7 @@
 
 @media (width >= 720px) {
 
-    #lr-grid #center .column-button {
+    #lr-grid #main .column-button {
         display: none;
     }
 

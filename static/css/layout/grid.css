@@ -6,7 +6,7 @@ main {
     margin: auto;
 }
 
-#center,
+#main,
 #lr-grid #left {
     grid-column: 1/13;
 }
@@ -18,7 +18,7 @@ main {
 
 @media (width >= 720px) {
 
-    #lr-grid #center {
+    #lr-grid #main {
         grid-column: 1/7;
     }
     
@@ -48,7 +48,7 @@ main {
         width: 100%;
     }
 
-    #cr-grid #center {
+    #cr-grid #main {
         grid-column: 1/9;
     }
 
@@ -61,8 +61,8 @@ main {
         grid-column: 1/5;
     }
 
-    #lc-grid #center,
-    #lcr-grid #center {
+    #lc-grid #main,
+    #lcr-grid #main {
         grid-column: 5/13;
     }
 
@@ -78,7 +78,7 @@ main {
         grid-column: 1/4;
     }
 
-    #lcr-grid #center {
+    #lcr-grid #main {
         grid-column: 4/10;
     }
 

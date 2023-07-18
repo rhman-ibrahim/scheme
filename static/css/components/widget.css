@@ -108,17 +108,17 @@
 
 @media (width >= 720px) {
 
-    #center .flex-container:not(.flex-rows) {
+    #main .flex-container:not(.flex-rows) {
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    #center .flex-container:not(.flex-rows) .flex-box-col {
+    #main .flex-container:not(.flex-rows) .flex-box-col {
         max-width: calc(calc(100% - 8px) / 2);
         flex: calc(calc(100% - 8px) / 2);
     }
 
-    #center .flex-container:not(.flex-rows) .flex-box-col.full-row {
+    #main .flex-container:not(.flex-rows) .flex-box-col.full-row {
         max-width: 100%;
         flex: 100%;
     }
