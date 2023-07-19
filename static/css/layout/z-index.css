@@ -12,7 +12,9 @@ aside,
 header,
 footer,
 #left,
-#right {
+#left .column-button,
+#right,
+#right .column-button {
     z-index: 16;
 }
 
@@ -20,7 +22,7 @@ footer,
     z-index: 8;
 }
 
-.column-button {
+#main .column-button {
     z-index: 4;
 }
 

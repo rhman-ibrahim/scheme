@@ -2,43 +2,44 @@
     <>
 */
 
-body {
+html,
+body,
+input,
+textarea,
+button {
     font-family: 'Ubuntu', sans-serif;
-    font-weight: 400;
+    color: var(--d4);
+    font-weight: 300;
     font-size: 16px;
 }
 
 h1,
 h2,
 h3,
-h4,
-.cell {
-    text-transform: capitalize;
+h4 {
     display: table-cell;
+    text-transform: capitalize;
 }
 
-h1,
-h1 .material-icons,
-h1 .material-symbols-outlined {
+h1 {
     font-size: 1.75rem;
 }
 
-h2,
-h2 .material-icons,
-h2 .material-symbols-outlined {
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
     font-size: 1.25rem;
 }
 
-h3,
-h3 .material-icons,
-h3 .material-symbols-outlined {
-    font-size: 1rem;
+small {
+    font-size: .75rem;
 }
 
-h4,
-h4 .material-icons,
-h4 .material-symbols-outlined {
-    font-size: .85rem;
+.material-icons
+.material-symbols-outlined {
+    font-size: inherit !important;
 }
 
 h1 *,
@@ -50,21 +51,14 @@ h4 *,
 }
 
 p {
-    text-transform: none;
-    font-weight: 300;
-    line-height: 1.4;
-    padding: 0px 4px;
     font-size: 1rem;
+    line-height: 1.4;
+    text-transform: none;
+    padding: 0px 4px;
 }
 
 span {
     display: inline-block;
-}
-
-small,
-small .material-icons,
-small .material-symbols-outlined {
-    font-size: .75rem;
 }
 
 b {
@@ -84,7 +78,7 @@ button,
 }
 
 button {
-    font-size: inherit;
+    font-size: 1rem;
     background: none;
     border: none;
 }

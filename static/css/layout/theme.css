@@ -132,3 +132,20 @@ section.active {
 .success-light-outline {
     outline: 1.32px solid var(--ls);
 }
+
+/*
+*/
+
+html,
+body,
+main,
+section .column {
+    background: var(--d1);
+}
+
+
+header,
+footer,
+aside .column { 
+    background: var(--d2);
+}

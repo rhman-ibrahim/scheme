@@ -91,3 +91,43 @@ main {
     }
 
 }
+
+.column-button {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    line-height: 24px;
+    outline: 1.32px solid var(--d3);
+    box-shadow: var(--bs);
+    background: var(--d2);
+    border-radius: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+@media (width > 360px) {
+
+    aside .column-button,
+    #right .column-button {
+        display: none;
+    }
+    
+}
+
+@media (width >= 720px) {
+
+    #lr-grid #main .column-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1080px) {
+
+    #lc-grid .column-button,
+    #cr-grid .column-button {
+        display: none;
+    }
+
+}
