@@ -1,6 +1,6 @@
-<ul data-serial="{{ room.serial }}" ondblclick="Fixed.open('#room-input_button-container')" id="room">
+<ul data-serial="{{ room.serial }}" id="room" class="{{ room.conversation }}">
 </ul>
-<nav data-username="{{ request.user.username }}" id="room-input_button-container">
+<nav data-username="{{ request.user.username }}" id="room-input">
     <input type="text" name="message" placeholder="type...." id="message">
-    <button type="button" class="material-symbols-outlined" id="sendButton">send</button>
+    <button type="button" class="material-icons" id="sendButton">send</button>
 </nav>

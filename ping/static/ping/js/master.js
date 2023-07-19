@@ -1,50 +1,64 @@
-ROOM.fixChatBoxWidth();
-
-const SERIAL        = ROOM.data().serial;
-const USERNAME      = ROOM.data().username;
+const SERIAL        = ROOM.get().serial;
 const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${SERIAL}/`);
-const BUTTON        = document.querySelector('#sendButton');
 
-SOCKET.onerror      = function(error) {
-    console.error('WebSocket error:', error);
-};
-
-BUTTON.onclick      = e => {
-    SOCKET.send(
-        JSON.stringify(
-            {
-                'sender': String(USERNAME),
-                'body': String(document.querySelector('#message').value)
+document.addEventListener(
+    'DOMContentLoaded', 
+    () => {
+        fetch(`http://${window.location.host}/dapi/${SERIAL}/`)
+        .then(
+            response => response.json()
+        )
+        .then(
+            data => {
+                const FRAGMENT = document.createDocumentFragment();
+                data.forEach(
+                    message => {
+                        ROOM.append(
+                            FRAGMENT,
+                            message
+                        )
+                    }
+                );
+                Template.append(
+                    ROOM.get().conversation,
+                    [
+                        FRAGMENT
+                    ]
+                )
+                ROOM.scroll();
             }
         )
-    );
-    document.querySelector('#message').value = '';
+        .catch(
+            error => console.log(error)
+        );
+    }
+)
+
+document.getElementById('sendButton').onclick = () => {
+    if (ROOM.input()) {
+        SOCKET.send(ROOM.message());
+        ROOM.clear();
+    } 
 }
 
-SOCKET.onmessage    = e => {
-    const data      = JSON.parse(e.data);
-    if (data.event === 'message') {
-        ROOM.messageAppend(ROOM.UI(), data);
-    }
+SOCKET.onmessage     = received => {
+    const data       = JSON.parse(received.data);
     if (data.event === 'notify') {
-        let notification = String(data.notification);
-        if (!notification.includes(USERNAME)) {
-            let li         = document.createElement('li');
-            li.textContent = `${notification}`;
-            li.classList.add('notification');
-            ROOM.appendChild(li);
-        };
+        Template.append(
+            ROOM.get().conversation,
+            [
+                ROOM.li(data.notification)
+            ]
+        );
+    }
+    if (data.event === 'message') {
+        ROOM.append(
+            ROOM.get().conversation,
+            data
+        );
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch(`http://${window.location.host}/dapi/${SERIAL}/`)
-    .then(response => response.json())
-    .then(
-        data => {
-            const FRAGMENT = document.createDocumentFragment();
-            data.forEach(message => ROOM.messageAppend(FRAGMENT, message));
-            ROOM.UI().append(FRAGMENT);
-        }
-    ).catch(error => console.log(error));
-})
+SOCKET.onerror       = error => {
+    console.error('WebSocket error:', error);
+}

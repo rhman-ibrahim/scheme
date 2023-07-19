@@ -1,6 +1,5 @@
 # Django
 from django.db import models
-from django.utils.crypto import get_random_string
 # Helpers
 from helpers.functions import generate_serial
 
@@ -12,7 +11,6 @@ ROOM_STATUS = (
 
 class Room(models.Model):
 
-    circle   = models.ForeignKey("team.Circle", on_delete=models.CASCADE, null=True, blank=False)
     serial   = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     status   = models.IntegerField(choices=ROOM_STATUS, default=0, blank=False, null=False)
     members  = models.ManyToManyField("user.Account")
@@ -23,6 +21,10 @@ class Room(models.Model):
     def get_status_icon(self):
         if self.status == 0: return "line_start_circle"
         return "line_end_circle"
+    
+    @property
+    def conversation(self):
+        return "group" if self.members.count() > 2 else "one-to-one"
     
 
 class Message(models.Model):
