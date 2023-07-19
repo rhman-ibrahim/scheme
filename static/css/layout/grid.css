@@ -7,7 +7,7 @@ main {
 }
 
 #main,
-#lr-grid #left {
+#lr-grid #main {
     grid-column: 1/13;
 }
 
@@ -25,7 +25,7 @@ main {
     #lr-grid #right {
         display: flex;
         z-index: initial;
-        position: static;
+        position: sticky;
         grid-column: 7/13;
         width: 100%;
     }
@@ -43,7 +43,7 @@ main {
     #lc-grid #left,
     #lcr-grid #left {
         z-index: initial;
-        position: static;
+        position: sticky;
         display: flex;
         width: 100%;
     }
@@ -85,7 +85,7 @@ main {
     #lcr-grid #right {
         display: flex;
         z-index: initial;
-        position: static;
+        position: sticky;
         grid-column: 10/13;
         width: 100%;
     }

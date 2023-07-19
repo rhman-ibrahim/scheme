@@ -37,6 +37,10 @@ footer::-webkit-scrollbar,
     display: none;
 }
 
+#main {
+    position: relative;
+}
+
 /*
     .column
 */
