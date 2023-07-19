@@ -183,6 +183,10 @@ class Template {
         let element = document.querySelector(selector);
         if (document.body.contains(element)) document.body.removeChild(element);
     }
+    static append = (parent, children) => {
+        children.forEach(child => parent.appendChild(child));
+        return parent;
+    }
     static writeToClipboard = (element, attribute) => {
         let dataToCopy = element.getAttribute(`data-${attribute}`);
         navigator.clipboard.writeText(dataToCopy)
