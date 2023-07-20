@@ -8,8 +8,10 @@ def is_authenticated(status):
             if status == request.user.is_authenticated:
                 return view(request, *args, **kwargs)
             else:
-                if status: messages.warning(request, "you have to signin first.")
-                messages.warning(request, "you have to signout first.")
+                if status:
+                    messages.warning(request, "you have to signin first.")
+                else:
+                    messages.warning(request, "you have to signout first.")
                 return redirect('user:navigate')
         return wrapper
     return decorator
