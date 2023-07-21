@@ -12,16 +12,16 @@
 {% include "mate/forms/request.html" %}
 {% include "mate/forms/picture.html" %}
 {% include "mate/fixed/received.html" %}
-{% include "mate/fixed/friends.html" %}
+{% include "mate/fixed/list.html" %}
 {% include "mate/fixed/sent.html" %}
 {% include "user/forms/password.html" %}
 {% endblock %}
 
 {% block center %}
 {% include "user/widgets/navigate.html" %}
-{% include "user/widgets/security.html" %}
-{% include "user/widgets/friends.html" %}
 {% include "user/widgets/circles.html" %}
+{% include "user/widgets/friends.html" %}
+{% include "user/widgets/security.html" %}
 {% endblock %}
 
 {% block right %}
