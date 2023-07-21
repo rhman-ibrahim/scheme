@@ -108,6 +108,7 @@ USE_TZ        = True
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
     BASE_DIR / 'ping/static',
+    BASE_DIR / 'home/static'
 ]
 
 STATIC_URL          = '/static/'
