@@ -1,13 +1,16 @@
 # Response
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+
 # Decorators
 from user.decorators import is_authenticated, is_guest
+from team.decorators import is_logined
+
 # Forms
+from team.forms import CircleForm, CircleLoginForm
 from mate.forms import ProfilePictureForm, ProfileInfoForm
 from mate.forms import AccountUsernameForm
 from user.forms import  PasswordUpdateForm
-from team.forms import CircleForm
 
 
 def back(request):
@@ -15,6 +18,7 @@ def back(request):
 
 @is_authenticated(True)
 @is_guest(False)
+@is_logined(False)
 def settings(request):
     return render(
         request,
@@ -24,8 +28,9 @@ def settings(request):
                 'info': ProfileInfoForm(instance=request.user.profile),
                 'password': PasswordUpdateForm(False),
                 'picture': ProfilePictureForm,
-                'circle': CircleForm,
-                'mate': AccountUsernameForm
+                'mate': AccountUsernameForm,
+                'login': CircleLoginForm,
+                'circle': CircleForm
             },
             'column': {
                 'icon': 'person'

@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 # Helpers
 from helpers.functions import get_form_errors, log
+from team.decorators import is_logined
 # User
 from user.models import Token
 from user.decorators import is_authenticated, is_guest
@@ -13,6 +14,7 @@ from user.forms import PasswordUpdateForm, PassWordResetForm
 
 @is_authenticated(True)
 @is_guest(False)
+@is_logined(False)
 def update_password(request):
     if request.method == 'POST':
         form = PasswordUpdateForm(request.user, request.POST)

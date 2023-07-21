@@ -5,7 +5,6 @@ from django.contrib import messages
 from helpers.functions import get_form_errors
 # Team
 from team.models import Circle
-from team.decorators import circle_session
 # Ping
 from ping.models import Room
 # Blog
@@ -13,7 +12,6 @@ from .forms import SignalForm
 from .models import Signal
 
 
-@circle_session
 def create_signal(request):
     if  request.method == "POST":
         form = SignalForm(request.POST)
@@ -38,7 +36,6 @@ def update_status(request, serial):
     room.save()
     return redirect("user:back")
 
-@circle_session
 def list(request):
     circle  = Circle.objects.get(serial=request.session.get('circle'))
     signals = Signal.objects.filter(circle=circle).order_by('-created')
@@ -58,7 +55,6 @@ def list(request):
         }
     )
     
-@circle_session
 def detail(request, serial):
     signal = Signal.objects.get(serial=serial)
     return render(

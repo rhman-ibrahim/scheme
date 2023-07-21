@@ -8,6 +8,7 @@ from django.contrib import messages
 from scheme.settings import MEDIA_ROOT
 # Helpers
 from helpers.functions import get_form_errors
+from team.decorators import is_logined
 # User
 from user.models import Token
 from user.forms import VerifyForm
@@ -16,6 +17,7 @@ from user.decorators import is_authenticated, is_guest
 
 @is_authenticated(True)
 @is_guest(False)
+@is_logined(False)
 def token(request):
     with open(f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png", 'rb') as f:
         file = f.read()
@@ -47,6 +49,7 @@ def verify(request):
 
 @is_authenticated(True)
 @is_guest(False)
+@is_logined(False)
 def update_token(request):
     token = request.user.token
     if token != None:
