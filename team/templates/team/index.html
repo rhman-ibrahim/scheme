@@ -2,9 +2,11 @@
 {% load static %}
 
 {% block head %}
-<title>{{ circle.name|lower }} by {{ circle.founder.username }}</title>
-<link rel="stylesheet" href="{% static 'ping/css/master.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
 <script src="{% static 'ping/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/room.js' %}" defer></script>
+<title>{{ profile.user.username }}</title>
 {% endblock %}
 
 {% block right %}

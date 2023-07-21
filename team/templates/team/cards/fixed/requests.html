@@ -5,5 +5,11 @@
         <li class="material-icons" onclick="Fixed.open('#requests')">mark_email_unread</li>
     </ul>
 </div>
-{% elif request.resolver_match.app_name == "team" %}
+{% elif request.resolver_match.app_name == "team" and request.user == circle.founder %}
+<div class="flex-box-col">
+    <p><b>Respond</b> to received circle invitations, <span>sent by</span> circle founders.</p>
+    <ul class="text-align-right">
+        <li class="material-icons">rule</li>
+    </ul>
+</div>
 {% endif %}

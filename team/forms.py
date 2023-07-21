@@ -1,12 +1,16 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Circle
 
 
 class CircleForm(forms.ModelForm):
 
-    name = forms.CharField(
+    name        = forms.CharField(
         max_length=32,
         required=True
+    )
+    password    = forms.CharField(
+        widget=forms.PasswordInput()
     )
     description = forms.CharField(
         max_length=512,
@@ -23,4 +27,5 @@ class CircleForm(forms.ModelForm):
 
     class Meta:
         model  = Circle
-        fields = ['name', 'description']
+        fields = ['name', 'password', 'description']
+        

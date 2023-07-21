@@ -8,10 +8,10 @@
     <div class="card" role="describe">
         <p>These requests have been received, sorted from oldest to newest.</p>
         <ul class="end">
-            <li><b>{{ circle.circlerequest_set.count }}</b></li>
+            <li><b>{{ circle.join_requests.count }}</b></li>
         </ul>
     </div>
-    {% for ask in circle.circlerequest_set.all %}
+    {% for ask in circle.join_requests %}
     <ul class="row">
         <li>
             <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">

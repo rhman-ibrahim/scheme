@@ -6,15 +6,14 @@ app_name    = "team"
 urlpatterns = [
     # All
     path('create/', views.create, name="create"),
-    path('link/<str:serial>/', views.link, name="link"),
+    path('request/<str:serial>/', views.create_request, name="request"),
     # Founder
-    path('refresh/', views.refresh, name="refresh"),
+    path('approve/<int:user_id>/', views.approve, name="approve"),
     path('reject/<int:user_id>/', views.reject, name="reject"),
     path('remove/<int:user_id>/', views.remove, name="remove"),
-    path('approve/<int:user_id>/', views.approve, name="approve"),
-    # Members
-    path('leave/', views.leave, name="leave"),
+    # Memebers
     path('login/<str:serial>/', views.login, name="login"),
-    path('logout/', views.logout, name="logout"),
     path('browse/', views.browse, name="browse"),
+    path('logout/', views.logout, name="logout"),
+    path('leave/', views.leave, name="leave"),
 ]

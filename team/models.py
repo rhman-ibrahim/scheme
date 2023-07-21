@@ -1,14 +1,22 @@
+import hashlib
+
 # Django
+from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from django.utils import timezone
-from django.urls import reverse
 from django.db import models
 # Ping
 from ping.models import Room
 # Helpers
 from helpers.functions import generate_serial
 
+
+REQUEST_STATUS = (
+    (0, "Rejected"),
+    (1, "Accepted"),
+    (2, "Pending"),
+)
 
 class Circle(models.Model):
 
@@ -18,52 +26,49 @@ class Circle(models.Model):
     description = models.TextField(max_length=512, blank=True)
     # Users
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
-    requested   = models.ManyToManyField("user.Account", blank=True, related_name="requested", through="CircleRequest")
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="CircleMembership")
+    # Password
+    password    = models.CharField(max_length=128, null=False, blank=False)
     # Time
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"{self.name} by {self.founder.username}"
-
     @property
     def has_description(self):
         return False if not bool(self.description) else True
+    
+    @property
+    def join_requests(self):
+        return CircleRequest.objects.filter(circle=self, status=2)
 
-    def browse(self):
-        return reverse("team:browse")
-
-    def logout(self):
-        return reverse("team:logout")
-            
-    def login(self):
-        return reverse("team:login", args=[str(self.serial)])
-
-    def link(self):
-        return str(reverse("team:link", args=[str(self.serial)]))
-
+    @property
     def logs(self):
         return LogEntry.objects.filter(
             content_type = ContentType.objects.get_for_model(Circle),
             object_id    = self.id
         )
     
-    def user_role(self, user):
-        if user in self.members.all():
-            return "member"
-        elif user == self.founder:
-            return "founder"
-        return None
-    
     @property
-    def room_members_synced(self):
-        room           = Room.objects.get(serial=self.serial)
-        circle_members = [member.id for member in self.members.all()]
-        circle_members.append(self.founder.id)
-        if set(circle_members) == set([member.id for member in room.members.all()]):
-            return True
-        return False
+    def room(self):
+        return Room.objects.get(serial=self.serial)
+
+    def set_password(self, raw_password):
+        self.password = hashlib.sha256(raw_password.encode()).hexdigest()
+    
+    def check_password(self, raw_password):
+        return self.password == hashlib.sha256(raw_password.encode()).hexdigest()
+
+    def user_role(self, user):
+        if user in self.members.all(): return "member"
+        elif user == self.founder: return "founder"
+        return None
+
+    def save(self, *args, **kwargs):
+        if self.password: self.set_password(self.password)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} by {self.founder.username}"    
     
     class Meta:
         unique_together = ('founder', 'name')
@@ -71,6 +76,7 @@ class Circle(models.Model):
 
 class CircleRequest(models.Model):
 
+    status    = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)

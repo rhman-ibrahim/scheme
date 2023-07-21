@@ -68,9 +68,8 @@ def browse(request):
             },
             'circle': circle,
             'room': Room.objects.get(serial=circle.serial),
-            'icons': {
-                'left':"groups",
-                "right":"forum"
+            'column': {
+                'icon':"forum",
             }
         }
     )
