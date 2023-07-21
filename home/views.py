@@ -1,10 +1,10 @@
 # Django
 from django.shortcuts import render
-from django.contrib import messages
 # User
 from user.forms import SignUpForm, SignInForm, VerifyForm, PassWordResetForm
 from user.decorators import is_authenticated
 from user.models import Account
+from mate.models import Profile
 # Circles
 from team.forms import CircleForm
 from team.models import Circle
@@ -32,6 +32,9 @@ def index(request):
             },
             'column': {
                 'icon': 'person'
+            },
+            'about': {
+                'me': Profile.objects.get(user__id=1)
             }
         }
     )
