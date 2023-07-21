@@ -21,7 +21,10 @@ def log(user_id, instance, flag, message=""):
     )
 
 def get_form_errors(request, form):
-    [messages.error(request, error) for field in form for error in field.errors]
+    [
+        messages.error(request, str(error).replace("This field", str(field.name).capitalize()))
+        for field in form for error in field.errors
+    ]
     [messages.error(request, error) for error in form.non_field_errors()]
 
 def completion(fields):
