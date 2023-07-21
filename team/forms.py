@@ -28,4 +28,15 @@ class CircleForm(forms.ModelForm):
     class Meta:
         model  = Circle
         fields = ['name', 'password', 'description']
-        
+
+
+class CircleLoginForm(forms.Form):
+
+    name        = forms.CharField(
+        max_length=32,
+        required=True,
+    )
+    password    = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput()
+    )

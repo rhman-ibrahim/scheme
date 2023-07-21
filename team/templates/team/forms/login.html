@@ -1,0 +1,7 @@
+<footer id="circle-login-form-footer">
+    <form method="POST" action="{% url 'team:login' %}" class="left" id="circle-login-form">
+        {% with form=forms.login password=1 %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</footer>

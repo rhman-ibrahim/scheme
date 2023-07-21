@@ -1,16 +1,19 @@
 # Django
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.admin.models import CHANGE
-# Ping
+
+# Models
 from ping.models import Room
-# User
+from team.models import Circle, CircleRequest
+
+# Functions & Decorators
+from team.decorators import is_logined
 from user.decorators import is_authenticated
 from user.functions import log
-# Team
-from team.models import Circle, CircleRequest
 
 
 @is_authenticated(True)
+@is_logined(True)
 def approve(request, user_id):
     c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
     c_req.status = 1
@@ -24,6 +27,7 @@ def approve(request, user_id):
     return redirect("team:browse")
     
 @is_authenticated(True)
+@is_logined(True)
 def reject(request, user_id):
     c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
     c_req.status = 0
@@ -36,6 +40,7 @@ def reject(request, user_id):
     return redirect("team:browse")
 
 @is_authenticated(True)
+@is_logined(True)
 def remove(request, user_id):
     circle = Circle.objects.get(serial=request.session.get('circle'))
     user   = circle.members.get(id=int(user_id))

@@ -1,22 +1,20 @@
-from django.core.exceptions import ValidationError
-
 # Django
 from django.shortcuts import redirect
 from django.contrib.admin.models import ADDITION, CHANGE
-from django.db import IntegrityError
 from django.contrib import messages
 
-# Helpers
+# Functions & Decorators
 from helpers.functions import get_form_errors, log
-
-# User
 from user.functions import create_a_guest_user
+from team.decorators import is_logined
 
 # Circles
 from team.forms import CircleForm
 from team.models import Circle, CircleRequest
 
 
+
+@is_logined(False)
 def create(request):
     if request.method == "POST":
         form = CircleForm(request.POST)
@@ -39,29 +37,25 @@ def create(request):
             get_form_errors(request, form)
     return redirect("user:back")
 
+@is_logined(False)
 def create_request(request, serial):
-    
     circle = Circle.objects.get(serial=serial)
-    
     if request.user.is_authenticated:
         if circle.user_role(request.user):
             messages.info(request, "you are already a membre.")
             return redirect("user:navigate")
-    else: create_a_guest_user(request)
-    
+    else:
+        create_a_guest_user(request)
     CircleRequest.objects.create(
         circle = circle,
         user   = request.user
     )
-
     messages.success(
         request,
         "join request sent successfully."
     )
-    
     log(
         request.user.id, circle, ADDITION,
         f"requested to join the circle ({circle.name})."
     )
-
     return redirect("user:navigate")

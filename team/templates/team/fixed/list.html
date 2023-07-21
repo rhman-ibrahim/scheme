@@ -11,7 +11,7 @@
             <nav class="flex-box-row">
                 <h3>{{ circle.name }}</h3>
                 <h3 class="text-align-right">
-                    <a class="material-icons" href="{{ circle.browse }}">login</a>
+                    <i class="material-icons" onclick="Circle.loginForm('{{ circle.name }}')">login</i>
                 </h3>
             </nav>
             {% endfor %}
@@ -27,7 +27,7 @@
             <nav class="flex-box-row">
                 <h3>{{ circle.name }}</h3>
                 <h3 class="text-align-right">
-                    <a class="material-icons" href="{{ circle.browse }}">login</a>
+                    <i class="material-icons" onclick="Circle.loginForm('{{ circle.name }}')">login</i>
                 </h3>
             </nav>
             {% endfor %}

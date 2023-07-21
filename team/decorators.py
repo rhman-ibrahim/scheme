@@ -1,13 +1,21 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from team.processors import opened_circle
 
 
-def circle_session(view):
-    def decorator(request, *args, **kwargs):
-        if 'circle' in request.session:
-            return view(request, *args, **kwargs)
-        else:
-            messages.warning(request, "there is no opened circle")
+def is_logined(status):
+    def decorator(view):
+        def wrapper(request, *args, **kwargs):
+            connected = True if 'circle' in request.session else False
+            if request.user.is_authenticated:
+                if status == connected:
+                    return view(request, *args, **kwargs)
+                elif status == True:
+                    messages.warning(request, "you have to login to the circle.")
+                    return redirect('user:navigate')
+                else:
+                    messages.warning(request, "you have to logout to the circle.")
+                    return redirect('team:browse')
+            messages.warning(request, "you have to signin")
             return redirect('user:navigate')
+        return wrapper
     return decorator
