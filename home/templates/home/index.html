@@ -1,6 +1,8 @@
 {% extends 'templates/lc.html' %}
+{% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'home/css/master.css' %}">
 <title>Scheme, express and communicate. Sign-up or create a circle now.</title>
 {% endblock %}
 
@@ -12,8 +14,8 @@
 {% endblock %}
 
 {% block left %}
-{% include "home/widgets/theme.html" %}
 {% include "home/widgets/user.html" %}
+{% include "home/widgets/theme.html" %}
 {% endblock %}
 
 {% block center %}
