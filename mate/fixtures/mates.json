@@ -1,0 +1,12 @@
+[
+  {
+    "model": "mate.Profile",
+    "id": 1,
+    "fields": {
+      "user":1,
+      "name":"rhman ibrahim",
+      "email":"rhmanibrahimmuhammad@gmail.com",
+      "about":"Hello world, my name is Rhman and this is the Scheme. I'm an autodidact passionate web developer interested in Python. I have built Scheme as a project to show-up, as a place to be shared with all, used by all and as an idea to be always under development."
+    }
+  }
+]
