@@ -1,10 +1,17 @@
+import hashlib
+
+# Contrib
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 
+# Utils
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 
+
+def secret(raw_string):
+    return hashlib.sha256(str(raw_string).encode()).hexdigest()
 
 def generate_serial():
     return get_random_string(length=32)
