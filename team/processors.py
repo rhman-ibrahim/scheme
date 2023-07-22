@@ -7,7 +7,7 @@ def opened_circle(request):
         if 'circle' in request.session:
             try:
                 return {
-                    'opened_circle': Circle.objects.get(serial=request.session.get('circle'))
+                    'opened_circle': Circle.objects.get(id=request.session.get('circle'))
                 }
             except Circle.DoesNotExist:
                 messages.warning(request, "circle does not exsit")
