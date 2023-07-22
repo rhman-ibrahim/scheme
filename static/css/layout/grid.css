@@ -103,10 +103,23 @@ main {
     right: 8px;
 }
 
+#lcr-left-button.column-button {
+    position: absolute;
+    bottom: 8px;
+    right: 48px;
+}
+
+#lcr-right-button.column-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
 @media (width > 360px) {
 
     aside .column-button,
-    #right .column-button {
+    #right .column-button,
+    #left .column-button {
         display: none;
     }
     
@@ -123,7 +136,16 @@ main {
 @media (width >= 1080px) {
 
     #lc-grid .column-button,
-    #cr-grid .column-button {
+    #cr-grid .column-button,
+    #lcr-left-button {
+        display: none;
+    }
+
+}
+
+@media (width >= 1440px) {
+
+    #lcr-right-button {
         display: none;
     }
 
