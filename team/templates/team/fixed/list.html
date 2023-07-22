@@ -3,29 +3,23 @@
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
             <div class="flex-box-col">
-                <p>As a founder, you are connected to
-                <span><b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
+                <p>As a founder, you are connected <span>to
+                <b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
+                <ul class="text-align-right">
+                    <i class="material-symbols-outlined">local_police</i>
+                </ul>
             </div>
-            {% if request.user.scheme.circles.as_founder.count %}
-            {% for circle in request.user.scheme.circles.as_founder.all %}
-            <nav class="flex-box-row">
-                <h3>{{ circle.name }}</h3>
-                <h3 class="text-align-right">
-                    <i class="material-icons" onclick="Circle.loginForm('{{ circle.name }}')">login</i>
-                </h3>
-            </nav>
-            {% endfor %}
-            {% endif %}
-        </section>
-        <section class="widget">
             <div class="flex-box-col">
-                <p>As a member, you are connected to
-                <span><b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
+                <p>As a member, you are connected <span>to
+                <b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
+                <ul class="text-align-right">
+                    <i class="material-symbols-outlined">shield</i>
+                </ul>
             </div>
-            {% if request.user.scheme.circles.as_member.count %}
-            {% for circle in request.user.scheme.circles.as_member.all %}
+            {% if request.user.scheme.circles.all.count %}
+            {% for circle in request.user.scheme.circles.all.all %}
             <nav class="flex-box-row">
-                <h3>{{ circle.name }}</h3>
+                <h3 class="text-transform-none">{{ circle.name }}</h3>
                 <h3 class="text-align-right">
                     <i class="material-icons" onclick="Circle.loginForm('{{ circle.name }}')">login</i>
                 </h3>
