@@ -11,12 +11,12 @@ main {
     grid-column: 1/13;
 }
 
-#c-grid,
-#lr-grid {
-    max-width: 720px;
-}
-
 @media (width >= 720px) {
+
+    #c-grid,
+    #lr-grid {
+        max-width: 720px;
+    }
 
     #lr-grid #main {
         grid-column: 1/7;
@@ -32,12 +32,14 @@ main {
 
 }
 
-#cr-grid,
-#lc-grid {
-    max-width: 1080px;
-}
 
 @media (width >= 1080px) {
+    
+    #cr-grid,
+    #lc-grid,
+    #lcr-grid {
+        max-width: 1080px;
+    }
 
     #cr-grid #right,
     #lc-grid #left,
@@ -68,11 +70,12 @@ main {
 
 }
 
-#lcr-grid {
-    max-width: 1440px;
-}
 
 @media (width >= 1440px) {
+    
+    #lcr-grid {
+        max-width: 1440px;
+    }
     
     #lcr-grid #left {
         grid-column: 1/4;
