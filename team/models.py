@@ -1,15 +1,16 @@
-import hashlib
-
 # Django
 from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from django.utils import timezone
 from django.db import models
+
+# Helpers
+from helpers.functions import generate_serial, secret
+
 # Ping
 from ping.models import Room
-# Helpers
-from helpers.functions import generate_serial
+
 
 
 REQUEST_STATUS = (
@@ -51,21 +52,15 @@ class Circle(models.Model):
     @property
     def room(self):
         return Room.objects.get(serial=self.serial)
-
-    def set_password(self, raw_password):
-        self.password = hashlib.sha256(raw_password.encode()).hexdigest()
     
     def check_password(self, raw_password):
-        return self.password == hashlib.sha256(raw_password.encode()).hexdigest()
+        return self.password == secret(raw_password)
 
     def user_role(self, user):
         if user in self.members.all(): return "member"
         elif user == self.founder: return "founder"
         return None
 
-    def save(self, *args, **kwargs):
-        if self.password: self.set_password(self.password)
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.name} by {self.founder.username}"    
