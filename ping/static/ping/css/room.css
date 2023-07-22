@@ -30,6 +30,10 @@
     display: none;
 }
 
+#room ul.outgoing {
+    outline: 1.32px solid var(--d3);
+}
+
 #room ul.incoming {
     background: var(--d3);
     text-align: right;

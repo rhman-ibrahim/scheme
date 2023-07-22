@@ -21,7 +21,6 @@ def ping_room(sender, instance, **kwargs):
 def ping_room(sender, instance, created, **kwargs):
     room, created = Room.objects.get_or_create(serial=instance.serial)
     room.members.set([instance.founder, *instance.members.all()])
-    print([instance.founder, *instance.members.all()])
 
 @receiver(post_save, sender=Signal)
 def ping_room(sender, instance, created, **kwargs):
