@@ -4,13 +4,13 @@ from django.contrib.admin.models import ADDITION, CHANGE
 from django.contrib import messages
 
 # Functions & Decorators
-from helpers.functions import get_form_errors, log
+from helpers.functions import get_form_errors, log, secret
 from user.functions import create_a_guest_user
 from team.decorators import is_logined
 
 # Circles
-from team.forms import CircleForm
 from team.models import Circle, CircleRequest
+from team.forms import CircleForm
 
 
 
@@ -18,23 +18,23 @@ from team.models import Circle, CircleRequest
 def create(request):
     if request.method == "POST":
         form = CircleForm(request.POST)
-        if not request.user.is_authenticated: create_a_guest_user(request)
+        if not request.user.is_authenticated:
+            create_a_guest_user(request)
         if form.is_valid():
             if Circle.objects.filter(name=form.cleaned_data['name'], founder=request.user).exists():
                 messages.error(request, 'You have a circle with this name.')
                 redirect('user:back')
             else:
-                circle         = form.save(commit=False)
-                circle.set_password(form.cleaned_data['password'])
-                circle.founder = request.user
-                circle         = form.save()
+                circle          = form.save(commit=False)
+                circle.founder  = request.user
+                circle.password = secret(form.cleaned_data['password'])
+                circle          = form.save()
                 log(
                     request.user.id, circle, ADDITION,
                     f"created the circle ({circle.name})."
                 )
                 messages.success(request, "your circle is created successfully")
-        else:
-            get_form_errors(request, form)
+        else: get_form_errors(request, form)
     return redirect("user:back")
 
 @is_logined(False)

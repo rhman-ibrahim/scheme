@@ -2,7 +2,10 @@
 from django.contrib.admin.models import CHANGE, DELETION
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.db.models import Q
+
+# Models
+from team.models import Circle
+from ping.models import Room
 
 # Functions & Decorators
 from helpers.functions import log, get_form_errors
@@ -12,9 +15,6 @@ from team.decorators import is_logined
 # Forms
 from team.forms import CircleForm, CircleLoginForm
 
-# Models
-from ping.models import Room
-from team.models import Circle
 
 
 @is_authenticated(True)
@@ -25,15 +25,18 @@ def login(request):
             form = CircleLoginForm(request.POST)
             if form.is_valid():
                 circle = Circle.objects.filter(name=form.cleaned_data['name'])
-                if circle.exists() and circle.first().user_role(request.user) != None:
-                    if circle.first().check_password(form.cleaned_data['password']):
-                        messages.success(request, "welcome")
+                circle = circle.first() if circle.exists() else None
+                if circle != None and circle.user_role(request.user) != None:
+                    if circle.check_password(form.cleaned_data['password']):
                         request.session['circle'] = circle.id
-                    else: messages.error(request, "circle password is wrong")
+                        return redirect("team:browse")
+                    else:
+                        messages.info(request, circle.first().password)
+                        messages.error(request, "circle password is wrong")
                 else: messages.error(request, "circle credentials error")
             else:
                 get_form_errors(request, form)
-    messages.warning(request, "you have to logout from the current circle")
+    messages.warning(request, "login view end")
     return redirect('user:back')
 
 @is_authenticated(True)
@@ -44,13 +47,14 @@ def browse(request):
         request,
         "team/index.html",
         {
+            'circle': circle,
+            'room': Room.objects.get(serial=circle.serial),
             'forms': {
                 'circle': CircleForm(instance=circle)
             },
-            'circle': circle,
-            'room': Room.objects.get(serial=circle.serial),
             'column': {
-                'icon':"forum",
+                'left':"groups",
+                'right':"forum",
             }
         }
     )
