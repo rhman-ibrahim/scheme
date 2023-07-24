@@ -1,6 +1,6 @@
 {% load user_filters %}
 <div class="flex-box-col" role="navigate">
-    <p>Manage your account, recovery token, circles, profile and theme.</p>
+    <p><b>Manage</b> your account, recovery token, circles, profile and theme.</p>
     <nav class="text-align-right">
         <a href="{% url 'user:settings' %}">
             <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">

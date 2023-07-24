@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 
 # Decorators
 from user.decorators import is_authenticated, is_guest
-from team.decorators import is_logined
 
 # Forms
 from team.forms import CircleForm, CircleLoginForm
@@ -18,7 +17,6 @@ def back(request):
 
 @is_authenticated(True)
 @is_guest(False)
-@is_logined(False)
 def settings(request):
     return render(
         request,
