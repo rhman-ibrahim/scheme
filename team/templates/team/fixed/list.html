@@ -20,9 +20,15 @@
             {% for circle in request.user.scheme.circles.all.all %}
             <nav class="flex-box-row">
                 <h3 class="text-transform-none">{{ circle.name }}</h3>
+                {% if opened_circle.id == circle.id %}
+                <a href="{% url 'team:browse' %}" class="text-align-right info-light-color">
+                    <b class="material-icons">diversity_2</b>
+                </a>
+                {% else %}
                 <h3 class="text-align-right">
                     <i class="material-icons" onclick="Circle.loginForm('{{ circle.name }}')">login</i>
                 </h3>
+                {% endif %}
             </nav>
             {% endfor %}
             {% endif %}

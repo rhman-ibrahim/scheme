@@ -1,0 +1,50 @@
+{% load user_filters %}
+<aside class="left" id="members-aside">
+    <div class="column">
+        <button type="button" onclick="Fixed.clear()" class="material-icons column-button">close</button>
+        <section class="widget">
+            <h4>
+                <i class="material-icons">local_police</i>
+                <span>founder</span>
+            </h4>
+            <section class="flex-container">
+                <ul class="flex-box-row">
+                    <div class="flex-row-start">
+                        <h4>{{ circle.founder.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <img
+                            src="{{ circle.founder|profile_picture_url }}"
+                            alt="{{ circle.founder.username }}"
+                            class="circle-24"
+                        >
+                    </nav>
+                </ul>
+            </section>
+        </section>
+        {% if circle.members.count %}
+        <section class="widget">
+            <h4>
+                <i class="material-icons">shield</i>
+                <span>members ({{ circle.members.count }})</span>
+            </h4>
+            {% for member in circle.members.all %}
+            <section class="flex-container">
+                <ul class="flex-box-row">
+                    <div class="flex-row-start">
+                        <h4>{{ member.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <img
+                            src="{{ member|profile_picture_url }}"
+                            alt="{{ member.username }}"
+                            class="circle-24"
+                        >
+                    </nav>
+                </ul>
+            </section>
+            {% endfor %}
+        </section>
+        {% endif %}
+    </div>
+</aside>

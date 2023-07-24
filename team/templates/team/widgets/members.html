@@ -1,38 +1,10 @@
-{% load user_filters %}
-<section class="widget">
-    <h3 class="text-capitalize">
-        <i class="material-icons">admin_panel_settings</i>
-        <span>founder</span>
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">groups</i>
+        <span>friends</span>
     </h3>
-    {% with member=circle.founder %}
-    <ul class="row">
-        <li>
-            <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
-            <span>{{ member.username }}</span>
-        </li>
-        <li>
-        </li>
-    </ul>
-    {% endwith %}
+    <div class="flex-container">
+        {% include "team/cards/fixed/members.html" %}
+        {% include "team/cards/fixed/friends.html" %}
+    </div>
 </section>
-{% if circle.members.count %}
-<section class="widget" id="members">
-    <h3 class="text-capitalize text-right">
-        <span>members</span>
-        <i class="material-icons">group</i>
-    </h3>
-    {% for member in circle.members.all %}
-    <ul class="row">
-        <li>
-            <img src="{{ member|profile_picture_url }}" alt="{{ member.username }}" class="circle-24">
-            <span>{{ member.username }}</span>
-        </li>
-        <li>
-            {% if request.user == circle.founder %}
-            <a href="{% url 'team:remove' member.id %}" class="material-icons">close</a>
-            {% endif %}
-        </li>
-    </ul>
-    {% endfor %}
-</section>
-{% endif %}

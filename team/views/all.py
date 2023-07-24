@@ -14,7 +14,6 @@ from team.forms import CircleForm
 
 
 
-@is_logined(False)
 def create(request):
     if request.method == "POST":
         form = CircleForm(request.POST)

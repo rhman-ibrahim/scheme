@@ -1,14 +1,29 @@
 {% extends 'templates/lcr.html' %}
 {% load static %}
 
+{% block left %}
+{% include "team/widgets/navigate.html" %}
+{% include "team/widgets/members.html" %}
+{% include "team/widgets/founder.html" %}
+{% include "team/widgets/security.html" %}
+{% endblock %}
+
+{% block center %}
+{% endblock %}
+
+{% block right %}
+{% include "ping/room.html" %}
+{% endblock %}
+
+{% block fixed %}
+{% include "team/fixed/warning.html" %}
+{% include "team/fixed/members.html" %}
+{% endblock %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
 <link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
 <script src="{% static 'ping/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/room.js' %}" defer></script>
-<title>{{ profile.user.username }}</title>
-{% endblock %}
-
-{% block right %}
-{% include "ping/room.html" %}
+<title>{{ circle.name }} by {{ circle.founder.username }}</title>
 {% endblock %}

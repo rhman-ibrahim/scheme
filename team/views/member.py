@@ -16,7 +16,6 @@ from team.decorators import is_logined
 from team.forms import CircleForm, CircleLoginForm
 
 
-
 @is_authenticated(True)
 @is_logined(False)
 def login(request):
