@@ -8,5 +8,60 @@
       "email":"rhmanibrahimmuhammad@gmail.com",
       "about":"Hello world, my name is Rhman and this is the Scheme. I'm an autodidact passionate web developer interested in Python. I have built Scheme as a project to show-up, as a place to be shared with all, used by all and as an idea to be always under development."
     }
+  },
+  {
+    "model": "mate.FriendRequest",
+    "id": 1,
+    "fields": {
+      "status":1,
+      "receiver":1,
+      "sender":2,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "mate.FriendRequest",
+    "id": 2,
+    "fields": {
+      "status":1,
+      "receiver":1,
+      "sender":3,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "mate.FriendRequest",
+    "id": 3,
+    "fields": {
+      "status":1,
+      "receiver":1,
+      "sender":4,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "mate.FriendRequest",
+    "id": 4,
+    "fields": {
+      "status":1,
+      "receiver":1,
+      "sender":5,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "mate.FriendRequest",
+    "id": 5,
+    "fields": {
+      "status":1,
+      "receiver":1,
+      "sender":6,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
   }
 ]
