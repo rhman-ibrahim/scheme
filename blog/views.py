@@ -35,25 +35,6 @@ def update_status(request, serial):
     signal.save()
     room.save()
     return redirect("user:back")
-
-def list(request):
-    circle  = Circle.objects.get(serial=request.session.get('circle'))
-    signals = Signal.objects.filter(circle=circle).order_by('-created')
-    return render(
-        request,
-        "blog/index.html",
-        {
-            "forms": {
-                'signal': SignalForm,
-            },
-            'icons': {
-                'left':"diversity_2",
-                "right":"forum"
-            },
-            'signals': signals,
-            'room': Room.objects.get(serial=circle.serial)
-        }
-    )
     
 def detail(request, serial):
     signal = Signal.objects.get(serial=serial)
