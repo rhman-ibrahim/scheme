@@ -13,7 +13,10 @@ from user.decorators import is_authenticated
 from team.decorators import is_logined
 
 # Forms
-from team.forms import CircleForm, CircleLoginForm
+from team.forms import (
+    CircleForm, CircleLoginForm, AddFounderFriendsForm,
+    TransferCircleForm
+)
 
 
 @is_authenticated(True)
@@ -49,7 +52,9 @@ def browse(request):
             'circle': circle,
             'room': Room.objects.get(serial=circle.serial),
             'forms': {
-                'circle': CircleForm(instance=circle)
+                'circle': CircleForm(instance=circle),
+                'friends': AddFounderFriendsForm(instance=circle),
+                'transfer':TransferCircleForm(instance=circle)
             },
             'column': {
                 'left':"groups",

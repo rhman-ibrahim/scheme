@@ -1,5 +1,5 @@
 from django import forms
-from django.core.exceptions import ValidationError
+from user.models import Account
 from .models import Circle
 
 
@@ -40,3 +40,35 @@ class CircleLoginForm(forms.Form):
         required=True,
         widget=forms.PasswordInput()
     )
+
+
+class AddFounderFriendsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = kwargs['instance']
+        self.fields['members'].queryset = instance.founder_friends_queryset()
+
+    class Meta:
+        model   = Circle
+        fields  = ['members']
+        widgets = {
+            'members': forms.CheckboxSelectMultiple()
+        }
+
+
+class TransferCircleForm(forms.ModelForm):
+
+    members = forms.RadioSelect()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = kwargs['instance']
+        self.fields['members'].queryset = instance.members.all()
+    
+    class Meta:
+        model   = Circle
+        fields  = ['members']
+        widgets = {
+            'members': forms.RadioSelect()
+        }

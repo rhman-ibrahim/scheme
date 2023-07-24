@@ -3,7 +3,10 @@ from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from django.utils import timezone
+
+# Models
 from django.db import models
+from user.models import Account
 
 # Helpers
 from helpers.functions import generate_serial, secret
@@ -52,6 +55,14 @@ class Circle(models.Model):
     @property
     def room(self):
         return Room.objects.get(serial=self.serial)
+    
+    def founder_friends_queryset(self):
+        friends = [int(friend.id) for friend in self.founder.scheme.friends.all()]
+        members = [int(member.id) for member in self.members.all()]
+        return Account.objects.filter(
+            pk__in=list(set(friends).symmetric_difference(set(members)))
+        )
+    
     
     def check_password(self, raw_password):
         return self.password == secret(raw_password)
