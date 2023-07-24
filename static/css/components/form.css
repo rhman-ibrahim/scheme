@@ -64,6 +64,13 @@ div.check h5 {
   line-height: 2;
 }
 
+div.check div.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 div.check div.container [type=checkbox] {
   position: absolute;
   opacity: 0;
@@ -71,17 +78,22 @@ div.check div.container [type=checkbox] {
   width: 0;
 }
 
-div.check div.container [type=checkbox] + h6 {
-  outline: 1px solid var(--d2);
+div.check div.container [type=checkbox] + h6,
+div.radio div.container input + h6 {
+  border-radius: 8px;
+  background: var(--d1);
+  outline: 1px solid var(--d3);
   text-transform: capitalize;
   display: inline-block;
   font-weight: bold;
   cursor: pointer;
+  padding: 4px;
 }
 
-div.check div.container [type=checkbox]:checked + h6 {
-  outline-color: var(--d4);
-  background: var(--d4);
+div.check div.container [type=checkbox]:checked + h6,
+div.radio div.container input:checked + h6 {
+  outline-color: var(--di);
+  color: var(--di);
 }
 
 /*
@@ -95,7 +107,8 @@ div.radio h5 {
 
 div.radio div.container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 8px;
 }
 
 div.radio div.container label {
@@ -107,20 +120,6 @@ div.radio div.container input {
   opacity: 0;
   height: 0;
   width: 0;
-}
-
-div.radio div.container input + h6 {
-  outline: 1px solid var(--d2);
-  text-transform: capitalize;
-  display: inline-block;
-  background: var(--d1);
-  cursor: pointer;
-}
-
-div.radio div.container input:checked + h6 {
-  outline-color: var(--d4);
-  background: var(--d4);
-  font-weight: bolder;
 }
 
 /*
