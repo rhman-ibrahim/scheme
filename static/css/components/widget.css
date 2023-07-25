@@ -16,6 +16,24 @@
     gap: 12px;
 }
 
+.scroll-horizontally {
+    display: flex;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow: auto;
+    padding: 8px;
+    gap: 8px;
+}
+
+.scroll-horizontally::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-horizontally .flex-box-col {
+    flex-wrap: wrap;
+    flex: 0 0 320px;
+}
+
 /*
     flex-box-*
     > direct children of .flex-container
