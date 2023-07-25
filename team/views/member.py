@@ -26,19 +26,17 @@ def login(request):
         if request.method == 'POST':
             form = CircleLoginForm(request.POST)
             if form.is_valid():
-                circle = Circle.objects.filter(name=form.cleaned_data['name'])
-                circle = circle.first() if circle.exists() else None
+                query = Circle.objects.filter(name=form.cleaned_data['name'])
+                circle = query.first() if query.exists() else None
                 if circle != None and circle.user_role(request.user) != None:
                     if circle.check_password(form.cleaned_data['password']):
                         request.session['circle'] = circle.id
                         return redirect("team:browse")
                     else:
-                        messages.info(request, circle.first().password)
                         messages.error(request, "circle password is wrong")
                 else: messages.error(request, "circle credentials error")
             else:
                 get_form_errors(request, form)
-    messages.warning(request, "login view end")
     return redirect('user:back')
 
 @is_authenticated(True)
@@ -66,7 +64,7 @@ def browse(request):
 @is_authenticated(True)
 @is_logined(True)
 def logout(request):
-    request.session.pop('circle')
+    del request.session['circle']
     return redirect('user:navigate')
 
 @is_authenticated(True)
