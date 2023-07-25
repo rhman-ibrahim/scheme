@@ -1,7 +1,0 @@
-<form method="POST" action="{% url 'blog:create_signal' %}" class="left" id="hypothesis-create-form">
-    {% with form=forms.signal %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-    <input type="hidden" name="icon" value="cognition">
-    <input type="hidden" name="classification" value="4">
-</form>

@@ -1,7 +1,0 @@
-<form method="POST" action="{% url 'blog:create_signal' %}" class="left" id="comment-create-form">
-    {% with form=forms.signal %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-    <input type="hidden" name="icon" value="comment">
-    <input type="hidden" name="classification" value="1">
-</form>
