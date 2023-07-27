@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block center %}
+{% include "blog/widgets/index.html" %}
 {% endblock %}
 
 {% block right %}
@@ -20,11 +21,13 @@
 {% include "team/fixed/members.html" %}
 {% include "team/forms/friends.html" %}
 {% include "team/forms/transfer.html" %}
+{% include "blog/form.html" %}
 {% endblock %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
 <link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
+<script src="{% static 'blog/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/room.js' %}" defer></script>
 <title>{{ circle.name }} by {{ circle.founder.username }}</title>
