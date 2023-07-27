@@ -19,11 +19,29 @@ class SignalForm(forms.ModelForm):
     class Meta:
 
         model   = Signal
-        fields  = ['parent', 'body']
+        fields  = ['glyph', 'icon', 'parent', 'classification', 'body']
         widgets = {
+            'glyph': forms.HiddenInput(
+                attrs = {
+                    'id':"signal-glyph-input",
+                    'data-field':"glyph"
+                }
+            ),
+            'icon': forms.HiddenInput(
+                attrs = {
+                    'id':"signal-icon-input",
+                    'data-field':"icon"
+                }
+            ),
             'parent': forms.HiddenInput(
                 attrs = {
                     'data-field':"parent"
+                }
+            ),
+            'classification': forms.HiddenInput(
+                attrs = {
+                    'id':"signal-classification-input",
+                    'data-field':"classification"
                 }
             )
         }
