@@ -1,15 +1,17 @@
 # Django
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 # Helpers
 from helpers.functions import get_form_errors
-# Team
+
+# Models
 from team.models import Circle
-# Ping
 from ping.models import Room
-# Blog
-from .forms import SignalForm
 from .models import Signal
+
+# Forms
+from .forms import SignalForm
 
 
 def create_signal(request):
@@ -17,9 +19,7 @@ def create_signal(request):
         form = SignalForm(request.POST)
         if form.is_valid():
             signal                = form.save(commit=False)
-            signal.circle         = Circle.objects.get(serial=request.session.get('circle'))
-            signal.classification = request.POST['classification']
-            signal.icon           = request.POST['icon']
+            signal.circle         = Circle.objects.get(id=request.session.get('circle'))
             signal.owner          = request.user
             signal.user           = request.user
             form.save()
@@ -27,16 +27,18 @@ def create_signal(request):
         else: get_form_errors(request, form)
     return redirect("user:back")
 
-def update_status(request, serial):
-    signal        = Signal.objects.get(serial=serial)
-    room          = Room.objects.get(serial=serial)
-    signal.status = 0 if signal.status else 1
-    room.status = signal.status
-    signal.save()
-    room.save()
-    return redirect("user:back")
+def update_signal_status(request, serial):
+    query = Signal.objects.filter(serial=serial)
+    if query.exsits() and query.count() == 1:
+        signal = query.first()
+        signal.status = False if signal.status else True
+        signal.save()
+        return redirect("ping:update_room_status", signal.serial)
+    else:
+        messages.warning(request, "something has gone wrong")
+    return redirect("blog:detail", signal.serial)
     
-def detail(request, serial):
+def get_signal(request, serial):
     signal = Signal.objects.get(serial=serial)
     return render(
         request,
