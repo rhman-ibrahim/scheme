@@ -1,1 +1,25 @@
-{% extends 'ping/lcr.html' %}
+{% extends 'templates/lcr.html' %}
+{% load static %}
+
+{% block left %}
+{% endblock %}
+
+{% block center %}
+{% include "blog/widgets/index.html" %}
+{% endblock %}
+
+{% block right %}
+{% include "ping/room.html" %}
+{% endblock %}
+
+{% block fixed %}
+{% include "blog/form.html" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
+<script src="{% static 'blog/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/room.js' %}" defer></script>
+{% endblock %}
