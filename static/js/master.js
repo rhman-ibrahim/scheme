@@ -45,16 +45,16 @@ class Grid {
         document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
     }
     static justifyColumnContent = () => {
-        document.querySelectorAll('#left > div.column, #right > div.column')
+        document.querySelectorAll('section:not(#main) div.column')
         .forEach(
             column => {
                 let widgetsTotalHeights = 0;
-                column.querySelectorAll('.widget')
-                .forEach(
-                    widget => widgetsTotalHeights += widget.clientHeight);
+                column.querySelectorAll('.widget').forEach(
+                    widget => widgetsTotalHeights += widget.clientHeight
+                );
                 if ((widgetsTotalHeights / window.innerHeight) < .75) {
                     column.style.justifyContent = "center";
-                }    
+                }
             }
         );
     }
@@ -200,8 +200,8 @@ class Template {
 
 class Handler {
     static init = () => {
-        Theme.init();
         Grid.init();
+        Theme.init();
         Message.init();
     }
 }
