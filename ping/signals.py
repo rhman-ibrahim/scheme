@@ -14,8 +14,10 @@ def ping_room(sender, instance, **kwargs):
 
 @receiver(post_delete, sender=FriendRequest)
 def ping_room(sender, instance, **kwargs):
-    if Room.objects.filter(serial=instance.serial).exists():
-        Room.objects.delete(serial=instance.serial)
+    query = Room.objects.filter(serial=instance.serial)
+    if query.exists():
+        room = query.first()
+        room.delete()
 
 @receiver(post_save, sender=Circle)
 def ping_room(sender, instance, created, **kwargs):
