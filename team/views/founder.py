@@ -1,16 +1,42 @@
 # Django
 from django.shortcuts import redirect
 from django.contrib.admin.models import CHANGE
+from django.contrib import messages
 
 # Models
-from ping.models import Room
 from team.models import Circle, CircleRequest
+from team.forms import AddFounderFriendsForm, TransferCircleForm
 
 # Functions & Decorators
 from team.decorators import is_logined
 from user.decorators import is_authenticated
 from user.functions import log
 
+
+@is_authenticated(True)
+@is_logined(True)
+def add_founder_friends(request):
+    if request.method == 'POST':
+        circle = Circle.objects.get(id=request.session['circle'])
+        form = AddFounderFriendsForm(request.POST, instance=circle)
+        if form.is_valid():
+            selected = [int(x) for x in request.POST.getlist('members')]
+            if len(selected) > 0:
+                circle.members.add(*selected)
+                messages.success(request, f"{len(selected)} friend/s added to your circle.")
+            messages.error(request, "You did not select any.")
+        messages.error(request, "Something went wrong.")
+    return redirect("user:back")
+
+@is_authenticated(True)
+@is_logined(True)
+def transfer(request):
+    circle = Circle.objects.get(id=request.session['circle'])
+    if request.method == 'POST':
+        form = TransferCircleForm(request.POST, instance=circle)
+        if form.is_valid():
+            messages.info(request, form.cleaned_data['members'])
+    return redirect("user:back")
 
 @is_authenticated(True)
 @is_logined(True)
