@@ -1,3 +1,10 @@
+form > nav > button {
+  border-radius: 100%;
+  text-align: center;
+  height: 18px;
+  width: 18px;
+}
+
 form label {
   line-height: 1.4;
 }
@@ -34,7 +41,7 @@ textarea {
   display: block;
   outline: 1px solid var(--d3);
   font-size: 1rem !important;
-  background: var(--d1);
+  background: var(--d2);
   border-radius: 4px;
   color: var(--d4);
   border: none;

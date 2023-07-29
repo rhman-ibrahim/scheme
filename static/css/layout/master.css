@@ -101,13 +101,14 @@ aside.right.active {
 
 header,
 footer {
+    background: var(--d1);
     height: max-content;
     max-height: 50vh;
     padding: 8px;
 }
 
 header {
-    border-bottom: 1.32px solid var(--d3);
+    border-bottom: 1.32px solid var(--d2);
     transition: top 1s ease-in-out;
     position: fixed;
     top: -50vh;
@@ -120,7 +121,7 @@ header.active {
 }
 
 footer {
-    border-top: 1.32px solid var(--d3);
+    border-top: 1.32px solid var(--d2);
     transition: bottom 1s ease-in-out;
     position: fixed;
     bottom: -50vh;

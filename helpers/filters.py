@@ -12,19 +12,19 @@ def message(tag, prop):
 
     tags = {
         "error": {
-            'color':'danger-dark-color',
+            'background':'danger-background',
             'icon':'error'
         },
         "info": {
-            'color':'info-dark-color',
+            'background':'info-background',
             'icon':'info'
         },
         "warning": {
-            'color':'warning-dark-color',
+            'background':'warning-background',
             'icon':'warning'
         },
         "success": {
-            'color':'success-dark-color',
+            'background':'success-background',
             'icon':'done'
         },
     }
