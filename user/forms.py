@@ -46,6 +46,7 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs.pop("autofocus", None)
 
     class Meta:
+
         model  = Account
         fields = ['username']
 
@@ -74,23 +75,21 @@ class SignInForm(forms.ModelForm):
     )
     
     def clean(self):
-
         if self.is_valid():
-
             username = self.cleaned_data['username']
             password = self.cleaned_data['password']
-
-            try: account = Account.objects.get(username=username) 
-            except Account.DoesNotExist: raise forms.ValidationError('account does not exist')
-            
+            try:
+                account = Account.objects.get(username=username) 
+            except Account.DoesNotExist:
+                raise forms.ValidationError('account does not exist')
             if account.is_active == False:
                 raise forms.ValidationError('your account has not been activated yet')
-        
             if not authenticate(username=username, password=password):
                 raise forms.ValidationError('password is incorrect')
 
     
     class Meta:
+
         model  = Account
         fields = ['username', 'password']
 
@@ -137,7 +136,8 @@ class PasswordUpdateForm(PasswordChangeForm):
         )
     )
     
-    class Meta:   
+    class Meta:
+
         model   = Account
         fields  = '__all__'
 
@@ -167,3 +167,16 @@ class PassWordResetForm(SetPasswordForm):
     class Meta:   
         model   = Account
         fields  = '__all__'
+
+
+class AccountDeleteForm(forms.Form):
+
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs  = {
+                'class':'password',
+                'id':'account-delete-password-form',
+                'autocomplete':'current-password',
+            }
+        )
+    )

@@ -1,12 +1,14 @@
 import qrcode
 # Django
 from django.db.models import Q
-from django.contrib.admin.models import LogEntry
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django.core.validators import RegexValidator
-from django.utils.crypto import get_random_string
 from django.contrib.admin.models import LogEntry
+
+from django.utils.crypto import get_random_string
+from django.core.validators import RegexValidator
+
 from django.db import models
+
 # Scheme
 from scheme.settings import MEDIA_ROOT
 
@@ -44,8 +46,8 @@ class Account(AbstractBaseUser, PermissionsMixin):
         validators = [
             RegexValidator(regex='^[a-zA-Z0-9]{4,16}$', message='this is not a valid username')
         ],
-        unique     = True,
-        max_length = 16
+        unique      = True,
+        max_length  = 16
     )
     is_active      = models.BooleanField(default=True)
     is_superuser   = models.BooleanField(default=False)

@@ -1,0 +1,7 @@
+<footer id="account-delete-form-footer">
+    <form method="POST" action="{% url 'user:delete_account' %}" id="account-delete-form">
+        {% with form=forms.delete password=1 %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</footer>

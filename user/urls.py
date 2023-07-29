@@ -18,5 +18,6 @@ urlpatterns = [
     path('token/', views.token, name='token'),
     # Update
     path('update/password/', views.update_password, name='password'),
+    path('delete/', views.delete_account, name='delete_account'),
     path('reset/', views.reset, name='reset'),
 ]
