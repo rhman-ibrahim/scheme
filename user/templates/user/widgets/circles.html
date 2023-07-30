@@ -1,4 +1,31 @@
-<section class="widget" id="user-navigate-widget">
+{% if request.user.is_guest %}
+<section class="widget" id="guest-circles-widget">
+    <h3>
+        <i class="material-icons">diversity_2</i>
+        <span>circle</span>
+    </h3>
+    <section class="flex-container">
+        {% if guest.type == "inactive" %}
+        <div class="flex-box-col">
+            <h3>inactive</h3>
+        </div>
+        {% elif guest.type == "founder" %}
+        <div class="flex-box-col">
+            <h3>founder</h3>
+        </div>
+        {% elif guest.type == "member" %}
+        <div class="flex-box-col">
+            <h3>member</h3>
+        </div>
+        {% elif guest.type == "requester" %}
+        <div class="flex-box-col">
+            <h3>requester</h3>
+        </div>
+        {% endif %}
+    </section>
+</section>
+{% else %}
+<section class="widget" id="user-circles-widget">
     <h2>
         <i class="material-icons">diversity_2</i>
         <span class="text-transform-capitalize">circles</span>
@@ -9,3 +36,4 @@
         {% include "team/cards/fixed/requests.html" %}
     </section>
 </section>
+{% endif %}

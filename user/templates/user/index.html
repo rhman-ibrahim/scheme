@@ -1,27 +1,6 @@
 {% extends 'templates/cr.html' %}
-{% load static %}
 
-
-{% block head %}
-<script src="{% static 'team/js/master.js' %}" defer></script>
-<title>@{{ request.user.username }} / Settings</title>
-{% endblock %}
-
-{% block fixed %}
-{% include "team/forms/login.html" %}
-{% include "team/forms/create.html" %}
-{% include "team/fixed/requests.html" %}
-{% include "team/fixed/list.html" %}
-{% include "mate/forms/info.html" %}
-{% include "mate/forms/request.html" %}
-{% include "mate/forms/picture.html" %}
-{% include "mate/fixed/received.html" %}
-{% include "mate/fixed/list.html" %}
-{% include "mate/fixed/sent.html" %}
-{% include "user/forms/password.html" %}
-{% endblock %}
-
-{% block center %}
+{% block main %}
 {% include "user/widgets/navigate.html" %}
 {% include "user/widgets/circles.html" %}
 {% include "user/widgets/friends.html" %}
@@ -31,4 +10,23 @@
 {% block right %}
 {% include "mate/widgets/profile.html" %}
 {% include "home/widgets/theme.html" %}
+{% endblock %}
+
+{% block fixed %}
+{% include "team/fixed/list.html" %}
+{% include "user/forms/password.html" %}
+{% include "team/fixed/requests.html" %}
+{% include "mate/fixed/received.html" %}
+{% include "mate/forms/request.html" %}
+{% include "mate/forms/picture.html" %}
+{% include "team/forms/create.html" %}
+{% include "team/forms/login.html" %}
+{% include "mate/forms/info.html" %}
+{% include "mate/fixed/list.html" %}
+{% include "mate/fixed/sent.html" %}
+{% include "user/forms/delete.html" %}
+{% endblock %}
+
+{% block head %}
+<title>@{{ request.user.username }} / Settings</title>
 {% endblock %}
