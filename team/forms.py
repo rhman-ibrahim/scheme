@@ -42,6 +42,13 @@ class CircleLoginForm(forms.Form):
     )
 
 
+class CircleRequestForm(forms.Form):
+
+    serial = forms.CharField(
+        max_length=32,
+        required=True,
+    )
+
 class AddFounderFriendsForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):

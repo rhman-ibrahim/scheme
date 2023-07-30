@@ -6,9 +6,10 @@ app_name    = "team"
 urlpatterns = [
     # All
     path('create/', views.create, name="create"),
-    path('request/<str:serial>/', views.create_request, name="request"),
+    path('request/', views.create_circle_request, name="create_circle_request"),
+    path('delete/<int:id>/', views.delete_circle_request, name="delete_circle_request"),
     # Founder
-    path('put/', views.add_founder_friends, name="add_founder_friends"),
+    path('put/', views.put, name="put"),
     path('approve/<int:user_id>/', views.approve, name="approve"),
     path('reject/<int:user_id>/', views.reject, name="reject"),
     path('remove/<int:user_id>/', views.remove, name="remove"),
