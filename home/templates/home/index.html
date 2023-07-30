@@ -1,28 +1,31 @@
 {% extends 'templates/lc.html' %}
 {% load static %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'home/css/master.css' %}">
-<title>Scheme, express and communicate. Sign-up or create a circle now.</title>
-{% endblock %}
-
-{% block fixed %}
-{% include "team/forms/create.html" %}
-{% include "user/forms/signup.html" %}
-{% include "user/forms/signin.html" %}
-{% include "user/forms/token.html" %}
-{% endblock %}
-
-{% block left %}
-{% include "home/widgets/user.html" %}
-{% include "home/widgets/theme.html" %}
-{% endblock %}
-
-{% block center %}
+{% block main %}
 {% include "home/widgets/header.html" %}
 {% include "home/widgets/benefits.html" %}
 {% include "home/widgets/features.html" %}
 {% include "home/widgets/stats.html" %}
 {% include "home/widgets/FAQs.html" %}
 {% include "home/widgets/about.html" %}
+{% endblock %}
+
+{% block left %}
+{% include "home/widgets/user.html" %}
+{% include "home/widgets/token.html" %}
+{% include "home/widgets/circle.html" %}
+{% include "home/widgets/theme.html" %}
+{% endblock %}
+
+{% block fixed %}
+{% include "user/forms/token.html" %}
+{% include "user/forms/signup.html" %}
+{% include "user/forms/signin.html" %}
+{% include "team/forms/create.html" %}
+{% include "team/forms/request.html" %}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/css/master.css' %}">
+<title>Scheme, express and communicate. Sign-up or create a circle now.</title>
 {% endblock %}

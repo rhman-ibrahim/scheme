@@ -6,7 +6,7 @@ from user.decorators import is_authenticated
 from user.models import Account
 from mate.models import Profile
 # Circles
-from team.forms import CircleForm
+from team.forms import CircleForm, CircleRequestForm
 from team.models import Circle
 # Signal
 from blog.models import Signal
@@ -19,11 +19,12 @@ def index(request):
         "home/index.html",
         {
             'forms': {
+                'circle_request': CircleRequestForm,
+                'reset': PassWordResetForm(False),
                 'signup': SignUpForm,
                 'signin': SignInForm,
                 'circle': CircleForm,
-                'verify': VerifyForm,
-                'reset': PassWordResetForm(False)
+                'verify': VerifyForm
             },
             'stats': {
                 'interactions': Signal.objects.count(),
