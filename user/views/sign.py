@@ -6,8 +6,9 @@ from django.shortcuts import redirect
 # Helpers
 from helpers.functions import log, get_form_errors
 # User
-from user.forms import SignUpForm, SignInForm
 from user.decorators import is_authenticated
+from user.functions import create_a_guest_user
+from user.forms import SignUpForm, SignInForm
 
 def end_token_session(request):
     if 'token' in request.session:
@@ -25,7 +26,7 @@ def signup(request):
             get_form_errors(request, form)
         return redirect("user:back")
 
-@is_authenticated(False)    
+@is_authenticated(False)
 def signin(request):
     end_token_session(request)
     if request.method == 'POST':
@@ -43,6 +44,11 @@ def signin(request):
         else:
             get_form_errors(request, form)
     return redirect("user:back")
+
+@is_authenticated(False)
+def signin_guest(request):
+    create_a_guest_user(request)
+    return redirect("user:guest")
 
 @is_authenticated(True)
 def signout(request):
