@@ -109,7 +109,6 @@ STATICFILES_DIRS    = [
     BASE_DIR / 'static',
     BASE_DIR / 'home/static',
     BASE_DIR / 'ping/static',
-    BASE_DIR / 'team/static',
     BASE_DIR / 'blog/static'
 ]
 

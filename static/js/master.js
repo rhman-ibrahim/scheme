@@ -126,7 +126,10 @@ class Fixed {
             }
         )
     }
-    
+    static CircleLoginForm = circleName => {
+        document.querySelector('#circle-login-form #id_name').value = circleName;
+        Fixed.open('#circle-login-form-footer');
+    }
     static init = () => {
         if (Fixed.collected()) Fixed.open(localStorage.getItem('fixed')); else localStorage.removeItem('fixed');         
     }
