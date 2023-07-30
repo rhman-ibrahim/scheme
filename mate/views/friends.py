@@ -12,22 +12,17 @@ from mate.models import FriendRequest
 from user.models import Account
 
 # Functions & Decorators
-from user.decorators import is_authenticated, is_guest
 from helpers.functions import get_form_errors, log
-
+from user.decorators import is_authenticated
 
 # Forms
 from mate.forms import AccountUsernameForm
 
 
 @is_authenticated(True)
-@is_guest(False)
 def create_friend_request(request):
-
     if request.method == "POST":
-    
         try:
-    
             form = AccountUsernameForm(request.POST)
             if form.is_valid():
                 if form.cleaned_data['username'] == request.user.username:
@@ -61,7 +56,6 @@ def create_friend_request(request):
     return redirect("user:back") 
 
 @is_authenticated(True)
-@is_guest(False)
 def accept_friend_request(request, req):
 
     f_req        = FriendRequest.objects.get(id=req)
@@ -77,32 +71,28 @@ def accept_friend_request(request, req):
     return redirect("user:back")
 
 @is_authenticated(True)
-@is_guest(False)
 def reject_friend_request(request, req):
-
     f_req        = FriendRequest.objects.get(id=req)
     f_req.status = 0
     f_req.save()
-
-    messages.success(request, f"You have rejected {f_req.sender.username}'s friend request")
-    
+    messages.success(
+        request,
+        f"You have rejected {f_req.sender.username}'s friend request"
+    )
     log(request.user.id, f_req, CHANGE,
         f"rejected the friend request received from {f_req.sender.username}"
     )
-
     return redirect("user:back")
 
 @is_authenticated(True)
-@is_guest(False)
 def delete_friend_request(request, req):
-
     f_req = FriendRequest.objects.get(id=req)
     f_req.delete()
-
-    messages.success(request, f"You have cancelled the friend request to {f_req.receiver.username}")
-
+    messages.success(
+        request,
+        f"You have cancelled the friend request to {f_req.receiver.username}"
+    )
     log(request.user.id, f_req, DELETION,
         f"deleted the friend request sent to {f_req.receiver.username}"
     )
-    
     return redirect("user:back")

@@ -30,13 +30,13 @@ def profile(request, username):
             Q(status=1)
         )
         if friendsip.exists():
-            room    = Room.objects.get(serial=friendsip.first().serial)
+            room = Room.objects.get(serial=friendsip.first().serial)
         else:
             messages.info(request, f"There is no connection with {username}")
-            return redirect("user:navigate")
+            return redirect("user:back")
     except ObjectDoesNotExist:
         messages.info(request, f"There is no connection with {username}")
-        return redirect("user:navigate")
+        return redirect("user:back")
     return render(
         request,
         "mate/index.html",
@@ -77,4 +77,4 @@ def update_profile_info(request):
             messages.success(request, "profile info updated successfully")
         else:
             get_form_errors(request, form)
-    return redirect('user:settings')
+    return redirect('user:back')
