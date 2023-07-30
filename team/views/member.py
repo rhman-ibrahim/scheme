@@ -6,7 +6,6 @@ from django.contrib import messages
 # Models
 from team.models import Circle
 from ping.models import Room
-from user.models import Account
 
 # Functions & Decorators
 from helpers.functions import log, get_form_errors
@@ -45,6 +44,23 @@ def login(request):
 @is_logined(True)
 def browse(request):
     circle = Circle.objects.get(id=request.session.get('circle'))
+    if request.user.is_guest:
+        return render(
+            request,
+            "team/guest.html",
+            {
+            'circle': circle,
+            'room': Room.objects.get(serial=circle.serial),
+            'forms': {
+                'circle': CircleForm(instance=circle),
+                'signal': SignalForm
+            },
+            'column': {
+                'left':"groups",
+                'right':"forum",
+            }
+        }    
+    )
     return render(
         request,
         "team/index.html",
@@ -68,7 +84,7 @@ def browse(request):
 @is_logined(True)
 def logout(request):
     del request.session['circle']
-    return redirect('user:navigate')
+    return redirect('user:back')
 
 @is_authenticated(True)
 @is_logined(True)

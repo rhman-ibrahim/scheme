@@ -15,7 +15,7 @@ from user.functions import log
 
 @is_authenticated(True)
 @is_logined(True)
-def add_founder_friends(request):
+def put(request):
     if request.method == 'POST':
         circle = Circle.objects.get(id=request.session['circle'])
         form = AddFounderFriendsForm(request.POST, instance=circle)
