@@ -11,11 +11,11 @@ def is_logined(status):
                     return view(request, *args, **kwargs)
                 elif status == True:
                     messages.warning(request, "you have to login to the circle.")
-                    return redirect('user:navigate')
+                    return redirect('user:back')
                 else:
                     messages.warning(request, "you have to logout to the circle.")
                     return redirect('team:browse')
             messages.warning(request, "you have to signin")
-            return redirect('user:navigate')
+            return redirect('user:back')
         return wrapper
     return decorator

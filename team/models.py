@@ -1,8 +1,8 @@
 # Django
-from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from django.utils import timezone
+from django.urls import reverse
 
 # Models
 from django.db import models
@@ -68,8 +68,10 @@ class Circle(models.Model):
         return self.password == secret(raw_password)
 
     def user_role(self, user):
-        if user in self.members.all(): return "member"
-        elif user == self.founder: return "founder"
+        if user in self.members.all():
+            return "member"
+        elif user == self.founder:
+            return "founder"
         return None
 
 
@@ -89,13 +91,16 @@ class CircleRequest(models.Model):
 
     def __str__(self):
         return f"{self.user.username} requested to join {self.circle.name}."
+    
+    def cancel(self):
+        return reverse("team:delete_circle_request", args=[str(self.id)])
 
 
 class CircleMembership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(default=timezone.now)
+    created   = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} approved."
