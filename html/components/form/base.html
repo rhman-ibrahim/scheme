@@ -1,9 +1,9 @@
 <nav class="flex-row-end">
-    <button type="button" onclick="Fixed.clear()" class="danger-button"></button>
+    <button type="button" onclick="Fixed.clear()" class="danger-background"></button>
     {% if password %}
-    <button type="button" onclick="Form.passwordToggle(this)" class="warning-button"></button>
+    <button type="button" onclick="Form.passwordToggle(this)" class="warning-background"></button>
     {% endif %}
-    <button type="submit" class="success-button"></button>
+    <button type="submit" class="success-background"></button>
 </nav>
 <fieldset>
     {% csrf_token %}
