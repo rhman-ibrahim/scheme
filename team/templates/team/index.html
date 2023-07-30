@@ -1,15 +1,15 @@
 {% extends 'templates/lcr.html' %}
 {% load static %}
 
+{% block main %}
+{% include "blog/widgets/index.html" %}
+{% endblock %}
+
 {% block left %}
 {% include "team/widgets/navigate.html" %}
 {% include "team/widgets/members.html" %}
 {% include "team/widgets/founder.html" %}
 {% include "team/widgets/security.html" %}
-{% endblock %}
-
-{% block center %}
-{% include "blog/widgets/index.html" %}
 {% endblock %}
 
 {% block right %}
