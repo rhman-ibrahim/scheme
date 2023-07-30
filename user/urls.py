@@ -5,10 +5,12 @@ from user import views
 app_name    = "user"
 urlpatterns = [
     # Nav
-    path('back/', views.back, name='back'),
     path('settings/', views.settings, name="settings"),
-    path("navigate/", views.navigate, name="navigate"),
+    path('guest/', views.guest, name="guest"),
+    path('back/', views.back, name='back'),
+    path('', views.nav, name='nav'),
     # Sign
+    path('signin/guest/', views.signin_guest, name='signin_guest'),
     path('signout/', views.signout, name='signout'),
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
