@@ -10,9 +10,10 @@ def is_authenticated(status):
             else:
                 if status:
                     messages.warning(request, "you have to signin first.")
+                    return redirect("home:index")
                 else:
                     messages.warning(request, "you have to signout first.")
-                return redirect('user:navigate')
+                return redirect('user:nav')
         return wrapper
     return decorator
 
@@ -24,6 +25,6 @@ def is_guest(status):
             else:
                 if status: messages.warning(request, "Only guest users are allowed to view this.")
                 messages.warning(request, "Guest users are not allowed to view this.")
-                return redirect('user:navigate')
+                return redirect('user:settings')
         return wrapper
     return decorator
