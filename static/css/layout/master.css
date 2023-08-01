@@ -65,7 +65,7 @@ aside {
 }
 
 #left,
-aside.left {
+aside {
     position: fixed;
     border-right: 1.32px solid var(--d3);
     transition: left 1s ease-in-out;
@@ -74,8 +74,7 @@ aside.left {
     top: 0px;
 }
 
-#right,
-aside.right {
+#right {
     position: fixed;
     border-left: 1.32px solid var(--d3);
     transition: right 1s ease-in-out;
@@ -85,12 +84,11 @@ aside.right {
 }
 
 #left.active,
-aside.left.active {
+aside.active {
     left: 0px;
 }
 
-#right.active,
-aside.right.active {
+#right.active {
     right: 0px;
 }
 
@@ -116,10 +114,6 @@ header {
     left: 0px;
 }
 
-header.active {
-    top: 0px;
-}
-
 footer {
     border-top: 1.32px solid var(--d2);
     transition: bottom 1s ease-in-out;
@@ -127,6 +121,10 @@ footer {
     bottom: -50vh;
     right: 0px;
     left: 0px;
+}
+
+header.active {
+    top: 0px;
 }
 
 footer.active {

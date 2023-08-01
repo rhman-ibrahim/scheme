@@ -1,12 +1,16 @@
 :root {
-    --accent: #663366;
+    /* main */
     --black: #000000;
-    --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    --danger: #66333A;
-    --info: #335766;
-    --success: #496633;
-    --warning: #665733;
     --white: #FFFFFF;
+    /* alerts */
+    --danger: #d64242;
+    --info: #0090e0;
+    --success: #34c240;
+    --warning: #fa9f47;
+    /* accent */
+    --accent: #77216F;
+    /* properties */
+    --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 body,
@@ -39,13 +43,81 @@ section.active {
 }
 
 /*
+    cards
+*/
+
+.accent-card:hover {
+    outline-color: var(--accent);
+}
+.accent-card:hover b,
+.accent-card:hover .material-icons,
+.accent-card:hover .material-symbols-outlined {
+    color: var(--accent);
+}
+
+.danger-card:hover {
+    outline-color: var(--danger);
+}
+.danger-card:hover b,
+.danger-card:hover .material-icons,
+.danger-card:hover .material-symbols-outlined {
+    color: var(--danger);
+}
+
+.info-card:hover {
+    outline-color: var(--info);
+}
+.info-card:hover b,
+.info-card:hover .material-icons,
+.info-card:hover .material-symbols-outlined {
+    color: var(--info);
+}
+
+.success-card:hover {
+    outline-color: var(--success);
+}
+.success-card:hover b,
+.success-card:hover .material-icons,
+.success-card:hover .material-symbols-outlined {
+    color: var(--success);
+}
+
+.warning-card:hover {
+    outline-color: var(--warning);
+}
+.warning-card:hover b,
+.warning-card:hover .material-icons,
+.warning-card:hover .material-symbols-outlined {
+    color: var(--warning);
+}
+
+/*
+    outline
+*/
+
+.accent-outline {
+    outline: 1.32px solid var(--accent);
+}
+.danger-outline {
+    outline: 1.32px solid var(--danger);
+}
+.info-outline {
+    outline: 1.32px solid var(--info);
+}
+.success-outline {
+    outline: 1.32px solid var(--success);
+}
+.warning-outline {
+    outline: 1.32px solid var(--warning);
+}
+
+/*
     background
 */
 
 .accent-background {
     background: var(--accent);
 }
-
 .danger-background {
     background: var(--danger);
 }
@@ -77,24 +149,4 @@ section.active {
 }
 .warning-color {
     color: var(--warning);
-}
-
-/*
-    outline
-*/
-
-.accent-outline {
-    outline: 1.32px solid var(--accent);
-}
-.danger-outline {
-    outline: 1.32px solid var(--danger);
-}
-.info-outline {
-    outline: 1.32px solid var(--info);
-}
-.success-outline {
-    outline: 1.32px solid var(--success);
-}
-.warning-outline {
-    outline: 1.32px solid var(--warning);
 }

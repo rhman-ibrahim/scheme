@@ -98,12 +98,28 @@ main {
 .column-button {
     width: 32px;
     height: 32px;
+    color: var(--white);
+    outline: 1.32px solid var(--accent);
+    box-shadow: var(--box-shadow);
+    background: var(--accent);
     border-radius: 100%;
-    box-shadow: var(--bs);
-    background: var(--d3);
     position: absolute;
     bottom: 8px;
     right: 8px;
+}
+
+.view-link {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    color: var(--white);
+    outline: 1.32px solid var(--info);
+    box-shadow: var(--box-shadow);
+    background: var(--info);
+    border-radius: 100%;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
 }
 
 #lcr-left-button.column-button {

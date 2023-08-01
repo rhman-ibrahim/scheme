@@ -190,13 +190,13 @@ class Template {
         children.forEach(child => parent.appendChild(child));
         return parent;
     }
-    static writeToClipboard = (element, attribute) => {
-        let dataToCopy = element.getAttribute(`data-${attribute}`);
+    static copyToClipboard = element => {
+        let dataToCopy = element.getAttribute(`data-clipboard`);
         navigator.clipboard.writeText(dataToCopy)
         .then(
-            () => alert("Link copied to clipboard!"))
+            () => alert("copied to clipboard!"))
         .catch(
-            () => alert("Failed to copy link to clipboard.")
+            () => alert("Failed to copy to clipboard.")
         )
     }
 }

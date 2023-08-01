@@ -22,7 +22,8 @@ footer,
     z-index: 8;
 }
 
-#main .column-button {
+#main .column-button,
+#main .view-link {
     z-index: 4;
 }
 
