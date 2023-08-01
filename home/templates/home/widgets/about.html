@@ -1,20 +1,29 @@
 {% load user_filters %}
+
 <section class="widget" id="home-about-widget">
     <h2>
         <i class="material-icons">info</i>
         <span>About</span>
     </h2>
     <section class="flex-container">
-        <div class="flex-box-col full-row" role="describe">
+        <div class="flex-box-col full-row">
             <p>{{ about.me.about|safe }}</p>
             <ul class="text-align-right">
-                <img src="{{ about.me.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
+                <li>
+                    <img
+                        alt="{{ request.user.username }}'s profile picture"
+                        src="{{ about.me.user|profile_picture_url }}"
+                        class="circle-24"
+                    />
+                </li>
             </ul>
         </div>
-        <div class="flex-box-col" role="describe">
+        <div class="flex-box-col">
             <p>Built with Django (Py) in its core. HTML, CSS and Js for the UI.</p>
             <ul class="text-align-right">
-                <li class="material-symbols-outlined">code</li>
+                <li>
+                    <i class="material-symbols-outlined">code</i>
+                </li>
             </ul>
         </div>
     </section>

@@ -1,0 +1,26 @@
+{% load user_filters %}
+
+<aside id="sent-requests-aside">
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="widget">
+            <section class="flex-container">
+                {% if request.user.scheme.friend_requests.sent.count %}
+                {% for req in request.user.scheme.friend_requests.sent %}
+                <div class="flex-box-row">
+                    <div class="flex-row-start">
+                        <img src="{{ req.receiver|profile_picture_url }}" alt="" class="circle-24">
+                        <h4>{{ req.receiver.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <a href="{{ req.cancel }}" class="material-icons">close</a>
+                    </nav>
+                 </div>
+                {% endfor %}
+                {% else %}
+                {% include "mate/card/js/form/request.html" %}
+                {% endif %}
+            </section>
+        </section>
+    </div>
+</aside>

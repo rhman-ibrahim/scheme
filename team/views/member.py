@@ -42,25 +42,28 @@ def login(request):
 
 @is_authenticated(True)
 @is_logined(True)
-def browse(request):
+def settings(request):
     circle = Circle.objects.get(id=request.session.get('circle'))
-    if request.user.is_guest:
-        return render(
-            request,
-            "team/guest.html",
-            {
+    return render(
+        request,
+        "team/settings.html",
+        {
             'circle': circle,
-            'room': Room.objects.get(serial=circle.serial),
             'forms': {
                 'circle': CircleForm(instance=circle),
-                'signal': SignalForm
+                'friends': AddFounderFriendsForm(instance=circle),
+                'transfer':TransferCircleForm(instance=circle),
             },
             'column': {
-                'left':"groups",
-                'right':"forum",
+                'icon':"groups"
             }
         }    
     )
+
+@is_authenticated(True)
+@is_logined(True)
+def browse(request):
+    circle = Circle.objects.get(id=request.session.get('circle'))
     return render(
         request,
         "team/index.html",
@@ -68,16 +71,13 @@ def browse(request):
             'circle': circle,
             'room': Room.objects.get(serial=circle.serial),
             'forms': {
-                'circle': CircleForm(instance=circle),
-                'friends': AddFounderFriendsForm(instance=circle),
-                'transfer':TransferCircleForm(instance=circle),
                 'signal': SignalForm
             },
             'column': {
-                'left':"groups",
+                'left':"bubble_chart",
                 'right':"forum",
             }
-        }
+        }    
     )
 
 @is_authenticated(True)

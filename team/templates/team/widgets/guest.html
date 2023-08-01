@@ -1,0 +1,25 @@
+<section class="widget" id="guest-circles-widget">
+    <h3>
+        <i class="material-icons">diversity_2</i>
+        <span>circle</span>
+    </h3>
+    <section class="flex-container">
+        {% if guest.type == "inactive" %}
+        <div class="flex-box-col">
+            <h3>inactive</h3>
+        </div>
+        {% elif guest.type == "founder" %}
+        <div class="flex-box-col">
+            <h3>founder</h3>
+        </div>
+        {% elif guest.type == "member" %}
+        <div class="flex-box-col">
+            <h3>member</h3>
+        </div>
+        {% elif guest.type == "requester" %}
+        <div class="flex-box-col">
+            <h3>requester</h3>
+        </div>
+        {% endif %}
+    </section>
+</section>

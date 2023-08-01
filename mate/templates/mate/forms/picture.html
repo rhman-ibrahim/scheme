@@ -1,7 +1,0 @@
-<footer id="picture-form-footer">
-    <form method="POST" enctype="multipart/form-data" action="{% url 'mate:picture' %}" class="right" id="picture-form">
-        {% with form=forms.picture %}
-        {% include "components/form/base.html" %}
-        {% endwith %}
-    </form>
-</footer>

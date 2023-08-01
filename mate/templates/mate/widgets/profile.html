@@ -1,10 +1,12 @@
+{% load user_filters %}
+
 <section class="widget" id="user-profile-widget">
     <h3>
-        <i class="material-icons">contacts</i>
-        <span>profile</span>
+        <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
+        <span class="text-transform-none">{{ request.user.username }}</span>
     </h3>
     <section class="flex-container">
-        {% include "mate/cards/form/info.html" %}
-        {% include "mate/cards/form/picture.html" %}
+        {% include "mate/card/js/form/info.html" %}
+        {% include "mate/card/js/form/picture.html" %}
     </section>
 </section>

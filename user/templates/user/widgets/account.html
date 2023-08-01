@@ -1,0 +1,13 @@
+<section class="widget" id="user-security-widget">
+    <h3 class="text-capitalize">
+        <i class="material-icons">person</i>
+        <span>account</span>
+    </h3>
+    <section class="flex-container">
+        {% include "user/card/py/patch/signout.html" %}
+        {% if not request.user.is_guest %}
+        {% include "user/card/js/form/password.html" %}
+        {% include "user/card/js/form/delete.html" %}
+        {% endif %}
+    </section>
+</section>

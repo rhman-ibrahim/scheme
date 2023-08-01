@@ -1,5 +1,0 @@
-{% if 'token' in request.session %}
-    {% include "user/forms/reset.html" %}
-{% else %}
-    {% include "user/forms/verify.html" %}
-{% endif %}

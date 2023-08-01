@@ -1,0 +1,25 @@
+{% load user_filters %}
+
+<aside id="friends-aside">
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="flex-container">
+            {% if request.user.scheme.friends.count %}
+                {% for friend in request.user.scheme.friends.all %}
+                <ul class="flex-box-row">
+                    <div class="flex-row-start">
+                        <img src="{{ friend|profile_picture_url }}" alt="" class="circle-24">
+                        <h4>{{ friend.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <a href="{{ friend.profile.index }}" class="material-icons">forum</a>
+                    </nav>
+                </ul>
+                {% endfor %}
+            {% else %}
+                {% include "mate/card/js/aside/received.html" %}
+                {% include "mate/card/js/form/request.html" %}
+            {% endif %}
+        </section>
+    </div>
+</aside>

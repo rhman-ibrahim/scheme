@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block main %}
-{% include "blog/widgets/index.html" %}
+<a class="view-link" href="{% url 'team:settings' %}">
+    <i class="material-icons">settings</i>
+</a>
 {% endblock %}
 
 {% block left %}
-{% include "team/widgets/navigate.html" %}
-{% include "team/widgets/members.html" %}
-{% include "team/widgets/founder.html" %}
-{% include "team/widgets/security.html" %}
+{% include "blog/widgets/index.html" %}
 {% endblock %}
 
 {% block right %}
@@ -17,10 +16,8 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "team/fixed/warning.html" %}
-{% include "team/fixed/members.html" %}
-{% include "team/forms/friends.html" %}
-{% include "team/forms/transfer.html" %}
+{% include "team/form/friends.html" %}
+{% include "team/form/transfer.html" %}
 {% include "blog/form.html" %}
 {% endblock %}
 
@@ -30,5 +27,5 @@
 <script src="{% static 'blog/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/room.js' %}" defer></script>
-<title>{{ circle.name }} by {{ circle.founder.username }}</title>
+<title>{{ circle.name }} / Home</title>
 {% endblock %}

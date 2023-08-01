@@ -1,0 +1,12 @@
+<section class="widget">
+    <h3>
+        <i class="material-icons">person</i>
+        <span onclick="Template.copyToClipboard(this)" data-clipBoard="{{ request.user.username }}">{{ request.user.username }}</span>
+    </h3>
+    <section class="flex-container">
+        {% include "mate/card/js/aside/friends.html" %}
+        {% include "team/card/js/aside/circles.html" %}
+        {% include "user/card/py/get/settings.html" %}
+        {% include "components/card/js/theme.html" %}
+    </section>
+</section>

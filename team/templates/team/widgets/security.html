@@ -1,14 +1,14 @@
 <section class="widget" id="team-navigate-widget">
     <h3>
-        <i class="material-symbols-outlined">security</i>
+        <i class="material-icons">shield</i>
        <span>secuirty</span>
     </h3>
     <div class="flex-container">
         {% if circle.founder == request.user %}
-            {% include "team/cards/form/transfer.html" %}
-            {% include "team/cards/fixed/delete.html" %}
+            {% include "team/card/js/form/transfer.html" %}
+            {% include "team/card/js/footer/delete.html" %}
         {% else %}
-            {% include "team/cards/fixed/leave.html" %}
+            {% include "team/card/js/footer/leave.html" %}
         {% endif %}
     </div>
 </section>

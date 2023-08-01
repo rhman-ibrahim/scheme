@@ -15,7 +15,8 @@ urlpatterns = [
     path('transfer/', views.transfer, name="transfer"),
     path('put/', views.put, name="put"),
     # Memebers
-    path('browse/', views.browse, name="browse"),
+    path('', views.browse, name="browse"),
+    path('settings/', views.settings, name="settings"),
     path('logout/', views.logout, name="logout"),
     path('leave/', views.leave, name="leave"),
     path('login/', views.login, name="login"),

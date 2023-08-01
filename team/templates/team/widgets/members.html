@@ -1,10 +1,38 @@
-<section class="widget" id="team-navigate-widget">
-    <h3>
+{% load user_filters %}
+
+<section class="widget">
+    <h4>
         <i class="material-icons">groups</i>
-        <span>members</span>
-    </h3>
-    <div class="flex-container">
-        {% include "team/cards/fixed/members.html" %}
-        {% include "team/cards/fixed/friends.html" %}
-    </div>
+        <span>founder</span>
+    </h4>
+    <section class="flex-container">
+        <ul class="flex-box-row">
+            <div class="flex-row-start">
+                <h4>{{ circle.founder.username }}</h4>
+            </div>
+            <nav class="flex-row-end">
+                <img
+                    src="{{ circle.founder|profile_picture_url }}"
+                    alt="{{ circle.founder.username }}"
+                    class="circle-24"
+                >
+            </nav>
+        </ul>
+        {% if circle.members.count %}
+        {% for member in circle.members.all %}
+        <ul class="flex-box-row">
+            <div class="flex-row-start">
+                <h4>{{ member.username }}</h4>
+            </div>
+            <nav class="flex-row-end">
+                <img
+                    src="{{ member|profile_picture_url }}"
+                    alt="{{ member.username }}"
+                    class="circle-24"
+                >
+            </nav>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </section>
 </section>

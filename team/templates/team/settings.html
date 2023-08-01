@@ -1,0 +1,25 @@
+{% extends 'templates/lc.html' %}
+{% load static %}
+
+{% block main %}
+{% include "team/widgets/friends.html" %}
+{% include "team/widgets/founder.html" %}
+{% include "team/widgets/security.html" %}
+<a class="view-link" href="{% url 'team:browse' %}">
+    <i class="material-icons">home</i>
+</a>
+{% endblock %}
+
+{% block left %}
+{% include "team/widgets/members.html" %}
+{% endblock %}
+
+{% block fixed %}
+{% include "team/form/friends.html" %}
+{% include "team/form/transfer.html" %}
+{% include "blog/form.html" %}
+{% endblock %}
+
+{% block head %}
+<title>{{ circle.name }} / Info</title>
+{% endblock %}

@@ -1,0 +1,14 @@
+<section class="widget" id="home-user-widget">
+    <h3>
+        <i class="material-icons">qr_code</i>
+        <span>token</span>
+    </h3>
+    <section class="flex-container">
+    {% if request.resolver_match.app_name == "home" %}
+    {% include "user/card/js/form/token.html" %}
+    {% elif request.resolver_match.app_name == "user" %}
+    {% include "user/card/py/get/download.html" %}
+    {% include "user/card/py/patch/refresh.html" %}
+    {% endif %}
+</section>
+</section>
