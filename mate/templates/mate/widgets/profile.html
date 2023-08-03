@@ -1,8 +1,12 @@
 {% load user_filters %}
 
-<section class="widget" id="user-profile-widget">
+<section class="widget">
     <h3>
-        <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
+        <img
+            class="circle-24"
+            src="{{ request.user|profile_picture_url }}"
+            alt="{{ request.user.username }}'s profile picture"
+        />
         <span class="text-transform-none">{{ request.user.username }}</span>
     </h3>
     <section class="flex-container">

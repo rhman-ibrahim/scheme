@@ -119,6 +119,6 @@ class Scheme(models.Model):
     def circles(self):
         return {
             'all': Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).order_by('-created'),
-            'as_founder':Circle.objects.filter(founder=self.user).order_by('-created'),
-            'as_member':Circle.objects.filter(members=self.user).order_by('-created')
+            'as_founder': Circle.objects.filter(founder=self.user).order_by('-created'),
+            'as_member': Circle.objects.filter(members=self.user).order_by('-created')
         }

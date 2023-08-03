@@ -1,14 +1,9 @@
 {% extends 'templates/lr.html' %}
-{% load static %}
 
 {% block left %}
 {% include "ping/room.html" %}
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'ping/css/left.css' %}">
-<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
-<script src="{% static 'ping/js/master.js' %}" defer></script>
-<script src="{% static 'ping/js/room.js' %}" defer></script>
-<title>{{ profile.user.username }}</title>
+{% include "blog/head.html" %}
 {% endblock %}
