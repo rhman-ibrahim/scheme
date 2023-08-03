@@ -1,10 +1,8 @@
 {% extends 'templates/lcr.html' %}
-{% load static %}
 
 {% block main %}
-<a class="view-link" href="{% url 'team:settings' %}">
-    <i class="material-icons">settings</i>
-</a>
+{% include "team/widgets/navigate.html" %}
+{% include "blog/widgets/signals.html" %}
 {% endblock %}
 
 {% block left %}
@@ -16,16 +14,9 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "team/form/friends.html" %}
-{% include "team/form/transfer.html" %}
 {% include "blog/form.html" %}
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
-<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
-<script src="{% static 'blog/js/master.js' %}" defer></script>
-<script src="{% static 'ping/js/master.js' %}" defer></script>
-<script src="{% static 'ping/js/room.js' %}" defer></script>
-<title>{{ circle.name }} / Home</title>
+{% include "team/head.html" %}
 {% endblock %}

@@ -3,44 +3,42 @@
 <aside id="requests-aside">
     <div class="column">
         <button type="button" onclick="Fixed.clear()" class="material-icons column-button">close</button>
-        {% if request.resolver_match.app_name == "team" and request.user == circle.founder %}
-        <div class="card">
-            <p>These requests have been received, sorted from oldest to newest.</p>
-            <ul class="end">
-                <li><b>{{ circle.join_requests.count }}</b></li>
-            </ul>
-        </div>
-        {% for ask in circle.join_requests %}
-        <ul class="row">
-            <li>
-                <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
-                <span>{{ ask.user.username }}</span>
-            </li>
-            <li>
-                <a href="{% url 'team:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
-                <a href="{% url 'team:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
-            </li>
-        </ul>
-        {% endfor %}
-        {% elif request.resolver_match.app_name == "user" %}
-        {% if request.user.scheme.circle_requests.count %}
-        {% for ask in request.user.scheme.circle_requests %}
-        <ul class="row">
-            <li>
-                <span>{{ ask.circle.name }}</span>
-            </li>
-            <li>
-                <a href="{{ ask.cancel }}" class="material-symbols-outlined">close</a>
-            </li>
-        </ul>
-        {% endfor %}
-        {% else %}
         <section class="widget">
             <section class="flex-container">
+                {% if request.resolver_match.app_name == "team" and request.user == circle.founder %}
+                <div class="flex-box-col">
+                    <p>These requests have been received, sorted from oldest to newest.</p>
+                    <ul class="text-align-right">
+                        <li>{{ circle.join_requests.count }}</li>
+                    </ul>
+                </div>
+                {% for ask in circle.join_requests %}
+                <ul class="row">
+                    <li>
+                        <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
+                        <span>{{ ask.user.username }}</span>
+                    </li>
+                    <li>
+                        <a href="{% url 'team:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
+                        <a href="{% url 'team:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
+                    </li>
+                </ul>
+                {% endfor %}
+                {% elif request.resolver_match.app_name == "user" and request.user.scheme.circle_requests.count %}
+                {% for ask in request.user.scheme.circle_requests %}
+                <ul class="row">
+                    <li>
+                        <span>{{ ask.circle.name }}</span>
+                    </li>
+                    <li>
+                        <a href="{{ ask.cancel }}" class="material-symbols-outlined">close</a>
+                    </li>
+                </ul>
+                {% endfor %}
+                {% else %}
                 {% include "team/card/js/form/request.html" %}
+                {% endif %}
             </section>
         </section>
-        {% endif %}
-        {% endif %}
     </div>
 </aside>

@@ -6,6 +6,7 @@ from django.contrib import messages
 # Models
 from team.models import Circle
 from ping.models import Room
+from blog.models import Signal
 
 # Functions & Decorators
 from helpers.functions import log, get_form_errors
@@ -64,17 +65,19 @@ def settings(request):
 @is_logined(True)
 def browse(request):
     circle = Circle.objects.get(id=request.session.get('circle'))
+    request.session['parent_signal_id'] = None
     return render(
         request,
         "team/index.html",
         {
             'circle': circle,
             'room': Room.objects.get(serial=circle.serial),
+            'signals': Signal.objects.filter(circle=circle, level=0).order_by('-created'),
             'forms': {
                 'signal': SignalForm
             },
             'column': {
-                'left':"bubble_chart",
+                'left':"format_quote",
                 'right':"forum",
             }
         }    
@@ -84,7 +87,7 @@ def browse(request):
 @is_logined(True)
 def logout(request):
     del request.session['circle']
-    return redirect('user:back')
+    return redirect('user:nav')
 
 @is_authenticated(True)
 @is_logined(True)

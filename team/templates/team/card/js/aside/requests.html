@@ -2,14 +2,14 @@
 <div class="flex-box-col info-card">
     <p><b>Review</b> sent joining requests, to view its state or to cancel it.</p>
     <nav class="text-align-right">
-        <i class="material-icons" onclick="Fixed.open('#requests')">mark_email_unread</i>
+        <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
     </nav>
 </div>
 {% elif request.resolver_match.app_name == "team" and request.user == circle.founder %}
 <div class="flex-box-col info-card">
     <p><b>Respond</b> to received circle invitations, <span>sent by</span> circle founders.</p>
     <nav class="text-align-right">
-        <i class="material-icons">rule</i>
+        <i class="material-icons" onclick="Fixed.open('#requests-aside')">rule</i>
     </nav>
 </div>
 {% endif %}

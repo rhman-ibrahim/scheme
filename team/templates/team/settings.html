@@ -2,12 +2,10 @@
 {% load static %}
 
 {% block main %}
-{% include "team/widgets/friends.html" %}
-{% include "team/widgets/founder.html" %}
+{% include "team/widgets/navigate.html" %}
+{% include "team/widgets/settings.html" %}
+{% include "team/widgets/manage.html" %}
 {% include "team/widgets/security.html" %}
-<a class="view-link" href="{% url 'team:browse' %}">
-    <i class="material-icons">home</i>
-</a>
 {% endblock %}
 
 {% block left %}
@@ -15,11 +13,12 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "team/form/friends.html" %}
+{% include "team/aside/requests.html" %}
 {% include "team/form/transfer.html" %}
-{% include "blog/form.html" %}
+{% include "team/form/friends.html" %}
+{% include "team/form/update.html" %}
 {% endblock %}
 
 {% block head %}
-<title>{{ circle.name }} / Info</title>
+{% include "team/head.html" %}
 {% endblock %}

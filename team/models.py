@@ -100,7 +100,7 @@ class CircleMembership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
-    created   = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.user.username} approved."
