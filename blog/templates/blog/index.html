@@ -1,7 +1,11 @@
 {% extends 'templates/lcr.html' %}
-{% load static %}
 
 {% block main %}
+{% include "team/widgets/navigate.html" %}
+{% include "blog/widgets/signal.html" %}
+{% endblock %}
+
+{% block left %}
 {% include "blog/widgets/index.html" %}
 {% endblock %}
 
@@ -14,9 +18,5 @@
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
-<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
-<script src="{% static 'blog/js/master.js' %}" defer></script>
-<script src="{% static 'ping/js/master.js' %}" defer></script>
-<script src="{% static 'ping/js/room.js' %}" defer></script>
+{% include "blog/head.html" %}
 {% endblock %}
