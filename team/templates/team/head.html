@@ -1,0 +1,16 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'blog/css/master.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/right.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
+<script src="{% static 'blog/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/room.js' %}" defer></script>
+
+{% if request.resolver_match.url_name == "browse" %}
+<title>{{ circle.name }} / home</title>
+{% endif %}
+
+{% if request.resolver_match.url_name == "settings" %}
+<title>{{ circle.name }} / info</title>
+{% endif %}
