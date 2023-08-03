@@ -20,6 +20,7 @@ def create_signal(request):
         if form.is_valid():
             signal                = form.save(commit=False)
             signal.circle         = Circle.objects.get(id=request.session.get('circle'))
+            signal.parent         = Signal.objects.get(id=request.session.get('parent_signal_id'))
             signal.owner          = request.user
             signal.user           = request.user
             form.save()
@@ -40,10 +41,13 @@ def update_signal_status(request, serial):
     
 def get_signal(request, serial):
     signal = Signal.objects.get(serial=serial)
+    request.session['parent_signal_id'] = signal.id
     return render(
         request,
-        "blog/signal.html",
+        "blog/index.html",
         {
+            'signal': signal,
+            'room': Room.objects.get(serial=signal.serial),
             'forms': {
                 'signal' : SignalForm(
                     initial = {
@@ -54,8 +58,6 @@ def get_signal(request, serial):
             'icons': {
                 'left':"diversity_2",
                 "right":"forum"
-            },
-            'signal': signal,
-            'room': Room.objects.get(serial=signal.serial),
+            }
         }
     )
