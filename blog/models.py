@@ -11,7 +11,6 @@ from helpers.functions import generate_serial
 
 class Signal(MPTTModel):
 
-    # Parent
     parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     # Creator & Contributor
     owner          = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False, related_name="owner")
@@ -23,7 +22,7 @@ class Signal(MPTTModel):
     icon           = models.CharField(max_length=64, default="radio_button_checked")
     # Room
     serial         = models.CharField(max_length=64, default=generate_serial, null=False, blank=False, editable=False)
-    status         = models.BooleanField(default=False, blank=False, null=False)
+    status         = models.BooleanField(default=True, blank=False, null=False)
     # Value    
     body           = models.TextField(max_length=512, blank=False, null=False)
     created        = models.DateTimeField(auto_now_add=True)
@@ -35,9 +34,11 @@ class Signal(MPTTModel):
     def url(self):
         return reverse("blog:get_signal", args=[str(self.serial)])
     
-    def get_status_icon(self):
-        if self.status == 0: return "line_start_circle"
-        return "line_end_circle"
+    def get_status(self):
+        return {
+            'i': "line_start_circle" if self.status == 1 else "line_end_circle",
+            's': "opened" if self.status == 1 else "closed"
+        }
     
     def update_status(self):
         return reverse("blog:update_signal_status", args=[str(self.serial)])
