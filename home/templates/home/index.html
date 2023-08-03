@@ -1,5 +1,4 @@
 {% extends 'templates/lc.html' %}
-{% load static %}
 
 {% block main %}
 {% include "home/widgets/header.html" %}
@@ -12,20 +11,19 @@
 
 {% block left %}
 {% include "user/widgets/sign.html" %}
-{% include "user/widgets/token.html" %}
 {% include "team/widgets/circles.html" %}
+{% include "user/widgets/token.html" %}
 {% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block fixed %}
-{% include "user/form/token.html" %}
+{% include "team/form/request.html" %}
 {% include "user/form/signup.html" %}
 {% include "user/form/signin.html" %}
 {% include "team/form/create.html" %}
-{% include "team/form/request.html" %}
+{% include "user/form/token.html" %}
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'home/css/master.css' %}">
-<title>Scheme, express and communicate. Sign-up or create a circle now.</title>
+{% include "home/head.html" %}
 {% endblock %}
