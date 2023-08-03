@@ -1,23 +1,27 @@
-{% extends 'templates/c.html' %}
+{% extends 'templates/cr.html' %}
 
 {% block main %}
-{% include "user/widgets/guest.html" %}
 {% include "mate/widgets/friends.html" %}
 {% include "team/widgets/circles.html" %}
-{% include "user/widgets/account.html" %}
+{% endblock %}
+
+{% block right %}
+{% include "user/widgets/signout.html" %}
+{% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block fixed %}
-{% include "team/aside/circles.html" %}
+{% include "mate/aside/received.html" %}
 {% include "team/aside/requests.html" %}
+{% include "mate/aside/friends.html" %}
+{% include "team/aside/circles.html" %}
+{% include "team/form/request.html" %}
+{% include "mate/form/request.html" %}
 {% include "team/form/create.html" %}
 {% include "team/form/login.html" %}
-{% include "mate/form/request.html" %}
-{% include "mate/aside/friends.html" %}
-{% include "mate/aside/received.html" %}
 {% include "mate/aside/sent.html" %}
 {% endblock %}
 
 {% block head %}
-<title>{{ request.user.username }}</title>
+{% include "user/head.html" %}
 {% endblock %}

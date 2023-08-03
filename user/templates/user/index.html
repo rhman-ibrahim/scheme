@@ -1,33 +1,33 @@
 {% extends 'templates/cr.html' %}
 
 {% block main %}
-{% include "user/widgets/connections.html" %}
-{% include "team/widgets/circles.html" %}
+{% include "mate/widgets/profile.html" %}
 {% include "mate/widgets/friends.html" %}
-{% include "user/widgets/account.html" %}
+{% include "team/widgets/circles.html" %}
 {% endblock %}
 
 {% block right %}
+{% include "user/widgets/security.html" %}
 {% include "user/widgets/token.html" %}
-{% include "mate/widgets/profile.html" %}
 {% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block fixed %}
-{% include "user/form/password.html" %}
-{% include "user/form/delete.html" %}
-{% include "team/aside/circles.html" %}
 {% include "team/aside/requests.html" %}
+{% include "mate/aside/received.html" %}
+{% include "team/aside/circles.html" %}
+{% include "user/form/password.html" %}
+{% include "mate/aside/friends.html" %}
+{% include "team/form/request.html" %}
+{% include "mate/form/picture.html" %}
+{% include "mate/form/request.html" %}
+{% include "user/form/delete.html" %}
 {% include "team/form/create.html" %}
 {% include "team/form/login.html" %}
-{% include "mate/form/picture.html" %}
-{% include "mate/form/info.html" %}
-{% include "mate/form/request.html" %}
-{% include "mate/aside/friends.html" %}
-{% include "mate/aside/received.html" %}
 {% include "mate/aside/sent.html" %}
+{% include "mate/form/info.html" %}
 {% endblock %}
 
 {% block head %}
-<title>{{ request.user.username }}</title>
+{% include "user/head.html" %}
 {% endblock %}

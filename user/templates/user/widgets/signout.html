@@ -1,0 +1,11 @@
+{% load user_filters %}
+
+<section class="widget">
+    <h3>
+        <img src="{{ request.user|profile_picture_url }}" class="circle-24" alt="{{ request.user.username }}'s profile picture">
+        <span class="text-transform-none">{{ request.user.username }}</span>
+    </h3>
+    <section class="flex-container">
+        {% include "user/card/py/patch/signout.html" %}
+    </section>
+</section>
