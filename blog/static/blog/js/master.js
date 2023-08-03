@@ -12,7 +12,7 @@ class Signal {
     static get = iElement => {
         return {
             placeholder: iElement.parentElement.parentElement.querySelector('p').textContent,
-            classification: iElement.parentElement.querySelector('b').textContent,
+            classification: iElement.parentElement.parentElement.querySelector('h4 b').textContent,
             glyph: iElement.classList.item(0),
             icon: iElement.textContent
         }

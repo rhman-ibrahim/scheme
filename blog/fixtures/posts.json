@@ -1,0 +1,306 @@
+[
+  {
+    "model": "blog.Signal",
+    "id": 1,
+    "fields": {
+      "owner": 1,
+      "user": 1,
+      "circle": 1,
+      "classification":"answer",
+      "glyph":"material-symbols-outlined",
+      "icon":"article",
+      "body":"Lorem ipsum dolor sit amet, cons",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 1,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 2,
+    "fields": {
+      "owner": 2,
+      "user": 2,
+      "circle": 1,
+      "classification":"concern",
+      "glyph":"material-symbols-outlined",
+      "icon":"release_alert",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 2,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 3,
+    "fields": {
+      "owner": 3,
+      "user": 3,
+      "circle": 1,
+      "classification":"criteria",
+      "glyph":"material-symbols-outlined",
+      "icon":"balance",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque pen",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 3,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 4,
+    "fields": {
+      "owner": 4,
+      "user": 4,
+      "circle": 1,
+      "classification":"decision",
+      "glyph":"material-symbols-outlined",
+      "icon":"gavel",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 4,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 5,
+    "fields": {
+      "owner": 1,
+      "user": 1,
+      "circle": 1,
+      "classification":"hypothesis",
+      "glyph":"material-symbols-outlined",
+      "icon":"cognition",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus e",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 5,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 6,
+    "fields": {
+      "owner": 2,
+      "user": 2,
+      "circle": 1,
+      "classification":"idea",
+      "glyph":"material-icons",
+      "icon":"bubble_chart",
+      "body": "Lorem ipsum dolor sit amet, cons",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 6,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 7,
+    "fields": {
+      "owner": 3,
+      "user": 3,
+      "circle": 1,
+      "classification":"insight",
+      "glyph":"material-symbols-outlined",
+      "icon":"insights",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 7,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 8,
+    "fields": {
+      "owner": 4,
+      "user": 4,
+      "circle": 1,
+      "classification":"metric",
+      "glyph":"material-symbols-outlined",
+      "icon":"monitoring",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque pen",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 8,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 9,
+    "fields": {
+      "owner": 1,
+      "user": 1,
+      "circle": 1,
+      "classification":"observation",
+      "glyph":"material-icons",
+      "icon":"tips_and_updates",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 9,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 10,
+    "fields": {
+      "owner": 2,
+      "user": 2,
+      "circle": 1,
+      "classification":"opportunity",
+      "glyph":"material-symbols-outlined",
+      "icon":"target",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus e",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 10,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 11,
+    "fields": {
+      "owner": 3,
+      "user": 3,
+      "circle": 1,
+      "classification":"problem",
+      "glyph":"material-symbols-outlined",
+      "icon":"warning",
+      "body": "Lorem ipsum dolor sit amet, cons",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 11,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 12,
+    "fields": {
+      "owner": 4,
+      "user": 4,
+      "circle": 1,
+      "classification":"question",
+      "glyph":"material-symbols-outlined",
+      "icon":"psychology_alt",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 12,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 13,
+    "fields": {
+      "owner": 1,
+      "user": 1,
+      "circle": 1,
+      "classification":"result",
+      "glyph":"material-icons",
+      "icon":"sensors",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque pen",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 13,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 14,
+    "fields": {
+      "owner": 2,
+      "user": 2,
+      "circle": 1,
+      "classification":"test",
+      "glyph":"material-symbols-outlined",
+      "icon":"science",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 14,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 15,
+    "fields": {
+      "owner": 3,
+      "user": 3,
+      "circle": 1,
+      "classification":"theory",
+      "glyph":"material-symbols-outlined",
+      "icon":"psychology",
+      "body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus e",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 15,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.Signal",
+    "id": 16,
+    "fields": {
+      "owner": 4,
+      "user": 4,
+      "circle": 1,
+      "classification":"thought",
+      "glyph":"material-icons",
+      "icon":"incomplete_circle",
+      "body": "Lorem ipsum dolor sit amet, cons",
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00",
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 16,
+      "level": 0
+    }
+  }
+]
