@@ -10,7 +10,3 @@ python3 manage.py makemigrations dapi
 
 # Migrate
 python3 manage.py migrate
-
-# Load fixtures
-python3 manage.py loaddata user/fixtures/users.json
-python3 manage.py loaddata mate/fixtures/mates.json
