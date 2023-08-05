@@ -4,10 +4,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 
 # Decorators
-from user.decorators import is_authenticated, is_guest
-
-# Models
-from team.models import Circle, CircleRequest
+from user.decorators import is_authenticated, is_guest, track_guest
 
 # Forms
 from team.forms import CircleForm, CircleLoginForm, CircleRequestForm
@@ -45,6 +42,7 @@ def settings(request):
         }
     )
 
+@track_guest
 @is_authenticated(True)
 @is_guest(True)
 def guest(request):
@@ -63,7 +61,3 @@ def guest(request):
                 }
             }
         )
-
-
-def back(request):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

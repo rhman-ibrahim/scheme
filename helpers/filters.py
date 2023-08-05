@@ -44,6 +44,7 @@ def ago(time_stamp):
     if isinstance(time_stamp, stamp):
         return timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc))
     return "---"
+
 @register.filter
 def ago_shorten(time_stamp):
     if isinstance(time_stamp, stamp):

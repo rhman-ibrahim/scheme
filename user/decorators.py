@@ -1,5 +1,10 @@
+import datetime, timeago
+from django.utils.timezone import utc
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.contrib.auth import logout
+from user.models import Account
+import pytz
 
 
 def is_authenticated(status):
@@ -28,3 +33,12 @@ def is_guest(status):
                 return redirect('user:settings')
         return wrapper
     return decorator
+
+def track_guest(view):
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_guest:
+            termination = request.user.termination
+            if termination['state']:
+                return redirect("user:terminate")
+        return view(request, *args, **kwargs)
+    return wrapper

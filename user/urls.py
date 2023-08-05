@@ -5,9 +5,9 @@ from user import views
 app_name    = "user"
 urlpatterns = [
     # Nav
+    path('terminate/', views.terminate, name="terminate"),
     path('settings/', views.settings, name="settings"),
     path('guest/', views.guest, name="guest"),
-    path('back/', views.back, name='back'),
     path('', views.nav, name='nav'),
     # Sign
     path('signin/guest/', views.signin_guest, name='signin_guest'),

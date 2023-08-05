@@ -70,3 +70,14 @@ def delete_account(request):
     else:
         get_form_errors(request, form)
     return redirect('user:back')
+
+
+@is_authenticated(True)
+@is_guest(True)
+def terminate(request):
+    account = Account.objects.get(id=request.user.id)
+    account.is_active = False
+    account.save()
+    logout(request)
+    messages.info(request, 'Your 8 hours session is over.')
+    return redirect("home:index")

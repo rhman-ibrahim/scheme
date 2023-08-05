@@ -201,10 +201,40 @@ class Template {
     }
 }
 
+class Timer {
+    static countDown = () => {
+        let x = new Date(document.getElementById("timer").dataset.countDown);
+        x.setUTCHours(x.getUTCHours() + 3);
+        x = x.getTime();
+        setInterval(
+            () =>
+            {
+                let dif = x - new Date().getTime();
+                console.log(dif);
+                    
+                // Time calculations for days, hours, minutes and seconds
+                let h = Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let m = Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60));
+                let s = Math.floor((dif % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = `${h}:${m}:${s}`;
+                    
+                // If the count down is over, write some text 
+                if (dif < 0) {
+                    clearInterval(x);
+                    window.location.href = `http://${window.location.host}/user/terminate/`
+                }
+            },
+            1000
+        );
+    }
+}
+
 class Handler {
     static init = () => {
         Grid.init();
         Theme.init();
         Message.init();
+        if (Template.isThere('#timer')) Timer.countDown();
     }
 }
