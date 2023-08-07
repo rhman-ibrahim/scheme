@@ -87,7 +87,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
             return {
                 'tz': self.created.tzinfo,
                 'state': True if df.total_seconds() < 0 else False,
-                'string_formation': tt.strftime("%b %d, %Y %H:%M:%S"),
+                'timer': tt.strftime("%b %d, %Y %H:%M:%S"),
                 'duration': duration,
                 'seconds': seconds,
                 'minutes': minutes,

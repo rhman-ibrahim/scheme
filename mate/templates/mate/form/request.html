@@ -1,5 +1,5 @@
 <footer id="mate-form-footer">
-    <form method="POST" action="{% url 'mate:create_friend_request' %}" id="mate-form">
+    <form method="POST" action="{% url 'mate:create_request' %}" id="mate-form">
         {% with form=forms.mate %}
         {% include "components/form/base.html" %}
         {% endwith %}

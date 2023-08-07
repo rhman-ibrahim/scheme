@@ -6,6 +6,9 @@
         <span class="text-transform-none">{{ request.user.username }}</span>
     </h3>
     <section class="flex-container">
+        {% include "mate/card/js/aside/friends.html" %}
+        {% include "team/card/js/aside/circles.html" %}
+        {% include "user/card/js/username.html" %}
         {% include "user/card/py/patch/signout.html" %}
     </section>
 </section>

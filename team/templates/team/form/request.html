@@ -1,5 +1,5 @@
 <footer id="circle-request-form-footer">
-    <form method="POST" action="{% url 'team:create_circle_request' %}" id="circle-request-form">
+    <form method="POST" action="{% url 'team:create_request' %}" id="circle-request-form">
         {% with form=forms.circle_request %}
         {% include "components/form/base.html" %}
         {% endwith %}

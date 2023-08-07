@@ -8,7 +8,11 @@
     <section class="flex-container">
         <ul class="flex-box-row">
             <div class="flex-row-start">
+                {% if circle.founder == request.user %}
+                <h4>you</h4>
+                {% else %}
                 <h4>{{ circle.founder.username }}</h4>
+                {% endif %}
             </div>
             <nav class="flex-row-end">
                 <img
@@ -22,7 +26,11 @@
         {% for member in circle.members.all %}
         <ul class="flex-box-row">
             <div class="flex-row-start">
+                {% if member == request.user %}
+                <h4>you</h4>
+                {% else %}
                 <h4>{{ member.username }}</h4>
+                {% endif %}
             </div>
             <nav class="flex-row-end">
                 <img

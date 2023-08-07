@@ -21,7 +21,7 @@
             <nav class="flex-box-row">
                 <h3 class="text-transform-none">{{ circle.name }}</h3>
                 {% if opened_circle.id == circle.id %}
-                <a href="{% url 'team:browse' %}" class="text-align-right info-color">
+                <a href="{% url 'team:retrieve_team_index' %}" class="text-align-right info-color">
                     <b class="material-icons">diversity_2</b>
                 </a>
                 {% else %}

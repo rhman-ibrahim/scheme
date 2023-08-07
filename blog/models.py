@@ -32,7 +32,7 @@ class Signal(MPTTModel):
         return f"{self.serial}"
 
     def url(self):
-        return reverse("blog:get_signal", args=[str(self.serial)])
+        return reverse("blog:retrieve_signal", args=[str(self.serial)])
     
     def get_status(self):
         return {

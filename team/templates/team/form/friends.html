@@ -1,5 +1,5 @@
 <footer id="founder-friends-form-footer">
-    <form method="POST" action="{% url 'team:put' %}" id="founder-friends-form">
+    <form method="POST" action="{% url 'team:import_friends' %}" id="founder-friends-form">
         {% with form=forms.friends %}
         {% include "components/form/base.html" %}
         {% endwith %}

@@ -61,7 +61,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         
         # Check if the room is opened
-        if self.room.status:
+        if not self.room.status:
 
             await self.channel_layer.group_send(                                                
             self.group_name, 

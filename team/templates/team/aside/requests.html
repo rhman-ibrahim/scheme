@@ -13,16 +13,16 @@
                     </ul>
                 </div>
                 {% for ask in circle.join_requests %}
-                <ul class="row">
-                    <li>
+                <div class="flex-box-row">
+                    <div  class="flex-row-start">
                         <img src="{{ ask.user|profile_picture_url }}" alt="" class="circle-24">
                         <span>{{ ask.user.username }}</span>
-                    </li>
-                    <li>
-                        <a href="{% url 'team:approve' ask.user.id %}" class="material-symbols-outlined">check</a>
-                        <a href="{% url 'team:reject' ask.user.id %}" class="material-symbols-outlined">close</a>
-                    </li>
-                </ul>
+                    </div>
+                    <nav class="flex-row-end">
+                        <a href="{% url 'team:accept_request' ask.user.id %}" class="material-symbols-outlined">check</a>
+                        <a href="{% url 'team:reject_request' ask.user.id %}" class="material-symbols-outlined">close</a>
+                    </nav>
+                </div>
                 {% endfor %}
                 {% elif request.resolver_match.app_name == "user" and request.user.scheme.circle_requests.count %}
                 {% for ask in request.user.scheme.circle_requests %}

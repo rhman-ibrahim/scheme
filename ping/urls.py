@@ -3,5 +3,6 @@ from . import views
 
 app_name    = "ping"
 urlpatterns = [
-    path('status/<str:serial>/', views.update_room_status, name="update_room_status"),
+    # Update
+    path('<str:serial>/udate/status/', views.update_room_status, name="update_room_status"),
 ]

@@ -39,21 +39,21 @@ class Profile(models.Model):
         ]
     )
 
-    def index(self):
-        return reverse("mate:profile", args=[str(self.user.username)])
-
     def __str__(self):
         return f"{self.user.username}'s profile"
-
+    
     @property
     def completion_percentage(self):
         return completion([self.name, self.email, self.about])
+    
     @property
     def has_name(self):
         return False if not bool(self.name) else True
+    
     @property
     def has_email(self):
         return False if not bool(self.email) else True
+    
     @property
     def has_about(self):
         return False if not bool(self.about) else True
@@ -69,17 +69,17 @@ class FriendRequest(models.Model):
     updated  = models.DateTimeField(auto_now=True)
 
     def accept(self):
-        return reverse("mate:accept_friend_request", args=[str(self.id)])
+        return reverse("mate:accept_request", args=[str(self.id)])
 
     def reject(self):
-        return reverse("mate:reject_friend_request", args=[str(self.id)])
+        return reverse("mate:reject_request", args=[str(self.id)])
 
     def cancel(self):
-        return reverse("mate:delete_friend_request", args=[str(self.id)])
+        return reverse("mate:delete_request", args=[str(self.id)])
     
     def validate_unique(self, exclude=None):
         # Check if there is an existing friend request with the sender and receiver fields swapped
-        if FriendRequest.objects.filter(sender=self.receiver, receiver=self.sender).exists():
+        if FriendRequest.objects.filter(Q(sender=self.receiver) & Q(receiver=self.sender), ~Q(status=0)).exists():
             raise ValidationError('A friend request already exists between these users.')
         # Call the parent validate_unique method to check for any other unique constraints
         super(FriendRequest, self).validate_unique(exclude=exclude)
@@ -100,6 +100,9 @@ class Scheme(models.Model):
     def __str__(self):
         return self.user.username
 
+    def index(self):
+        return reverse("mate:retrieve_mate_index", args=[str(self.user.username)])
+    
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)

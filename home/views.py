@@ -1,19 +1,27 @@
 # Django
 from django.shortcuts import render
-# User
-from user.forms import SignUpForm, SignInForm, VerifyForm, PassWordResetForm
-from user.decorators import is_authenticated
+
+# Models
 from user.models import Account
 from mate.models import Profile
-# Circles
-from team.forms import CircleForm, CircleRequestForm
 from team.models import Circle
-# Signal
 from blog.models import Signal
+
+# Forms
+from user.forms import (
+    SignUpForm, SignInForm,
+    VerifyForm, PassWordResetForm
+)
+from team.forms import (
+    CircleForm, CircleRequestForm
+)
+
+# Decorators
+from user.decorators import is_authenticated
 
 
 @is_authenticated(False)
-def index(request):
+def render_home_index(request):
     return render(
         request,
         "home/index.html",

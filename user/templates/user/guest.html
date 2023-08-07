@@ -1,15 +1,13 @@
-{% extends 'templates/cr.html' %}
+{% extends 'templates/c.html' %}
 
 {% block main %}
 {% include "user/widgets/termination.html" %}
+{% include "user/widgets/account.html" %}
 {% include "mate/widgets/friends.html" %}
 {% include "team/widgets/circles.html" %}
-{% endblock %}
-
-{% block right %}
-{% include "user/widgets/signout.html" %}
 {% include "components/widgets/theme.html" %}
 {% endblock %}
+
 
 {% block fixed %}
 {% include "mate/aside/received.html" %}

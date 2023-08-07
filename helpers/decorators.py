@@ -1,7 +1,24 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
 
+
+def home(view):
+    def wrapper(request, *args, **kwargs):
+        view(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            if request.user.is_guest:
+                return redirect("user:retrieve_account")
+            return redirect("user:retrieve_account")
+        return redirect("home:render_home_index")
+    return wrapper
+
+def back(view):
+    def wrapper(request, *args, **kwargs):
+        view(request, *args, **kwargs)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return wrapper
 
 def resource(link):
     # Check if the resource exists.

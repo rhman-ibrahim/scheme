@@ -3,5 +3,6 @@ from . import views
 
 app_name    = "dapi"
 urlpatterns = [
-    path('<str:serial>/', views.room_messages)
+    # Retrieve
+    path('<str:serial>/', views.retrieve_room_messages, name="retrieve_room_messages")
 ]

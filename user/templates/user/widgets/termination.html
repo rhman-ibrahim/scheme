@@ -1,7 +1,17 @@
 <section class="widget">
     <div class="flex-container flex-rows">
-        <div class="flex-box-col">
-            <h3 id="timer" data-count-down="{{ request.user.termination.string_formation }}"></h3>
+        <div class="flex-box-col warning-card">
+            <h3>
+                <i class="material-symbols-outlined">domino_mask</i>
+                <span>{{ request.user.username }}</span>
+            </h3>
+            <p>As a guest user your session will be terminated after complete 8 hours
+            of creation, <span>then everything</span> you created will be deleted.</p>
+            <ul class="text-align-right">
+                <li>
+                    <b id="timer" data-count-down="{{ request.user.termination.timer }}"></b>
+                </li>
+            </ul>
         </div>
     </div>
 </section>

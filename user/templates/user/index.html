@@ -1,15 +1,16 @@
 {% extends 'templates/cr.html' %}
 
 {% block main %}
-{% include "mate/widgets/profile.html" %}
+{% include "user/widgets/account.html" %}
 {% include "mate/widgets/friends.html" %}
 {% include "team/widgets/circles.html" %}
+{% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "user/widgets/security.html" %}
+{% include "mate/widgets/profile.html" %}
 {% include "user/widgets/token.html" %}
-{% include "components/widgets/theme.html" %}
+{% include "user/widgets/security.html" %}
 {% endblock %}
 
 {% block fixed %}

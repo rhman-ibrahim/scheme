@@ -93,7 +93,7 @@ class CircleRequest(models.Model):
         return f"{self.user.username} requested to join {self.circle.name}."
     
     def cancel(self):
-        return reverse("team:delete_circle_request", args=[str(self.id)])
+        return reverse("team:delete_request", args=[str(self.id)])
 
 
 class CircleMembership(models.Model):
