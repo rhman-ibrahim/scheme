@@ -3,16 +3,17 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION
 from django.contrib import messages
 from django.http import Http404
+from django.db.models import Q
 
 # Models
 from team.models import (
     Circle, CircleRequest
 )
 from ping.models import Room
-from blog.models import Signal
+from blog.models import Post
 
 # Forms
-from blog.forms import SignalForm
+from blog.forms import PostForm
 from team.forms import (
     CircleForm, CircleRequestForm,
     AddFounderFriendsForm, TransferCircleForm,
@@ -115,12 +116,12 @@ def retrieve_team_index(request):
         {
             'circle': circle,
             'room': Room.objects.get(serial=circle.serial),
-            'signals': Signal.objects.filter(circle=circle, level=0).order_by('-created'),
+            'posts': Post.objects.filter(circle=circle, level=0).order_by('-created'),
             'forms': {
-                'signal': SignalForm
+                'post': PostForm
             },
             'column': {
-                'left':"format_quote",
+                'left':"menu",
                 'right':"forum",
             }
         }    
@@ -198,15 +199,16 @@ def login(request):
     if request.method == 'POST':
         form = CircleLoginForm(request.POST)
         if form.is_valid():
-            query = Circle.objects.filter(name=form.cleaned_data['name'])
+            query = Circle.objects.filter(
+                Q(name=form.cleaned_data['name']) &
+                (Q(founder=request.user) | Q(members=request.user))
+            )
             circle = query.first() if query.exists() else None
-            if circle != None and circle.user_role(request.user) != None:
-                if circle.check_password(form.cleaned_data['password']):
-                    request.session['circle'] = circle.id
-                    return redirect("team:retrieve_team_index")
-                else:
-                    messages.error(request, "circle password is wrong")
-            else: messages.error(request, "circle credentials error")
+            if circle.check_password(form.cleaned_data['password']):
+                request.session['circle'] = circle.id
+                return redirect("team:retrieve_team_index")
+            else:
+                messages.error(request, "circle password is wrong")
         else:
             get_form_errors(request, form)
 

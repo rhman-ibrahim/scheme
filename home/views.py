@@ -5,7 +5,7 @@ from django.shortcuts import render
 from user.models import Account
 from mate.models import Profile
 from team.models import Circle
-from blog.models import Signal
+from blog.models import Post
 
 # Forms
 from user.forms import (
@@ -35,7 +35,7 @@ def render_home_index(request):
                 'verify': VerifyForm
             },
             'stats': {
-                'interactions': Signal.objects.count(),
+                'interactions': Post.objects.count(),
                 'circles': Circle.objects.count(),
                 'users': Account.objects.count(),
             },
