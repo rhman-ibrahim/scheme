@@ -99,9 +99,9 @@ main {
     width: 32px;
     height: 32px;
     color: var(--white);
-    outline: 1.32px solid var(--accent);
+    outline: 1.32px solid var(--primary);
     box-shadow: var(--box-shadow);
-    background: var(--accent);
+    background: var(--primary);
     border-radius: 100%;
     position: absolute;
     bottom: 8px;

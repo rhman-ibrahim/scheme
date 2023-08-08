@@ -8,7 +8,8 @@
     --success: #34c240;
     --warning: #fa9f47;
     /* accent */
-    --accent: #77216F;
+    --primary: #9D00FF;
+    --secondary: #7D39FF;
     /* properties */
     --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -47,12 +48,12 @@ section.active {
 */
 
 .accent-card:hover {
-    outline-color: var(--accent);
+    outline-color: var(--primary);
 }
 .accent-card:hover b,
 .accent-card:hover .material-icons,
 .accent-card:hover .material-symbols-outlined {
-    color: var(--accent);
+    color: var(--primary);
 }
 
 .danger-card:hover {
@@ -96,7 +97,7 @@ section.active {
 */
 
 .accent-outline {
-    outline: 1.32px solid var(--accent);
+    outline: 1.32px solid var(--primary);
 }
 .danger-outline {
     outline: 1.32px solid var(--danger);
@@ -116,7 +117,7 @@ section.active {
 */
 
 .accent-background {
-    background: var(--accent);
+    background: var(--primary);
 }
 .danger-background {
     background: var(--danger);
@@ -136,7 +137,7 @@ section.active {
 */
 
 .accent-color {
-    color: var(--accent);
+    color: var(--primary);
 }
 .danger-color {
     color: var(--danger);

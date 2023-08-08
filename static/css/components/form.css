@@ -9,15 +9,7 @@ form label {
   line-height: 1.4;
 }
 
-form small {
-  display: inline-block;
-  font-size: .75rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-form label::first-letter,
-form small::first-letter {
+form label::first-letter {
   text-transform: capitalize;
 }
 
@@ -25,7 +17,7 @@ form small::first-letter {
   div
 */
 
-fieldset div {
+fieldset > div {
   display: flex;
   flex-direction: column;
   padding: 8px 4px;
@@ -63,22 +55,22 @@ textarea::-webkit-scrollbar {
 }
 
 /*
-  div.check
+  div.check,
+  div.radio
 */
 
-div.check h5 {
-  text-transform: capitalize;
-  line-height: 2;
-}
-
-div.check div.container {
+fieldset div.check div.container,
+fieldset div.radio div.container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px 4px;
   gap: 8px;
 }
 
-div.check div.container [type=checkbox] {
+div.check div.container [type=checkbox],
+div.radio div.container [type=radio] {
   position: absolute;
   opacity: 0;
   height: 0;
@@ -86,7 +78,7 @@ div.check div.container [type=checkbox] {
 }
 
 div.check div.container [type=checkbox] + h6,
-div.radio div.container input + h6 {
+div.radio div.container [type=radio] + h6 {
   border-radius: 8px;
   background: var(--d1);
   outline: 1px solid var(--d3);
@@ -99,34 +91,8 @@ div.radio div.container input + h6 {
 
 div.check div.container [type=checkbox]:checked + h6,
 div.radio div.container input:checked + h6 {
-  outline-color: var(--di);
-  color: var(--di);
-}
-
-/*
-  div.radio
-*/
-
-div.radio h5 {
-  text-transform: capitalize;
-  line-height: 2;
-}
-
-div.radio div.container {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-div.radio div.container label {
-  flex: auto 1 fit-content;
-}
-
-div.radio div.container input {
-  position: absolute;
-  opacity: 0;
-  height: 0;
-  width: 0;
+  background: var(--primary);
+  color: var(--d1);
 }
 
 /*
