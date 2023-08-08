@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -16,8 +16,10 @@ def home(view):
 
 def back(view):
     def wrapper(request, *args, **kwargs):
-        view(request, *args, **kwargs)
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        response = view(request, *args, **kwargs)
+        if not isinstance(response, (HttpResponseRedirect, HttpResponsePermanentRedirect)):
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return response
     return wrapper
 
 def resource(link):
