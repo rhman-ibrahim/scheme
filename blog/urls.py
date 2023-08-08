@@ -5,9 +5,9 @@ from . import views
 app_name    = "blog"
 urlpatterns = [
     # Create
-    path('create/', views.create_signal, name="create_signal"),
+    path('create/', views.create_post, name="create_post"),
     # Retrieve
-    path('<str:serial>/', views.retrieve_signal, name="retrieve_signal"),
+    path('<str:serial>/', views.retrieve_post, name="retrieve_post"),
     # Update
     path('<str:serial>/status/update/', views.update_signal_status, name="update_signal_status"),
 ]

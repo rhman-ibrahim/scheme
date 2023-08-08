@@ -1,12 +1,13 @@
-from blog.models import Signal
+from blog.models import Post
 from django import forms
 
 
-class SignalForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
 
-    body = forms.CharField(
-        label=False,
-        required=True,
+    signal = forms.RadioSelect()
+    body   = forms.CharField(
+        label     = False,
+        required  = True,
         widget=forms.Textarea(
             attrs = {
                 'data-field':"body",
@@ -18,8 +19,8 @@ class SignalForm(forms.ModelForm):
 
     class Meta:
 
-        model   = Signal
-        fields  = ['parent', 'glyph', 'icon', 'classification', 'body']
+        model   = Post
+        fields  = ['parent', 'signal', 'body']
         widgets = {
             'parent': forms.HiddenInput(
                 attrs = {
@@ -27,22 +28,5 @@ class SignalForm(forms.ModelForm):
                     'data-field':"parent"
                 }
             ),
-            'glyph': forms.HiddenInput(
-                attrs = {
-                    'id':"signal-glyph-input",
-                    'data-field':"glyph"
-                }
-            ),
-            'icon': forms.HiddenInput(
-                attrs = {
-                    'id':"signal-icon-input",
-                    'data-field':"icon"
-                }
-            ),
-            'classification': forms.HiddenInput(
-                attrs = {
-                    'id':"signal-classification-input",
-                    'data-field':"classification"
-                }
-            )
+            'signal': forms.RadioSelect()
         }

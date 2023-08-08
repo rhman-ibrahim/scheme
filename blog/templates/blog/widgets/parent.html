@@ -1,0 +1,9 @@
+<section class="widget">
+    <section class="flex-container flex-rows" id="parent-beam">
+        {% include "blog/post.html" %}
+        <div class="vertical-line"></div>
+        {% for post in post.beam.user %}
+        {% include "blog/post.html" %}
+        {% endfor %}
+    </section>
+</section>

@@ -1,7 +1,0 @@
-<footer id="signal-form-footer">
-    <form method="POST" action="{% url 'blog:create_signal' %}" id="signal-create-form">
-        {% with form=forms.signal %}
-        {% include "components/form/base.html" %}
-        {% endwith %}
-    </form>
-</footer>

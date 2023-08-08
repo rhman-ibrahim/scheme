@@ -1,0 +1,7 @@
+<footer id="post-form-footer">
+    <form method="POST" action="{% url 'blog:create_post' %}" id="post-create-form">
+        {% with form=forms.post %}
+        {% include "components/form/base.html" %}
+        {% endwith %}
+    </form>
+</footer>

@@ -1,0 +1,42 @@
+{% load filters %}
+{% load user_filters %}
+
+<div class="post">
+    <div class="post-header">
+        <h4>
+            <small class="text-transform-none">{{ post.user.username }}</small>
+            <img
+                class="post-footer-img circle-24"
+                src="{{ post.user|profile_picture_url }}"
+                alt="{{ post.user.username }}'s profile picture"
+            />
+        </h4>
+    </div>
+    <div class="post-body">
+        <p class="post-body-p">{{ post.body|linebreaks }}</p>
+        <ul>
+            <a href="{{ post.url }}" class="post-body-mark">
+                <i class="{{ post.signal.glyph }}">{{ post.signal.icon }}</i>
+                <span>{{ post.signal.classification }}</span>
+            </a>
+            {% if post.beam.user.count %}
+            <li class="post-body-mark">
+                <i class="material-icons">speaker_notes</i>
+                <span>{{ post.beam.user.count }}</span>
+            </li>
+            {% endif %}
+            {% if post.beam.others.count %}
+            <li class="post-body-mark">
+                <span>{{ post.beam.others.count }}</span>
+                <i class="material-icons">comment</i>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <nav class="post-nav">
+        <a href="{{ post.url }}">
+            <small class="text-transform-lower">{{ post.created|ago }}</small>
+            <i class="material-icons">schedule</i>
+        </a>
+    </nav>
+</div>

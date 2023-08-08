@@ -1,12 +1,20 @@
 {% extends 'templates/lcr.html' %}
 
 {% block main %}
-{% include "team/widgets/navigate.html" %}
-{% include "blog/widgets/signal.html" %}
+
+{% with post=post %}
+{% include "blog/widgets/post.html" %}
+{% endwith %}
+
+{% with posts=post.beam.others.all %}
+{% include "blog/widgets/siblings.html" %}
+{% endwith %}
+
 {% endblock %}
 
 {% block left %}
-{% include "blog/widgets/index.html" %}
+{% include "team/widgets/navigate.html" %}
+{% include "blog/widgets/create.html" %}
 {% endblock %}
 
 {% block right %}
@@ -14,7 +22,7 @@
 {% endblock %}
 
 {% block fixed %}
-{% include "blog/form.html" %}
+{% include "blog/form/post.html" %}
 {% endblock %}
 
 {% block head %}

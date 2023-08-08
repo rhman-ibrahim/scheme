@@ -1,0 +1,21 @@
+{% if posts.count %}
+<section class="widget">
+    {% if request.resolver_match.app_name == "team" %}
+    <h3>
+        <i class="material-icons">format_quote</i>
+        <span>posts</span>
+    </h3>
+    {% endif %}
+    {% if request.resolver_match.app_name == "blog" %}
+    <h3>
+        <i class="material-icons">comment</i>
+        <span>comments</span>
+    </h3>
+    {% endif %}
+    <section class="flex-container flex-rows" id="siblings-list">
+        {% for post in posts %}
+        {% include "blog/post.html" %}
+        {% endfor %}
+    </section>
+</section>
+{% endif %}

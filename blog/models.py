@@ -9,17 +9,23 @@ from mptt.models import MPTTModel, TreeForeignKey
 from helpers.functions import generate_serial
 
 
-class Signal(MPTTModel):
-
-    parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    # Creator & Contributor
-    owner          = models.ForeignKey("user.Account", on_delete=models.CASCADE, blank=False, null=False, related_name="owner")
-    user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="user")
-    # Identification
-    circle         = models.ForeignKey("team.Circle", on_delete=models.CASCADE)
+class Signal(models.Model):
+    
     classification = models.CharField(max_length=64, default="signal", blank=False, null=False)
     glyph          = models.CharField(max_length=64, default="material-symbols-outlined")
     icon           = models.CharField(max_length=64, default="radio_button_checked")
+
+    def __str__(self):
+        return self.classification
+
+class Post(MPTTModel):
+
+    parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    # Creator & Contributor
+    user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="user")
+    # Identification
+    circle         = models.ForeignKey("team.Circle", on_delete=models.CASCADE)
+    signal         = models.ForeignKey("blog.Signal", default=16, on_delete=models.CASCADE)
     # Room
     serial         = models.CharField(max_length=64, default=generate_serial, null=False, blank=False, editable=False)
     status         = models.BooleanField(default=True, blank=False, null=False)
@@ -29,16 +35,25 @@ class Signal(MPTTModel):
     updated        = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.serial}"
+        return f"{self.signal.classification} by {self.user.username}"
 
     def url(self):
-        return reverse("blog:retrieve_signal", args=[str(self.serial)])
+        return reverse("blog:retrieve_post", args=[str(self.serial)])
     
     def get_status(self):
         return {
-            'i': "line_start_circle" if self.status == 1 else "line_end_circle",
-            's': "opened" if self.status == 1 else "closed"
+            'icon': "line_start_circle" if self.status == 1 else "line_end_circle",
+            'value': "opened" if self.status == 1 else "closed",
         }
     
     def update_status(self):
         return reverse("blog:update_signal_status", args=[str(self.serial)])
+    
+    @property
+    def beam(self):
+        by_user   = [int(signal.id) for signal in self.get_children() if signal.user == self.user]
+        by_others = [int(signal.id) for signal in self.get_children() if signal.user != self.user]
+        return {
+            'user': Post.objects.filter(pk__in=by_user),
+            'others': Post.objects.filter(pk__in=by_others)
+        }

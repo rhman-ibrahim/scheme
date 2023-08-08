@@ -5,10 +5,10 @@ from django.contrib import messages
 # Models
 from team.models import Circle
 from ping.models import Room
-from .models import Signal
+from .models import Post
 
 # Forms
-from .forms import SignalForm
+from .forms import PostForm
 
 # Decorators
 from helpers.decorators import back
@@ -20,19 +20,17 @@ from helpers.functions import get_form_errors
 # Create
 
 @back
-def create_signal(request):
+def create_post(request):
     if request.method == "POST":
-        form = SignalForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             signal        = form.save(commit=False)
             signal.circle = Circle.objects.get(id=request.session.get('circle'))
-            if 'parent_signal_id' in request.session:
-                messages.info(request, "OMG")
-                # parent        = Signal.objects.get(id=request.session.get('parent_signal_id')) 
-                # signal.parent = parent
-                # signal.owner  = parent.user
-            signal.owner  = request.user
             signal.user   = request.user
+            try:
+                signal.parent = Post.objects.get(id=request.session.get('parent_signal_id'))
+            except Post.DoesNotExist:
+                pass
             form.save()
             messages.success(request, "your signal has been sent successfully")
         else:
@@ -40,17 +38,17 @@ def create_signal(request):
 
 # Retieve
 
-def retrieve_signal(request, serial):
-    signal = Signal.objects.get(serial=serial)
+def retrieve_post(request, serial):
+    signal = Post.objects.get(serial=serial)
     request.session['parent_signal_id'] = signal.id
     return render(
         request,
         "blog/index.html",
         {
-            'signal': signal,
+            'post': signal,
             'room': Room.objects.get(serial=signal.serial),
             'forms': {
-                'signal' : SignalForm
+                'post':PostForm
             },
             'icons': {
                 'left':"diversity_2",
@@ -62,7 +60,7 @@ def retrieve_signal(request, serial):
 # Update
 
 def update_signal_status(request, serial):
-    query = Signal.objects.filter(serial=serial)
+    query = Post.objects.filter(serial=serial)
     if query.exsits() and query.count() == 1:
         signal = query.first()
         signal.status = False if signal.status else True
