@@ -2,7 +2,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from mate.models import FriendRequest
 from team.models import Circle
-from blog.models import Signal
+from blog.models import Post
 from .models import Room
 
 
@@ -24,7 +24,7 @@ def ping_room(sender, instance, created, **kwargs):
     room, created = Room.objects.get_or_create(serial=instance.serial)
     room.members.set([instance.founder, *instance.members.all()])
 
-@receiver(post_save, sender=Signal)
+@receiver(post_save, sender=Post)
 def ping_room(sender, instance, created, **kwargs):
     room, created = Room.objects.get_or_create(serial=instance.serial)
     room.members.set([instance.circle.founder, *instance.circle.members.all()])
