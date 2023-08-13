@@ -1,5 +1,4 @@
 import datetime, timeago
-from datetime import datetime as stamp
 from django.utils.timezone import utc
 from django import template
 
@@ -12,19 +11,19 @@ def message(tag, prop):
 
     tags = {
         "error": {
-            'background':'danger-background',
+            'color':'danger-background',
             'icon':'error'
         },
         "info": {
-            'background':'info-background',
+            'color':'info-background',
             'icon':'info'
         },
         "warning": {
-            'background':'warning-background',
+            'color':'warning-background',
             'icon':'warning'
         },
         "success": {
-            'background':'success-background',
+            'color':'success-background',
             'icon':'done'
         },
     }
@@ -41,29 +40,9 @@ def get_class(value):
 # Time
 @register.filter
 def ago(time_stamp):
-    if isinstance(time_stamp, stamp):
+    if isinstance(time_stamp, datetime):
         return timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc))
     return "---"
-
-@register.filter
-def ago_shorten(time_stamp):
-    if isinstance(time_stamp, stamp):
-        statment = str(timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc)))
-        if "second" in statment:
-            return statment.replace("second", "sec")
-        if "minute" in statment:
-            return statment.replace("minute", "min")
-        if "month" in statment:
-            return statment.replace("month", "mth")
-        if "week" in statment:
-            return statment.replace("week", "wk")
-        if "year" in statment:
-            return statment.replace("year", "yr")
-        if "hour" in statment:
-            return statment.replace("hour", "hr")
-        if "day" in statment:
-            return statment.replace("day", "dy")
-    return statment
 
 # Numbers
 @register.filter
