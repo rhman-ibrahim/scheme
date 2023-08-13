@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Delete cache and migrations files
+rm -rf */__pycache__
+rm -rf */migrations
+
+
 # Find all PNG files
 png_files=$(find . -wholename "/media/user/tokens/*.png")
 
@@ -7,10 +12,6 @@ png_files=$(find . -wholename "/media/user/tokens/*.png")
 if test -n "$png_files"
 then rm $png_files
 fi
-
-# Delete cache and migrations files
-rm -rf */__pycache__
-rm -rf */migrations
 
 # Delete db.sqlite3 file (Django Database)
 if [ -f "db.sqlite3" ]

@@ -4,7 +4,7 @@
 python3 manage.py makemigrations user
 python3 manage.py makemigrations mate
 python3 manage.py makemigrations team
-python3 manage.py makemigrations blog
+# python3 manage.py makemigrations blog
 python3 manage.py makemigrations ping
 python3 manage.py makemigrations dapi
 
