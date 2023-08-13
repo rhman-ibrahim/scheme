@@ -1,22 +1,11 @@
-{% load filters %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include "components/head.html" %}
-    {% block head %}
-    {% endblock %}
-</head>
-<body onload="Handler.init();" onresize="Handler.init();" data-app="{{ request.resolver_match.app_name }}">
-    <main data-url="{{ request.resolver_match.url_name }}" id="c-grid">
-        <section id="main">
-            <div class="column">
-                {% block main %}
-                {% endblock %}
-            </div>
-        </section>
-    </main>
-    {% include "components/messages.html" %}
-    {% block fixed %}
-    {% endblock %}
-</body>
-</html>
+{% extends 'templates/_.html' %}
+{% block grid %}
+<main id="c-grid">
+    <section id="main">
+        <div class="column">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </section>
+</main>
+{% endblock %}
