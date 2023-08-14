@@ -110,18 +110,18 @@ class Scheme(models.Model):
     @property
     def friend_requests(self):
         return {
-            'received': FriendRequest.objects.filter(receiver=self.user, status=2).order_by('-id'),
-            'sent': FriendRequest.objects.filter(sender=self.user, status=2).order_by('-id')
+            'received': FriendRequest.objects.filter(receiver=self.user, status=2).distinct().order_by('-id'),
+            'sent': FriendRequest.objects.filter(sender=self.user, status=2).distinct().order_by('-id')
         }
     
     @property
     def circle_requests(self):
-        return CircleRequest.objects.filter(user=self.user, status=2).order_by('-id')
+        return CircleRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
     
     @property
     def circles(self):
         return {
-            'all': Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).order_by('-created'),
-            'as_founder': Circle.objects.filter(founder=self.user).order_by('-created'),
-            'as_member': Circle.objects.filter(members=self.user).order_by('-created')
+            'all': Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-created'),
+            'as_founder': Circle.objects.filter(founder=self.user).distinct().order_by('-created'),
+            'as_member': Circle.objects.filter(members=self.user).distinct().order_by('-created')
         }
