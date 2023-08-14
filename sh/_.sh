@@ -36,29 +36,33 @@ function start {
 
 function build {
     clean
-    migarte
+    migrate
     load
-    start
 }
 
 # Main
 
 function init {
 
-    echo "0: to exit"
-    echo "1: to clean"
-    echo "2: to migrate"
-    echo "3: to load"
-    echo "4: to start Django"
-    echo "5: to start Redis"
-    echo "6: to start Celery"
-    echo "7: to start Redis and Celery"
-    echo "8: to clean, migrate and load fixtures."
-    echo "9: to start Django, Redis and Celery servers."
+    echo "0 to exit"
+    echo "1 to clean"
+    echo "2 to migrate"
+    echo "3 to load"
+    echo "4 to run Django"
+    echo "5 to run Redis"
+    echo "6 to run Celery"
+    echo "7 to run Redis and Celery"
+    echo "8 to build"
+    echo "9 to start"
 
     while true; do
-    read -p "Enter a value from 0 to 9: " input
+    read -p "Input a value from 0 to 9: " input
     
+    re='^[0-9]$'
+    if ! [[ $input =~ $re ]] ; then
+    echo "Only integer values from 0 to 9."
+    fi
+
     if [ "$input" == 0 ]; then
         echo "Exiting..."
         break
