@@ -1,0 +1,48 @@
+{% load filters %}
+{% load user_filters %}
+
+<div class="post" data-serial="{{ instance.serial }}">
+    <div class="post-header">
+        <h4>
+            <small class="text-transform-none">{{ instance.user.username }}</small>
+            <img
+                class="post-footer-img circle-24"
+                src="{{ instance.user|profile_picture_url }}"
+                alt="{{ instance.user.username }}'s profile picture"
+            />
+        </h4>
+    </div>
+    <div class="post-body">
+        <p class="post-body-p">{{ instance.body|linebreaks }}</p>
+        <ul>
+            <a href="{{ instance.url }}" class="post-body-mark">
+                <i class="{{ instance.signal.glyph }}">{{ instance.signal.icon }}</i>
+                <span>{{ instance.signal.classification }}</span>
+            </a>
+            {% if instance.beam %}
+            <li class="post-body-mark">
+                <i class="material-icons">speaker_notes</i>
+                <span>{{ instance.beam.count }}</span>
+            </li>
+            {% endif %}
+            {% if instance.comments %}
+            <li class="post-body-mark">
+                <span>{{ instance.comments.count }}</span>
+                <i class="material-icons">comment</i>
+            </li>
+            {% endif %}
+            {% if instance.replies %}
+            <li class="post-body-mark">
+                <span>{{ instance.replies.count }}</span>
+                <i class="material-icons">comment</i>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <nav class="post-nav">
+        <a href="{{ instance.url }}">
+            <small class="text-transform-lower">{{ instance.created|ago }}</small>
+            <i class="material-icons">schedule</i>
+        </a>
+    </nav>
+</div>

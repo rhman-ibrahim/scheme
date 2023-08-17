@@ -10,50 +10,69 @@ from helpers.functions import generate_serial
 
 
 class Signal(models.Model):
-    
+
     classification = models.CharField(max_length=64, default="signal", blank=False, null=False)
     glyph          = models.CharField(max_length=64, default="material-symbols-outlined")
     icon           = models.CharField(max_length=64, default="radio_button_checked")
-
+    
     def __str__(self):
         return self.classification
 
-class Post(MPTTModel):
-
-    parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    # Creator & Contributor
-    user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="user")
-    # Identification
+class SignalBase(models.Model):
+    
     circle         = models.ForeignKey("team.Circle", on_delete=models.CASCADE)
     signal         = models.ForeignKey("blog.Signal", default=16, on_delete=models.CASCADE)
-    # Room
+    user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True)
     serial         = models.CharField(max_length=64, default=generate_serial, null=False, blank=False, editable=False)
     status         = models.BooleanField(default=True, blank=False, null=False)
-    # Value    
-    body           = models.TextField(max_length=512, blank=False, null=False)
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
+        
+    def get_status(self):
+        return {
+            'i': "radio_button_checked" if self.status == 1 else "check_circle",
+            'c': "primary" if self.status == 1 else "success",
+            'v': "opened" if self.status == 1 else "closed"
+        }
+    
+    def beam(self):
+        query = self.get_descendants(include_self=True).filter(level__lte=self.level+1, user=self.user)
+        return query if query.count() > 1 else None
+    
+    class Meta:
+        abstract = True
+    
+class Post(SignalBase, MPTTModel):
+
+    parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    body           = models.TextField(max_length=512, blank=False, null=False)
 
     def __str__(self):
-        return f"{self.signal.classification} by {self.user.username}"
+        return f"{self.signal.classification} post by {self.user.username}"
 
     def url(self):
         return reverse("blog:retrieve_post", args=[str(self.serial)])
     
-    def get_status(self):
-        return {
-            'icon': "line_start_circle" if self.status == 1 else "line_end_circle",
-            'value': "opened" if self.status == 1 else "closed",
-        }
+    def comments(self):
+        query = Comment.objects.filter(
+            pk__in=[comment.id for comment in Comment.objects.filter(post=self) if comment.user != self.user]
+        )
+        return query if query.count() else None
+
+class Comment(SignalBase, MPTTModel):
+
+    post           = models.ForeignKey("blog.Post", on_delete=models.CASCADE)
+    parent         = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    body           = models.TextField(max_length=512, blank=False, null=False)
+
+    def __str__(self):
+        return f"{self.signal.classification} comment by {self.user.username}"
     
-    def update_status(self):
-        return reverse("blog:update_signal_status", args=[str(self.serial)])
+    def url(self):
+        return reverse("blog:retrieve_comment", args=[str(self.serial)])
     
-    @property
-    def beam(self):
-        by_user   = [int(signal.id) for signal in self.get_children() if signal.user == self.user]
-        by_others = [int(signal.id) for signal in self.get_children() if signal.user != self.user]
-        return {
-            'user': Post.objects.filter(pk__in=by_user),
-            'others': Post.objects.filter(pk__in=by_others)
-        }
+    def replies(self):
+        query = Comment.objects.filter(
+            pk__in=[comment.id for comment in self.get_children() if comment.user != self.user]
+        )
+        return query if query.count() else None

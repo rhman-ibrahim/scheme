@@ -1,9 +1,0 @@
-{% if post.beam.user.count %}
-    {% include "blog/widgets/parent.html" %}
-{% else %}
-    {% if post.is_child_node %}
-        {% include "blog/widgets/child.html" %}
-    {% else %}
-        {% include "blog/widgets/leaf.html" %}
-    {% endif %}
-{% endif %}

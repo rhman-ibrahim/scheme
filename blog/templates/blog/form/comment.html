@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'blog:create_comment' %}" id="comment-create-form">
+    {% with form=forms.comment %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

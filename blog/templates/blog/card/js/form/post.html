@@ -2,13 +2,9 @@
     {% if request.resolver_match.app_name == "team" %}
     <p><b>Post and start a new discussion</b> about what you have on your mind.</p>
     {% elif request.resolver_match.app_name == "blog" %}
-    {% if post.user == request.user %}
-    <p><b>Connect</b> another post to this one to create a chained beam of signals.</p>
-    {% else %}
-    <p><b>Comment</b> on this post or engage in the post conversation.</p>
-    {% endif %}
+    <p><b>Connect</b> another signal to this one to create a chained beam of signals.</p>
     {% endif %}
     <nav class="text-align-right">
-        <i class="material-icons" onclick="Fixed.open('#post-form-footer')">format_quote</i>
+        <i class="material-icons" onclick="Fixed.open('#post-form')">format_quote</i>
     </nav>
 </div>

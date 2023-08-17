@@ -1,0 +1,10 @@
+<div class="flex-box-col accent-card">
+    {% if comment.user == request.user %}
+    <p><b>Connect</b> another comment to this signal to create a chained beam.</p>
+    {% else %}
+    <p><b>Comment</b> on this signal or engage in the post conversation.</p>
+    {% endif %}
+    <nav class="text-align-right">
+        <i class="material-icons" onclick="Fixed.open('#comment-form')">format_quote</i>
+    </nav>
+</div>
