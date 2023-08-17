@@ -13,9 +13,14 @@ from .serializers import MessageSerializer
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def retrieve_room_messages(request, serial):
-    messages   = [
-        {'body':message.body, 'sender':message.sender.username}
-        for message in Message.objects.filter(room__serial=serial)[:100]
-    ]
-    serializer = MessageSerializer(messages, many=True)
+    serializer = MessageSerializer(
+        [
+            {
+                'sender': message.sender.username,
+                'body': message.body
+            }
+            for message in Message.objects.filter(room__serial=serial)[:100]
+        ],
+        many=True
+    )
     return Response(serializer.data)

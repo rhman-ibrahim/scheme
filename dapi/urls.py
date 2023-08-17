@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name    = "dapi"
+app_name    = "api"
 urlpatterns = [
     # Retrieve
     path('<str:serial>/', views.retrieve_room_messages, name="retrieve_room_messages")

@@ -12,17 +12,18 @@ from ping.consumers import ChatConsumer
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scheme.settings")
 
 
-application = ProtocolTypeRouter({
-    # Django's ASGI application to handle traditional HTTP requests
-    "http": get_asgi_application(),
+application = ProtocolTypeRouter(
+    {
+        # Django's ASGI application to handle traditional HTTP requests
+        "http": get_asgi_application(),
 
-    # WebSocket chat handler
-    "websocket": AllowedHostsOriginValidator(
-        AuthMiddlewareStack(
-            URLRouter([
-                path('ping/<str:serial>/', ChatConsumer.as_asgi()),
-            ])
-        )
-    ),
-
-})
+        # WebSocket chat handler
+        "websocket": AllowedHostsOriginValidator(
+            AuthMiddlewareStack(
+                URLRouter([
+                    path('ping/<str:serial>/', ChatConsumer.as_asgi()),
+                ])
+            )
+        ),
+    }
+)

@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'mate.apps.MateConfig',
     'team.apps.TeamConfig',
-    'blog.apps.BlogConfig',
+    # 'blog.apps.BlogConfig',
     'ping.apps.PingConfig',
     'home.apps.HomeConfig',
     # reset framework
@@ -107,9 +107,8 @@ USE_TZ        = True
 # Static files (CSS, JavaScript, Images)
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
-    BASE_DIR / 'home/static',
     BASE_DIR / 'ping/static',
-    BASE_DIR / 'blog/static'
+    # BASE_DIR / 'blog/static'
 ]
 
 STATIC_URL          = '/static/'
@@ -138,8 +137,14 @@ ASGI_APPLICATION = 'scheme.asgi.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
+        "CONFIG":
+        {
+            "hosts": [
+                (
+                    "localhost",
+                    6379
+                )
+            ],
         },
     },
 }
