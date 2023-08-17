@@ -1,0 +1,5 @@
+<form method="POST" enctype="multipart/form-data" action="{% url 'user:token_signin' %}" id="token-signin-form">
+    {% with form=forms.token.sign_in %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

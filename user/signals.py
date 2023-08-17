@@ -7,7 +7,6 @@ from django.dispatch import receiver
 @receiver(post_save, sender=Account)
 def reader(sender, instance, created, **kwargs):
     if created:
+        Token.objects.create(user=instance)
+        Profile.objects.create(user=instance)
         Scheme.objects.create(user=instance)
-        if not instance.is_guest:
-            Token.objects.create(user=instance)
-            Profile.objects.create(user=instance)

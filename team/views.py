@@ -1,8 +1,7 @@
 # Django
-from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION
+from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.http import Http404
 from django.db.models import Q
 
 # Models
@@ -10,19 +9,21 @@ from team.models import (
     Circle, CircleRequest
 )
 from ping.models import Room
-from blog.models import Post
+# from blog.models import Post
 
 # Forms
-from blog.forms import PostForm
+# from blog.forms import PostForm
 from team.forms import (
     CircleForm, CircleRequestForm,
     AddFounderFriendsForm, TransferCircleForm,
     CircleLoginForm
 )
 # Decorators
-from helpers.decorators import back, home
-from user.decorators import is_authenticated
-from team.decorators import is_logined
+from helpers.decorators import (
+    back, center, resource,
+    is_authenticated,
+    is_logined, is_founder
+)
 
 # Functions
 from helpers.functions import (
@@ -54,81 +55,61 @@ def create_circle(request):
 @back
 def create_request(request):
     if request.method == 'POST':
-        try:
-            form  = CircleRequestForm(request.POST)
-            if form.is_valid():
-                # 1: check
-                circle = get_object_or_404(Circle, serial=form.cleaned_data['serial'])
-                query  = CircleRequest.objects.filter(circle=circle, user=request.user)
-                # 2: if the request is there and not rejected (status != 0)
-                if query.exists() and query.first().status != 0:
-                    if query.first().status == 2:
-                        messages.info(request, f"Your request to join {query.first().circle.name} is pending")
-                    elif query.first().status == 1:
-                        messages.info(request, f"You are already connected to {query.first().circle.name}")
-                else:
-                    # 3: if request is not there or it is there and rejected
-                    CircleRequest.objects.create(
-                        circle=circle,
-                        user=request.user
+        form  = CircleRequestForm(request.POST)
+        if form.is_valid():
+            circle          = Circle.objects.get(serial=form.cleaned_data['serial'])
+            circle_request  = CircleRequest.objects.get(circle=circle, user=request.user)
+            if circle_request.status == 2:
+                messages.info(request, f"Your request to join {circle.name} is pending")
+            elif circle_request.status == 1:
+                messages.info(request, f"You are already connected to {circle.name}")
+            else:
+                CircleRequest.objects.create(
+                    circle=circle,
+                    user=request.user
+                )
+                messages.success(
+                    request,
+                    "join request created successfully."
                     )
-                    messages.success(
-                        request,
-                        "join request created successfully."
-                        )
-                    log(
-                        request.user.id, circle, ADDITION,
-                        f"requested to join the circle ({circle.name})."
-                    )
-            else: get_form_errors(request, form)
-        except Http404:
-            messages.error(request, "circle does not exists")
+                log(
+                    request.user.id, circle, ADDITION,
+                    f"requested to join the circle ({circle.name})."
+                )
+        else:
+            get_form_errors(request, form)
 
 
 @is_authenticated(True)
 @is_logined(True)
-def retrieve_team_settings(request):
-    circle = Circle.objects.get(id=request.session.get('circle'))
-    return render(
-        request,
-        "team/settings.html",
-        {
-            'circle': circle,
-            'forms': {
-                'circle': CircleForm(instance=circle),
-                'friends': AddFounderFriendsForm(instance=circle),
-                'transfer':TransferCircleForm(instance=circle),
-            },
-            'column': {
-                'icon':"groups"
-            }
-        }    
-    )
-
-@is_authenticated(True)
-@is_logined(True)
+@resource
 def retrieve_team_index(request):
     circle = Circle.objects.get(id=request.session.get('circle'))
-    request.session['parent_signal_id'] = None
+    room   = Room.objects.get(serial=circle.serial)
     return render(
         request,
         "team/index.html",
         {
             'circle': circle,
-            'room': Room.objects.get(serial=circle.serial),
-            'posts': Post.objects.filter(circle=circle, level=0).order_by('-created'),
+            'room': room,
             'forms': {
-                'post': PostForm
+                'circle': CircleForm(instance=circle),
+                'friends': AddFounderFriendsForm(instance=circle),
+                'transfer':TransferCircleForm(instance=circle),
             },
-            'column': {
-                'left':"menu",
-                'right':"forum",
+            'grid': {
+                'title': f".sch | {circle.name}",
+                'icons': {
+                    'left':"groups",
+                    'right':"forum",
+                }
             }
         }    
     )
 
 @is_authenticated(True)
 @is_logined(True)
+@is_founder
 @back
 def import_friends(request):
     if request.method == 'POST':
@@ -144,6 +125,7 @@ def import_friends(request):
 
 @is_authenticated(True)
 @is_logined(True)
+@is_founder
 @back
 def accept_request(request, user_id):
     c_req        = CircleRequest.objects.get(circle__id=request.session.get('circle'), user__id=user_id)
@@ -158,6 +140,7 @@ def accept_request(request, user_id):
     
 @is_authenticated(True)
 @is_logined(True)
+@is_founder
 @back
 def reject_request(request, user_id):
     c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
@@ -171,6 +154,7 @@ def reject_request(request, user_id):
 
 @is_authenticated(True)
 @is_logined(True)
+@is_founder
 @back
 def remove_circle_member(request, user_id):
     circle = Circle.objects.get(serial=request.session.get('circle'))
@@ -184,6 +168,7 @@ def remove_circle_member(request, user_id):
 
 @is_authenticated(True)
 @is_logined(True)
+@is_founder
 @back
 def transfer_circle(request):
     circle = Circle.objects.get(id=request.session['circle'])
@@ -199,30 +184,29 @@ def login(request):
     if request.method == 'POST':
         form = CircleLoginForm(request.POST)
         if form.is_valid():
-            query = Circle.objects.filter(
-                Q(name=form.cleaned_data['name']) &
-                (Q(founder=request.user) | Q(members=request.user))
-            )
-            circle = query.first() if query.exists() else None
-            if circle.check_password(form.cleaned_data['password']):
-                request.session['circle'] = circle.id
-                return redirect("team:retrieve_team_index")
+            circle = Circle.objects.get(name=form.cleaned_data['name'])
+            if circle.user_role(request.user) != None:       
+                if circle.check_password(form.cleaned_data['password']):
+                    request.session['circle'] = circle.id
+                    return redirect("team:retrieve_team_index")
+                else:
+                    messages.error(request, "circle password is wrong")
             else:
-                messages.error(request, "circle password is wrong")
+                messages.warning(request, "you are not a member")
         else:
             get_form_errors(request, form)
 
 @is_authenticated(True)
 @is_logined(True)
-@home
+@center
 def logout(request):
     del request.session['circle']
 
 @is_authenticated(True)
 @is_logined(True)
-@home
+@center
 def leave(request):
-    circle = Circle.objects.get(serial=request.session.get('circle'))
+    circle = Circle.objects.get(id=request.session.get('circle'))
     role   = circle.user_role(request.user)
     if role == "member":
         circle.members.remove(request.user)
@@ -235,14 +219,21 @@ def leave(request):
         log(request.user.id, circle, DELETION,
             f"deleted the circle ({circle.name})."
         )
+    return redirect('team:logout')
 
 @is_authenticated(True)
 @is_logined(True)
+@back
 def delete_request(request, request_id):
-    c_req        = CircleRequest.objects.get(id=request_id)
-    c_req.delete()
-    log(
-        request.user.id, c_req.circle, DELETION,
-        f"approved ({c_req.user.username}) joining the circle ({c_req.circle.name})."
-    )
-    return redirect("team:retrieve_team_index")
+    circle_request = CircleRequest.objects.get(id=request_id)
+    if request.user == circle_request.user:
+        circle_request.delete()
+        log(
+            request.user.id, circle_request.circle, DELETION,
+            f"approved ({circle_request.user.username}) joining the circle ({circle_request.circle.name})."
+        )
+        messages.warning(
+            request,
+            "You are not allowed to preform this action"
+        )
+        return redirect("team:retrieve_team_index")

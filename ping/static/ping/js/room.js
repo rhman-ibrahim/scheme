@@ -4,7 +4,7 @@ const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${SERIAL}
 document.addEventListener(
     'DOMContentLoaded', 
     () => {
-        fetch(`http://${window.location.host}/dapi/${SERIAL}/`)
+        fetch(`http://${window.location.host}/api/${SERIAL}/`)
         .then(
             response => response.json()
         )

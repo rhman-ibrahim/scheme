@@ -2,13 +2,13 @@ import datetime, timeago
 from django.utils.timezone import utc
 from django import template
 
+from user.models import Account
 
 register = template.Library()
 
 # Message
 @register.filter
 def message(tag, prop):
-
     tags = {
         "error": {
             'color':'danger-background',
@@ -27,10 +27,14 @@ def message(tag, prop):
             'icon':'done'
         },
     }
-
     tag_props = tags.get(tag, {})
     return tag_props.get(prop, '')
 
+@register.filter
+def circle_friends(account, circle):
+    friends = [int(friend.id) for friend in account.scheme.friends.all()]
+    members = [int(member.id) for member in circle.members.all()]
+    return Account.objects.filter(pk__in=list(set(members).intersection(set(friends))))
 
 # Model
 @register.filter

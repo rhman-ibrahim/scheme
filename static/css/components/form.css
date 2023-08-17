@@ -1,3 +1,41 @@
+form {
+  width: 100%;
+  padding: 8px;
+  max-height: 50vh;
+  height: max-content;
+  background: var(--d1);
+  border-top: 1.32px solid var(--d2);
+  transition: bottom 1s ease-in-out;
+  border-radius: 8px 8px 0px 0px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  bottom: -50vh;
+  right: 0px;
+  left: 0px;
+}
+
+form::-webkit-scrollbar {
+  display: none;
+}
+
+@media (width >= 720px) {
+
+  form {
+    width: 360px;
+    position: fixed;
+    left: calc((var(--ww) - 540px));
+    right: 180px;
+  }
+
+}
+
+form.active {
+  bottom: 0px;
+}
+
 form > nav > button {
   border-radius: 100%;
   text-align: center;

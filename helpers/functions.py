@@ -1,4 +1,4 @@
-import hashlib
+import hashlib, cv2
 
 # Contrib
 from django.contrib import messages
@@ -9,12 +9,33 @@ from django.contrib.admin.models import LogEntry
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 
+# Scheme
+from scheme.settings import MEDIA_ROOT
 
 def secret(raw_string):
     return hashlib.sha256(str(raw_string).encode()).hexdigest()
 
+def token_reveal(request):
+    path = f'{MEDIA_ROOT}/user/tokens/verify/{get_random_string(length=32)}.png'
+    destination = open(path, 'wb+')
+    for chunk in request.FILES['token']:
+        destination.write(chunk)
+    destination.close()
+    decoder = cv2.QRCodeDetector()
+    reval, point, s_qr, = decoder.detectAndDecode(cv2.imread(path))
+    return str(reval)
+
 def generate_serial():
     return get_random_string(length=32)
+
+def get_form_errors(request, form):
+    [
+        messages.error(request, str(error).replace("This field", str(field.name).capitalize()))
+        for field in form for error in field.errors
+    ]
+    [
+        messages.error(request, error) for error in form.non_field_errors()
+    ]
 
 def log(user_id, instance, flag, message=""):
     # Create the log entry for C_UD operations.
@@ -26,20 +47,6 @@ def log(user_id, instance, flag, message=""):
         action_flag     = flag,
         change_message  = message
     )
-
-def get_form_errors(request, form):
-    [
-        messages.error(request, str(error).replace("This field", str(field.name).capitalize()))
-        for field in form for error in field.errors
-    ]
-    [messages.error(request, error) for error in form.non_field_errors()]
-
-def completion(fields):
-    incomplete = 0
-    if any(field is None or field == '' for field in fields) is True:
-        incomplete += 1
-    return round((len(fields) - incomplete) / len(fields), 2)
-
 
 def profile_picture_path_handler(instance, filename):
     # renames the updated profile picture with the user's username.

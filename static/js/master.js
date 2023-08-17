@@ -128,7 +128,7 @@ class Fixed {
     }
     static CircleLoginForm = circleName => {
         document.querySelector('#circle-login-form #id_name').value = circleName;
-        Fixed.open('#circle-login-form-footer');
+        Fixed.open('#circle-login-form');
     }
     static init = () => {
         if (Fixed.collected()) Fixed.open(localStorage.getItem('fixed')); else localStorage.removeItem('fixed');         
@@ -222,7 +222,7 @@ class Timer {
                 // If the count down is over, write some text 
                 if (dif < 0) {
                     clearInterval(x);
-                    window.location.href = `http://${window.location.host}/user/terminate/`
+                    window.location.href = `http://${window.location.host}/user/deactivate`
                 }
             },
             1000

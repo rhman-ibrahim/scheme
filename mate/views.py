@@ -1,6 +1,5 @@
 # Django
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 
 # Models
@@ -23,8 +22,8 @@ from mate.forms import (
 )
 
 # Decorators
-from helpers.decorators import back, home
-from user.decorators import (
+from helpers.decorators import (
+    back,
     is_authenticated,
     is_guest
 )
@@ -58,9 +57,6 @@ def create_request(request):
                     request.user.id, f_req, ADDITION,
                     f"sent {account.username} a friend request"
                 )
-        except Account.DoesNotExist:
-            messages.error(request, "no account was found")
-
         except ValidationError as e:
             messages.error(
                 request,
@@ -79,30 +75,27 @@ def create_request(request):
 
 
 @is_authenticated(True)
-# @back
+@back
 def retrieve_mate_index(request, username):
-    try:
-        mate      = Account.objects.get(username=username)
-        friendsip = FriendRequest.objects.filter(
-            (Q(sender=request.user) & Q(receiver=mate)) |
-            (Q(sender=mate) & Q(receiver=request.user)) &
-            Q(status=1)
-        )
-        if friendsip.exists():
-            room = Room.objects.get(serial=friendsip.get(status=1).serial)
-            return render(
-                request,
-                "mate/index.html",
-                {
-                    'mate': mate,
-                    'room': room,
-                    'column': {
-                        'icon':'format_quote'
-                    }
+    mate      = Account.objects.get(username=username)
+    friendsip = FriendRequest.objects.get(
+        (Q(sender=request.user) & Q(receiver=mate)) |
+        (Q(sender=mate) & Q(receiver=request.user)) &
+        Q(status=1)
+    )
+    if friendsip.exists():
+        room = Room.objects.get(serial=friendsip.get(status=1).serial)
+        return render(
+            request,
+            "mate/index.html",
+            {
+                'mate': mate,
+                'room': room,
+                'column': {
+                    'icon':'format_quote'
                 }
-            )
-    except ObjectDoesNotExist:
-        messages.info(request, f"There is no connection with {username}")
+            }
+        )
 
 
 @is_authenticated(True)
@@ -138,37 +131,58 @@ def update_profile_info(request):
 @is_authenticated(True)
 @back
 def accept_request(request, req):
-    f_req        = FriendRequest.objects.get(id=req)
-    f_req.status = 1
-    f_req.save()
-    messages.success(request, f"Now you are friends with {f_req.sender.username}")
-    log(request.user.id, f_req, CHANGE,
-        f"accepted the friend request received from {f_req.sender.username}"
-    )
+    friend_request = FriendRequest.objects.get(id=req)
+    if request.user == friend_request.receiver:
+        friend_request.status = 1
+        friend_request.save()
+        messages.success(request, f"Now you are friends with {friend_request.sender.username}")
+        log(
+            request.user.id, friend_request, CHANGE,
+            f"accepted the friend request received from {friend_request.sender.username}"
+        )
+    else:
+        messages.warning(
+            request,
+            "you are not allowed to perform this action"
+        )
 
 @is_authenticated(True)
 @back
 def reject_request(request, req):
-    f_req        = FriendRequest.objects.get(id=req)
-    f_req.status = 0
-    f_req.save()
-    messages.success(
-        request,
-        f"You have rejected {f_req.sender.username}'s friend request"
-    )
-    log(request.user.id, f_req, CHANGE,
-        f"rejected the friend request received from {f_req.sender.username}"
-    )
+    friend_request = FriendRequest.objects.get(id=req)
+    if request.user == friend_request.receiver:
+        friend_request.status = 0
+        friend_request.save()
+        messages.success(
+            request,
+            f"You have rejected {friend_request.sender.username}'s friend request"
+        )
+        log(
+            request.user.id, friend_request, CHANGE,
+            f"rejected the friend request received from {friend_request.sender.username}"
+        )
+    else:
+        messages.warning(
+            request,
+            "you are not allowed to perform this action"
+        )
 
 @is_authenticated(True)
 @back
 def delete_request(request, req):
-    f_req = FriendRequest.objects.get(id=req)
-    f_req.delete()
-    messages.success(
-        request,
-        f"You have cancelled the friend request to {f_req.receiver.username}"
-    )
-    log(request.user.id, f_req, DELETION,
-        f"deleted the friend request sent to {f_req.receiver.username}"
-    )
+    friend_request = FriendRequest.objects.get(id=req)
+    if request.user == friend_request.sender:
+        friend_request.delete()
+        messages.success(
+            request,
+            f"you have cancelled the friend request to {friend_request.receiver.username}"
+        )
+        log(
+            request.user.id, friend_request, DELETION,
+            f"deleted the friend request sent to {friend_request.receiver.username}"
+        )
+    else:
+        messages.warning(
+            request,
+            "you are not allowed to perform this action"
+        )

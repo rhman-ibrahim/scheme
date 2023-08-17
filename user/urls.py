@@ -18,7 +18,8 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     # Validate
     path('signin/', views.signin, name='signin'),
-    path('verify/', views.verify, name='verify'),
+    path('token/verify/', views.token_verify, name='token_verify'),
+    path('token/sign/in/', views.token_signin, name='token_signin'),
     # Delete
     path('delete/', views.delete_account, name='delete_account'),
 ]

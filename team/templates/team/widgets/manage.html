@@ -1,4 +1,3 @@
-{% if circle.founder == request.user %}
 <section class="widget" id="team-navigate-widget">
     <h3>
         <i class="material-icons">admin_panel_settings</i>
@@ -7,7 +6,6 @@
     <div class="flex-container">
         {% include "team/card/js/form/update.html" %}
         {% include "team/card/js/aside/requests.html" %}
-        {% include "team/card/js/form/put.html" %}
+        {% include "team/card/js/form/import.html" %}
     </div>
 </section>
-{% endif %}

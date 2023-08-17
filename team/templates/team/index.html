@@ -1,24 +1,39 @@
 {% extends 'templates/lcr.html' %}
+{% load static %}
 
 {% block main %}
-{% with posts=posts %}
-{% include "blog/widgets/siblings.html" %}
-{% endwith %}
+{% include "team/widgets/navigate.html" %}
+{% include "team/widgets/settings.html" %}
+{% if circle.founder == request.user %}
+{% include "team/widgets/manage.html" %}
+{% endif %}
+{% include "team/widgets/security.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "team/widgets/navigate.html" %}
-{% include "blog/widgets/create.html" %}
+{% include "team/widgets/members.html" %}
 {% endblock %}
 
 {% block right %}
 {% include "ping/room.html" %}
 {% endblock %}
 
-{% block fixed %}
-{% include "blog/form/post.html" %}
+{% block side %}
+{% include "team/aside/friends.html" %}
+{% include "team/aside/history.html" %}
+{% if circle.founder == request.user %}
+{% include "team/aside/requests.html" %}
+{% include "team/form/transfer.html" %}
+{% include "team/form/import.html" %}
+{% include "team/form/update.html" %}
+{% endif %}
 {% endblock %}
 
-{% block head %}
-{% include "team/head.html" %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'ping/css/master.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'ping/js/master.js' %}" defer></script>
+<script src="{% static 'ping/js/room.js' %}" defer></script>
 {% endblock %}

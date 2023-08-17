@@ -5,28 +5,29 @@
         <span>logs</span> 
     </h3>
     <section class="cards">
-        {% for log in logs %}
-        <div class="verticl-line"></div>
-        <div class="card log" data-account-id="{{ log.user.id }}">
-            <h4>
-                {% if log.action_flag|flag_repr == "view" %}
-                <i class="{{ log.action_flag|flag_repr }} material-icons">visibility</i>
-                {% elif log.action_flag|flag_repr == "add" %}
-                <i class="{{ log.action_flag|flag_repr }} material-icons">add</i>
-                {% elif log.action_flag|flag_repr == "change" %}
-                <i class="{{ log.action_flag|flag_repr }} material-icons">edit</i>
-                {% elif log.action_flag|flag_repr == "delete" %}
-                <i class="{{ log.action_flag|flag_repr }} material-icons">delete</i>
-                {% endif %}
-                <span>{{ log.action_time|date:"M d, y" }}</span>
-                {% comment %} <small><b>({{ log.action_time|ago_shorten }})</b></small> {% endcomment %}
-            </h4>
-            <small><b>{{ log.user.username }}</b> {{ log.get_change_message }}</small>
-            <small class="end">
-                <span><span>{{ log.action_time|date:"h:i A" }}</span></span>
-                <i class="material-icons">schedule</i>
-            </small>
+        {% if logs.count %}
+            {% for log in logs %}
+            <div class="verticl-line"></div>
+            <div class="flex-box-col log">
+                <h4>
+                    {% if log.action_flag|flag_repr == "view" %}
+                    <i class="{{ log.action_flag|flag_repr }} material-icons">visibility</i>
+                    {% elif log.action_flag|flag_repr == "add" %}
+                    <i class="{{ log.action_flag|flag_repr }} material-icons">add</i>
+                    {% elif log.action_flag|flag_repr == "change" %}
+                    <i class="{{ log.action_flag|flag_repr }} material-icons">edit</i>
+                    {% elif log.action_flag|flag_repr == "delete" %}
+                    <i class="{{ log.action_flag|flag_repr }} material-icons">delete</i>
+                    {% endif %}
+                    <span>{{ log.action_time|date:"M d, y" }}</span>
+                </h4>
+                <small><b>{{ log.user.username }}</b> {{ log.get_change_message }}</small>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="flex-box-col">
+            <p>There are no updates right now</p>
         </div>
-        {% endfor %}
+        {% endif %}
     </section>
 </section>

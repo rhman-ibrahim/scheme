@@ -1,8 +1,12 @@
 {% load static %}
+
+{% block css %}
 <link rel="stylesheet" href="{% static 'blog/css/master.css' %}">
-<link rel="stylesheet" href="{% static 'ping/css/left.css' %}">
-<link rel="stylesheet" href="{% static 'ping/css/room.css' %}">
+<link rel="stylesheet" href="{% static 'ping/css/master.css' %}">
+{% endblock %}
+
+{% block js %}
 <script src="{% static 'blog/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/master.js' %}" defer></script>
 <script src="{% static 'ping/js/room.js' %}" defer></script>
-<title>{{ mate.username }}</title>
+{% endblock %}

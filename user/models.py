@@ -1,13 +1,12 @@
+# Standard libraries
 import qrcode, datetime, pytz
 
 # Django
 from django.db.models import Q
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.contrib.admin.models import LogEntry
-
 from django.utils.crypto import get_random_string
 from django.core.validators import RegexValidator
-
 from django.db import models
 
 # Scheme
@@ -72,27 +71,19 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return LogEntry.objects.filter(user_id=self.id).count()
     
     @property
-    def termination(self):
+    def is_expired(self):
         if self.is_guest:
-
             ct = datetime.datetime.now(tz=pytz.timezone('Africa/Cairo'))
             tt = self.created + datetime.timedelta(hours=8)
             df = tt - ct
+            return True if df.total_seconds() < 0 else False
+        return False
 
-            # Calculate hours, minutes, and seconds
-            hours, remainder = divmod(df.total_seconds(), 3600)
-            minutes, seconds = divmod(remainder, 60)
-            # "M j, Y H:i:s"
-            duration = "{:02d}:{:02d}:{:02d}".format(int(hours), int(minutes), int(seconds))
-            return {
-                'tz': self.created.tzinfo,
-                'state': True if df.total_seconds() < 0 else False,
-                'timer': tt.strftime("%b %d, %Y %H:%M:%S"),
-                'duration': duration,
-                'seconds': seconds,
-                'minutes': minutes,
-                'hours': hours
-            }
+    @property
+    def timer(self):
+        if self.is_guest:
+            tt = self.created + datetime.timedelta(hours=8)
+            return tt.strftime("%b %d, %Y %H:%M:%S")
         return None
 
 class Token(models.Model):

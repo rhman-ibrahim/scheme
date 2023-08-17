@@ -12,10 +12,11 @@ from django.db import models
 # Models
 from django.contrib.admin.models import LogEntry
 from team.models import Circle, CircleRequest
+from user.models import Account
 
 # Helpers
 from helpers.functions import (
-    completion, profile_picture_path_handler, generate_serial
+    profile_picture_path_handler, generate_serial
 )
 
 
@@ -41,10 +42,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s profile"
-    
-    @property
-    def completion_percentage(self):
-        return completion([self.name, self.email, self.about])
     
     @property
     def has_name(self):

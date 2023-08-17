@@ -9,7 +9,6 @@ urlpatterns = [
     path('request/', views.create_request, name="create_request"),
     # Render
     path('', views.retrieve_team_index, name="retrieve_team_index"),
-    path('settings/', views.retrieve_team_settings, name="retrieve_team_settings"),
     # Update
     path('import/friends/', views.import_friends, name="import_friends"),
     path('remove/<int:user_id>/', views.remove_circle_member, name="remove_circle_member"),

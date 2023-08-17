@@ -3,13 +3,13 @@
         <div class="flex-box-col warning-card">
             <h3>
                 <i class="material-symbols-outlined">domino_mask</i>
-                <span>{{ request.user.username }}</span>
+                <span>guest session</span>
             </h3>
             <p>As a guest user your session will be terminated after complete 8 hours
             of creation, <span>then everything</span> you created will be deleted.</p>
             <ul class="text-align-right">
                 <li>
-                    <b id="timer" data-count-down="{{ request.user.termination.timer }}"></b>
+                    <b id="timer" data-count-down="{{ request.user.timer }}"></b>
                 </li>
             </ul>
         </div>

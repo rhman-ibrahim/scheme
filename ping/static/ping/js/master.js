@@ -56,7 +56,9 @@ class ROOM {
 
     static append = (destination, data) => {
         if (destination.querySelector('ul:last-of-type') != null) {
-            if (destination.querySelector('ul:last-of-type').dataset.sender == data.sender) ROOM.appendLi(destination, data);
+            if (destination.querySelector('ul:last-of-type').dataset.sender == data.sender) {
+                ROOM.appendLi(destination, data);
+            }
         }
         ROOM.appendUl(destination, data);
         ROOM.scroll();
@@ -69,4 +71,5 @@ class ROOM {
     static scroll = () => {
         ROOM.get().conversation.scrollTop = ROOM.get().conversation.scrollHeight;
     }
+    
 }

@@ -1,5 +1,5 @@
 # Standard
-import cv2, uuid
+import uuid
 
 # Django
 from django.contrib import messages
@@ -38,17 +38,15 @@ from team.forms import (
 # Functions
 from helpers.functions import (
     get_form_errors,
+    token_reveal,
     log
 )
 
 # Decorators
-from helpers.decorators import back, home
-from team.decorators import is_logined
-from user.decorators import (
-    is_guest, is_expired,
-    is_authenticated
+from helpers.decorators import (
+    back, center, resource,
+    is_guest, is_authenticated,
 )
-
 
 @is_authenticated(False)
 def create_account(request):
@@ -69,15 +67,15 @@ def create_account(request):
 
 @is_authenticated(False)
 def create_guest(request):
-    uuid_key_8 = str(uuid.uuid4())[:8]
-    uuid_key16 = str(uuid.uuid4())[:16]
+    uuid_key_1 = str(uuid.uuid4())[:8]
+    uuid_key_2 = str(uuid.uuid4())[:16]
     Account.objects.create_guest(
-        username=uuid_key_8,
-        password=uuid_key16
+        username=uuid_key_1,
+        password=uuid_key_2
     )
     user = authenticate(
-        username=uuid_key_8,
-        password=uuid_key16
+        username=uuid_key_1,
+        password=uuid_key_2
     )
     if user is not None:
         login(
@@ -93,40 +91,26 @@ def create_guest(request):
     return redirect('user:retrieve_account')
 
 @is_authenticated(True)
-@is_expired
 def retrieve_account(request):
-    if not request.user.is_guest:
-        return render(
-            request,
-            "user/index.html",
-            {
-                'forms': {
-                    'info': ProfileInfoForm(instance=request.user.profile),
-                    'password': PasswordUpdateForm(False),
-                    'circle_request': CircleRequestForm,
-                    'picture': ProfilePictureForm,
-                    'delete': AccountDeleteForm,
-                    'mate': AccountUsernameForm,
-                    'login': CircleLoginForm,
-                    'circle': CircleForm
-                },
-                'column': {
-                    'icon': 'settings'
-                }
-            }
-        )
     return render(
-            request,
-            "user/guest.html",
-            {
-                'forms': {
-                    'circle_request': CircleRequestForm,
-                    'mate': AccountUsernameForm,
-                    'login': CircleLoginForm,
-                    'circle': CircleForm
-                }
+        request,
+        "user/index.html",
+        {
+            'forms': {
+                'info': ProfileInfoForm(instance=request.user.profile),
+                'password': PasswordUpdateForm(False),
+                'circle_request': CircleRequestForm,
+                'picture': ProfilePictureForm,
+                'delete': AccountDeleteForm,
+                'mate': AccountUsernameForm,
+                'login': CircleLoginForm,
+                'circle': CircleForm
+            },
+            'column': {
+                'icon': 'settings'
             }
-        )
+        }
+    )
 
 
 @is_authenticated(True)
@@ -140,7 +124,6 @@ def retrieve_token(request):
 
 @is_authenticated(True)
 @is_guest(False)
-@is_logined(False)
 def update_token(request):
     token = request.user.token
     if token != None:
@@ -151,7 +134,6 @@ def update_token(request):
 
 @is_authenticated(True)
 @is_guest(False)
-@is_logined(False)
 @back
 def update_account_password(request):
     if request.method == 'POST':
@@ -164,15 +146,16 @@ def update_account_password(request):
         else:
             get_form_errors(request, form)
 
+
 @is_authenticated(True)
-@is_guest(True)
+@resource
 def update_account_status(request):
     account = Account.objects.get(id=request.user.id)
     account.is_active = False
     account.save()
     logout(request)
-    messages.info(request, 'Your 8 hours session is over.')
-    return redirect("home:render_home_index")
+    messages.info(request, 'account has been deactivated')
+    return redirect("home:retrieve_home_index")
 
 @is_authenticated(False)
 @back
@@ -184,12 +167,12 @@ def reset_account_password(request):
             form.save()
             messages.success(request, 'password has been reset successfully')
             del request.session['token']
-            return redirect("home:render_home_index")
+            return redirect("home:retrieve_home_index")
         else:
             get_form_errors(request, form)
 
 @is_authenticated(False)
-@home
+@center
 def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
@@ -218,33 +201,40 @@ def signout(request):
     )
     logout(request)
     messages.success(request, 'signed out successfully')
-    return redirect('home:render_home_index')
+    return redirect('home:retrieve_home_index')
 
 @is_authenticated(False)
-def verify(request):
+@resource
+def token_verify(request):
     if request.method == 'POST':
         form = VerifyForm(request.POST, request.FILES)
         if form.is_valid():
-            path = f'{MEDIA_ROOT}/user/tokens/verify/{get_random_string(length=32)}.png'
-            destination = open(path, 'wb+')
-            for chunk in request.FILES['token']:
-                destination.write(chunk)
-            destination.close()
-            decoder = cv2.QRCodeDetector()
-            reval, point, s_qr, = decoder.detectAndDecode(cv2.imread(path))
-            try:
-                Token.objects.get(value=reval)
-                request.session['token'] = reval
+            query = Token.objects.filter(value=token_reveal(request))
+            if query.exists() and query.count() == 1:
+                request.session['token'] = query.first().value
                 messages.success(request, "your account has been detected successfully")
-            except Token.DoesNotExist:
-                messages.error(request, "invalid or used token")
         else:
             get_form_errors(request, form)
-    return redirect('home:render_home_index')
+    return redirect('home:retrieve_home_index')
+
+@is_authenticated(False)
+@resource
+def token_signin(request):
+    if request.method == 'POST':
+        form = VerifyForm(request.POST, request.FILES)
+        if form.is_valid():            
+            query = Token.objects.filter(value=token_reveal(request))
+            if query.exists() and query.count() == 1:
+                login(request, query.first().user)
+                log(request.user.id, request.user, CHANGE, "signed in using token")
+            messages.success(request, 'signed in successfully')
+            return redirect("user:retrieve_account")
+        else:
+            get_form_errors(request, form)
+    return redirect('home:retrieve_home_index')
 
 @is_authenticated(True)
-@is_logined(False)
-@home
+@center
 def delete_account(request):
     form = AccountDeleteForm(request.POST)
     if form.is_valid():
@@ -258,7 +248,7 @@ def delete_account(request):
                 "your account has been deleted successfully."
             )
             logout(request)
-            return redirect("home:render_home_index")
+            return redirect("home:retrieve_home_index")
         else:
             messages.error(request, "incorrect password")
     else:

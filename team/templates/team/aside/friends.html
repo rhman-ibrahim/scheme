@@ -1,0 +1,25 @@
+{% load filters %}
+{% load user_filters %}
+<aside id="friends-aside">
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="widget">
+            <div class="flex-container">
+                {% for member in request.user|circle_friends:circle %}
+                <ul class="flex-box-row">
+                    <div class="flex-row-start">
+                        <h4>{{ member.username }}</h4>
+                    </div>
+                    <nav class="flex-row-end">
+                        <img
+                            src="{{ member|profile_picture_url }}"
+                            alt="{{ member.username }}"
+                            class="circle-24"
+                        >
+                    </nav>
+                </ul>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</aside>

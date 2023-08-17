@@ -1,6 +1,5 @@
 {% load static %}
 {% load filters %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,7 +26,7 @@
         {% block js %}
         {% endblock %}
         <!-- Title -->
-        <title>{{ title }}</title>
+        <title>{{ grid.title }}</title>
     </head>
     <body onload="Handler.init();" onresize="Handler.init();">
         {% block grid %}{% endblock %}
