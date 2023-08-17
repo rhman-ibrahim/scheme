@@ -1,0 +1,14 @@
+<section class="widget" id="home-user-widget">
+    <h3>
+        <i class="material-icons">qr_code</i>
+        <span>token</span>
+    </h3>
+    <section class="flex-container">
+        {% if 'token' in request.session %}
+        {% include "user/card/js/form/reset.html" %}
+        {% else %}
+        {% include "user/card/js/form/token/verify.html" %}
+        {% endif %}
+        {% include "user/card/js/form/token/signin.html" %}
+</section>
+</section>

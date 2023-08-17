@@ -2,10 +2,8 @@
 from django.shortcuts import render
 
 # Models
-from user.models import Account
 from mate.models import Profile
-from team.models import Circle
-from blog.models import Post
+# from blog.models import Post
 
 # Forms
 from user.forms import (
@@ -17,33 +15,50 @@ from team.forms import (
 )
 
 # Decorators
-from user.decorators import is_authenticated
+from helpers.decorators import (
+    is_authenticated, resource, back
+)
 
+@back
+def cancel(request):
+    request.session.pop('token')
 
+def resource_not_found(request):
+    return render(
+        request,
+        "home/404.html",
+        {
+            'title':'.sch | Resource Not Found.'
+        }
+    )
+ 
 @is_authenticated(False)
-def render_home_index(request):
+@resource
+def retrieve_home_index(request):
     return render(
         request,
         "home/index.html",
         {
             'forms': {
-                'circle_request': CircleRequestForm,
-                'reset': PassWordResetForm(False),
-                'signup': SignUpForm,
-                'signin': SignInForm,
-                'circle': CircleForm,
-                'verify': VerifyForm
-            },
-            'stats': {
-                'interactions': Post.objects.count(),
-                'circles': Circle.objects.count(),
-                'users': Account.objects.count(),
-            },
-            'column': {
-                'icon': 'person'
+                'circle_request': CircleRequestForm(auto_id="circle_request_%s"),
+                'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
+                'circle': CircleForm(auto_id="circle_form_%s"),
+                'signup': SignUpForm(auto_id="sign_up_%s"),
+                'signin': SignInForm(auto_id="sign_in_%s"),
+                'token': {
+                    'sign_in': VerifyForm(auto_id=f"sign_in_with_token_%s"),
+                    'verify': VerifyForm(auto_id=f"verify_token_%s")
+                }
             },
             'about': {
                 'me': Profile.objects.get(user__id=1)
-            }
+            },
+            'grid': {
+                'title': ".sch | Add friends, create circles, express, discuss & poll.",
+                'icons': {
+                    'left': 'menu',
+                    'right': 'bolt'
+                }
+            },
         }
     )

@@ -1,29 +1,31 @@
-{% extends 'templates/lc.html' %}
+{% extends 'templates/lcr.html' %}
 
 {% block main %}
 {% include "home/widgets/header.html" %}
-{% include "home/widgets/benefits.html" %}
-{% include "home/widgets/features.html" %}
-{% include "home/widgets/stats.html" %}
-{% include "home/widgets/FAQs.html" %}
+{% include "home/widgets/privacy.html" %}
 {% include "home/widgets/about.html" %}
+{% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block left %}
 {% include "user/widgets/sign.html" %}
 {% include "team/widgets/circles.html" %}
-{% include "user/widgets/token.html" %}
-{% include "components/widgets/theme.html" %}
 {% endblock %}
 
-{% block fixed %}
+{% block right %}
+{% include "home/widgets/anonymous.html" %}
+{% include "home/widgets/token.html" %}
+{% endblock %}
+
+{% block side %}
 {% include "team/form/request.html" %}
 {% include "user/form/signup.html" %}
 {% include "user/form/signin.html" %}
 {% include "team/form/create.html" %}
-{% include "user/form/token.html" %}
-{% endblock %}
-
-{% block head %}
-{% include "home/head.html" %}
+{% include "user/form/token/signin.html" %}
+{% if 'token' in request.session %}
+    {% include "user/form/reset.html" %}
+{% else %}
+    {% include "user/form/token/verify.html" %}
+{% endif %}
 {% endblock %}
