@@ -4,10 +4,16 @@ const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${SERIAL}
 document.addEventListener(
     'DOMContentLoaded', 
     () => {
-        fetch(`http://${window.location.host}/api/${SERIAL}/`)
-        .then(
-            response => response.json()
+        fetch(
+            `http://${window.location.host}/api/room/${SERIAL}/messages/`,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization':`Token XpfKFCkGHNdqrQ0KEAepsMrh8a6oI9g5`,
+                }
+            }
         )
+        .then(response => response.json())
         .then(
             data => {
                 const FRAGMENT = document.createDocumentFragment();
