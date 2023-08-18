@@ -28,8 +28,10 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     # reset framework
     'dapi.apps.DapiConfig',
-    # Third Party
+    # DRF
     'rest_framework',
+    'rest_framework.authtoken',
+    # Third Party
     'channels',
     'mptt',
 ]
@@ -147,4 +149,14 @@ CHANNEL_LAYERS = {
             ],
         },
     },
+}
+
+# API
+REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dapi.models.SchemeToken',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
