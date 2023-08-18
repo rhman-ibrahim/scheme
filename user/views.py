@@ -99,14 +99,15 @@ def retrieve_account(request):
             'forms': {
                 'info': ProfileInfoForm(instance=request.user.profile),
                 'password': PasswordUpdateForm(False),
-                'circle_request': CircleRequestForm,
-                'picture': ProfilePictureForm,
-                'delete': AccountDeleteForm,
-                'mate': AccountUsernameForm,
-                'login': CircleLoginForm,
-                'circle': CircleForm
+                'circle_request': CircleRequestForm(auto_id="circle_request_%s"),
+                'picture': ProfilePictureForm(auto_id="profile_picture_%s"),
+                'delete': AccountDeleteForm(auto_id="account_delete_%s"),
+                'mate': AccountUsernameForm(auto_id="account_username_%s"),
+                'login': CircleLoginForm(auto_id="circle_login_%s"),
+                'circle': CircleForm(auto_id="circle_%s")
             },
-            'column': {
+            'grid': {
+                'title': f'.sch | { request.user.username }',
                 'icon': 'settings'
             }
         }
@@ -127,7 +128,7 @@ def retrieve_token(request):
 def update_token(request):
     token = request.user.token
     if token != None:
-        token.value = get_random_string(length=32)
+        token.key = get_random_string(length=32)
         token.save()
         messages.success(request, "your token has been updated successfully")
     return redirect("user:retrieve_account")

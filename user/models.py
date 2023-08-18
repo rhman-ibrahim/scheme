@@ -89,16 +89,19 @@ class Account(AbstractBaseUser, PermissionsMixin):
 class Token(models.Model):
 
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
-    value   = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
+    key     = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
     ready   = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.key
 
     @property
     def path(self):
         return f'/media/user/tokens/{self.user.username}.png'
 
     def save(self, *args, **kwargs):
-        qr = qrcode.make(self.value)
+        qr = qrcode.make(self.key)
         qr.save(f'{MEDIA_ROOT}/user/tokens/{self.user.username}.png')
         super(Token, self).save(*args, **kwargs)
