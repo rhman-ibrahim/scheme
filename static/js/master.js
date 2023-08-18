@@ -127,7 +127,7 @@ class Fixed {
         )
     }
     static CircleLoginForm = circleName => {
-        document.querySelector('#circle-login-form #id_name').value = circleName;
+        document.querySelector('#circle-login-form #circle_login_name').value = circleName;
         Fixed.open('#circle-login-form');
     }
     static init = () => {
