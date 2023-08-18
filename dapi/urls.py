@@ -1,8 +1,10 @@
 from django.urls import path
-from . import views
+from .views import RoomViewSet, CircleViewSet
 
 app_name    = "api"
 urlpatterns = [
     # Retrieve
-    path('<str:serial>/', views.retrieve_room_messages, name="retrieve_room_messages")
+    path('create/circle/', CircleViewSet.as_view({'post':'create'})),
+    path('circle/<int:pk>/info/', CircleViewSet.as_view({'get':'info'})),
+    path('room/<str:serial>/messages/', RoomViewSet.as_view({'get':'messages'})),
 ]
