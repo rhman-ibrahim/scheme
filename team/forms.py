@@ -7,10 +7,22 @@ class CircleForm(forms.ModelForm):
 
     name        = forms.CharField(
         max_length=32,
-        required=True
+        required=True,
+        widget=forms.TextInput(
+            attrs = {
+                'placeholder':'name',
+                'autocomplete':"off"
+            }
+        )
     )
     password    = forms.CharField(
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(
+            attrs = {
+                'data-field':"password",
+                'placeholder': "circle password",
+                'autocomplete':"new-password"
+            }
+        )
     )
     description = forms.CharField(
         max_length=512,
@@ -35,10 +47,19 @@ class CircleLoginForm(forms.Form):
     name        = forms.CharField(
         max_length=32,
         required=True,
+        widget=forms.TextInput(
+            attrs={
+                'autocomplete':'name',
+            }
+        )
     )
     password    = forms.CharField(
         required=True,
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(
+            attrs={
+                'autocomplete':'current-password'
+            }
+        )
     )
 
 
