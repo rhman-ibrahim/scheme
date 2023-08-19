@@ -1,0 +1,10 @@
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">person</i>
+        <span>{{ request.user.username }}</span>
+    </h3>
+    <div class="flex-container">
+        {% include "user/card/py/get/settings.html" %}
+        {% include "team/card/js/aside/friends.html" %}
+    </div>
+</section>

@@ -1,11 +1,22 @@
+{% load filters %}
+{% load user_filters %}
 <section class="widget" id="team-navigate-widget">
     <h3>
         <i class="material-icons">diversity_2</i>
         <span>{{ circle.name }}</span>
     </h3>
     <div class="flex-container">
+        <div class="flex-box-col info-card">
+            <p>{{ circle.name }} was created by <b>{{ circle.founder.username }}</b>,
+            {{ circle.created|ago }}, <span>on {{ circle.created|date:"H:i A, j/m/Y" }}</span>.</p>
+            <div class="text-align-right">
+                <img
+                    src="{{ request.user|profile_picture_url }}"
+                    class="circle-24" alt="{{ circle.founder.username }}'s profile picture"
+                />
+            </div>
+        </div>
         {% include "team/card/js/serial.html" %}
-        {% include "team/card/js/aside/friends.html" %}
         {% include "team/card/js/aside/history.html" %}
     </div>
 </section>
