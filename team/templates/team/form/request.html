@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'team:create_request' %}" id="circle-request-form">
-    {% with form=forms.circle_request %}
+    {% with form=forms.team.request %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

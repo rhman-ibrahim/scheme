@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'mate:info' %}" id="info-form">
-    {% with form=forms.info %}
+    {% with form=forms.user.info %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

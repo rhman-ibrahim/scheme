@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'user:create_account' %}" id="sign-up-form">
-    {% with form=forms.signup password=1 %}
+    {% with form=forms.user.signup password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
