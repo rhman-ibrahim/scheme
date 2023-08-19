@@ -8,7 +8,7 @@ from mate.models import Profile
 # Forms
 from user.forms import (
     SignUpForm, SignInForm,
-    VerifyForm, PassWordResetForm
+    TokenForm, PassWordResetForm
 )
 from team.forms import (
     CircleForm, CircleRequestForm
@@ -28,7 +28,7 @@ def resource_not_found(request):
         request,
         "home/404.html",
         {
-            'title':'.sch | Resource Not Found.'
+            'title':'Resource Not Found.'
         }
     )
  
@@ -39,26 +39,32 @@ def retrieve_home_index(request):
         request,
         "home/index.html",
         {
-            'forms': {
-                'circle_request': CircleRequestForm(auto_id="circle_request_%s"),
-                'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
-                'circle': CircleForm(auto_id="circle_form_%s"),
-                'signup': SignUpForm(auto_id="sign_up_%s"),
-                'signin': SignInForm(auto_id="sign_in_%s"),
-                'token': {
-                    'sign_in': VerifyForm(auto_id=f"sign_in_with_token_%s"),
-                    'verify': VerifyForm(auto_id=f"verify_token_%s")
-                }
-            },
-            'about': {
-                'me': Profile.objects.get(user__id=1)
-            },
             'grid': {
-                'title': ".sch | Add friends, create circles, express, discuss & poll.",
+                'title': "Add friends, create circles, express, discuss & poll.",
                 'icons': {
                     'left': 'menu',
                     'right': 'bolt'
                 }
             },
+            'widgets': {
+                'about': {
+                    'me': Profile.objects.get(user__id=1),
+                },
+            },
+            'forms': {
+                'user': {
+                    'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
+                    'signup': SignUpForm(auto_id="sign_up_%s"),
+                    'signin': SignInForm(auto_id="sign_in_%s"),
+                    'token': {
+                        'signin': TokenForm(auto_id=f"sign_in_with_token_%s"),
+                        'verify': TokenForm(auto_id=f"verify_token_%s")
+                    }
+                },
+                'team': {
+                    'circle': CircleForm(auto_id="circle_form_%s"),
+                    'request': CircleRequestForm(auto_id="circle_request_%s"),
+                }
+            }
         }
     )

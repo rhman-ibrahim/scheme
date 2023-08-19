@@ -7,12 +7,12 @@
     </h2>
     <section class="flex-container">
         <div class="flex-box-col full-row">
-            <p>{{ about.me.about|safe }}</p>
+            <p>{{ widgets.about.me.about|safe }}</p>
             <ul class="text-align-right">
                 <li>
                     <img
                         alt="{{ request.user.username }}'s profile picture"
-                        src="{{ about.me.user|profile_picture_url }}"
+                        src="{{ widgets.about.me.user|profile_picture_url }}"
                         class="circle-24"
                     />
                 </li>

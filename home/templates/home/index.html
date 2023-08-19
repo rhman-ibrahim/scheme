@@ -18,14 +18,14 @@
 {% endblock %}
 
 {% block side %}
-{% include "team/form/request.html" %}
+{% if 'token' in request.session %}
+{% include "user/form/reset.html" %}
+{% else %}
+{% include "user/form/token/verify.html" %}
+{% endif %}
+{% include "user/form/token/signin.html" %}
 {% include "user/form/signup.html" %}
 {% include "user/form/signin.html" %}
+{% include "team/form/request.html" %}
 {% include "team/form/create.html" %}
-{% include "user/form/token/signin.html" %}
-{% if 'token' in request.session %}
-    {% include "user/form/reset.html" %}
-{% else %}
-    {% include "user/form/token/verify.html" %}
-{% endif %}
 {% endblock %}
