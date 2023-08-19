@@ -44,7 +44,7 @@ def get_class(value):
 # Time
 @register.filter
 def ago(time_stamp):
-    if isinstance(time_stamp, datetime):
+    if isinstance(time_stamp, datetime.datetime):
         return timeago.format(time_stamp, datetime.datetime.utcnow().replace(tzinfo=utc))
     return "---"
 
