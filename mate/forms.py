@@ -9,7 +9,8 @@ class ProfileInfoForm(forms.ModelForm):
         help_text="Separated names by spaces.",
         widget=forms.TextInput(
             attrs={
-                'id':'profile-form-name'
+                'id':'profile-form-name',
+                'autocomplete':'name',
             }
         )
     )
