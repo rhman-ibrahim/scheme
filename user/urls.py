@@ -9,7 +9,6 @@ urlpatterns = [
     path('signin/guest/', views.create_guest, name='create_guest'),
     # Retrieve
     path('settings/', views.retrieve_account, name="retrieve_account"),
-    path('token/', views.retrieve_token, name='retrieve_token'),
     # Update
     path('update/password/', views.update_account_password, name='update_account_password'),
     path('deactivate/', views.update_account_status, name="update_account_status"),

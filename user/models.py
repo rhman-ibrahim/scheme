@@ -1,13 +1,15 @@
 # Standard libraries
-import qrcode, datetime, pytz
+import datetime, pytz
 
 # Django
-from django.db.models import Q
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django.contrib.admin.models import LogEntry
-from django.utils.crypto import get_random_string
-from django.core.validators import RegexValidator
 from django.db import models
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
+)
+from django.utils.crypto import get_random_string
+from django.core.exceptions import MultipleObjectsReturned
+from django.core.validators import RegexValidator
+from django.contrib.admin.models import LogEntry
 
 # Scheme
 from scheme.settings import MEDIA_ROOT
@@ -97,11 +99,10 @@ class Token(models.Model):
     def __str__(self):
         return self.key
 
-    @property
-    def path(self):
-        return f'/media/user/tokens/{self.user.username}.png'
-
     def save(self, *args, **kwargs):
-        qr = qrcode.make(self.key)
-        qr.save(f'{MEDIA_ROOT}/user/tokens/{self.user.username}.png')
+        try:
+            Token.objects.get(key=self.key)
+            self.ready = False
+        except MultipleObjectsReturned:
+            self.ready = True
         super(Token, self).save(*args, **kwargs)

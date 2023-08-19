@@ -3,7 +3,6 @@ import uuid
 
 # Django
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.admin.models import CHANGE
 from django.contrib.auth.hashers import check_password
 from django.utils.crypto import get_random_string
@@ -14,16 +13,13 @@ from django.contrib.auth import (
     logout,
 )
 
-# Scheme
-from scheme.settings import MEDIA_ROOT
-
 # Models
 from user.models import Account, Token
 
 # Forms
 from user.forms import (
     PasswordUpdateForm, AccountDeleteForm,
-    VerifyForm, PassWordResetForm,
+    TokenForm, PassWordResetForm,
     SignInForm, SignUpForm
 )
 from mate.forms import (
@@ -38,7 +34,6 @@ from team.forms import (
 # Functions
 from helpers.functions import (
     get_form_errors,
-    token_reveal,
     log
 )
 
@@ -96,32 +91,32 @@ def retrieve_account(request):
         request,
         "user/index.html",
         {
-            'forms': {
-                'info': ProfileInfoForm(instance=request.user.profile),
-                'password': PasswordUpdateForm(False),
-                'circle_request': CircleRequestForm(auto_id="circle_request_%s"),
-                'picture': ProfilePictureForm(auto_id="profile_picture_%s"),
-                'delete': AccountDeleteForm(auto_id="account_delete_%s"),
-                'mate': AccountUsernameForm(auto_id="account_username_%s"),
-                'login': CircleLoginForm(auto_id="circle_login_%s"),
-                'circle': CircleForm(auto_id="circle_%s")
-            },
             'grid': {
-                'title': f'.sch | { request.user.username }',
-                'icon': 'settings'
+                'title': f'settings / { request.user.username }',
+                'icons': {
+                    'left': 'menu',
+                    'right': 'shield'
+                }
+            },
+            'forms': {
+                'user': {
+                    'password': PasswordUpdateForm(False),
+                    'delete': AccountDeleteForm(auto_id="account_delete_%s"),
+                    'picture': ProfilePictureForm(auto_id="profile_picture_%s"),
+                    'info': ProfileInfoForm(instance=request.user.profile),
+                },
+                'team': {
+                    'request': CircleRequestForm(auto_id="circle_request_%s"),
+                    'login': CircleLoginForm(auto_id="circle_login_%s"),
+                    'circle': CircleForm(auto_id="circle_%s")
+                },
+                'mate': {
+                    'username': AccountUsernameForm(auto_id="account_username_%s"),
+                }
             }
         }
     )
 
-
-@is_authenticated(True)
-@is_guest(False)
-def retrieve_token(request):
-    with open(f"{MEDIA_ROOT}/user/tokens/{request.user.username}.png", 'rb') as f:
-        file = f.read()
-    response = HttpResponse(content_type='image/png')
-    response.write(file)
-    return response
 
 @is_authenticated(True)
 @is_guest(False)
@@ -208,12 +203,12 @@ def signout(request):
 @resource
 def token_verify(request):
     if request.method == 'POST':
-        form = VerifyForm(request.POST, request.FILES)
+        form = TokenForm(request.POST)
         if form.is_valid():
-            query = Token.objects.filter(value=token_reveal(request))
+            query = Token.objects.filter(key=form.cleaned_data['key'])
             if query.exists() and query.count() == 1:
-                request.session['token'] = query.first().value
-                messages.success(request, "your account has been detected successfully")
+                request.session['token'] = query.first().key
+                messages.success(request, "your account has been verified successfully")
         else:
             get_form_errors(request, form)
     return redirect('home:retrieve_home_index')
@@ -222,9 +217,9 @@ def token_verify(request):
 @resource
 def token_signin(request):
     if request.method == 'POST':
-        form = VerifyForm(request.POST, request.FILES)
+        form = TokenForm(request.POST)
         if form.is_valid():            
-            query = Token.objects.filter(value=token_reveal(request))
+            query = Token.objects.filter(key=form.cleaned_data['key'])
             if query.exists() and query.count() == 1:
                 login(request, query.first().user)
                 log(request.user.id, request.user, CHANGE, "signed in using token")

@@ -1,8 +1,9 @@
 from django import forms
-from user.models import Account
+from user.models import Account, Token
+from django.contrib.auth.forms import (
+    UserCreationForm, PasswordChangeForm, SetPasswordForm
+)
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
-from django.core.validators import FileExtensionValidator
 
 
 class SignUpForm(UserCreationForm):
@@ -51,6 +52,22 @@ class SignUpForm(UserCreationForm):
         fields = ['username']
 
 
+class TokenForm(forms.ModelForm):
+    key        = forms.CharField(
+        label="token",
+        required=True,
+        widget=forms.TextInput(
+            attrs = {
+                'placeholder':"token's key",
+                'autocomplete':"off"
+            }
+        )
+    )
+    class Meta:
+        model  = Token
+        fields = ['key']
+
+
 class SignInForm(forms.ModelForm):
 
     username = forms.CharField(
@@ -92,16 +109,6 @@ class SignInForm(forms.ModelForm):
 
         model  = Account
         fields = ['username', 'password']
-
-class VerifyForm(forms.Form):
-
-    token = forms.ImageField(
-        label="upload your token",
-        help_text="a token is a one-time-use QR code file.",
-        validators = [
-            FileExtensionValidator(allowed_extensions=['png'])
-        ]
-    )
 
 class PasswordUpdateForm(PasswordChangeForm):
     
