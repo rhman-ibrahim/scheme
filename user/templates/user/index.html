@@ -1,33 +1,35 @@
-{% extends 'templates/cr.html' %}
+{% extends 'templates/lcr.html' %}
 
 {% block main %}
-    {% if request.user.is_guest %}
-        {% include "user/widgets/termination.html" %}
-    {% endif %}
-    {% include "user/widgets/account.html" %}
-    {% include "mate/widgets/friends.html" %}
-    {% include "team/widgets/circles.html" %}
-    {% include "components/widgets/theme.html" %}
+{% if request.user.is_guest %}
+{% include "user/widgets/termination.html" %}
+{% endif %}
+{% include "user/widgets/account.html" %}
+{% include "mate/widgets/friends.html" %}
+{% include "team/widgets/circles.html" %}
+{% endblock %}
+
+{% block left %}
+{% include "mate/widgets/profile.html" %}
+{% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block right %}
-    {% include "mate/widgets/profile.html" %}
-    {% include "user/widgets/token.html" %}
-    {% include "user/widgets/security.html" %}
+{% include "user/widgets/security.html" %}
 {% endblock %}
 
 {% block side %}
-    {% include "user/form/password.html" %}
-    {% include "user/form/delete.html" %}
-    {% include "mate/aside/received.html" %}
-    {% include "mate/aside/friends.html" %}
-    {% include "mate/form/picture.html" %}
-    {% include "mate/form/request.html" %}
-    {% include "mate/aside/sent.html" %}
-    {% include "mate/form/info.html" %}
-    {% include "team/aside/requests.html" %}
-    {% include "team/aside/circles.html" %}
-    {% include "team/form/request.html" %}
-    {% include "team/form/create.html" %}
-    {% include "team/form/login.html" %}
+{% include "user/form/password.html" %}
+{% include "user/form/delete.html" %}
+{% include "mate/aside/received.html" %}
+{% include "mate/aside/friends.html" %}
+{% include "mate/form/picture.html" %}
+{% include "mate/form/request.html" %}
+{% include "mate/aside/sent.html" %}
+{% include "mate/form/info.html" %}
+{% include "team/aside/requests.html" %}
+{% include "team/aside/circles.html" %}
+{% include "team/form/request.html" %}
+{% include "team/form/create.html" %}
+{% include "team/form/login.html" %}
 {% endblock %}
