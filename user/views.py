@@ -1,9 +1,14 @@
 # Standard
-import uuid
+import tempfile, uuid
+
+from weasyprint import HTML, CSS
 
 # Django
+from django.conf import settings
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.admin.models import CHANGE
+from django.template.loader import render_to_string
 from django.contrib.auth.hashers import check_password
 from django.utils.crypto import get_random_string
 from django.shortcuts import redirect, render
@@ -249,3 +254,23 @@ def delete_account(request):
             messages.error(request, "incorrect password")
     else:
         get_form_errors(request, form)
+
+
+def pdf(request):
+    
+    response                              = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition']       = f'inline; attachment; filename={request.user.username}.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    
+    token  = Token.objects.get(user=request.user)
+    html   = HTML(string=render_to_string('user/pdf.html',{'token': token, 'user':request.user}))
+    css    = [CSS(f'/home/rhman/Documents/dj/scheme/user/static/user/css/pdf.css')]
+    result = html.write_pdf(stylesheets=css)
+    
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'rb')
+        response.write(output.read())
+        
+    return response

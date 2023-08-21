@@ -21,4 +21,6 @@ urlpatterns = [
     path('token/sign/in/', views.token_signin, name='token_signin'),
     # Delete
     path('delete/', views.delete_account, name='delete_account'),
+    # PDF
+    path('pdf/', views.pdf, name='pdf'),
 ]
