@@ -4,7 +4,28 @@
         <span>{{ request.user.username }}</span>
     </h3>
     <div class="flex-container">
-        {% include "user/card/py/get/settings.html" %}
-        {% include "team/card/js/aside/friends.html" %}
+        <div class="flex-box-col info-card">
+            <p><b>Visit</b> the circle home page, list members, circle history.</p>
+            <nav class="text-align-right">
+                <a class="material-icons" href="{% url 'team:retrieve_team_index' %}">home</a>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>View</b> a list of your friends who are also members of this circle.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#friends-aside')">filter_alt</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Manage</b> your account, recovery token, circles, profile and theme.</p>
+            <nav class="text-align-right">
+                <a href="{% url 'user:retrieve_account' %}">
+                    <img
+                        src="{{ request.user|profile_picture_url }}"
+                        class="circle-24" alt="{{ request.user.username }}'s profile picture"
+                    />
+                </a>
+            </nav>
+        </div>
     </div>
 </section>

@@ -4,8 +4,25 @@
         <span>security</span>
     </h3>
     <section class="flex-container">
-        {% include "user/card/py/patch/refresh.html" %}
-        {% include "user/card/js/form/password.html" %}
-        {% include "user/card/js/form/delete.html" %}
+        <div class="flex-box-col warning-card">
+            <p><b>Refresh</b> your account token, do not share it and store it safe.</p>
+            <nav class="text-align-right">
+                <a href="{% url 'user:update_token' %}">
+                    <i class="material-symbols-outlined">token</i>
+                </a>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Update</b> your password regularly, at least every three (3) months.</p>
+            <nav class="text-align-right">
+                <i class="material-symbols-outlined" onclick="Fixed.open('#password-form')">lock_reset</i>
+            </nav>
+        </div>
+        <div class="flex-box-col danger-card">
+            <p><b>Delete</b> your account now, also circles, signals, tasks and polls.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#account-delete-form')">person_remove</i>
+            </nav>
+        </div>
     </section>
 </section>

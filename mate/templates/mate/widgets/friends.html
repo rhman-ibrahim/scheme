@@ -4,8 +4,23 @@
         <span class="text-transform-capitalize">friends</span>
     </h2>
     <section class="flex-container">
-        {% include "mate/card/js/form/request.html" %}
-        {% include "mate/card/js/aside/sent.html" %}
-        {% include "mate/card/js/aside/received.html" %}
+        <div class="flex-box-col info-card">
+            <p><b>Add</b> your friends, to connect with, <span>and add</span> them in your circles.</p>
+            <ul class="text-align-right">
+                <li class="material-icons" onclick="Fixed.open('#mate-form')">outgoing_mail</li>
+            </ul>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Review</b> sent friend requests!, to view its state or to cancel it.</p>
+            <ul class="text-align-right">
+                <li class="material-icons" onclick="Fixed.open('#sent-requests-aside')">mark_email_unread</li>
+            </ul>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Respond</b> to received friend requests, ordered by date of sending.</p>
+            <ul class="text-align-right">
+                <li class="material-icons" onclick="Fixed.open('#received-requests-aside')">mark_email_read</li>
+            </ul>
+        </div>
     </section>
 </section>

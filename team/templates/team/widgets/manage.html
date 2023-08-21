@@ -4,8 +4,23 @@
         <span>manage</span>
     </h3>
     <div class="flex-container">
-        {% include "team/card/js/form/update.html" %}
-        {% include "team/card/js/aside/requests.html" %}
-        {% include "team/card/js/form/import.html" %}
+        <div class="flex-box-col warning-card">
+            <p><b>Update</b> the circle's profile info, make sure to keep it specific.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#circle-update-form')">edit_square</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Respond</b> to received circle request.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Add</b> directly to the circle. Select from or all of, your friends.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">add</i>
+            </nav>
+        </div>
     </div>
 </section>

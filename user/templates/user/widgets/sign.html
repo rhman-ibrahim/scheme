@@ -4,7 +4,17 @@
         <span>user</span>
     </h3>
     <section class="flex-container">
-        {% include "user/card/js/form/signup.html" %}
-        {% include "user/card/js/form/signin.html" %}
+        <div class="flex-box-col info-card">
+            <p><b>Signup</b> immediately, only a username and a password are required.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#sign-up-form')">person_add</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Sign-in</b> now and communicate with your team without distractions.</p>
+            <nav class="text-align-right">
+                <i class="material-symbols-outlined" onclick="Fixed.open('#sign-in-form')">login</i>
+            </nav>
+        </div>
     </section>
 </section>

@@ -4,10 +4,23 @@
         <b>circle</b>
     </h3>
     <section class="flex-container">
-        {% include "team/card/js/form/create.html" %}
-        {% include "team/card/js/form/request.html" %}
-        {% if request.user.is_authenticated %}
-          {% include "team/card/js/aside/requests.html" %}
-        {% endif %}
+        <div class="flex-box-col info-card">
+            <p><b>Create</b> your circle now, build your team and start communicating.</p>
+            <nav class="text-align-right">
+                <i class="material-symbols-outlined" onclick="Fixed.open('#circle-create-form')">add</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Join</b> new circles, input the circle serial <span>to request</span> joining it.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#circle-request-form')">outgoing_mail</i>
+            </nav>
+        </div>
+        <div class="flex-box-col info-card">
+            <p><b>Review</b> sent joining requests, to view its state or to cancel it.</p>
+            <nav class="text-align-right">
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
+            </nav>
+        </div>
     </section>
 </section>
