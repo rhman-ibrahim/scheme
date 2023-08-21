@@ -73,7 +73,6 @@ TEMPLATES      = [
 ]
 
 # Web
-
 WSGI_APPLICATION = 'scheme.wsgi.application'
 
 # Database
@@ -110,7 +109,7 @@ USE_TZ        = True
 STATICFILES_DIRS    = [
     BASE_DIR / 'static',
     BASE_DIR / 'ping/static',
-    # BASE_DIR / 'blog/static'
+    BASE_DIR / 'user/static'
 ]
 
 STATIC_URL          = '/static/'
