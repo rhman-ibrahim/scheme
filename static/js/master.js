@@ -1,3 +1,5 @@
+let messages = [];
+
 class Theme {
     static init = () => {
         if (localStorage.getItem('theme') == null) Theme.default();
@@ -140,12 +142,29 @@ class Fixed {
 
 
 class Message {
+    static init = () => {
+        const FRAGMENT     = document.createDocumentFragment();
+        messages.forEach(
+            message => {
+                let id     = `${message.flag}-message-${messages.indexOf(message)}`;
+                let header = document.createElement('header');
+                let p      = document.createElement('p');
+                header.classList.add('message', `${message.flag}-background`);
+                header.setAttribute('id', id);
+                p.textContent = message.body;
+                header.appendChild(p);
+                FRAGMENT.appendChild(header);
+            }
+        )
+        document.body.appendChild(FRAGMENT);
+        Message.notify();
+    }
     static list = () => {
         const messagesIdSelectors = []; 
         document.querySelectorAll('.message').forEach(message => messagesIdSelectors.push(message.id));
         return messagesIdSelectors;
     }
-    static init = () => {
+    static notify = () => {
         if (Message.list().length) Fixed.open(`#${Message.list()[0]}`);
     }
     static next = selector => {
@@ -234,7 +253,29 @@ class Handler {
     static init = () => {
         Grid.init();
         Theme.init();
-        Message.init();
         if (Template.isThere('#timer')) Timer.countDown();
     }
 }
+
+document.addEventListener(
+    'DOMContentLoaded', 
+    () => {
+        fetch(`http://${window.location.host}/api/flash/`)
+        .then(response => response.json())
+        .then(
+            data => {
+                data.messages.forEach(message => messages.push(message));
+            }
+        )
+        .then(
+            () => {
+                if (messages.length) Message.init();
+            }
+        )
+        .catch(
+            error => {
+                messages.push(error);
+            }
+        );
+    }
+)

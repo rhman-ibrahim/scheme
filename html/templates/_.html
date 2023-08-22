@@ -31,16 +31,5 @@
     <body onload="Handler.init();" onresize="Handler.init();">
         {% block grid %}{% endblock %}
         {% block side %}{% endblock %}
-        {% if messages|length > 0 %}
-        {% for message in messages %}
-        <header class="message {{ message.tags|message:"color" }}" id="{{ message.tags }}-message-{{ forloop.counter }}">
-            <h3 class="text-capitalize">
-                <i class="material-icons">{{ message.tags|message:"icon" }}</i>
-                <span>{{ message.tags }}</span>
-            </h3>
-            <p>{{ message }}</p>
-        </header>
-        {% endfor %}
-        {% endif %}
     </body>
 </html>

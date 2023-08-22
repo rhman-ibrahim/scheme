@@ -1,9 +1,12 @@
+# Django
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+from django.http import JsonResponse
+
 # REST
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
-# Django
-from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.permissions import AllowAny
 
 # Models
 from team.models import Circle
@@ -30,6 +33,20 @@ def resource(view):
             )
     return wrapper
 
+
+class MessageViewSet(viewsets.ViewSet):
+
+    permission_classes = [AllowAny]
+
+    def flash(self, request):
+        message_data = []
+        for message in messages.get_messages(request):
+            message_data.append({
+                'body': message.message,
+                'flag': message.tags,
+            })
+        return JsonResponse({'messages': message_data})
+            
 
 class CircleViewSet(viewsets.ViewSet):
 

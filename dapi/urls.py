@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RoomViewSet, CircleViewSet
+from .views import RoomViewSet, CircleViewSet, MessageViewSet
 
 app_name    = "api"
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/circle/', CircleViewSet.as_view({'post':'create'})),
     path('circle/<int:pk>/info/', CircleViewSet.as_view({'get':'info'})),
     path('room/<str:serial>/messages/', RoomViewSet.as_view({'get':'messages'})),
+    path('flash/', MessageViewSet.as_view({'get':'flash'}))
 ]
