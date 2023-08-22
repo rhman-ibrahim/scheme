@@ -99,10 +99,10 @@ main {
     width: 32px;
     height: 32px;
     padding: 4px;
-    color: var(--white);
-    outline: 1.32px solid var(--primary);
+    color: var(--d4);
+    outline: 1.32px solid var(--d3);
     box-shadow: var(--box-shadow);
-    background: var(--primary);
+    background: var(--d2);
     border-radius: 100%;
     position: absolute;
     bottom: 8px;

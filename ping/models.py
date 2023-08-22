@@ -8,9 +8,10 @@ from helpers.functions import generate_serial
 
 class Room(models.Model):
 
-    serial   = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
-    status   = models.BooleanField(default=True, blank=False, null=False)
-    members  = models.ManyToManyField("user.Account")
+    serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
+    status      = models.BooleanField(default=True, blank=False, null=False)
+    description = models.TextField(default="This room has no description.")
+    members     = models.ManyToManyField("user.Account")
 
     def __str__(self):
         return self.serial

@@ -9,11 +9,13 @@ document.addEventListener(
             {
                 method: 'GET',
                 headers: {
-                    'Authorization':`Token XpfKFCkGHNdqrQ0KEAepsMrh8a6oI9g5`,
+                    'Authorization':`Token ${ROOM.get().token}`,
                 }
             }
         )
-        .then(response => response.json())
+        .then(
+            response => response.json()
+        )
         .then(
             data => {
                 const FRAGMENT = document.createDocumentFragment();
@@ -26,7 +28,7 @@ document.addEventListener(
                     }
                 );
                 Template.append(
-                    ROOM.get().conversation,
+                    ROOM.get().ui,
                     [
                         FRAGMENT
                     ]
@@ -34,9 +36,7 @@ document.addEventListener(
                 ROOM.scroll();
             }
         )
-        .catch(
-            error => console.log(error)
-        );
+        .catch(error => console.log(error));
     }
 )
 
@@ -51,7 +51,7 @@ SOCKET.onmessage     = received => {
     const data       = JSON.parse(received.data);
     if (data.event === 'notify') {
         Template.append(
-            ROOM.get().conversation,
+            ROOM.get().ui,
             [
                 ROOM.li(data.notification)
             ]
@@ -59,7 +59,7 @@ SOCKET.onmessage     = received => {
     }
     if (data.event === 'message') {
         ROOM.append(
-            ROOM.get().conversation,
+            ROOM.get().ui,
             data
         );
     }

@@ -11,6 +11,8 @@ def ping_room(sender, instance, **kwargs):
     if instance.status == 1:
         room, created = Room.objects.get_or_create(serial=instance.serial)
         room.members.set([instance.receiver, instance.sender])
+        room.description = f"{instance.receiver.username} & {instance.sender.username} chat room."
+        room.save()
 
 @receiver(post_delete, sender=FriendRequest)
 def ping_room(sender, instance, **kwargs):
@@ -23,9 +25,5 @@ def ping_room(sender, instance, **kwargs):
 def ping_room(sender, instance, created, **kwargs):
     room, created = Room.objects.get_or_create(serial=instance.serial)
     room.members.set([instance.founder, *instance.members.all()])
-
-# @receiver(post_save, sender=Post)
-# @receiver(post_save, sender=Comment)
-# def ping_room(sender, instance, created, **kwargs):
-#     room, created = Room.objects.get_or_create(serial=instance.serial)
-#     room.members.set([instance.circle.founder, *instance.circle.members.all()])
+    room.description = f"{instance.name} circle's chat room, {room.members.count()} of {instance.members.count()} are in."
+    room.save()

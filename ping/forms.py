@@ -2,26 +2,42 @@ from django import forms
 from .models import Room
 
 
-class RoomForm(forms.ModelForm):
+class RoomForm(forms.Form):
 
-    name = forms.CharField(
-        label='room name',
-        widget = forms.TextInput(
+    token = forms.CharField(
+        label="room's token",
+        widget = forms.HiddenInput(
             attrs = {
-                'id':'room-name',
-                'placeholder':'room name'
+                'id':'user-token',
+                'autocomplete':'off'
             }
         )
     )
-
-    class Meta:
-        model   = Room
-        fields  = ['name', 'users', 'description']
-        widgets = {
-            'users': forms.CheckboxSelectMultiple(),
-            'description': forms.Textarea(
-                attrs={
-                    'placeholder':'What is this room for?'
-                }
-            )
-        }
+    username = forms.CharField(
+        label="room's username",
+        widget = forms.HiddenInput(
+            attrs = {
+                'id':'user-username',
+                'autocomplete':'off'
+            }
+        )
+    )
+    serial = forms.CharField(
+        label="room's serial",
+        widget = forms.HiddenInput(
+            attrs = {
+                'id':'room-serial',
+                'autocomplete':'off'
+            }
+        )
+    )
+    message = forms.CharField(
+        label=False,
+        widget = forms.TextInput(
+            attrs = {
+                'id':'room-message',
+                'placeholder':'message',
+                'autocomplete':'off'
+            }
+        )
+    )

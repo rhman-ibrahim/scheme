@@ -1,6 +1,6 @@
 form {
   width: 100%;
-  padding: 8px;
+  padding: 4px;
   max-height: 50vh;
   height: max-content;
   background: var(--d1);

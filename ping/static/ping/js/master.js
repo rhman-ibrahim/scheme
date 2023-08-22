@@ -3,17 +3,13 @@ class ROOM {
     
     static get = () => {
         return {
-            serial: String(document.getElementById('room').dataset.serial),
-            username: String(document.getElementById('room-input').dataset.username),
-            message: String(document.getElementById('message').value),
-            last: document.getElementById('room').querySelector('ul:last-of-type'),
-            conversation: document.querySelector('#room'),
+            ui: document.querySelector('#messages'),
+            last: document.getElementById('messages').querySelector('ul:last-of-type'),
+            username: String(document.getElementById('user-username').value),
+            message: String(document.getElementById('room-message').value),
+            serial: String(document.getElementById('room-serial').value),
+            token: String(document.getElementById('user-token').value)
         };
-    }
-
-    static input = () => {
-        if (ROOM.get().message.trim().length !== 0) return true;
-        return false;
     }
 
     static message = () => {
@@ -64,12 +60,7 @@ class ROOM {
         ROOM.scroll();
     }
 
-    static clear = () => {
-        document.querySelector('#message').value = '';
-    }
-
-    static scroll = () => {
-        ROOM.get().conversation.scrollTop = ROOM.get().conversation.scrollHeight;
-    }
-    
+    static scroll = () => ROOM.get().ui.scrollTop = ROOM.get().ui.scrollHeight;
+    static input  = () => ROOM.get().message.trim().length !== 0 ? true:false;
+    static clear  = () => document.getElementById('room-message').value = '';
 }
