@@ -105,4 +105,6 @@ class Token(models.Model):
             self.ready = False
         except MultipleObjectsReturned:
             self.ready = True
+        except Token.DoesNotExist:
+            pass
         super(Token, self).save(*args, **kwargs)
