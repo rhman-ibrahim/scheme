@@ -1,6 +1,10 @@
+{% load user_filters %}
 <section class="widget" id="team-navigate-widget">
     <h3>
-        <i class="material-icons">person</i>
+        <img
+            src="{{ request.user|profile_picture_url }}"
+            class="circle-24" alt="{{ request.user.username }}'s profile picture"
+        />
         <span>{{ request.user.username }}</span>
     </h3>
     <div class="flex-container">
@@ -20,10 +24,15 @@
             <p><b>Manage</b> your account, recovery token, circles, profile and theme.</p>
             <nav class="text-align-right">
                 <a href="{% url 'user:retrieve_account' %}">
-                    <img
-                        src="{{ request.user|profile_picture_url }}"
-                        class="circle-24" alt="{{ request.user.username }}'s profile picture"
-                    />
+                    <i class="material-icons">person</i>
+                </a>
+            </nav>
+        </div>
+        <div class="flex-box-col warning-card">
+            <p><b>Logout</b>, and back to your account. You are logged in this circle.</p>
+            <nav class="text-align-right">
+                <a href="{% url 'team:logout' %}" style="color:var(--lw);">
+                    <i class="material-icons">logout</i>
                 </a>
             </nav>
         </div>

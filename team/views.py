@@ -9,10 +9,9 @@ from team.models import (
     Circle, CircleRequest
 )
 from ping.models import Room
-# from blog.models import Post
 
 # Forms
-# from blog.forms import PostForm
+from ping.forms import RoomForm
 from team.forms import (
     CircleForm, CircleRequestForm,
     AddFounderFriendsForm, TransferCircleForm,
@@ -93,15 +92,26 @@ def retrieve_team_index(request):
             'circle': circle,
             'room': room,
             'forms': {
-                'circle': CircleForm(instance=circle),
-                'friends': AddFounderFriendsForm(instance=circle),
-                'transfer':TransferCircleForm(instance=circle),
+                'team': {
+                    'circle': CircleForm(instance=circle),
+                    'transfer':TransferCircleForm(instance=circle),
+                },
+                'mate': {
+                    'friends': AddFounderFriendsForm(instance=circle),
+                },
+                'ping': {
+                    'room': RoomForm(initial={
+                        'token': request.user.token.key,
+                        'username': request.user.username,
+                        'serial': room.serial
+                    })
+                }
             },
             'grid': {
-                'title': f".sch | {circle.name}",
+                'title': f"{circle.name} by {circle.founder.username}",
                 'icons': {
-                    'left':"groups",
-                    'right':"forum",
+                    'left':"person",
+                    'right':"menu",
                 }
             }
         }    

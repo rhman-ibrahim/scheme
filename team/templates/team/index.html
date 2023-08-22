@@ -2,35 +2,33 @@
 {% load static %}
 
 {% block main %}
-{% include "team/widgets/user.html" %}
-{% include "team/widgets/settings.html" %}
 {% if circle.founder == request.user %}
 {% include "team/widgets/manage.html" %}
 {% endif %}
-{% include "team/widgets/security.html" %}
+{% include "team/widgets/settings.html" %}
+{% include "ping/widgets/room.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "team/widgets/members.html" %}
+{% include "team/widgets/user.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "ping/room.html" %}
+{% include "components/widgets/history.html" %}
+{% include "team/widgets/security.html" %}
 {% endblock %}
 
 {% block side %}
+{% include "ping/form/room.html" %}
+{% include "components/aside/history.html" %}
+{% include "team/aside/members.html" %}
 {% include "team/aside/friends.html" %}
-{% include "team/aside/history.html" %}
 {% if circle.founder == request.user %}
 {% include "team/aside/requests.html" %}
 {% include "team/form/transfer.html" %}
 {% include "team/form/import.html" %}
 {% include "team/form/update.html" %}
 {% endif %}
-{% endblock %}
-
-{% block css %}
-<link rel="stylesheet" href="{% static 'ping/css/master.css' %}">
 {% endblock %}
 
 {% block js %}
