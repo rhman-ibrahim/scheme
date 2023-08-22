@@ -6,13 +6,10 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
-from django.utils.crypto import get_random_string
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.validators import RegexValidator
 from django.contrib.admin.models import LogEntry
-
-# Scheme
-from scheme.settings import MEDIA_ROOT
+from django.utils.crypto import get_random_string
 
 
 class UserManager(BaseUserManager):

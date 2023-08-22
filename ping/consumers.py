@@ -1,9 +1,13 @@
+import json
+from asgiref.sync import sync_to_async
+
+# Channels
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
-from asgiref.sync import sync_to_async
-from .models import Room, Message
+
+# Models
 from user.models import Account
-import json
+from .models import Room, Message
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
