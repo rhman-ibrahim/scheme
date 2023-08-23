@@ -12,12 +12,12 @@ from django.db import IntegrityError
 
 # Models
 from user.models import Account
-from team.models import Circle
+from team.models import Space
 from ping.models import Room
-from .models import FriendRequest, CircleRequest
+from .models import FriendRequest, SpaceRequest
 
 # Forms
-from mate.forms import AccountUsernameForm, CircleRequestForm
+from mate.forms import AccountUsernameForm, SpaceRequestForm
 
 # Decorators
 from helpers.decorators import (
@@ -158,19 +158,19 @@ def delete_friend_request(request, req):
 
 
 @back
-def create_circle_request(request):
+def create_space_request(request):
     if request.method == 'POST':
-        form  = CircleRequestForm(request.POST)
+        form  = SpaceRequestForm(request.POST)
         if form.is_valid():
-            circle          = Circle.objects.get(serial=form.cleaned_data['serial'])
-            circle_request  = CircleRequest.objects.get(circle=circle, user=request.user)
-            if circle_request.status == 2:
-                messages.info(request, f"Your request to join {circle.name} is pending")
-            elif circle_request.status == 1:
-                messages.info(request, f"You are already connected to {circle.name}")
+            space          = Space.objects.get(serial=form.cleaned_data['serial'])
+            space_request  = SpaceRequest.objects.get(space=space, user=request.user)
+            if space_request.status == 2:
+                messages.info(request, f"Your request to join {space.name} is pending")
+            elif space_request.status == 1:
+                messages.info(request, f"You are already connected to {space.name}")
             else:
-                CircleRequest.objects.create(
-                    circle=circle,
+                SpaceRequest.objects.create(
+                    space=space,
                     user=request.user
                 )
                 messages.success(
@@ -178,8 +178,8 @@ def create_circle_request(request):
                     "join request created successfully."
                     )
                 log(
-                    request.user.id, circle, ADDITION,
-                    f"requested to join the circle ({circle.name})."
+                    request.user.id, space, ADDITION,
+                    f"requested to join the space ({space.name})."
                 )
         else:
             get_form_errors(request, form)
@@ -188,41 +188,41 @@ def create_circle_request(request):
 @is_logined(True)
 @is_founder
 @back
-def accept_circle_request(request, user_id):
-    c_req        = CircleRequest.objects.get(circle__id=request.session.get('circle'), user__id=user_id)
+def accept_space_request(request, user_id):
+    c_req        = SpaceRequest.objects.get(space__id=request.session.get('space'), user__id=user_id)
     c_req.status = 1
-    c_req.circle.members.add(c_req.user)
-    c_req.circle.save()
+    c_req.space.members.add(c_req.user)
+    c_req.space.save()
     c_req.save()
     log(
-        request.user.id, c_req.circle, CHANGE,
-        f"approved ({c_req.user.username}) joining the circle ({c_req.circle.name})."
+        request.user.id, c_req.space, CHANGE,
+        f"approved ({c_req.user.username}) joining the space ({c_req.space.name})."
     )
     
 @is_authenticated(True)
 @is_logined(True)
 @is_founder
 @back
-def reject_circle_request(request, user_id):
-    c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
+def reject_space_request(request, user_id):
+    c_req        = SpaceRequest.objects.get(space__serial=request.session.get('space'), user__id=user_id)
     c_req.status = 0
-    c_req.circle.save()
+    c_req.space.save()
     c_req.save()
     log(
-        request.user.id, c_req.circle, CHANGE,
-        f"rejected ({c_req.user.username}) joining the circle ({c_req.circle.name})."
+        request.user.id, c_req.space, CHANGE,
+        f"rejected ({c_req.user.username}) joining the space ({c_req.space.name})."
     )
     
 @is_authenticated(True)
 @is_logined(True)
 @back
-def delete_circle_request(request, request_id):
-    circle_request = CircleRequest.objects.get(id=request_id)
-    if request.user == circle_request.user:
-        circle_request.delete()
+def delete_space_request(request, request_id):
+    space_request = SpaceRequest.objects.get(id=request_id)
+    if request.user == space_request.user:
+        space_request.delete()
         log(
-            request.user.id, circle_request.circle, DELETION,
-            f"approved ({circle_request.user.username}) joining the circle ({circle_request.circle.name})."
+            request.user.id, space_request.space, DELETION,
+            f"approved ({space_request.user.username}) joining the space ({space_request.space.name})."
         )
         messages.warning(
             request,

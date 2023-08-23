@@ -29,10 +29,10 @@ from user.forms import (
 )
 from mate.forms import (
     AccountUsernameForm,
-    CircleRequestForm
+    SpaceRequestForm
 )
 from team.forms import (
-    CircleForm, CircleLoginForm,
+    SpaceForm, SpaceLoginForm,
 )
 
 # Functions
@@ -110,9 +110,9 @@ def retrieve_account(request):
                     'info': ProfileInfoForm(instance=request.user.profile),
                 },
                 'team': {
-                    'request': CircleRequestForm(auto_id="circle_request_%s"),
-                    'login': CircleLoginForm(auto_id="circle_login_%s"),
-                    'circle': CircleForm(auto_id="circle_%s")
+                    'request': SpaceRequestForm(auto_id="circle_request_%s"),
+                    'login': SpaceLoginForm(auto_id="circle_login_%s"),
+                    'circle': SpaceForm(auto_id="circle_%s")
                 },
                 'mate': {
                     'username': AccountUsernameForm(auto_id="account_username_%s"),

@@ -158,7 +158,7 @@ class Profile(models.Model):
     @property
     def requests(self):
 
-        from team.models import CircleRequest
+        from team.models import SpaceRequest
         from mate.models import FriendRequest
 
         query = FriendRequest.objects.filter(
@@ -170,16 +170,16 @@ class Profile(models.Model):
                 'sent': query.filter(sender=self.user),
             },
             'circle': {
-                CircleRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
+                SpaceRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
             }
         }
     
     @property
     def circles(self):
         
-        from team.models import Circle
+        from team.models import Space
 
-        query = Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-id')
+        query = Space.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-id')
         return {
             'all': query,
             'as_founder': query.filter(founder=self.user),

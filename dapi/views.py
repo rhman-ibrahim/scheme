@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 
 # Models
-from team.models import Circle
+from team.models import Space
 from ping.models import Message
 
 # Helpers
@@ -16,7 +16,7 @@ from helpers.functions import secret
 
 # Serializers
 from .serializers import (
-    MessageSerializer, CircleSerializer, CirclePostSerializer
+    MessageSerializer, SpaceSerializer, SpacePostSerializer
 )
 
 # dapi
@@ -35,17 +35,17 @@ class MessageViewSet(viewsets.ViewSet):
         return JsonResponse({'messages': message_data})
             
 
-class CircleViewSet(viewsets.ViewSet):
+class SpaceViewSet(viewsets.ViewSet):
 
     @resource
     def info(self, request, pk=None):
         return Response(
-            CircleSerializer(Circle.objects.get(id=pk)).data,
+            SpaceSerializer(Space.objects.get(id=pk)).data,
             status=status.HTTP_200_OK
         )
     
     def create(self, request, *args, **kwargs):
-        serializer = CirclePostSerializer(
+        serializer = SpacePostSerializer(
             data = {
                 "password": secret(request.POST.get('password')) if bool(request.POST.get('password')) else None,
                 "name": request.POST.get('name'),

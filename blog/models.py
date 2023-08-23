@@ -20,7 +20,7 @@ class Signal(models.Model):
 
 class SignalBase(models.Model):
     
-    circle         = models.ForeignKey("team.Circle", on_delete=models.CASCADE)
+    space          = models.ForeignKey("team.Space", on_delete=models.CASCADE)
     signal         = models.ForeignKey("blog.Signal", default=16, on_delete=models.CASCADE)
     user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True)
     serial         = models.CharField(max_length=64, default=generate_serial, null=False, blank=False, editable=False)

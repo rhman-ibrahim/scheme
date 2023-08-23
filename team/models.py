@@ -14,7 +14,7 @@ from helpers.functions import generate_serial, secret
 from ping.models import Room
 
 
-class Circle(models.Model):
+class Space(models.Model):
 
     name        = models.CharField(max_length=32, null=False, blank=False)
     serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
@@ -31,13 +31,13 @@ class Circle(models.Model):
     
     @property
     def join_requests(self):
-        from mate.models import CircleRequest
-        return CircleRequest.objects.filter(circle=self, status=2)
+        from mate.models import SpaceRequest
+        return SpaceRequest.objects.filter(circle=self, status=2)
 
     @property
     def logs(self):
         return LogEntry.objects.filter(
-            content_type = ContentType.objects.get_for_model(Circle),
+            content_type = ContentType.objects.get_for_model(Space),
             object_id    = self.id
         )
     
@@ -75,7 +75,7 @@ class Circle(models.Model):
 class Membership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
+    space     = models.ForeignKey('team.Space', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

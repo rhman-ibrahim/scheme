@@ -1,9 +1,9 @@
 from django import forms
 from user.models import Account
-from .models import Circle
+from .models import Space
 
 
-class CircleForm(forms.ModelForm):
+class SpaceForm(forms.ModelForm):
 
     name        = forms.CharField(
         max_length=32,
@@ -19,7 +19,7 @@ class CircleForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs = {
                 'data-field':"password",
-                'placeholder': "circle password",
+                'placeholder': "space password",
                 'autocomplete':"new-password"
             }
         )
@@ -38,11 +38,11 @@ class CircleForm(forms.ModelForm):
     )
 
     class Meta:
-        model  = Circle
+        model  = Space
         fields = ['name', 'password', 'description']
 
 
-class CircleLoginForm(forms.Form):
+class SpaceLoginForm(forms.Form):
 
     name        = forms.CharField(
         max_length=32,
@@ -70,14 +70,14 @@ class AddFounderFriendsForm(forms.ModelForm):
         self.fields['members'].queryset = instance.founder_friends_queryset()
 
     class Meta:
-        model   = Circle
+        model   = Space
         fields  = ['members']
         widgets = {
             'members': forms.CheckboxSelectMultiple()
         }
 
 
-class TransferCircleForm(forms.ModelForm):
+class TransferSpaceForm(forms.ModelForm):
 
     members = forms.RadioSelect()
 
@@ -87,7 +87,7 @@ class TransferCircleForm(forms.ModelForm):
         self.fields['members'].queryset = instance.members.all()
     
     class Meta:
-        model   = Circle
+        model   = Space
         fields  = ['members']
         widgets = {
             'members': forms.RadioSelect()

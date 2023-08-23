@@ -5,15 +5,15 @@ from django.contrib import messages
 
 # Models
 from ping.models import Room
-from .models import Circle
+from .models import Space
 
 # Forms
-from mate.forms import CircleRequestForm
+from mate.forms import SpaceRequestForm
 from ping.forms import RoomForm
 from .forms import (
-    CircleForm, CircleLoginForm,
+    SpaceForm, SpaceLoginForm,
     AddFounderFriendsForm,
-    TransferCircleForm,
+    TransferSpaceForm,
 )
 
 # Decorators
@@ -31,22 +31,22 @@ from helpers.functions import (
 )
 
 @back
-def create_circle(request):
+def create_space(request):
     if request.method == "POST":
-        form = CircleForm(request.POST)
+        form = SpaceForm(request.POST)
         if form.is_valid():
-            if Circle.objects.filter(name=form.cleaned_data['name'], founder=request.user).exists():
-                messages.error(request, 'You have a circle with this name.')
+            if Space.objects.filter(name=form.cleaned_data['name'], founder=request.user).exists():
+                messages.error(request, 'You have a space with this name.')
             else:
-                circle          = form.save(commit=False)
-                circle.founder  = request.user
-                circle.password = secret(form.cleaned_data['password'])
-                circle          = form.save()
+                space          = form.save(commit=False)
+                space.founder  = request.user
+                space.password = secret(form.cleaned_data['password'])
+                space          = form.save()
                 log(
-                    request.user.id, circle, ADDITION,
-                    f"created the circle ({circle.name})."
+                    request.user.id, space, ADDITION,
+                    f"created the space ({space.name})."
                 )
-                messages.success(request, "your circle is created successfully")
+                messages.success(request, "your space is created successfully")
         else:
             get_form_errors(request, form)
 
@@ -55,21 +55,21 @@ def create_circle(request):
 @is_logined(True)
 @resource
 def retrieve_team_index(request):
-    circle = Circle.objects.get(id=request.session.get('circle'))
-    room   = Room.objects.get(serial=circle.serial)
+    space = Space.objects.get(id=request.session.get('space'))
+    room   = Room.objects.get(serial=space.serial)
     return render(
         request,
         "team/index.html",
         {
-            'circle': circle,
+            'space': space,
             'room': room,
             'forms': {
                 'team': {
-                    'circle': CircleForm(instance=circle),
-                    'transfer':TransferCircleForm(instance=circle),
+                    'space': SpaceForm(instance=space),
+                    'transfer':TransferSpaceForm(instance=space),
                 },
                 'mate': {
-                    'friends': AddFounderFriendsForm(instance=circle),
+                    'friends': AddFounderFriendsForm(instance=space),
                 },
                 'ping': {
                     'room': RoomForm(initial={
@@ -80,7 +80,7 @@ def retrieve_team_index(request):
                 }
             },
             'grid': {
-                'title': f"{circle.name} by {circle.founder.username}",
+                'title': f"{space.name} by {space.founder.username}",
                 'icons': {
                     'left':"person",
                     'right':"menu",
@@ -95,13 +95,13 @@ def retrieve_team_index(request):
 @back
 def import_friends(request):
     if request.method == 'POST':
-        circle = Circle.objects.get(id=request.session['circle'])
-        form = AddFounderFriendsForm(request.POST, instance=circle)
+        space = Space.objects.get(id=request.session['space'])
+        form = AddFounderFriendsForm(request.POST, instance=space)
         if form.is_valid():
             selected = [int(x) for x in request.POST.getlist('members')]
             if len(selected) > 0:
-                circle.members.add(*selected)
-                messages.success(request, f"{len(selected)} friend/s added to your circle.")
+                space.members.add(*selected)
+                messages.success(request, f"{len(selected)} friend/s added to your space.")
             messages.error(request, "You did not select any.")
         messages.error(request, "Something went wrong.")
 
@@ -109,24 +109,24 @@ def import_friends(request):
 @is_logined(True)
 @is_founder
 @back
-def remove_circle_member(request, user_id):
-    circle = Circle.objects.get(serial=request.session.get('circle'))
-    user   = circle.members.get(id=int(user_id))
-    circle.members.remove(user)
-    circle.save()
+def remove_space_member(request, user_id):
+    space = Space.objects.get(serial=request.session.get('space'))
+    user   = space.members.get(id=int(user_id))
+    space.members.remove(user)
+    space.save()
     log(
-        request.user.id, circle, CHANGE,
-        f"removed ({user.username}) from the circle ({circle.name})."
+        request.user.id, space, CHANGE,
+        f"removed ({user.username}) from the space ({space.name})."
     )
 
 @is_authenticated(True)
 @is_logined(True)
 @is_founder
 @back
-def transfer_circle(request):
-    circle = Circle.objects.get(id=request.session['circle'])
+def transfer_space(request):
+    space = Space.objects.get(id=request.session['space'])
     if request.method == 'POST':
-        form = TransferCircleForm(request.POST, instance=circle)
+        form = TransferSpaceForm(request.POST, instance=space)
         if form.is_valid():
             messages.info(request, form.cleaned_data['members'])
 
@@ -135,15 +135,15 @@ def transfer_circle(request):
 @back
 def login(request):
     if request.method == 'POST':
-        form = CircleLoginForm(request.POST)
+        form = SpaceLoginForm(request.POST)
         if form.is_valid():
-            circle = Circle.objects.get(name=form.cleaned_data['name'])
-            if circle.user_role(request.user) != None:       
-                if circle.check_password(form.cleaned_data['password']):
-                    request.session['circle'] = circle.id
+            space = Space.objects.get(name=form.cleaned_data['name'])
+            if space.user_role(request.user) != None:       
+                if space.check_password(form.cleaned_data['password']):
+                    request.session['space'] = space.id
                     return redirect("team:retrieve_team_index")
                 else:
-                    messages.error(request, "circle password is wrong")
+                    messages.error(request, "space password is wrong")
             else:
                 messages.warning(request, "you are not a member")
         else:
@@ -153,23 +153,23 @@ def login(request):
 @is_logined(True)
 @center
 def logout(request):
-    del request.session['circle']
+    del request.session['space']
 
 @is_authenticated(True)
 @is_logined(True)
 @center
 def leave(request):
-    circle = Circle.objects.get(id=request.session.get('circle'))
-    role   = circle.user_role(request.user)
+    space = Space.objects.get(id=request.session.get('space'))
+    role   = space.user_role(request.user)
     if role == "member":
-        circle.members.remove(request.user)
-        log(request.user.id, circle, CHANGE,
-            f"left the circle ({circle.name})."
+        space.members.remove(request.user)
+        log(request.user.id, space, CHANGE,
+            f"left the space ({space.name})."
         )
-        circle.save()
+        space.save()
     elif role == "founder":
-        circle.delete()
-        log(request.user.id, circle, DELETION,
-            f"deleted the circle ({circle.name})."
+        space.delete()
+        log(request.user.id, space, DELETION,
+            f"deleted the space ({space.name})."
         )
     return redirect('team:logout')

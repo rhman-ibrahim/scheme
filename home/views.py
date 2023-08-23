@@ -10,8 +10,8 @@ from user.forms import (
     TokenForm, PassWordResetForm,
     SignUpForm, SignInForm,
 )
-from team.forms import CircleForm
-from mate.forms import CircleRequestForm
+from team.forms import SpaceForm
+from mate.forms import SpaceRequestForm
 
 # Decorators
 from helpers.decorators import (
@@ -61,8 +61,8 @@ def retrieve_home_index(request):
                     }
                 },
                 'team': {
-                    'circle': CircleForm(auto_id="circle_form_%s"),
-                    'request': CircleRequestForm(auto_id="circle_request_%s"),
+                    'circle': SpaceForm(auto_id="circle_form_%s"),
+                    'request': SpaceRequestForm(auto_id="circle_request_%s"),
                 }
             }
         }

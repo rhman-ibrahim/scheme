@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
-from team.models import Circle
+from team.models import Space
 
 
 def center(view):
@@ -62,14 +62,14 @@ def is_guest(status):
 def is_logined(status):
     def decorator(view):
         def wrapper(request, *args, **kwargs):
-            connected = True if 'circle' in request.session else False
+            connected = True if 'space' in request.session else False
             if request.user.is_authenticated:
                 if status == connected:
                     return view(request, *args, **kwargs)
                 elif status == True:
-                    messages.warning(request, "you have to login to the circle.")
+                    messages.warning(request, "you have to login to the space.")
                 else:
-                    messages.warning(request, "you have to logout to the circle.")
+                    messages.warning(request, "you have to logout to the space.")
                     return redirect('team:retrieve_team_index')
             messages.warning(request, "you have to signin")
         return wrapper
@@ -77,16 +77,16 @@ def is_logined(status):
     
 def is_founder(view):
     def wrapper(request, *args, **kwargs):
-        if 'circle' in request.session:
-            query = Circle.objects.filter(id=request.session.get('circle'))
+        if 'space' in request.session:
+            query = Space.objects.filter(id=request.session.get('space'))
             if query.exists():
-                circle = query.first()
-                if circle.founder == request.user:
+                space = query.first()
+                if space.founder == request.user:
                     return view(request, *args, **kwargs)
                 else:
                     messages.warning(
                         request,
-                        "only circle founder is allowed"
+                        "only space founder is allowed"
                     )
                     return redirect('team:retrieve_team_index')
         return wrapper

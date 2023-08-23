@@ -15,7 +15,7 @@ class AccountUsernameForm(forms.Form):
         )
     )
 
-class CircleRequestForm(forms.Form):
+class SpaceRequestForm(forms.Form):
 
     serial = forms.CharField(
         max_length=32,

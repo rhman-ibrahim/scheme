@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from user.models import Account
 from ping.models import Room, Message
-from team.models import Circle
+from team.models import Space
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -17,19 +17,19 @@ class UsernameField(serializers.RelatedField):
         return value.username
 
 
-class CirclePostSerializer(serializers.ModelSerializer):
+class SpacePostSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model  = Circle
+        model  = Space
         fields = ['founder', 'name', 'password']
 
-class CircleSerializer(serializers.ModelSerializer):
+class SpaceSerializer(serializers.ModelSerializer):
 
     founder = serializers.StringRelatedField()
     members = UsernameField(many=True)
     
     class Meta:
-        model  = Circle
+        model  = Space
         fields = ['founder', 'name', 'serial', 'members']
 
 class MessageSerializer(serializers.ModelSerializer):

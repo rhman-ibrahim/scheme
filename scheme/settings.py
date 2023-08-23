@@ -60,7 +60,7 @@ TEMPLATES      = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # Scheme
-                'team.processors.opened_circle'
+                'team.processors.opened_space'
             ],
             # Scheme
             'libraries':{

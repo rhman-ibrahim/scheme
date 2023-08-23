@@ -1,6 +1,6 @@
 [
   {
-    "model": "team.Circle",
+    "model": "team.Space",
     "id": 1,
     "fields": {
       "name": "Scheme",

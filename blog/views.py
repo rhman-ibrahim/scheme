@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 # Models
-from team.models import Circle
+from team.models import Space
 from ping.models import Room
 from .models import Post, Comment
 
@@ -25,7 +25,7 @@ def create_post(request):
         form = PostForm(request.POST)
         if form.is_valid():
             signal        = form.save(commit=False)
-            signal.circle = Circle.objects.get(id=request.session.get('circle'))
+            signal.space = Space.objects.get(id=request.session.get('circle'))
             signal.user   = request.user
             form.save()
             messages.success(request, "your signal has been sent successfully")
@@ -38,7 +38,7 @@ def create_comment(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             signal        = form.save(commit=False)
-            signal.circle = Circle.objects.get(id=request.session.get('circle'))
+            signal.space = Space.objects.get(id=request.session.get('circle'))
             signal.user   = request.user
             form.save()
             messages.success(request, "your signal has been sent successfully")

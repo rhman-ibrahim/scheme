@@ -52,15 +52,15 @@ class FriendRequest(models.Model):
         unique_together = ('sender', 'receiver')
 
 
-class CircleRequest(models.Model):
+class SpaceRequest(models.Model):
 
     status    = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
+    space     = models.ForeignKey('team.Space', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.user.username} requested to join {self.circle.name}."
+        return f"{self.user.username} requested to join {self.space.name}."
     
     def cancel(self):
         return reverse("team:delete_request", args=[str(self.id)])

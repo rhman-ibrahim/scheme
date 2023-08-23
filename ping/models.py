@@ -36,4 +36,4 @@ class Message(models.Model):
     body    = models.TextField()
 
     def __str__(self):
-        return f'sent by {self.sender} on {self.created} in {self.room.circle}'
+        return f'sent by {self.sender} on {self.created} in {self.room.space}'
