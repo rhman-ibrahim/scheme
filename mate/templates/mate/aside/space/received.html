@@ -18,8 +18,8 @@
                         <span>{{ ask.user.username }}</span>
                     </div>
                     <nav class="flex-row-end">
-                        <a href="{% url 'team:accept_request' ask.user.id %}" class="material-symbols-outlined">check</a>
-                        <a href="{% url 'team:reject_request' ask.user.id %}" class="material-symbols-outlined">close</a>
+                        <a href="{% url 'team:accept_space_request' ask.user.id %}" class="material-symbols-outlined">check</a>
+                        <a href="{% url 'team:reject_space_request' ask.user.id %}" class="material-symbols-outlined">close</a>
                     </nav>
                 </div>
                 {% endfor %}

@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'team:create_request' %}" id="circle-request-form">
+<form method="POST" action="{% url 'mate:create_space_request' %}" id="space-request-form">
     {% with form=forms.team.request %}
     {% include "components/form/base.html" %}
     {% endwith %}
