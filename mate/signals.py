@@ -1,6 +1,9 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from mate.models import FriendRequest, Profile
+
+from user.models import Profile
+from .models import FriendRequest
+
 
 
 @receiver(post_save, sender=FriendRequest)

@@ -11,6 +11,8 @@ urlpatterns = [
     path('settings/', views.retrieve_account, name="retrieve_account"),
     # Update
     path('update/password/', views.update_account_password, name='update_account_password'),
+    path('update/info/', views.update_profile_info, name='info'),
+    path('update/picture/', views.update_profile_picture, name='picture'),
     path('deactivate/', views.update_account_status, name="update_account_status"),
     path('reset/', views.reset_account_password, name='reset_account_password'),
     path('update/token/', views.update_token, name='update_token'),

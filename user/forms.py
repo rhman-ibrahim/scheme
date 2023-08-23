@@ -1,9 +1,12 @@
 from django import forms
-from user.models import Account, Token
+from django.contrib.auth import authenticate
+from django.core.validators import FileExtensionValidator
 from django.contrib.auth.forms import (
     UserCreationForm, PasswordChangeForm, SetPasswordForm
 )
-from django.contrib.auth import authenticate
+from user.models import (
+    Account, Token, Profile
+)
 
 
 class SignUpForm(UserCreationForm):
@@ -187,3 +190,53 @@ class AccountDeleteForm(forms.Form):
             }
         )
     )
+
+class ProfileInfoForm(forms.ModelForm):
+    
+    name = forms.CharField(
+        help_text="Separated names by spaces.",
+        widget=forms.TextInput(
+            attrs={
+                'id':'profile-form-name',
+                'autocomplete':'name',
+            }
+        )
+    )
+    email = forms.EmailField(
+        help_text="Only you could see.",
+        widget=forms.TextInput(
+            attrs={
+                'id':'profile-form-email',
+                'autocomplete':'name',
+            }
+        )
+    )
+    about = forms.CharField(
+        label="256",
+        widget=forms.Textarea(
+            attrs={
+                'id':'profile-form-about',
+                'autocomplete':'off',
+                'maxlength':256
+            }
+        )
+    )
+
+    class Meta:
+        model  = Profile
+        fields = ['name', 'email', 'about']
+
+
+class ProfilePictureForm(forms.ModelForm):
+    
+    picture = forms.ImageField(
+        label="profile picture",
+        help_text="supported formats are: JPEG and JPG.",
+        validators = [
+            FileExtensionValidator(allowed_extensions=['jpeg', 'jpg'])
+        ]
+    )
+
+    class Meta:
+        model  = Profile
+        fields = ['picture']

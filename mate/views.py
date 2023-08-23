@@ -16,16 +16,12 @@ from user.models import Account
 from ping.models import Room
 
 # Forms
-from mate.forms import (
-    AccountUsernameForm, ProfileInfoForm,
-    ProfilePictureForm
-)
+from mate.forms import AccountUsernameForm
 
 # Decorators
 from helpers.decorators import (
     back,
     is_authenticated,
-    is_guest
 )
 
 # Functions
@@ -37,7 +33,7 @@ from helpers.functions import (
 
 @is_authenticated(True)
 @back
-def create_request(request):
+def create_friend_request(request):
     if request.method == "POST":
         try:
             form = AccountUsernameForm(request.POST)
@@ -99,38 +95,8 @@ def retrieve_mate_index(request, username):
 
 
 @is_authenticated(True)
-@is_guest(False)
 @back
-def update_profile_picture(request):
-    if request.method == 'POST':
-        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form         = form.save(commit=False)
-            form.account = request.user
-            form.save()
-            log(request.user.id, request.user, CHANGE, "updated profile picture")
-            messages.success(request, "profile picture updated successfully")
-        else:
-            get_form_errors(request, form)
-
-@is_authenticated(True)
-@is_guest(False)
-@back
-def update_profile_info(request):
-    if request.method == 'POST':
-        form = ProfileInfoForm(request.POST, instance=request.user.profile)
-        if form.is_valid():
-            form         = form.save(commit=False)
-            form.account = request.user
-            form.save()
-            log(request.user.id, request.user, CHANGE, "updated profile info")
-            messages.success(request, "profile info updated successfully")
-        else:
-            get_form_errors(request, form)
-
-@is_authenticated(True)
-@back
-def accept_request(request, req):
+def accept_friend_request(request, req):
     friend_request = FriendRequest.objects.get(id=req)
     if request.user == friend_request.receiver:
         friend_request.status = 1
@@ -148,7 +114,7 @@ def accept_request(request, req):
 
 @is_authenticated(True)
 @back
-def reject_request(request, req):
+def reject_friend_request(request, req):
     friend_request = FriendRequest.objects.get(id=req)
     if request.user == friend_request.receiver:
         friend_request.status = 0
@@ -169,7 +135,7 @@ def reject_request(request, req):
 
 @is_authenticated(True)
 @back
-def delete_request(request, req):
+def delete_friend_request(request, req):
     friend_request = FriendRequest.objects.get(id=req)
     if request.user == friend_request.sender:
         friend_request.delete()

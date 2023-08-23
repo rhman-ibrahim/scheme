@@ -4,7 +4,6 @@ import tempfile, uuid
 from weasyprint import HTML, CSS
 
 # Django
-from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.admin.models import CHANGE
@@ -24,11 +23,11 @@ from user.models import Account, Token
 # Forms
 from user.forms import (
     PasswordUpdateForm, AccountDeleteForm,
+    ProfilePictureForm, ProfileInfoForm,
     TokenForm, PassWordResetForm,
     SignInForm, SignUpForm
 )
 from mate.forms import (
-    ProfilePictureForm, ProfileInfoForm,
     AccountUsernameForm
 )
 from team.forms import (
@@ -44,8 +43,8 @@ from helpers.functions import (
 
 # Decorators
 from helpers.decorators import (
-    back, center, resource,
     is_guest, is_authenticated,
+    back, center, resource,
 )
 
 @is_authenticated(False)
@@ -157,6 +156,36 @@ def update_account_status(request):
     logout(request)
     messages.info(request, 'account has been deactivated')
     return redirect("home:retrieve_home_index")
+
+@is_authenticated(True)
+@is_guest(False)
+@back
+def update_profile_picture(request):
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form         = form.save(commit=False)
+            form.account = request.user
+            form.save()
+            log(request.user.id, request.user, CHANGE, "updated profile picture")
+            messages.success(request, "profile picture updated successfully")
+        else:
+            get_form_errors(request, form)
+
+@is_authenticated(True)
+@is_guest(False)
+@back
+def update_profile_info(request):
+    if request.method == 'POST':
+        form = ProfileInfoForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form         = form.save(commit=False)
+            form.account = request.user
+            form.save()
+            log(request.user.id, request.user, CHANGE, "updated profile info")
+            messages.success(request, "profile info updated successfully")
+        else:
+            get_form_errors(request, form)
 
 @is_authenticated(False)
 @back

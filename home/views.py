@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 # Models
-from mate.models import Profile
+from user.models import Profile
 # from blog.models import Post
 
 # Forms

@@ -1,7 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from user.models import Account, Token
-from mate.models import Profile
+from user.models import Account, Token, Profile
 
 
 @receiver(post_save, sender=Account)
