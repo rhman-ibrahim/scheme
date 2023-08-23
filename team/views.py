@@ -2,21 +2,20 @@
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.db.models import Q
 
 # Models
-from team.models import (
-    Circle, CircleRequest
-)
 from ping.models import Room
+from .models import Circle
 
 # Forms
+from mate.forms import CircleRequestForm
 from ping.forms import RoomForm
-from team.forms import (
-    CircleForm, CircleRequestForm,
-    AddFounderFriendsForm, TransferCircleForm,
-    CircleLoginForm
+from .forms import (
+    CircleForm, CircleLoginForm,
+    AddFounderFriendsForm,
+    TransferCircleForm,
 )
+
 # Decorators
 from helpers.decorators import (
     back, center, resource,
@@ -48,33 +47,6 @@ def create_circle(request):
                     f"created the circle ({circle.name})."
                 )
                 messages.success(request, "your circle is created successfully")
-        else:
-            get_form_errors(request, form)
-
-@back
-def create_request(request):
-    if request.method == 'POST':
-        form  = CircleRequestForm(request.POST)
-        if form.is_valid():
-            circle          = Circle.objects.get(serial=form.cleaned_data['serial'])
-            circle_request  = CircleRequest.objects.get(circle=circle, user=request.user)
-            if circle_request.status == 2:
-                messages.info(request, f"Your request to join {circle.name} is pending")
-            elif circle_request.status == 1:
-                messages.info(request, f"You are already connected to {circle.name}")
-            else:
-                CircleRequest.objects.create(
-                    circle=circle,
-                    user=request.user
-                )
-                messages.success(
-                    request,
-                    "join request created successfully."
-                    )
-                log(
-                    request.user.id, circle, ADDITION,
-                    f"requested to join the circle ({circle.name})."
-                )
         else:
             get_form_errors(request, form)
 
@@ -132,35 +104,6 @@ def import_friends(request):
                 messages.success(request, f"{len(selected)} friend/s added to your circle.")
             messages.error(request, "You did not select any.")
         messages.error(request, "Something went wrong.")
-
-@is_authenticated(True)
-@is_logined(True)
-@is_founder
-@back
-def accept_request(request, user_id):
-    c_req        = CircleRequest.objects.get(circle__id=request.session.get('circle'), user__id=user_id)
-    c_req.status = 1
-    c_req.circle.members.add(c_req.user)
-    c_req.circle.save()
-    c_req.save()
-    log(
-        request.user.id, c_req.circle, CHANGE,
-        f"approved ({c_req.user.username}) joining the circle ({c_req.circle.name})."
-    )
-    
-@is_authenticated(True)
-@is_logined(True)
-@is_founder
-@back
-def reject_request(request, user_id):
-    c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
-    c_req.status = 0
-    c_req.circle.save()
-    c_req.save()
-    log(
-        request.user.id, c_req.circle, CHANGE,
-        f"rejected ({c_req.user.username}) joining the circle ({c_req.circle.name})."
-    )
 
 @is_authenticated(True)
 @is_logined(True)
@@ -230,20 +173,3 @@ def leave(request):
             f"deleted the circle ({circle.name})."
         )
     return redirect('team:logout')
-
-@is_authenticated(True)
-@is_logined(True)
-@back
-def delete_request(request, request_id):
-    circle_request = CircleRequest.objects.get(id=request_id)
-    if request.user == circle_request.user:
-        circle_request.delete()
-        log(
-            request.user.id, circle_request.circle, DELETION,
-            f"approved ({circle_request.user.username}) joining the circle ({circle_request.circle.name})."
-        )
-        messages.warning(
-            request,
-            "You are not allowed to preform this action"
-        )
-        return redirect("team:retrieve_team_index")

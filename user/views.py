@@ -28,11 +28,11 @@ from user.forms import (
     SignInForm, SignUpForm
 )
 from mate.forms import (
-    AccountUsernameForm
+    AccountUsernameForm,
+    CircleRequestForm
 )
 from team.forms import (
     CircleForm, CircleLoginForm,
-    CircleRequestForm
 )
 
 # Functions

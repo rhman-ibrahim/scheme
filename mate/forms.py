@@ -14,3 +14,10 @@ class AccountUsernameForm(forms.Form):
             }
         )
     )
+
+class CircleRequestForm(forms.Form):
+
+    serial = forms.CharField(
+        max_length=32,
+        required=True,
+    )

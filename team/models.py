@@ -14,25 +14,14 @@ from helpers.functions import generate_serial, secret
 from ping.models import Room
 
 
-
-REQUEST_STATUS = (
-    (0, "Rejected"),
-    (1, "Accepted"),
-    (2, "Pending"),
-)
-
 class Circle(models.Model):
 
-    # Identify
     name        = models.CharField(max_length=32, null=False, blank=False)
     serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
-    # Users
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
-    members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="CircleMembership")
-    # Password
+    members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="Membership")
     password    = models.CharField(max_length=128, null=False, blank=False)
-    # Time
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
 
@@ -42,6 +31,7 @@ class Circle(models.Model):
     
     @property
     def join_requests(self):
+        from mate.models import CircleRequest
         return CircleRequest.objects.filter(circle=self, status=2)
 
     @property
@@ -56,9 +46,7 @@ class Circle(models.Model):
         return Room.objects.get(serial=self.serial)
     
     def founder_friends_queryset(self):
-        
         from user.models import Account
-
         friends = [int(friend.id) for friend in self.founder.scheme.friends.all()]
         members = [int(member.id) for member in self.members.all()]
         return Account.objects.filter(
@@ -84,21 +72,7 @@ class Circle(models.Model):
         unique_together = ('founder', 'name')
 
 
-class CircleRequest(models.Model):
-
-    status    = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
-    user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.user.username} requested to join {self.circle.name}."
-    
-    def cancel(self):
-        return reverse("team:delete_request", args=[str(self.id)])
-
-
-class CircleMembership(models.Model):
+class Membership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     circle    = models.ForeignKey('team.Circle', on_delete=models.CASCADE)

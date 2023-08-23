@@ -7,12 +7,11 @@ from user.models import Profile
 
 # Forms
 from user.forms import (
+    TokenForm, PassWordResetForm,
     SignUpForm, SignInForm,
-    TokenForm, PassWordResetForm
 )
-from team.forms import (
-    CircleForm, CircleRequestForm
-)
+from team.forms import CircleForm
+from mate.forms import CircleRequestForm
 
 # Decorators
 from helpers.decorators import (

@@ -1,5 +1,5 @@
 # Django
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 # Models
@@ -11,17 +11,20 @@ from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 
 # Models
-from mate.models import FriendRequest
 from user.models import Account
+from team.models import Circle
 from ping.models import Room
+from .models import FriendRequest, CircleRequest
 
 # Forms
-from mate.forms import AccountUsernameForm
+from mate.forms import AccountUsernameForm, CircleRequestForm
 
 # Decorators
 from helpers.decorators import (
     back,
     is_authenticated,
+    is_founder,
+    is_logined,
 )
 
 # Functions
@@ -152,3 +155,77 @@ def delete_friend_request(request, req):
             request,
             "you are not allowed to perform this action"
         )
+
+
+@back
+def create_circle_request(request):
+    if request.method == 'POST':
+        form  = CircleRequestForm(request.POST)
+        if form.is_valid():
+            circle          = Circle.objects.get(serial=form.cleaned_data['serial'])
+            circle_request  = CircleRequest.objects.get(circle=circle, user=request.user)
+            if circle_request.status == 2:
+                messages.info(request, f"Your request to join {circle.name} is pending")
+            elif circle_request.status == 1:
+                messages.info(request, f"You are already connected to {circle.name}")
+            else:
+                CircleRequest.objects.create(
+                    circle=circle,
+                    user=request.user
+                )
+                messages.success(
+                    request,
+                    "join request created successfully."
+                    )
+                log(
+                    request.user.id, circle, ADDITION,
+                    f"requested to join the circle ({circle.name})."
+                )
+        else:
+            get_form_errors(request, form)
+
+@is_authenticated(True)
+@is_logined(True)
+@is_founder
+@back
+def accept_circle_request(request, user_id):
+    c_req        = CircleRequest.objects.get(circle__id=request.session.get('circle'), user__id=user_id)
+    c_req.status = 1
+    c_req.circle.members.add(c_req.user)
+    c_req.circle.save()
+    c_req.save()
+    log(
+        request.user.id, c_req.circle, CHANGE,
+        f"approved ({c_req.user.username}) joining the circle ({c_req.circle.name})."
+    )
+    
+@is_authenticated(True)
+@is_logined(True)
+@is_founder
+@back
+def reject_circle_request(request, user_id):
+    c_req        = CircleRequest.objects.get(circle__serial=request.session.get('circle'), user__id=user_id)
+    c_req.status = 0
+    c_req.circle.save()
+    c_req.save()
+    log(
+        request.user.id, c_req.circle, CHANGE,
+        f"rejected ({c_req.user.username}) joining the circle ({c_req.circle.name})."
+    )
+    
+@is_authenticated(True)
+@is_logined(True)
+@back
+def delete_circle_request(request, request_id):
+    circle_request = CircleRequest.objects.get(id=request_id)
+    if request.user == circle_request.user:
+        circle_request.delete()
+        log(
+            request.user.id, circle_request.circle, DELETION,
+            f"approved ({circle_request.user.username}) joining the circle ({circle_request.circle.name})."
+        )
+        messages.warning(
+            request,
+            "You are not allowed to preform this action"
+        )
+        return redirect("team:retrieve_team_index")
