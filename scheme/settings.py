@@ -64,7 +64,6 @@ TEMPLATES      = [
             ],
             # Scheme
             'libraries':{
-                'team_filters':'team.filters',
                 'user_filters':'user.filters',
                 'filters':'helpers.filters'
             }
