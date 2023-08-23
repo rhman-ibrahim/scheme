@@ -1,43 +1,30 @@
 # Django
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib import messages
 
 # REST
-from rest_framework import status, viewsets
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework import status, viewsets
 
 # Models
 from team.models import Circle
 from ping.models import Message
+
+# Helpers
+from helpers.functions import secret
 
 # Serializers
 from .serializers import (
     MessageSerializer, CircleSerializer, CirclePostSerializer
 )
 
-# Helpers
-from helpers.functions import (
-    secret,
-)
-
-def resource(view):
-    def wrapper(request, *args, **kwargs):
-        try:
-            return view(request, *args, **kwargs)
-        except ObjectDoesNotExist:
-            return Response(
-                {'message':'the requested resource does not exist'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-    return wrapper
+# dapi
+from .decoratores import resource
 
 
 class MessageViewSet(viewsets.ViewSet):
-
     permission_classes = [AllowAny]
-
     def flash(self, request):
         message_data = []
         for message in messages.get_messages(request):
@@ -56,7 +43,7 @@ class CircleViewSet(viewsets.ViewSet):
             CircleSerializer(Circle.objects.get(id=pk)).data,
             status=status.HTTP_200_OK
         )
-
+    
     def create(self, request, *args, **kwargs):
         serializer = CirclePostSerializer(
             data = {
@@ -76,12 +63,14 @@ class CircleViewSet(viewsets.ViewSet):
 
 
 class RoomViewSet(viewsets.ViewSet):
-    
     @resource
     def messages(self, request, serial=None):
         return Response(
             MessageSerializer(
-                [{'sender': m.sender.username,'body': m.body} for m in Message.objects.filter(room__serial=serial)[:100]],
+                [
+                    {'sender': m.sender.username,'body': m.body}
+                    for m in Message.objects.filter(room__serial=serial)[:100]
+                ],
                 many=True
             ).data,
             status=status.HTTP_200_OK
