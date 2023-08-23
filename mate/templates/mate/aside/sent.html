@@ -4,8 +4,8 @@
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
             <section class="flex-container">
-                {% if request.user.scheme.friend_requests.sent.count %}
-                {% for req in request.user.scheme.friend_requests.sent %}
+                {% if request.user.profile.requests.sent.count %}
+                {% for req in request.user.profile.requests.friend.sent %}
                 <div class="flex-box-row">
                     <div class="flex-row-start">
                         <img src="{{ req.receiver|profile_picture_url }}" alt="" class="circle-24">

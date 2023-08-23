@@ -39,6 +39,11 @@ class Profile(models.Model):
             FileExtensionValidator(allowed_extensions=["jpg","jpeg"])
         ]
     )
+    friends = models.ManyToManyField(
+        "user.Account",
+        related_name="friends",
+        related_query_name="friends"
+    )
 
     def __str__(self):
         return f"{self.user.username}'s profile"
@@ -54,6 +59,37 @@ class Profile(models.Model):
     @property
     def has_about(self):
         return False if not bool(self.about) else True
+    
+    def index(self):
+        return reverse("mate:retrieve_mate_index", args=[str(self.user.username)])
+    
+    @property
+    def logs(self):
+        return LogEntry.objects.filter(user_id=self.user.id)
+    
+    @property
+    def requests(self):
+        query = FriendRequest.objects.filter(
+            (Q(receiver=self.user) | Q(receiver=self.user)) & Q(status=2)
+        ).distinct().order_by('-id')
+        return {
+            'firend': {
+                'received': query.filter(receiver=self.user),
+                'sent': query.filter(sender=self.user),
+            },
+            'circle': {
+                CircleRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
+            }
+        }
+    
+    @property
+    def circles(self):
+        query = Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-id')
+        return {
+            'all': query,
+            'as_founder': query.filter(founder=self.user),
+            'as_member': query.filter(members=self.user),
+        }
     
 
 class FriendRequest(models.Model):
@@ -75,10 +111,8 @@ class FriendRequest(models.Model):
         return reverse("mate:delete_request", args=[str(self.id)])
     
     def validate_unique(self, exclude=None):
-        # Check if there is an existing friend request with the sender and receiver fields swapped
         if FriendRequest.objects.filter(Q(sender=self.receiver) & Q(receiver=self.sender), ~Q(status=0)).exists():
             raise ValidationError('A friend request already exists between these users.')
-        # Call the parent validate_unique method to check for any other unique constraints
         super(FriendRequest, self).validate_unique(exclude=exclude)
     
     def save(self, *args, **kwargs):
@@ -87,38 +121,3 @@ class FriendRequest(models.Model):
 
     class Meta:
         unique_together = ('sender', 'receiver')
-        
-
-class Scheme(models.Model):
-
-    user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
-    friends = models.ManyToManyField("user.Account", related_name="friends", related_query_name="friends")
-
-    def __str__(self):
-        return self.user.username
-
-    def index(self):
-        return reverse("mate:retrieve_mate_index", args=[str(self.user.username)])
-    
-    @property
-    def logs(self):
-        return LogEntry.objects.filter(user_id=self.user.id)
-    
-    @property
-    def friend_requests(self):
-        return {
-            'received': FriendRequest.objects.filter(receiver=self.user, status=2).distinct().order_by('-id'),
-            'sent': FriendRequest.objects.filter(sender=self.user, status=2).distinct().order_by('-id')
-        }
-    
-    @property
-    def circle_requests(self):
-        return CircleRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
-    
-    @property
-    def circles(self):
-        return {
-            'all': Circle.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-created'),
-            'as_founder': Circle.objects.filter(founder=self.user).distinct().order_by('-created'),
-            'as_member': Circle.objects.filter(members=self.user).distinct().order_by('-created')
-        }

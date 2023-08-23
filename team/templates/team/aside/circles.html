@@ -5,20 +5,20 @@
             <section class="flex-container">
                 <div class="flex-box-col">
                     <p>As a founder, you are connected <span>to
-                    <b>{{ request.user.scheme.circles.as_founder.count }}</b> circles</span>.</p>
+                    <b>{{ request.user.profile.circles.as_founder.count }}</b> circles</span>.</p>
                     <ul class="text-align-right">
                         <i class="material-symbols-outlined">local_police</i>
                     </ul>
                 </div>
                 <div class="flex-box-col">
                     <p>As a member, you are connected <span>to
-                    <b>{{ request.user.scheme.circles.as_member.count }}</b> circles</span>.</p>
+                    <b>{{ request.user.profile.circles.as_member.count }}</b> circles</span>.</p>
                     <ul class="text-align-right">
                         <i class="material-symbols-outlined">shield</i>
                     </ul>
                 </div>
-                {% if request.user.scheme.circles.all %}
-                {% for circle in request.user.scheme.circles.all %}
+                {% if request.user.profile.circles.all %}
+                {% for circle in request.user.profile.circles.all %}
                 <nav class="flex-box-row">
                     <h3 class="text-transform-none">{{ circle.name }}</h3>
                     {% if opened_circle.id == circle.id %}

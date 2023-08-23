@@ -3,8 +3,8 @@
     <div class="column">
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
-            {% if request.user.scheme.friend_requests.received.count %}
-            {% for req in request.user.scheme.friend_requests.received %}
+            {% if request.user.profile.requests.friend.received.count %}
+            {% for req in request.user.profile.requests.friend.received %}
             <section class="flex-container">
                 <ul class="flex-box-row">
                     <div class="flex-row-start">

@@ -23,14 +23,14 @@
                     </nav>
                 </div>
                 {% endfor %}
-                {% elif request.resolver_match.app_name == "user" and request.user.scheme.circle_requests.count %}
-                {% for ask in request.user.scheme.circle_requests %}
+                {% elif request.resolver_match.app_name == "user" and request.user.profile.requests.circle.count %}
+                {% for req in request.user.profile.requests.circle.all %}
                 <ul class="row">
                     <li>
-                        <span>{{ ask.circle.name }}</span>
+                        <span>{{ req.circle.name }}</span>
                     </li>
                     <li>
-                        <a href="{{ ask.cancel }}" class="material-symbols-outlined">close</a>
+                        <a href="{{ req.cancel }}" class="material-symbols-outlined">close</a>
                     </li>
                 </ul>
                 {% endfor %}
