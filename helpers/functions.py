@@ -34,7 +34,3 @@ def log(user_id, instance, flag, message=""):
         action_flag     = flag,
         change_message  = message
     )
-
-def profile_picture_path_handler(instance, filename):
-    # renames the updated profile picture with the user's username.
-    return f'user/profile/pictures/{instance.account.username}.{filename.split(".")[-1]}'
