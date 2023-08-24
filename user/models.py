@@ -13,11 +13,6 @@ from django.contrib.admin.models import LogEntry
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
-# Helpers
-from helpers.functions import (
-    profile_picture_path_handler
-)
-
 class UserManager(BaseUserManager):
     
     def create_user(self, username, password=None):
