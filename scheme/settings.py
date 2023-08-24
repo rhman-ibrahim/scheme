@@ -64,7 +64,6 @@ TEMPLATES      = [
             ],
             # Scheme
             'libraries':{
-                'user_filters':'user.filters',
                 'filters':'helpers.filters'
             }
         },
@@ -114,18 +113,11 @@ STATICFILES_DIRS    = [
 STATIC_URL          = '/static/'
 STATIC_ROOT         = 'scheme'
 
-# Media
-MEDIA_URL           = '/media/'
-MEDIA_ROOT          = BASE_DIR / 'media'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # User
 AUTH_USER_MODEL  = 'user.Account'
-
-# Default profile picture (guests)
-DEFAULT_PROFILE_PICTURE_URL = '/media/user/profile/default.jpg'
 
 # Messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

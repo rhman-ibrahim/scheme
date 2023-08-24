@@ -120,13 +120,6 @@ class Profile(models.Model):
     name    = models.CharField(max_length=64, blank=True, null=True)
     email   = models.EmailField(max_length=256, unique=True, blank=True, null=True)
     about   = models.TextField(max_length=256, blank=True, null=True)
-    picture = models.ImageField(
-        default='user/profile/default.jpg',
-        upload_to=profile_picture_path_handler,
-        validators=[
-            FileExtensionValidator(allowed_extensions=["jpg","jpeg"])
-        ]
-    )
     friends = models.ManyToManyField(
         "user.Account",
         related_name="friends",
@@ -158,8 +151,7 @@ class Profile(models.Model):
     @property
     def requests(self):
 
-        from team.models import SpaceRequest
-        from mate.models import FriendRequest
+        from mate.models import FriendRequest, SpaceRequest
 
         query = FriendRequest.objects.filter(
             (Q(receiver=self.user) | Q(receiver=self.user)) & Q(status=2)

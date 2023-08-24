@@ -9,21 +9,8 @@ from django.contrib.admin.models import LogEntry
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 
-# Scheme
-from scheme.settings import MEDIA_ROOT
-
 def secret(raw_string):
     return hashlib.sha256(str(raw_string).encode()).hexdigest()
-
-def token_reveal(request):
-    path = f'{MEDIA_ROOT}/user/tokens/verify/{get_random_string(length=32)}.png'
-    destination = open(path, 'wb+')
-    for chunk in request.FILES['token']:
-        destination.write(chunk)
-    destination.close()
-    decoder = cv2.QRCodeDetector()
-    reval, point, s_qr, = decoder.detectAndDecode(cv2.imread(path))
-    return str(reval)
 
 def generate_serial():
     return get_random_string(length=32)

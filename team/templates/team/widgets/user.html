@@ -1,10 +1,6 @@
-{% load user_filters %}
 <section class="widget" id="team-navigate-widget">
     <h3>
-        <img
-            src="{{ request.user|profile_picture_url }}"
-            class="circle-24" alt="{{ request.user.username }}'s profile picture"
-        />
+        <i class="material-icons">person</i>
         <span>{{ request.user.username }}</span>
     </h3>
     <div class="flex-container">

@@ -1,4 +1,3 @@
-{% load user_filters %}
 <aside id="members-aside">
     <div class="column">
         <section class="widget">
@@ -17,13 +16,6 @@
                     <h4>{{ circle.founder.username }}</h4>
                     {% endif %}
                 </div>
-                <nav class="flex-row-end">
-                    <img
-                        src="{{ circle.founder|profile_picture_url }}"
-                        alt="{{ circle.founder.username }}"
-                        class="circle-24"
-                    >
-                </nav>
             </ul>
             {% if circle.members.count %}
             {% for member in circle.members.all %}
