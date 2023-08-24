@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import RoomViewSet, SpaceViewSet, MessageViewSet
+from .views import MessageViewSet
+from team.api import SpaceViewSet
+from ping.api import RoomViewSet
 
 app_name    = "api"
 urlpatterns = [
