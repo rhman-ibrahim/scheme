@@ -3,15 +3,15 @@ from django.http import JsonResponse
 from django.contrib import messages
 
 # REST
+from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
 
-from rest_framework.permissions import AllowAny
-
-from rest_framework.decorators import permission_classes
 
 
 class MessageViewSet(viewsets.ViewSet):
-    @permission_classes([AllowAny])
+    
+    permission_classes = [AllowAny]
+
     def flash(self, request):
         message_data = []
         for message in messages.get_messages(request):
