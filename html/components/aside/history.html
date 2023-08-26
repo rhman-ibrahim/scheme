@@ -12,7 +12,7 @@
                 {% if logs.count %}
                     {% for log in logs %}
                     <div class="verticl-line"></div>
-                    <div class="flex-box-col log">
+                    <div class="note log">
                         <h4>
                             {% if log.action_flag|flag_repr == "view" %}
                             <i class="{{ log.action_flag|flag_repr }} material-icons">visibility</i>
@@ -29,7 +29,7 @@
                     </div>
                     {% endfor %}
                 {% else %}
-                <div class="flex-box-col">
+                <div class="note">
                     <p>There are no updates right now</p>
                 </div>
                 {% endif %}
