@@ -1,5 +1,0 @@
-<form method="POST" action="{% url 'user:token_verify' %}" id="token-verify-form">
-    {% with form=forms.user.token.verify %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>

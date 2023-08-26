@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.core.validators import FileExtensionValidator
 from django.contrib.auth.forms import (
-    UserCreationForm, PasswordChangeForm, SetPasswordForm
+    UserCreationForm, PasswordChangeForm,
+    SetPasswordForm
 )
 from user.models import (
-    Account, Token, Profile
+    Account, Profile
 )
 
 
@@ -53,22 +53,6 @@ class SignUpForm(UserCreationForm):
 
         model  = Account
         fields = ['username']
-
-
-class TokenForm(forms.ModelForm):
-    key        = forms.CharField(
-        label="token",
-        required=True,
-        widget=forms.TextInput(
-            attrs = {
-                'placeholder':"token's key",
-                'autocomplete':"off"
-            }
-        )
-    )
-    class Meta:
-        model  = Token
-        fields = ['key']
 
 
 class SignInForm(forms.ModelForm):
@@ -151,47 +135,8 @@ class PasswordUpdateForm(PasswordChangeForm):
         model   = Account
         fields  = '__all__'
 
-class PassWordResetForm(SetPasswordForm):
-    
-    new_password1 = forms.CharField(
-        label = 'Password',
-        widget = forms.PasswordInput(
-            attrs = {
-                'class':'password',
-                'id':'reset-form-new-password-1',
-                'autocomplete':'new-password',
-            }
-        )
-    )
-    new_password2 = forms.CharField(
-        label = 'Confirm',
-        widget = forms.PasswordInput(
-            attrs = {
-                'class':'password',
-                'id':'reset-form-new-password-2',
-                'autocomplete':'new-password',
-            }
-        )
-    )
-    
-    class Meta:   
-        model   = Account
-        fields  = '__all__'
 
-
-class AccountDeleteForm(forms.Form):
-
-    password = forms.CharField(
-        widget = forms.PasswordInput(
-            attrs  = {
-                'class':'password',
-                'id':'account-delete-password-form',
-                'autocomplete':'current-password',
-            }
-        )
-    )
-
-class ProfileInfoForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     
     name = forms.CharField(
         help_text="Separated names by spaces.",
@@ -212,7 +157,7 @@ class ProfileInfoForm(forms.ModelForm):
         )
     )
     about = forms.CharField(
-        label="256",
+        label="about",
         widget=forms.Textarea(
             attrs={
                 'id':'profile-form-about',
@@ -227,16 +172,14 @@ class ProfileInfoForm(forms.ModelForm):
         fields = ['name', 'email', 'about']
 
 
-class ProfilePictureForm(forms.ModelForm):
-    
-    picture = forms.ImageField(
-        label="profile picture",
-        help_text="supported formats are: JPEG and JPG.",
-        validators = [
-            FileExtensionValidator(allowed_extensions=['jpeg', 'jpg'])
-        ]
-    )
+class PasswordForm(forms.Form):
 
-    class Meta:
-        model  = Profile
-        fields = ['picture']
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs  = {
+                'class':'password',
+                'id':'account-delete-password-form',
+                'autocomplete':'current-password',
+            }
+        )
+    )

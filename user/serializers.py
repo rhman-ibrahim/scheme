@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import authenticate
-from user.models import Account, Token
+from user.models import Account
 
 
 class UsernameField(serializers.RelatedField):

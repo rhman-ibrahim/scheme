@@ -1,7 +1,7 @@
 <aside id="friends-aside">
     <div class="column">
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
-        <section class="flex-container">
+        <section class="notes">
             {% if request.user.profile.friends.count %}
                 {% for friend in request.user.profile.friends.all %}
                 <ul class="flex-box-row">
@@ -14,7 +14,7 @@
                 </ul>
                 {% endfor %}
             {% else %}
-            <div class="flex-box-col">
+            <div class="note">
                 <p>there is no</p>
             </div>
             {% endif %}

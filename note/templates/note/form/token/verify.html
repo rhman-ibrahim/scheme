@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'note:reset_account_password' %}" id="token-verify-form">
+    {% with form=forms.user.token.reset %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

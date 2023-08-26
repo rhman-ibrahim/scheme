@@ -1,4 +1,5 @@
 # Django
+from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
 from django.utils import timezone
@@ -17,7 +18,7 @@ from ping.models import Room
 class Space(models.Model):
 
     name        = models.CharField(max_length=32, null=False, blank=False)
-    serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
+    serial      = models.CharField(max_length=32, default=generate_serial, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="Membership")
@@ -25,6 +26,12 @@ class Space(models.Model):
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = ('founder', 'name')
+    
+    def __str__(self):
+        return f"{self.name} by {self.founder.username}"
+    
     @property
     def has_description(self):
         return False if not bool(self.description) else True
@@ -47,7 +54,7 @@ class Space(models.Model):
     
     def founder_friends_queryset(self):
         from user.models import Account
-        friends = [int(friend.id) for friend in self.founder.scheme.friends.all()]
+        friends = [int(friend.id) for friend in self.founder.profile.friends.all()]
         members = [int(member.id) for member in self.members.all()]
         return Account.objects.filter(
             pk__in=list(set(friends).symmetric_difference(set(members)))
@@ -63,13 +70,6 @@ class Space(models.Model):
         elif user == self.founder:
             return "founder"
         return None
-
-
-    def __str__(self):
-        return f"{self.name} by {self.founder.username}"    
-    
-    class Meta:
-        unique_together = ('founder', 'name')
 
 
 class Membership(models.Model):

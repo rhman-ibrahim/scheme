@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
+from note.models import Token
 from .serializers import AccountSerializer
-from .models import Token
 
 
 class AccountViewSet(viewsets.ViewSet):

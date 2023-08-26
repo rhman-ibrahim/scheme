@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import MultipleObjectsReturned
 
 # User
-from user.models import Token
+from note.models import Token
 
 
 class SchemeToken(BaseAuthentication):

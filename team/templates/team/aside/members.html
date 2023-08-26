@@ -7,7 +7,7 @@
             </h4>
 
         </section>
-        <section class="flex-container">
+        <section class="notes">
             <ul class="flex-box-row">
                 <div class="flex-row-start">
                     {% if circle.founder == request.user %}
@@ -27,13 +27,6 @@
                     <h4>{{ member.username }}</h4>
                     {% endif %}
                 </div>
-                <nav class="flex-row-end">
-                    <img
-                        src="{{ member|profile_picture_url }}"
-                        alt="{{ member.username }}"
-                        class="circle-24"
-                    >
-                </nav>
             </ul>
             {% endfor %}
             {% endif %}

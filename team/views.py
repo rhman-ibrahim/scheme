@@ -8,7 +8,6 @@ from ping.models import Room
 from .models import Space
 
 # Forms
-from mate.forms import SpaceRequestForm
 from ping.forms import RoomForm
 from .forms import (
     SpaceForm, SpaceLoginForm,
@@ -26,12 +25,17 @@ from helpers.decorators import (
 # Functions
 from helpers.functions import (
     get_form_errors,
+    create_a_guest_account,
     secret,
-    log,
 )
+
+from django.contrib.auth import login as account_login
+
 
 @back
 def create_space(request):
+    if not request.user.is_authenticated:
+        create_a_guest_account(request)
     if request.method == "POST":
         form = SpaceForm(request.POST)
         if form.is_valid():
@@ -42,10 +46,6 @@ def create_space(request):
                 space.founder  = request.user
                 space.password = secret(form.cleaned_data['password'])
                 space          = form.save()
-                log(
-                    request.user.id, space, ADDITION,
-                    f"created the space ({space.name})."
-                )
                 messages.success(request, "your space is created successfully")
         else:
             get_form_errors(request, form)
@@ -56,7 +56,7 @@ def create_space(request):
 @resource
 def retrieve_team_index(request):
     space = Space.objects.get(id=request.session.get('space'))
-    room   = Room.objects.get(serial=space.serial)
+    room  = Room.objects.get(serial=space.serial)
     return render(
         request,
         "team/index.html",
@@ -114,10 +114,6 @@ def remove_space_member(request, user_id):
     user   = space.members.get(id=int(user_id))
     space.members.remove(user)
     space.save()
-    log(
-        request.user.id, space, CHANGE,
-        f"removed ({user.username}) from the space ({space.name})."
-    )
 
 @is_authenticated(True)
 @is_logined(True)
@@ -163,13 +159,7 @@ def leave(request):
     role   = space.user_role(request.user)
     if role == "member":
         space.members.remove(request.user)
-        log(request.user.id, space, CHANGE,
-            f"left the space ({space.name})."
-        )
         space.save()
     elif role == "founder":
         space.delete()
-        log(request.user.id, space, DELETION,
-            f"deleted the space ({space.name})."
-        )
     return redirect('team:logout')

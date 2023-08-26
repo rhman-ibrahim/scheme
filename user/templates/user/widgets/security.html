@@ -3,24 +3,24 @@
         <i class="material-icons">shield</i>
         <span>security</span>
     </h3>
-    <section class="flex-container">
-        <div class="flex-box-col warning-card">
+    <section class="notes">
+        <div class="note info-note">
             <p><b>Refresh</b> your account token, do not share it and store it safe.</p>
-            <nav class="text-align-right">
+            <nav>
                 <a href="{% url 'user:update_token' %}">
                     <i class="material-symbols-outlined">token</i>
                 </a>
             </nav>
         </div>
-        <div class="flex-box-col info-card">
+        <div class="note info-note">
             <p><b>Update</b> your password regularly, at least every three (3) months.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-symbols-outlined" onclick="Fixed.open('#password-form')">lock_reset</i>
             </nav>
         </div>
-        <div class="flex-box-col danger-card">
+        <div class="note danger-note">
             <p><b>Delete</b> your account now, also circles, signals, tasks and polls.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-icons" onclick="Fixed.open('#account-delete-form')">person_remove</i>
             </nav>
         </div>

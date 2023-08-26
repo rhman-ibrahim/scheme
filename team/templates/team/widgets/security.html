@@ -3,24 +3,24 @@
         <i class="material-icons">shield</i>
        <span>secuirty</span>
     </h3>
-    <div class="flex-container">
+    <div class="notes">
         {% if circle.founder != request.user %}
-        <div class="flex-box-col danger-card">
+        <div class="note danger-note">
             <p><b>Leave</b> the circle and delete your content, <span>this cannot be undone</span>.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-icons" onclick="Fixed.open('#space-delete-or-leave-footer')">radio_button_checked</i>
             </nav>
         </div>
         {% else %}
-        <div class="flex-box-col danger-card">
+        <div class="note danger-note">
             <p>Leave?, <b>transfer</b> the circle to another member to avoid deleting.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-symbols-outlined" onclick="Fixed.open('#space-transfer-form')">partner_exchange</i>
             </nav>
         </div>
-        <div class="flex-box-col danger-card">
+        <div class="note danger-note">
             <p><b>Delete</b> the circle and delete its content, <span>this cannot be undone</span>.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-icons" onclick="Fixed.open('#space-delete-or-leave-footer')">delete</i>
             </nav>
         </div>

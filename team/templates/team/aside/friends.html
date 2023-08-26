@@ -3,8 +3,8 @@
     <div class="column">
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
-            <div class="flex-container">
-                {% for member in request.user|circle_friends:circle %}
+            <div class="notes">
+                {% for member in request.user|space_friends:space %}
                 <ul class="flex-box-row">
                     <div class="flex-row-start">
                         <h4>{{ member.username }}</h4>

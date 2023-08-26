@@ -6,7 +6,6 @@ app_name    = "team"
 urlpatterns = [
     # Create
     path('create/', views.create_space, name="create_space"),
-    
     # Render
     path('', views.retrieve_team_index, name="retrieve_team_index"),
     # Update

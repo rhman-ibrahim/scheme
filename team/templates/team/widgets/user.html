@@ -3,30 +3,30 @@
         <i class="material-icons">person</i>
         <span>{{ request.user.username }}</span>
     </h3>
-    <div class="flex-container">
-        <div class="flex-box-col info-card">
+    <div class="notes">
+        <div class="note info-note">
             <p><b>Visit</b> the circle home page, list members, circle history.</p>
-            <nav class="text-align-right">
+            <nav>
                 <a class="material-icons" href="{% url 'team:retrieve_team_index' %}">home</a>
             </nav>
         </div>
-        <div class="flex-box-col info-card">
+        <div class="note info-note">
             <p><b>View</b> a list of your friends who are also members of this circle.</p>
-            <nav class="text-align-right">
+            <nav>
                 <i class="material-icons" onclick="Fixed.open('#friends-aside')">filter_alt</i>
             </nav>
         </div>
-        <div class="flex-box-col info-card">
+        <div class="note info-note">
             <p><b>Manage</b> your account, recovery token, circles, profile and theme.</p>
-            <nav class="text-align-right">
+            <nav>
                 <a href="{% url 'user:retrieve_account' %}">
                     <i class="material-icons">person</i>
                 </a>
             </nav>
         </div>
-        <div class="flex-box-col warning-card">
+        <div class="note warning-note">
             <p><b>Logout</b>, and back to your account. You are logged in this circle.</p>
-            <nav class="text-align-right">
+            <nav>
                 <a href="{% url 'team:logout' %}" style="color:var(--lw);">
                     <i class="material-icons">logout</i>
                 </a>

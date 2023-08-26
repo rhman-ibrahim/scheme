@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'user:info' %}" id="info-form">
+    {% with form=forms.user.info %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

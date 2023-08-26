@@ -1,22 +1,11 @@
 <aside id="circles-aside">
     <div class="column">
-        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <button
+            type="button"
+            class="material-icons column-button"
+            onclick="Fixed.clear()">close</button>
         <section class="widget">
-            <section class="flex-container">
-                <div class="flex-box-col">
-                    <p>As a founder, you are connected <span>to
-                    <b>{{ request.user.profile.circles.as_founder.count }}</b> circles</span>.</p>
-                    <ul class="text-align-right">
-                        <i class="material-symbols-outlined">local_police</i>
-                    </ul>
-                </div>
-                <div class="flex-box-col">
-                    <p>As a member, you are connected <span>to
-                    <b>{{ request.user.profile.circles.as_member.count }}</b> circles</span>.</p>
-                    <ul class="text-align-right">
-                        <i class="material-symbols-outlined">shield</i>
-                    </ul>
-                </div>
+            <section class="notes">
                 {% if request.user.profile.circles.all %}
                 {% for circle in request.user.profile.circles.all %}
                 <nav class="flex-box-row">

@@ -7,11 +7,13 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 from django.db.models import Q
-from django.core.exceptions import MultipleObjectsReturned
-from django.core.validators import FileExtensionValidator, RegexValidator
+
+from django.core.validators import RegexValidator
 from django.contrib.admin.models import LogEntry
-from django.utils.crypto import get_random_string
 from django.urls import reverse
+
+
+
 
 class UserManager(BaseUserManager):
     
@@ -87,28 +89,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return None
 
 
-class Token(models.Model):
-
-    user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
-    key     = models.CharField(max_length=32, default=get_random_string(length=32), null=False, blank=False)
-    ready   = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.key
-
-    def save(self, *args, **kwargs):
-        try:
-            Token.objects.get(key=self.key)
-            self.ready = False
-        except MultipleObjectsReturned:
-            self.ready = True
-        except Token.DoesNotExist:
-            pass
-        super(Token, self).save(*args, **kwargs)
-
-
 class Profile(models.Model):
     
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
@@ -165,8 +145,8 @@ class Profile(models.Model):
     def circles(self):
         
         from team.models import Space
-
         query = Space.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-id')
+
         return {
             'all': query,
             'as_founder': query.filter(founder=self.user),
