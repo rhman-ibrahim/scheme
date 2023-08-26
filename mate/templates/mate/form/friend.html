@@ -1,4 +1,4 @@
-<form method="POST" action="{% url 'mate:create_friend_request' %}" id="mate-form">
+<form method="POST" action="{% url 'mate:create_friend_request' %}" id="friend-request-form">
     {% with form=forms.mate.username %}
     {% include "components/form/base.html" %}
     {% endwith %}

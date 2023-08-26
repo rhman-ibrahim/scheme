@@ -1,21 +1,21 @@
 <aside id="friends-aside">
     <div class="column">
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
-        <section class="notes">
+        <section class="widget">
             {% if request.user.profile.friends.count %}
-                {% for friend in request.user.profile.friends.all %}
-                <ul class="flex-box-row">
-                    <div class="flex-row-start">
-                        <h4>{{ friend.username }}</h4>
-                    </div>
-                    <nav class="flex-row-end">
-                        <a href="{{ friend.profile.index }}" class="material-icons">forum</a>
-                    </nav>
-                </ul>
-                {% endfor %}
+            {% for friend in request.user.profile.friends.all %}
+            <div class="note info-note">
+                <mark><b class="text-transform-none">{{ friend.username }}</b></mark>
+                <nav>
+                    <a href="{% url 'user:retrieve_friend_index' friend.username %}">
+                        <i class="material-icons">link</i>
+                    </a>
+                </nav>
+            </div>
+            {% endfor %}
             {% else %}
-            <div class="note">
-                <p>there is no</p>
+            <div class="note info-note">
+                <p class="text-align-center">You have no sent connections.</p>
             </div>
             {% endif %}
         </section>

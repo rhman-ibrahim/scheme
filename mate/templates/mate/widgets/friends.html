@@ -3,24 +3,29 @@
         <i class="material-icons">groups</i>
         <span class="text-transform-capitalize">friends</span>
     </h2>
-    <section class="flex-container">
-        <div class="flex-box-col info-card">
-            <p><b>Add</b> your friends, to connect with, <span>and add</span> them in your circles.</p>
-            <ul class="text-align-right">
-                <li class="material-icons" onclick="Fixed.open('#mate-form')">outgoing_mail</li>
-            </ul>
+    <section class="notes">
+        <div class="note info-note">
+            <p><mark><b>Send</b></mark> friends requests, to connect with,
+            <span>and to add</span> them in your spaces.</p>
+            <nav>
+                <i class="material-icons"
+                onclick="Fixed.open('#friend-request-form')">mail</i>
+            </nav>
         </div>
-        <div class="flex-box-col info-card">
-            <p><b>Review</b> sent friend requests!, to view its state or to cancel it.</p>
-            <ul class="text-align-right">
-                <li class="material-icons" onclick="Fixed.open('#sent-requests-aside')">mark_email_unread</li>
-            </ul>
+        <div class="note info-note">
+            <p><mark><b>Review</b></mark> sent friend requests,
+            to view its state or to cancel it.</p>
+            <nav>
+                <i class="material-icons"
+                onclick="Fixed.open('#friend-sent-requests-aside')">outgoing_mail</i>
+            </nav>
         </div>
-        <div class="flex-box-col info-card">
-            <p><b>Respond</b> to received friend requests, ordered by date of sending.</p>
-            <ul class="text-align-right">
-                <li class="material-icons" onclick="Fixed.open('#received-requests-aside')">mark_email_read</li>
-            </ul>
+        <div class="note info-note">
+            <p>List the received friend requests and <mark><b>respond</b></mark> to it.</p>
+            <nav>
+                <i class="material-icons"
+                onclick="Fixed.open('#friend-received-requests-aside')">mark_email_unread</i>
+            </nav>
         </div>
     </section>
 </section>

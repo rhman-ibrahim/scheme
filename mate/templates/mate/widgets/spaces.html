@@ -1,7 +1,7 @@
 <section class="widget" id="home-user-widget">
     <h3>
         <i class="material-icons">diversity_2</i>
-        <b>Space</b>
+        <b>Spaces</b>
     </h3>
     <section class="notes">
         <div class="note info-note">
@@ -15,14 +15,22 @@
             <p><b><mark>Request to join an existing space</mark></b>,
             submit the space's serial and a message (optional).</p>
             <nav>
-                <i class="material-icons" onclick="Fixed.open('#space-request-form')">outgoing_mail</i>
+                <i class="material-icons" onclick="Fixed.open('#space-request-form')">mail</i>
             </nav>
         </div>
+        {% if request.user.is_authenticated %}
+        <div class="note info-note">
+            <p><b><mark>Review</mark></b> sent space requests, to view its state or to cancel it.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#sent-space-requests-aside')">outgoing_mail</i>
+            </nav>
+        </div>
+        {% endif %}
         <div class="note info-note">
             <p><b><mark>Login to your space</mark></b>,
             submit your secret token to sign-in and log-in in one step.</p>
             <nav>
-                <i class="material-symbols-outlined" onclick="Fixed.open('#secret-signin-form')">login</i>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#secret-login-form')">login</i>
             </nav>
         </div>
     </section>

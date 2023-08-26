@@ -1,28 +1,21 @@
-<aside id="circles-aside">
+<aside id="spaces-aside">
     <div class="column">
-        <button
-            type="button"
-            class="material-icons column-button"
-            onclick="Fixed.clear()">close</button>
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
-            <section class="notes">
-                {% if request.user.profile.circles.all %}
-                {% for circle in request.user.profile.circles.all %}
-                <nav class="flex-box-row">
-                    <h3 class="text-transform-none">{{ circle.name }}</h3>
-                    {% if opened_circle.id == circle.id %}
-                    <a href="{% url 'team:retrieve_team_index' %}" class="text-align-right info-color">
-                        <b class="material-icons">diversity_2</b>
-                    </a>
-                    {% else %}
-                    <h3 class="text-align-right">
-                        <i class="material-icons" onclick="Fixed.CircleLoginForm('{{ circle.name }}')">login</i>
-                    </h3>
-                    {% endif %}
+            {% if request.user.profile.spaces.all.count %}
+            {% for space in request.user.profile.spaces.all.all %}
+            <div class="note info-note">
+                <p><mark><b class="text-transform-none">{{ space.name }}</b></mark></p>
+                <nav>
+                    <i class="material-icons" onclick="Fixed.SpaceLoginForm('{{ space.name }}')">login</i>
                 </nav>
-                {% endfor %}
-                {% endif %}
-            </section>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="note info-note">
+                <p class="text-align-center">You have no sent requests.</p>
+            </div>
+            {% endif %}
         </section>
     </div>
 </aside>
