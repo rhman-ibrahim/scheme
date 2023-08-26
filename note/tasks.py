@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 from celery import shared_task
 
 # User
-from .models import Token
+from note.models import Token
 
 
 @shared_task
