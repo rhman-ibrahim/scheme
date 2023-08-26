@@ -22,8 +22,8 @@ class PassWordResetForm(SetPasswordForm):
         required=True,
         widget=forms.TextInput(
             attrs = {
-                'placeholder':"token's key",
-                'autocomplete':"off"
+                'autocomplete':"off",
+                'placeholder':"token's key"
             }
         )
     )
@@ -31,9 +31,10 @@ class PassWordResetForm(SetPasswordForm):
         label = 'Password',
         widget = forms.PasswordInput(
             attrs = {
-                'class':'password',
-                'id':'reset-form-new-password-1',
                 'autocomplete':'new-password',
+                'id':'reset-form-new-password-1',
+                'placeholder':'new password',
+                'class':'password',
             }
         )
     )
@@ -41,9 +42,10 @@ class PassWordResetForm(SetPasswordForm):
         label = 'Confirm',
         widget = forms.PasswordInput(
             attrs = {
-                'class':'password',
-                'id':'reset-form-new-password-2',
                 'autocomplete':'new-password',
+                'id':'reset-form-new-password-2',
+                'placeholder':'confirm password',
+                'class':'password',
             }
         )
     )
