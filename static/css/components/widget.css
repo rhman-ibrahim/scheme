@@ -1,10 +1,10 @@
 /*
-    .widget & .flex-container
-    > .flex-container is a direct child of .widget
+    .widget & .notes
+    > .notes is a direct child of .widget
 */
 
-.widget,
-.flex-container {
+.notes,
+.widget {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -29,17 +29,17 @@
     display: none;
 }
 
-.scroll-horizontally .flex-box-col {
+.scroll-horizontally .note {
     flex-wrap: wrap;
     flex: 0 0 320px;
 }
 
 /*
     flex-box-*
-    > direct children of .flex-container
+    > direct children of .notes
 */
 
-.flex-box-col,
+.note,
 .flex-box-row {
     z-index: 2;
     display: flex;
@@ -51,9 +51,17 @@
     flex: 1;
 }
 
-.flex-box-col > *,
+.note > *,
 .flex-box-row > * {
     flex: 1;
+}
+
+.note > nav,
+.note > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
 /*
@@ -61,7 +69,7 @@
     > direct children of flex-box-*
 */
 
-.flex-box-col,
+.note,
 .flex-col-start,
 .flex-col-center,
 .flex-col-end {
@@ -126,17 +134,17 @@
 
 @media (width >= 720px) {
 
-    #main .flex-container:not(.flex-rows) {
+    #main .notes:not(.flex-rows) {
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    #main .flex-container:not(.flex-rows) .flex-box-col {
+    #main .notes:not(.flex-rows) .note {
         max-width: calc(calc(100% - 8px) / 2);
         flex: calc(calc(100% - 8px) / 2);
     }
 
-    #main .flex-container:not(.flex-rows) .flex-box-col.full-row {
+    #main .notes:not(.flex-rows) .note.full-row {
         max-width: 100%;
         flex: 100%;
     }

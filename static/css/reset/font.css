@@ -57,6 +57,11 @@ p {
     padding: 0px 4px;
 }
 
+mark {
+    background: none;
+    color: inherit;
+}
+
 span {
     display: inline-block;
 }

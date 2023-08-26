@@ -128,9 +128,9 @@ class Fixed {
             }
         )
     }
-    static CircleLoginForm = circleName => {
-        document.querySelector('#circle-login-form #circle_login_name').value = circleName;
-        Fixed.open('#circle-login-form');
+    static SpaceLoginForm = spaceName => {
+        document.querySelector('#space-login-form #space_login_name').value = spaceName;
+        Fixed.open('#space-login-form');
     }
     static init = () => {
         if (Fixed.collected()) Fixed.open(localStorage.getItem('fixed')); else localStorage.removeItem('fixed');         

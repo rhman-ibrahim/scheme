@@ -47,48 +47,43 @@ section.active {
     cards
 */
 
-.accent-card:hover {
+.accent-note:hover {
     outline-color: var(--primary);
 }
-.accent-card:hover b,
-.accent-card:hover .material-icons,
-.accent-card:hover .material-symbols-outlined {
+.accent-note:hover mark,
+.accent-note:hover i {
     color: var(--primary);
 }
 
-.danger-card:hover {
+.danger-note:hover {
     outline-color: var(--danger);
 }
-.danger-card:hover b,
-.danger-card:hover .material-icons,
-.danger-card:hover .material-symbols-outlined {
+.danger-note:hover mark,
+.danger-note:hover i {
     color: var(--danger);
 }
 
-.info-card:hover {
+.info-note:hover {
     outline-color: var(--info);
 }
-.info-card:hover b,
-.info-card:hover .material-icons,
-.info-card:hover .material-symbols-outlined {
+.info-note:hover mark,
+.info-note:hover i{
     color: var(--info);
 }
 
-.success-card:hover {
+.success-note:hover {
     outline-color: var(--success);
 }
-.success-card:hover b,
-.success-card:hover .material-icons,
-.success-card:hover .material-symbols-outlined {
+.success-note:hover mark,
+.success-note:hover i {
     color: var(--success);
 }
 
-.warning-card:hover {
+.warning-note:hover {
     outline-color: var(--warning);
 }
-.warning-card:hover b,
-.warning-card:hover .material-icons,
-.warning-card:hover .material-symbols-outlined {
+.warning-note:hover mark,
+.warning-note:hover i {
     color: var(--warning);
 }
 
