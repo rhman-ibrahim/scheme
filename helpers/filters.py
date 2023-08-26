@@ -31,9 +31,9 @@ def message(tag, prop):
     return tag_props.get(prop, '')
 
 @register.filter
-def circle_friends(account, circle):
+def space_friends(account, space):
     friends = [int(friend.id) for friend in account.profile.friends.all()]
-    members = [int(member.id) for member in circle.members.all()]
+    members = [int(member.id) for member in space.members.all()]
     return Account.objects.filter(pk__in=list(set(members).intersection(set(friends))))
 
 # Model

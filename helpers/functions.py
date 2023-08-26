@@ -1,4 +1,4 @@
-import hashlib, cv2
+import hashlib, uuid
 
 # Contrib
 from django.contrib import messages
@@ -8,12 +8,22 @@ from django.contrib.admin.models import LogEntry
 # Utils
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
+from django.contrib.auth import login
+
 
 def secret(raw_string):
     return hashlib.sha256(str(raw_string).encode()).hexdigest()
 
 def generate_serial():
     return get_random_string(length=32)
+
+def create_a_guest_account(request):
+    from user.models import Account
+    user = Account.objects.create_guest(
+        username = str(uuid.uuid4())[:8],
+        password = str(uuid.uuid4())[:16]
+    )
+    login(request, user)
 
 def get_form_errors(request, form):
     [
