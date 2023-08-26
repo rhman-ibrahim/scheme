@@ -1,33 +1,20 @@
 <section class="widget" id="home-user-widget">
     <h3>
-        <i class="material-icons">qr_code</i>
+        <i class="material-symbols-outlined">token</i>
         <span>token</span>
     </h3>
-    <section class="flex-container">
-        {% if 'token' in request.session %}
-        <div class="flex-box-col warning-card">
-            <p><b>Cancel</b> the password resetting, or set a new password.</p>
-            <nav class="text-align-right">
-                <a href="{% url 'home:cancel' %}" class="material-icons">close</a>
+    <section class="notes">
+        <div class="note info-note">
+            <p><b><mark>Forgot password?</mark></b>,
+            submit your account token to <b>reset your password</b>.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#token-reset-form')">lock_reset</i>
             </nav>
         </div>
-        <div class="flex-box-col info-card">
-            <p><b>Your token has been verified</b>, set a new password for your account.</p>
-            <nav class="text-align-right">
-                <i  class="material-symbols-outlined" onclick="Fixed.open('#reset-form')">lock_reset</i>
-            </nav>
-        </div>
-        {% else %}
-        <div class="flex-box-col info-card">
-            <p>Upload your account QR code token <b><span>to reset your password</span></b>.</p>
-            <nav class="text-align-right">
-                <i class="material-symbols-outlined" onclick="Fixed.open('#token-verify-form')">token</i>
-            </nav>
-        </div>
-        {% endif %}
-        <div class="flex-box-col info-card">
-            <p>Upload your account QR code token <b><span>to sign-in</span></b>.</p>
-            <nav class="text-align-right">
+        <div class="note info-note">
+            <p><b><mark>Sign-in?</mark></b>,
+            submit your account token instead of username and password.</p>
+            <nav>
                 <i class="material-symbols-outlined" onclick="Fixed.open('#token-signin-form')">login</i>
             </nav>
         </div>

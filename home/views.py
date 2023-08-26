@@ -1,4 +1,5 @@
 # Django
+from django.views import View
 from django.shortcuts import render
 
 # Models
@@ -7,30 +8,19 @@ from user.models import Profile
 
 # Forms
 from user.forms import (
-    TokenForm, PassWordResetForm,
     SignUpForm, SignInForm,
 )
+from note.forms import (
+    KeyForm, PassWordResetForm,
+)
 from team.forms import SpaceForm
-from mate.forms import SpaceRequestForm
+from mate.forms import RequestForm
 
 # Decorators
 from helpers.decorators import (
-    is_authenticated, resource, back
+    is_authenticated, resource
 )
 
-@back
-def cancel(request):
-    request.session.pop('token')
-
-def resource_not_found(request):
-    return render(
-        request,
-        "home/404.html",
-        {
-            'title':'Resource Not Found.'
-        }
-    )
- 
 @is_authenticated(False)
 @resource
 def retrieve_home_index(request):
@@ -39,11 +29,8 @@ def retrieve_home_index(request):
         "home/index.html",
         {
             'grid': {
-                'title': "Add friends, create circles, express, discuss & poll.",
-                'icons': {
-                    'left': 'menu',
-                    'right': 'bolt'
-                }
+                'title': "Express on your behalf or anonymously.",
+                'icon': 'menu'
             },
             'widgets': {
                 'about': {
@@ -52,18 +39,28 @@ def retrieve_home_index(request):
             },
             'forms': {
                 'user': {
-                    'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
                     'signup': SignUpForm(auto_id="sign_up_%s"),
                     'signin': SignInForm(auto_id="sign_in_%s"),
-                    'token': {
-                        'signin': TokenForm(auto_id=f"sign_in_with_token_%s"),
-                        'verify': TokenForm(auto_id=f"verify_token_%s")
-                    }
+                },
+                'note': {
+                    'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
+                    'signin': KeyForm(auto_id=f"sign_in_with_token_%s"),
+                    'login': KeyForm(auto_id=f"login_secret_%s")
                 },
                 'team': {
                     'circle': SpaceForm(auto_id="circle_form_%s"),
-                    'request': SpaceRequestForm(auto_id="circle_request_%s"),
+                    'request': RequestForm(auto_id="circle_request_%s"),
+                    'secret': KeyForm(auto_id=f"verify_secret_%s")
                 }
             }
+        }
+    )
+
+def resource_not_found(request):
+    return render(
+        request,
+        "home/404.html",
+        {
+            'title':'Resource Not Found.'
         }
     )
