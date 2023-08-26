@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'note:signin' %}" id="token-signin-form">
+    {% with form=forms.note.signin %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

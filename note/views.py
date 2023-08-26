@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.crypto import get_random_string
-from django.contrib.auth import login
+from django.contrib.auth import login as account_sign_in
 from django.template.loader import render_to_string
 from helpers.decorators import (
     resource, is_authenticated, is_guest, back
@@ -17,7 +17,7 @@ from .forms import KeyForm, PassWordResetForm
 
 @is_authenticated(False)
 @resource
-def token_verify(request):
+def verify(request):
     if request.method == 'POST':
         form = KeyForm(request.POST)
         if form.is_valid():
@@ -31,13 +31,13 @@ def token_verify(request):
 
 @is_authenticated(False)
 @resource
-def token_signin(request):
+def signin(request):
     if request.method == 'POST':
         form = KeyForm(request.POST)
         if form.is_valid():            
             query = Token.objects.filter(key=form.cleaned_data['key'])
             if query.exists() and query.count() == 1:
-                login(request, query.first().user)
+                account_sign_in(request, query.first().user)
             messages.success(request, 'signed in successfully')
             return redirect("user:retrieve_account")
         else:
@@ -45,7 +45,7 @@ def token_signin(request):
     return redirect('home:retrieve_home_index')
 
 @resource
-def secret_verify(request):
+def login(request):
     if request.method == 'POST':
         form = KeyForm(request.POST)
         if form.is_valid():
@@ -55,7 +55,7 @@ def secret_verify(request):
                 messages.success(request,"your secret has been verified successfully")
                 request.session['space'] = token.space.id
                 if not request.user.is_authenticated:
-                    login(request, token.user)
+                    account_sign_in(request, token.user)
                 return redirect("team:retrieve_team_index")
         else:
             get_form_errors(request, form)
@@ -70,6 +70,20 @@ def update_token(request):
         messages.success(request, "your token has been updated successfully")
     return redirect("user:retrieve_account")
 
+@is_authenticated(False)
+@back
+def reset(request):
+    if request.method == "POST":
+        token = Token.objects.get(key=request.POST['key'])
+        form = PassWordResetForm(token.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'password has been reset successfully')
+            del request.session['token']
+            return redirect("home:retrieve_home_index")
+        else:
+            get_form_errors(request, form)
+            
 def pdf(request):
     response                              = HttpResponse(content_type='application/pdf;')
     response['Content-Disposition']       = f'inline; attachment; filename={request.user.username}.pdf'
@@ -84,21 +98,3 @@ def pdf(request):
         output = open(output.name, 'rb')
         response.write(output.read())
     return response
-
-@is_authenticated(False)
-@back
-def reset_account_password(request):
-    if request.method == "POST":
-        token = Token.objects.get(key=request.POST['key'])
-        form = PassWordResetForm(token.user, request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'password has been reset successfully')
-            del request.session['token']
-            return redirect("home:retrieve_home_index")
-        else:
-            get_form_errors(request, form)
-
-@is_authenticated(True)
-def delete_account(request):
-    pass
