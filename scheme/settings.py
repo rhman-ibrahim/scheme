@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Scheme
     'user.apps.UserConfig',
+    'note.apps.NoteConfig',
     'mate.apps.MateConfig',
     'team.apps.TeamConfig',
     # 'blog.apps.BlogConfig',

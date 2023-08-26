@@ -21,13 +21,8 @@ app.conf.update(
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    # Executes every 4 minutes
     'fixing-tokens-uuid-values': {
-        'task': 'user.tasks.fixing_tokens_uuid_values',
+        'task': 'note.tasks.fixing_tokens_uuid_values',
         'schedule': 45,
     },
-    # 'fixing-tokens-uuid-values': {
-    #     'task': 'user.tasks.deactivating_guest_user_accounts',
-    #     'schedule': 3600,
-    # },
 }
