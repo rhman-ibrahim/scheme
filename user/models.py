@@ -2,17 +2,14 @@
 import datetime, pytz
 
 # Django
+from django.urls import reverse
+from django.core.validators import RegexValidator
+from django.contrib.admin.models import LogEntry
+from django.db.models import Q
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
-from django.db.models import Q
-
-from django.core.validators import RegexValidator
-from django.contrib.admin.models import LogEntry
-from django.urls import reverse
-
-
 
 
 class UserManager(BaseUserManager):
@@ -116,37 +113,25 @@ class Profile(models.Model):
     def has_about(self):
         return False if not bool(self.about) else True
     
-    def index(self):
-        return reverse("mate:retrieve_mate_index", args=[str(self.user.username)])
-    
     @property
     def logs(self):
         return LogEntry.objects.filter(user_id=self.user.id)
     
     @property
     def requests(self):
-
         from mate.models import FriendRequest, SpaceRequest
-
-        query = FriendRequest.objects.filter(
-            (Q(receiver=self.user) | Q(receiver=self.user)) & Q(status=2)
-        ).distinct().order_by('-id')
         return {
-            'firend': {
-                'received': query.filter(receiver=self.user),
-                'sent': query.filter(sender=self.user),
+            'friend': {
+                'received': FriendRequest.objects.filter(receiver=self.user, status=2).distinct().order_by('-id'),
+                'sent': FriendRequest.objects.filter(sender=self.user, status=2).distinct().order_by('-id'),
             },
-            'circle': {
-                SpaceRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
-            }
+            'space': SpaceRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
         }
     
     @property
-    def circles(self):
-        
+    def spaces(self):
         from team.models import Space
         query = Space.objects.filter(Q(founder=self.user) | Q(members=self.user)).distinct().order_by('-id')
-
         return {
             'all': query,
             'as_founder': query.filter(founder=self.user),

@@ -1,4 +1,5 @@
 # Django
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import redirect, render
@@ -9,17 +10,18 @@ from django.contrib.auth import (
 )
 
 # Models
-from user.models import Account
+from mate.models import FriendRequest
+from ping.models import Room
+from .models import Account
 
 # Forms
-from user.forms import (
+from mate.forms import RequestForm
+from team.forms import SpaceForm, SpaceLoginForm
+from note.forms import KeyForm
+from .forms import (
     SignInForm, SignUpForm,
     PasswordUpdateForm, ProfileForm,
     PasswordForm
-)
-from mate.forms import RequestForm
-from team.forms import (
-    SpaceForm, SpaceLoginForm,
 )
 
 # Functions
@@ -33,6 +35,7 @@ from helpers.decorators import (
     is_guest, is_authenticated,
     back, center, resource,
 )
+
 
 @is_authenticated(False)
 def create_account(request):
@@ -59,8 +62,8 @@ def retrieve_account(request):
             'grid': {
                 'title': f'settings / { request.user.username }',
                 'icons': {
-                    'left': 'menu',
-                    'right': 'shield'
+                    'left': 'groups',
+                    'right': 'diversity_2'
                 }
             },
             'forms': {
@@ -70,9 +73,12 @@ def retrieve_account(request):
                     'info': ProfileForm(instance=request.user.profile),
                 },
                 'team': {
-                    'request': RequestForm(auto_id="circle_request_%s"),
-                    'login': SpaceLoginForm(auto_id="circle_login_%s"),
+                    'request': RequestForm(auto_id="space_request_%s"),
+                    'login': SpaceLoginForm(auto_id="space_login_%s"),
                     'circle': SpaceForm(auto_id="circle_%s")
+                },
+                'note': {
+                    'login': KeyForm(auto_id=f"space_login_%s")
                 },
                 'mate': {
                     'username': RequestForm(auto_id="friend_username_%s"),
@@ -81,6 +87,25 @@ def retrieve_account(request):
         }
     )
 
+@is_authenticated(True)
+@back
+def retrieve_friend_index(request, username):
+    mate  = Account.objects.get(username=username)
+    query = FriendRequest.objects.filter(
+        (Q(sender=request.user) & Q(receiver=mate)) |
+        (Q(sender=mate) & Q(receiver=request.user)) &
+        Q(status=1)
+    )
+    if query.exists():
+        room = Room.objects.get(serial=query.get(status=1).serial)
+        return render(
+            request,
+            "user/friend.html",
+            {
+                'mate': mate,
+                'room': room,
+            }
+        )
 
 @is_authenticated(True)
 @is_guest(False)
