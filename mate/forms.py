@@ -1,23 +1,27 @@
 from django import forms
 
 
-class AccountUsernameForm(forms.Form):
+class RequestForm(forms.Form):
 
-    username = forms.CharField(
-        label='Username',
-        help_text='usernames are 4 to 16 alphabetic/numeric characters.',
+    identifier = forms.CharField(
+        label='identifier',
+        required=True,
         widget = forms.TextInput(
             attrs = {
-                'id':'sign-up-form-username',
-                'pattern':'^[a-zA-Z0-9]{4,16}$',
-                'autocomplete':'username'
+                'id':'request-form-identifier',
+                'autocomplete':'off'
             }
         )
     )
-
-class SpaceRequestForm(forms.Form):
-
-    serial = forms.CharField(
-        max_length=32,
-        required=True,
+    message = forms.CharField(
+        label="message",
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'id':'request-form-message',
+                'placeholder':'write a message (optional)',
+                'autocomplete':'off',
+                'maxlength':256
+            }
+        )
     )
