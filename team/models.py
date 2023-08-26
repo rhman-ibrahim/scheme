@@ -60,7 +60,6 @@ class Space(models.Model):
             pk__in=list(set(friends).symmetric_difference(set(members)))
         )
     
-    
     def check_password(self, raw_password):
         return self.password == secret(raw_password)
 
