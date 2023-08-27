@@ -1,14 +1,12 @@
 /*
     .widget & .notes
-    > .notes is a direct child of .widget
 */
 
-.notes,
-.widget {
+.widget,
+.notes {
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 8px;
 }
 
 .widget {
@@ -16,33 +14,18 @@
     gap: 12px;
 }
 
-.scroll-horizontally {
-    display: flex;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    overflow: auto;
-    padding: 8px;
+.notes {
     gap: 8px;
 }
 
-.scroll-horizontally::-webkit-scrollbar {
-    display: none;
-}
-
-.scroll-horizontally .note {
-    flex-wrap: wrap;
-    flex: 0 0 320px;
-}
-
 /*
-    flex-box-*
-    > direct children of .notes
+    .note
 */
 
-.note,
-.flex-box-row {
+.note {
     z-index: 2;
     display: flex;
+    flex-direction: column;
     outline: 1.32px solid var(--d3);
     background: var(--d2);
     border-radius: 8px;
@@ -51,13 +34,11 @@
     flex: 1;
 }
 
-.note > *,
-.flex-box-row > * {
+.note > * {
     flex: 1;
 }
 
-.note > nav,
-.note > ul {
+.note > nav {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -65,71 +46,25 @@
 }
 
 /*
-    .flex-col-* & .flex row-*
-    > direct children of flex-box-*
+    .notes-horizontally-scroll
 */
 
-.note,
-.flex-col-start,
-.flex-col-center,
-.flex-col-end {
-    flex-direction: column;
-}
-
-.flex-box-row,
-.flex-row-start,
-.flex-row-center,
-.flex-row-end {
-    flex-direction: row;
-}
-
-.flex-col-start,
-.flex-row-start,
-.flex-col-center,
-.flex-row-center,
-.flex-col-end,
-.flex-row-end {
+.notes-horizontally-scroll {
     display: flex;
-    align-items: center;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow: auto;
+    padding: 8px;
     gap: 8px;
 }
 
-/*
-    flex justify
-*/
-
-.flex-col-start,
-.flex-row-start,
-.flex-justify-start {
-    justify-content: flex-start;
+.notes-horizontally-scroll::-webkit-scrollbar {
+    display: none;
 }
 
-.flex-col-center,
-.flex-row-center,
-.flex-justify-center {
-    justify-content: center;
-}
-
-.flex-col-end,
-.flex-row-end,
-.flex-justify-end {
-    justify-content: flex-end;
-}
-
-/*
-    flex-align
-*/
-
-.flex-align-start {
-    align-content: flex-start;
-}
-
-.flex-align-center {
-    align-content: center;
-}
-
-.flex-align-end {
-    align-content: flex-end;
+.notes-horizontally-scroll .note {
+    flex-wrap: wrap;
+    flex: 0 0 320px;
 }
 
 @media (width >= 720px) {

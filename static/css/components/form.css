@@ -36,6 +36,12 @@ form.active {
   bottom: 0px;
 }
 
+form > nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 form > nav > button {
   border-radius: 100%;
   text-align: center;
