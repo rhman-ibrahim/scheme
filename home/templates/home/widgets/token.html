@@ -1,21 +1,27 @@
 <section class="widget" id="home-user-widget">
-    <h3>
+    <h1>
         <i class="material-symbols-outlined">token</i>
-        <span>token</span>
-    </h3>
+    </h1>
     <section class="notes">
+        <div class="note info-note">
+            <p><b><mark>Sign-in?</mark></b>,
+            submit your account token instead of username and password.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#token-signin-form')">person</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b><mark>Login to your space</mark></b>,
+            submit your secret token to sign-in and log-in in one step.</p>
+            <nav>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#secret-login-form')">diversity_2</i>
+            </nav>
+        </div>
         <div class="note info-note">
             <p><b><mark>Forgot password?</mark></b>,
             submit your account token to <b>reset your password</b>.</p>
             <nav>
                 <i class="material-icons" onclick="Fixed.open('#token-reset-form')">lock_reset</i>
-            </nav>
-        </div>
-        <div class="note info-note">
-            <p><b><mark>Sign-in?</mark></b>,
-            submit your account token instead of username and password.</p>
-            <nav>
-                <i class="material-symbols-outlined" onclick="Fixed.open('#token-signin-form')">login</i>
             </nav>
         </div>
 </section>

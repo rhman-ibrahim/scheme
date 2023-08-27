@@ -1,20 +1,18 @@
 # Django
-from django.views import View
 from django.shortcuts import render
 
 # Models
 from user.models import Profile
-# from blog.models import Post
 
 # Forms
 from user.forms import (
-    SignUpForm, SignInForm,
+    SignUpForm, SignInForm
 )
 from note.forms import (
     KeyForm, PassWordResetForm,
 )
 from team.forms import SpaceForm
-from mate.forms import RequestForm
+from mate.forms import SignalForm
 
 # Decorators
 from helpers.decorators import (
@@ -47,10 +45,13 @@ def retrieve_home_index(request):
                     'signin': KeyForm(auto_id=f"sign_in_with_token_%s"),
                     'login': KeyForm(auto_id=f"login_secret_%s")
                 },
+                'mate': {
+                    'space': {
+                        'request': SignalForm(auto_id="space_request_%s")
+                    }
+                },
                 'team': {
-                    'circle': SpaceForm(auto_id="circle_form_%s"),
-                    'request': RequestForm(auto_id="circle_request_%s"),
-                    'secret': KeyForm(auto_id=f"verify_secret_%s")
+                    'space': SpaceForm(auto_id="space_form_%s")
                 }
             }
         }

@@ -2,12 +2,12 @@
 
 {% block main %}
 {% include "home/widgets/header.html" %}
-{% include "home/widgets/sign.html" %}
-{% include "mate/widgets/spaces.html" %}
+{% include "home/widgets/home.html" %}
+{% include "home/widgets/token.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "home/widgets/token.html" %}
+{% include "home/widgets/sign.html" %}
 {% include "components/widgets/theme.html" %}
 {% endblock %}
 
@@ -17,6 +17,6 @@
 {% include "note/form/reset.html" %}
 {% include "note/form/signin.html" %}
 {% include "note/form/login.html" %}
-{% include "mate/form/space.html" %}
+{% include "mate/form/request.html" %}
 {% include "team/form/create.html" %}
 {% endblock %}

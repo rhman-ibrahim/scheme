@@ -1,7 +1,6 @@
 <section class="widget" id="home-user-widget">
     <h3>
         <i class="material-icons">person</i>
-        <span>user</span>
     </h3>
     <section class="notes">
         <div class="note accent-note">
@@ -16,15 +15,6 @@
             explore more, connect to more and communicate.</p>
             <nav>
                 <i class="material-symbols-outlined" onclick="Fixed.open('#sign-in-form')">login</i>
-            </nav>
-        </div>
-        <div class="note accent-note">
-            <p><b><mark>Anonymous?</mark></b>, interact with users and spaces anonymously,
-            <mark>save your token to be able to sign in and out.</mark></p>
-            <nav>
-                <a href="{% url 'user:create_guest' %}">
-                    <i class="material-symbols-outlined">domino_mask</i>
-                </a>
             </nav>
         </div>
     </section>
