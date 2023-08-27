@@ -1,18 +1,13 @@
 # Django
-from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
-from django.utils import timezone
-from django.urls import reverse
+from django.db import models
 
 # Models
-from django.db import models
+from ping.models import Room
 
 # Helpers
 from helpers.functions import generate_serial, secret
-
-# Ping
-from ping.models import Room
 
 
 class Space(models.Model):
@@ -75,7 +70,7 @@ class Membership(models.Model):
 
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     space     = models.ForeignKey('team.Space', on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(default=timezone.now)
+    created   = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} approved."
+        return f"On {self.created.strftime('%B %d, %Y')}: {self.user.username} joined {self.space.name}."
