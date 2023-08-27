@@ -15,7 +15,7 @@ from ping.models import Room
 from .models import Account
 
 # Forms
-from mate.forms import RequestForm
+from mate.forms import SignalForm
 from team.forms import SpaceForm, SpaceLoginForm
 from note.forms import KeyForm
 from .forms import (
@@ -73,39 +73,21 @@ def retrieve_account(request):
                     'info': ProfileForm(instance=request.user.profile),
                 },
                 'team': {
-                    'request': RequestForm(auto_id="space_request_%s"),
                     'login': SpaceLoginForm(auto_id="space_login_%s"),
-                    'circle': SpaceForm(auto_id="circle_%s")
+                    'space': SpaceForm(auto_id="circle_%s")
                 },
                 'note': {
-                    'login': KeyForm(auto_id=f"space_login_%s")
+                    'login': KeyForm(auto_id=f"space_login_%s"),
                 },
                 'mate': {
-                    'username': RequestForm(auto_id="friend_username_%s"),
+                    'username': SignalForm(auto_id="friend_username_%s"),
+                    'space': {
+                        'request': SignalForm(auto_id="space_request_%s"),
+                    }
                 }
             }
         }
     )
-
-@is_authenticated(True)
-@back
-def retrieve_friend_index(request, username):
-    mate  = Account.objects.get(username=username)
-    query = FriendRequest.objects.filter(
-        (Q(sender=request.user) & Q(receiver=mate)) |
-        (Q(sender=mate) & Q(receiver=request.user)) &
-        Q(status=1)
-    )
-    if query.exists():
-        room = Room.objects.get(identifier=query.get(status=1).identifier)
-        return render(
-            request,
-            "user/friend.html",
-            {
-                'mate': mate,
-                'room': room,
-            }
-        )
 
 @is_authenticated(True)
 @is_guest(False)

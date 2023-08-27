@@ -4,15 +4,6 @@
     </h1>
     <section class="notes">
         <div class="note accent-note">
-            <p><b><mark>Anonymous?</mark></b>, interact with users and spaces anonymously,
-            <mark>save your token to be able to sign in and out.</mark></p>
-            <nav>
-                <a href="{% url 'user:create_guest' %}">
-                    <i class="material-symbols-outlined">domino_mask</i>
-                </a>
-            </nav>
-        </div>
-        <div class="note accent-note">
             <p><b><mark>Create a new space</mark></b>, pick a name and password,
             its recommended to provide a description <b>(optional)</b>.</p>
             <nav>
@@ -24,6 +15,13 @@
             submit the space's identifier and a message (optional).</p>
             <nav>
                 <i class="material-icons" onclick="Fixed.open('#space-request-form')">mail</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b><mark>Login to your space</mark></b>,
+            submit your secret token to sign-in and log-in in one step.</p>
+            <nav>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#secret-login-form')">login</i>
             </nav>
         </div>
         <div class="note accent-note">

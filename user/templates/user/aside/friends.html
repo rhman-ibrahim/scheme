@@ -5,9 +5,9 @@
             {% if request.user.profile.friends.count %}
             {% for friend in request.user.profile.friends.all %}
             <div class="note info-note">
-                <mark><b class="text-transform-none">{{ friend.username }}</b></mark>
+                <mark><b class="text-transform-none">{{ friend.user.username }}</b></mark>
                 <nav>
-                    <a href="{% url 'user:retrieve_friend_index' friend.username %}">
+                    <a href="{{ friend.index }}">
                         <i class="material-icons">link</i>
                     </a>
                 </nav>

@@ -116,15 +116,14 @@ class Profile(models.Model):
     name    = models.CharField(max_length=64, blank=True, null=True)
     email   = models.EmailField(max_length=256, unique=True, blank=True, null=True)
     about   = models.TextField(max_length=256, blank=True, null=True)
-    friends = models.ManyToManyField(
-        "user.Account",
-        related_name="friends",
-        related_query_name="friends"
-    )
+    friends = models.ManyToManyField("self", symmetrical=True)
 
     def __str__(self):
         return f"{self.user.username}'s profile"
-    
+
+    def index(self):
+        return reverse("mate:retrieve_friend_index", args=[str(self.user.username)])
+
     @property
     def has_name(self):
         return False if not bool(self.name) else True

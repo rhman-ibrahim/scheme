@@ -1,21 +1,18 @@
 {% extends 'templates/lcr.html' %}
 
 {% block main %}
-{% if request.user.is_guest %}
-{% include "user/widgets/termination.html" %}
-{% endif %}
+{% include "home/widgets/header.html" %}
 {% include "user/widgets/account.html" %}
-{% include "user/widgets/security.html" %}
-{% include "user/widgets/profile.html" %}
-{% include "components/widgets/theme.html" %}
+{% include "user/widgets/bolt.html" %}
+{% include "user/widgets/settings.html" %}
 {% endblock %}
 
 {% block right %}
-{% include "mate/widgets/spaces.html" %}
+{% include "user/widgets/spaces.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "mate/widgets/friends.html" %}
+{% include "user/widgets/friends.html" %}
 {% endblock %}
 
 {% block side %}
@@ -27,7 +24,7 @@
 {% include "mate/form/friend.html" %}
 {% include "mate/aside/friend/sent.html" %}
 {% include "mate/aside/friend/received.html" %}
-{% include "mate/form/space.html" %}
+{% include "mate/form/request.html" %}
 {% include "mate/aside/space/sent.html" %}
 {% include "team/aside/spaces.html" %}
 {% include "team/form/create.html" %}

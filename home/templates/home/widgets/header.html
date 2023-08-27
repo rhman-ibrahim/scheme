@@ -1,3 +1,4 @@
+{% if request.user.is_authenticated and not request.user.is_guest %}
 <section class="widget" id="home-header-widget">
     <h2>
         <i class="material-symbols-outlined">text_snippet</i>
@@ -11,3 +12,22 @@
         </div>
     </section>
 </section>
+{% else %}
+<section class="widget">
+    <div class="notes flex-rows">
+        <div class="note warning-note">
+            <h3>
+                <i class="material-symbols-outlined">domino_mask</i>
+                <span>guest session</span>
+            </h3>
+            <p>As a guest user your session will be terminated after complete 8 hours
+            of creation, <span>then everything</span> you created will be deleted.</p>
+            <ul class="text-align-right">
+                <li>
+                    <b id="timer" data-count-down="{{ request.user.timer }}"></b>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endif %}
