@@ -9,7 +9,7 @@ class SpaceSerializer(serializers.ModelSerializer):
     members = UsernameField(many=True)
     class Meta:
         model  = Space
-        fields = ['founder', 'name', 'serial', 'members']
+        fields = ['founder', 'name', 'identifier', 'members']
 
 
 class SpacePostSerializer(serializers.ModelSerializer):

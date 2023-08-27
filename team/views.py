@@ -56,7 +56,7 @@ def create_space(request):
 @resource
 def retrieve_team_index(request):
     space = Space.objects.get(id=request.session.get('space'))
-    room  = Room.objects.get(serial=space.serial)
+    room  = Room.objects.get(identifier=space.identifier)
     return render(
         request,
         "team/index.html",
@@ -75,7 +75,7 @@ def retrieve_team_index(request):
                     'room': RoomForm(initial={
                         'token': request.user.token.key,
                         'username': request.user.username,
-                        'serial': room.serial
+                        'identifier': room.identifier
                     })
                 }
             },
@@ -110,7 +110,7 @@ def import_friends(request):
 @is_founder
 @back
 def remove_space_member(request, user_id):
-    space = Space.objects.get(serial=request.session.get('space'))
+    space = Space.objects.get(identifier=request.session.get('space'))
     user   = space.members.get(id=int(user_id))
     space.members.remove(user)
     space.save()

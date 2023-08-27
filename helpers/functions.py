@@ -14,7 +14,7 @@ from django.contrib.auth import login
 def secret(raw_string):
     return hashlib.sha256(str(raw_string).encode()).hexdigest()
 
-def generate_serial():
+def generate_identifier():
     return get_random_string(length=32)
 
 def create_a_guest_account(request):

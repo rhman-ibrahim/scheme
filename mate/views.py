@@ -56,7 +56,7 @@ def create_space_request(request):
     if request.method == 'POST':
         form  = RequestForm(request.POST)
         if form.is_valid():
-            query  = SpaceRequest.objects.filter(space__serial=form.cleaned_data['identifier'], user=request.user)
+            query  = SpaceRequest.objects.filter(space__identifier=form.cleaned_data['identifier'], user=request.user)
             if query.exists():
                 sreq = query.first()
                 if sreq.status == 2:
@@ -65,7 +65,7 @@ def create_space_request(request):
                     messages.info(request, f"You are already connected to this space")
             else:
                 SpaceRequest.objects.create(
-                    space=Space.objects.get(serial=form.cleaned_data['identifier']),
+                    space=Space.objects.get(identifier=form.cleaned_data['identifier']),
                     user=request.user
                 )
                 messages.success(request, "join request created successfully.")

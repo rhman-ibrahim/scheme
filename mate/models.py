@@ -12,7 +12,7 @@ from django.db import models
 
 
 # Helpers
-from helpers.functions import generate_serial
+from helpers.functions import generate_identifier
 
 
 REQUEST_STATUS = (
@@ -23,13 +23,13 @@ REQUEST_STATUS = (
 
 class FriendRequest(models.Model):
 
-    status   = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
-    serial   = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
-    receiver = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="receiver")
-    sender   = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="sender")
-    message  = models.TextField(max_length=256, blank=True, null=True, default="Sender did not provide a message.")
-    created  = models.DateTimeField(auto_now_add=True)
-    updated  = models.DateTimeField(auto_now=True)
+    status     = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
+    identifier = models.CharField(max_length=36, default=generate_identifier, null=False, blank=False)
+    receiver   = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="receiver")
+    sender     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="sender")
+    message    = models.TextField(max_length=256, blank=True, null=True, default="Sender did not provide a message.")
+    created    = models.DateTimeField(auto_now_add=True)
+    updated    = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('sender', 'receiver')

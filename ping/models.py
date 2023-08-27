@@ -3,21 +3,21 @@ from django.urls import reverse
 from django.db import models
 
 # Helpers
-from helpers.functions import generate_serial
+from helpers.functions import generate_identifier
 
 
 class Room(models.Model):
 
-    serial      = models.CharField(max_length=36, default=generate_serial, null=False, blank=False)
+    identifier  = models.CharField(max_length=36, default=generate_identifier, null=False, blank=False)
     status      = models.BooleanField(default=True, blank=False, null=False)
     description = models.TextField(default="This room has no description.")
     members     = models.ManyToManyField("user.Account")
 
     def __str__(self):
-        return self.serial
+        return self.identifier
     
     def update_status(self):
-        return reverse("ping:update_room_status", args=[str(self.serial)])
+        return reverse("ping:update_room_status", args=[str(self.identifier)])
     
     def get_status_icon(self):
         if self.status == 0: return "line_start_circle"

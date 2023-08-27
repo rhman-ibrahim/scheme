@@ -21,7 +21,7 @@ application = ProtocolTypeRouter(
         "websocket": AllowedHostsOriginValidator(
             AuthMiddlewareStack(
                 URLRouter([
-                    path('ping/<str:serial>/', ChatConsumer.as_asgi()),
+                    path('ping/<str:identifier>/', ChatConsumer.as_asgi()),
                 ])
             )
         ),

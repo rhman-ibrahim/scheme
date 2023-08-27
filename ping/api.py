@@ -14,12 +14,12 @@ from dapi.decoratores import resource
 
 class RoomViewSet(viewsets.ViewSet):
     @resource
-    def messages(self, request, serial=None):
+    def messages(self, request, identifier=None):
         return Response(
             MessageSerializer(
                 [
                     {'sender': m.sender.username,'body': m.body}
-                    for m in Message.objects.filter(room__serial=serial)[:100]
+                    for m in Message.objects.filter(room__identifier=identifier)[:100]
                 ],
                 many=True
             ).data,

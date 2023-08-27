@@ -18,8 +18,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return False
 
     @database_sync_to_async
-    def get_room(self, serial):
-        return Room.objects.get(serial=serial)
+    def get_room(self, identifier):
+        return Room.objects.get(identifier=identifier)
     
     @database_sync_to_async
     def get_user(self, username):
@@ -33,10 +33,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
 
         self.user       = self.scope["user"]                                                # Get the user object (scope),
-        self.room       = await self.get_room(self.scope['url_route']['kwargs']['serial'])  # get room id (scope) to get the room object,
+        self.room       = await self.get_room(self.scope['url_route']['kwargs']['identifier'])  # get room id (scope) to get the room object,
         self.member     = await self.is_member(self.user, self.room)                        # check if user is a member of the room,
         self.username   = self.user.username                                                # extract username from user object,
-        self.group_name = self.room.serial                                                  # set the group name.
+        self.group_name = self.room.identifier                                                  # set the group name.
 
         if not self.room or not self.member:
 

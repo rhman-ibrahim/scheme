@@ -7,7 +7,7 @@ class ROOM {
             last: document.getElementById('messages').querySelector('ul:last-of-type'),
             username: String(document.getElementById('user-username').value),
             message: String(document.getElementById('room-message').value),
-            serial: String(document.getElementById('room-serial').value),
+            identifier: String(document.getElementById('room-identifier').value),
             token: String(document.getElementById('user-token').value)
         };
     }

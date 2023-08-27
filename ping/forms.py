@@ -22,11 +22,11 @@ class RoomForm(forms.Form):
             }
         )
     )
-    serial = forms.CharField(
-        label="room's serial",
+    identifier = forms.CharField(
+        label="room's identifier",
         widget = forms.HiddenInput(
             attrs = {
-                'id':'room-serial',
+                'id':'room-identifier',
                 'autocomplete':'off'
             }
         )

@@ -97,7 +97,7 @@ def retrieve_friend_index(request, username):
         Q(status=1)
     )
     if query.exists():
-        room = Room.objects.get(serial=query.get(status=1).serial)
+        room = Room.objects.get(identifier=query.get(status=1).identifier)
         return render(
             request,
             "user/friend.html",

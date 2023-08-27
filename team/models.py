@@ -7,13 +7,13 @@ from django.db import models
 from ping.models import Room
 
 # Helpers
-from helpers.functions import generate_serial, secret
+from helpers.functions import generate_identifier, secret
 
 
 class Space(models.Model):
 
     name        = models.CharField(max_length=32, null=False, blank=False)
-    serial      = models.CharField(max_length=32, default=generate_serial, null=False, blank=False)
+    identifier  = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
     members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="Membership")
@@ -45,7 +45,7 @@ class Space(models.Model):
     
     @property
     def room(self):
-        return Room.objects.get(serial=self.serial)
+        return Room.objects.get(identifier=self.identifier)
     
     def founder_friends_queryset(self):
         from user.models import Account

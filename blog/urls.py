@@ -8,8 +8,8 @@ urlpatterns = [
     path('create/post/', views.create_post, name="create_post"),
     path('create/comment/', views.create_comment, name="create_comment"),
     # Retrieve
-    path('post/<str:serial>/', views.retrieve_post, name="retrieve_post"),
-    path('comment/<str:serial>/', views.retrieve_comment, name="retrieve_comment"),
+    path('post/<str:identifier>/', views.retrieve_post, name="retrieve_post"),
+    path('comment/<str:identifier>/', views.retrieve_comment, name="retrieve_comment"),
     # Update
-    path('<str:serial>/status/update/', views.update_signal_status, name="update_signal_status"),
+    path('<str:identifier>/status/update/', views.update_signal_status, name="update_signal_status"),
 ]

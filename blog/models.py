@@ -6,7 +6,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 # Helpers
-from helpers.functions import generate_serial
+from helpers.functions import generate_identifier
 
 
 class Signal(models.Model):
@@ -23,7 +23,7 @@ class SignalBase(models.Model):
     space          = models.ForeignKey("team.Space", on_delete=models.CASCADE)
     signal         = models.ForeignKey("blog.Signal", default=16, on_delete=models.CASCADE)
     user           = models.ForeignKey("user.Account", on_delete=models.CASCADE, default=None, blank=True, null=True)
-    serial         = models.CharField(max_length=64, default=generate_serial, null=False, blank=False, editable=False)
+    identifier     = models.CharField(max_length=64, default=generate_identifier, null=False, blank=False, editable=False)
     status         = models.BooleanField(default=True, blank=False, null=False)
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
@@ -51,7 +51,7 @@ class Post(SignalBase, MPTTModel):
         return f"{self.signal.classification} post by {self.user.username}"
 
     def url(self):
-        return reverse("blog:retrieve_post", args=[str(self.serial)])
+        return reverse("blog:retrieve_post", args=[str(self.identifier)])
     
     def comments(self):
         query = Comment.objects.filter(
@@ -69,7 +69,7 @@ class Comment(SignalBase, MPTTModel):
         return f"{self.signal.classification} comment by {self.user.username}"
     
     def url(self):
-        return reverse("blog:retrieve_comment", args=[str(self.serial)])
+        return reverse("blog:retrieve_comment", args=[str(self.identifier)])
     
     def replies(self):
         query = Comment.objects.filter(

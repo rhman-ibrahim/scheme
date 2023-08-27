@@ -1,11 +1,11 @@
-const SERIAL        = ROOM.get().serial;
-const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${SERIAL}/`);
+const IDENTIFIER    = ROOM.get().identifier;
+const SOCKET        = new WebSocket(`ws://${window.location.host}/ping/${IDENTIFIER}/`);
 
 document.addEventListener(
     'DOMContentLoaded', 
     () => {
         fetch(
-            `http://${window.location.host}/api/room/${SERIAL}/messages/`,
+            `http://${window.location.host}/api/room/${IDENTIFIER}/messages/`,
             {
                 method: 'GET',
                 headers: {

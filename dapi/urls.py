@@ -13,5 +13,5 @@ urlpatterns = [
     path('signin/', AccountViewSet.as_view({'post':'signin'})),
     path('create/circle/', SpaceViewSet.as_view({'post':'create'})),
     path('circle/<int:pk>/info/', SpaceViewSet.as_view({'get':'info'})),
-    path('room/<str:serial>/messages/', RoomViewSet.as_view({'get':'messages'}))
+    path('room/<str:identifier>/messages/', RoomViewSet.as_view({'get':'messages'}))
 ]

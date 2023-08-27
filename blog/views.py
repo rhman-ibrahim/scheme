@@ -47,14 +47,14 @@ def create_comment(request):
 
 # Retieve
 
-def retrieve_post(request, serial):
-    signal = Post.objects.get(serial=serial)
+def retrieve_post(request, identifier):
+    signal = Post.objects.get(identifier=identifier)
     return render(
         request,
         "blog/post.html",
         {
             'post': signal,
-            'room': Room.objects.get(serial=signal.serial),
+            'room': Room.objects.get(identifier=signal.identifier),
             'forms': {
                 'post': PostForm(
                     initial = {
@@ -74,14 +74,14 @@ def retrieve_post(request, serial):
         }
     )
 
-def retrieve_comment(request, serial):
-    signal = Comment.objects.get(serial=serial)
+def retrieve_comment(request, identifier):
+    signal = Comment.objects.get(identifier=identifier)
     return render(
         request,
         "blog/comment.html",
         {
             'comment': signal,
-            'room': Room.objects.get(serial=signal.serial),
+            'room': Room.objects.get(identifier=signal.identifier),
             'forms': {
                 'comment': CommentForm(
                     initial = {
@@ -99,13 +99,13 @@ def retrieve_comment(request, serial):
 
 # Update
 
-def update_signal_status(request, serial):
-    query = Post.objects.filter(serial=serial)
+def update_signal_status(request, identifier):
+    query = Post.objects.filter(identifier=identifier)
     if query.exsits() and query.count() == 1:
         signal = query.first()
         signal.status = False if signal.status else True
         signal.save()
-        return redirect("ping:update_room_status", signal.serial)
+        return redirect("ping:update_room_status", signal.identifier)
     else:
         messages.warning(request, "something has gone wrong")
-    return redirect("blog:detail", signal.serial)
+    return redirect("blog:detail", signal.identifier)
