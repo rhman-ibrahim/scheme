@@ -21,8 +21,12 @@ app.conf.update(
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'fixing-tokens-uuid-values': {
-        'task': 'note.tasks.fixing_tokens_uuid_values',
+    'fixing-tokens-keys': {
+        'task': 'note.tasks.fixing_tokens_keys',
         'schedule': 45,
+    },
+    'fixing-membership-keys': {
+        'task': 'note.tasks.fixing_memberships_keys',
+        'schedule': 90,
     },
 }

@@ -11,7 +11,8 @@ from helpers.decorators import (
     resource, is_authenticated, is_guest, back
 )
 from helpers.functions import get_form_errors
-from .models import Token, Secret
+from user.models import Token
+from team.models import Membership
 from .forms import KeyForm, PassWordResetForm
 
 
@@ -49,10 +50,10 @@ def login(request):
     if request.method == 'POST':
         form = KeyForm(request.POST)
         if form.is_valid():
-            query = Secret.objects.filter(key=form.cleaned_data['key'])
+            query = Membership.objects.filter(key=form.cleaned_data['key'])
             if query.exists() and query.count() == 1:
                 token = query.first()
-                messages.success(request,"your secret has been verified successfully")
+                messages.success(request,"your membership has been verified successfully")
                 request.session['space'] = token.space.id
                 if not request.user.is_authenticated:
                     account_sign_in(request, token.user)

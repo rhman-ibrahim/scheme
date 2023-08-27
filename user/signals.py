@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from user.models import Account, Profile
-from note.models import Token
+from user.models import Token
 
 @receiver(post_save, sender=Account)
 def reader(sender, instance, created, **kwargs):

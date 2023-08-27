@@ -12,5 +12,16 @@
       "created": "2022-10-1T00:00:00+00:00",
       "updated": "2022-10-1T00:00:00+00:00"
     }
+  },
+  {
+    "model": "team.Membership",
+    "id": 1,
+    "fields": {
+      "user": 1,
+      "space": 1,
+      "ready":false,
+      "created": "2022-10-1T00:00:00+00:00",
+      "updated": "2022-10-1T00:00:00+00:00"
+    }
   }
 ]

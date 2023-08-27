@@ -5,11 +5,14 @@ import datetime, pytz
 from django.urls import reverse
 from django.core.validators import RegexValidator
 from django.contrib.admin.models import LogEntry
+from django.core.exceptions import MultipleObjectsReturned
 from django.db.models import Q
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
+
+from helpers.functions import generate_identifier
 
 
 class UserManager(BaseUserManager):
@@ -85,6 +88,27 @@ class Account(AbstractBaseUser, PermissionsMixin):
             return tt.strftime("%b %d, %Y %H:%M:%S")
         return None
 
+
+class Token(models.Model):
+
+    user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+    key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
+    ready   = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.key
+
+    def save(self, *args, **kwargs):
+        try:
+            Token.objects.get(key=self.key)
+            self.ready = False
+        except MultipleObjectsReturned:
+            self.ready = True
+        except Token.DoesNotExist:
+            pass
+        super(Token, self).save(*args, **kwargs)
 
 class Profile(models.Model):
     

@@ -29,8 +29,6 @@ from helpers.functions import (
     secret,
 )
 
-from django.contrib.auth import login as account_login
-
 
 @back
 def create_space(request):

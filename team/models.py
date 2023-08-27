@@ -1,5 +1,6 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.admin.models import LogEntry
 from django.db import models
 
@@ -68,9 +69,25 @@ class Space(models.Model):
 
 class Membership(models.Model):
 
-    user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    space     = models.ForeignKey('team.Space', on_delete=models.CASCADE)
-    created   = models.DateTimeField(auto_now_add=True)
+    user    = models.ForeignKey('user.Account', on_delete=models.CASCADE)
+    space   = models.ForeignKey('team.Space', on_delete=models.CASCADE)
+    key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
+    ready   = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = ('user', 'space')
+    
     def __str__(self):
         return f"On {self.created.strftime('%B %d, %Y')}: {self.user.username} joined {self.space.name}."
+    
+    def save(self, *args, **kwargs):
+        try:
+            Membership.objects.get(key=self.key)
+            self.ready = False
+        except MultipleObjectsReturned:
+            self.ready = True
+        except Membership.DoesNotExist:
+            pass
+        super(Membership, self).save(*args, **kwargs)

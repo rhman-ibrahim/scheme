@@ -1,13 +1,12 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from team.models import Membership
-from note.models import Secret
+from .models import Space, Membership
 
 
-@receiver(post_save, sender=Membership)
+@receiver(post_save, sender=Space)
 def reader(sender, instance, created, **kwargs):
     if created:
-        Secret.objects.create(
-            user=instance.user,
-            space=instance.space
+        Membership.objects.create(
+            user=instance.founder,
+            space=instance
         )
