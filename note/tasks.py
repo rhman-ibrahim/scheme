@@ -6,7 +6,7 @@ from celery import shared_task
 
 # User
 from user.models import Token
-from team.models import Membership
+from mate.models import Membership
 
 @shared_task
 def fixing_tokens_keys():

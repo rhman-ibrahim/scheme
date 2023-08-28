@@ -12,7 +12,7 @@ from helpers.decorators import (
 )
 from helpers.functions import get_form_errors
 from user.models import Token
-from team.models import Membership
+from mate.models import Membership
 from .forms import KeyForm, PassWordResetForm
 
 
