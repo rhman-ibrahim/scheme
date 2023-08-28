@@ -1,34 +1,43 @@
 <section class="widget" id="home-header-widget">
-    <h1>
+    <h2>
         <i class="material-icons">bolt</i>
-    </h1>
+        <span>bolt</span>
+    </h2>
     <section class="notes">
+        <div class="note accent-note full-row">
+            <p>The <b><mark>bolt mode</mark></b>, use <b><mark>notes</mark></b> without
+            manually signing-up for an 8-hours session,<br>after termination
+            everything will be deleted as it never was.</p>
+        </div>
         <div class="note accent-note">
-            <p><b><mark>Anonymous?</mark></b>, interact with users and spaces anonymously,
-            <mark>save your token to be able to sign in and out.</mark></p>
+            <p><mark><b>Interact</b></mark> with users and spaces,<br>
+            <b>remember</b> to save your token to be able <span>to sign in and out</span>.</p>
             <nav>
                 <a href="{% url 'user:create_guest' %}">
                     <i class="material-symbols-outlined">domino_mask</i>
                 </a>
             </nav>
         </div>
-        <div class="note info-note">
-            <p><b><mark>Request to join an existing space</mark></b>,
-            submit the space's identifier and a message (optional).</p>
-            <nav>
-                <i class="material-icons" onclick="Fixed.open('#space-request-form')">mail</i>
-            </nav>
-        </div>
         <div class="note accent-note">
-            <p><b><mark>Create a new space</mark></b>, pick a name and password,
-            its recommended to provide a description <b>(optional)</b>.</p>
+            <p><b><mark>Create a new space</mark></b>,
+            pick a name and <span>a password</span>, its recommended
+            <span>to provide a description</span>.</p>
             <nav>
                 <i class="material-symbols-outlined" onclick="Fixed.open('#space-create-form')">add</i>
             </nav>
         </div>
         <div class="note accent-note">
-            <p><mark><b>Send</b></mark> friends requests, to connect with,
-            <span>and to add</span> them in your spaces.</p>
+            <p>Submit a <b><mark>space identifier</mark></b>
+            to create <span><b><mark>a join request</mark></b></span>,
+            attach an optional message along side your request.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#space-request-form')">mail</i>
+            </nav>
+        </div>
+        <div class="note accent-note">
+            <p>Submit an <b><mark>account identifier</mark></b>
+            to create <span><b><mark>a friend request</mark></b></span>,
+            attach an optional message along side your request.</p>
             <nav>
                 <i class="material-icons"
                 onclick="Fixed.open('#friend-request-form')">mail</i>

@@ -28,7 +28,6 @@ def retrieve_home_index(request):
         {
             'grid': {
                 'title': "Express on your behalf or anonymously.",
-                'icon': 'menu'
             },
             'widgets': {
                 'about': {
@@ -46,6 +45,9 @@ def retrieve_home_index(request):
                     'login': KeyForm(auto_id=f"login_secret_%s")
                 },
                 'mate': {
+                    'friend': {
+                        'request':SignalForm(auto_id="friend_request_%s"),
+                    },
                     'space': {
                         'request': SignalForm(auto_id="space_request_%s")
                     }

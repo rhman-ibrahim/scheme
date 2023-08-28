@@ -70,19 +70,21 @@ def retrieve_account(request):
                 'user': {
                     'password': PasswordUpdateForm(False),
                     'delete': PasswordForm(auto_id="account_delete_%s"),
-                    'info': ProfileForm(instance=request.user.profile),
+                    'info': ProfileForm(instance=request.user.profile, auto_id="profile_info_%s"),
                 },
                 'team': {
-                    'login': SpaceLoginForm(auto_id="space_login_%s"),
-                    'space': SpaceForm(auto_id="circle_%s")
+                    'space': SpaceForm(auto_id="space_%s"),
+                    'login': SpaceLoginForm(auto_id="space_login_%s")
                 },
                 'note': {
-                    'login': KeyForm(auto_id=f"space_login_%s"),
+                    'login': KeyForm(auto_id="space_login_%s")
                 },
                 'mate': {
-                    'username': SignalForm(auto_id="friend_username_%s"),
+                    'friend': {
+                        'request':SignalForm(auto_id="friend_request_%s")
+                    },
                     'space': {
-                        'request': SignalForm(auto_id="space_request_%s"),
+                        'request': SignalForm(auto_id="space_request_%s")
                     }
                 }
             }

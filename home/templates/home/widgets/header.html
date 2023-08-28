@@ -1,4 +1,3 @@
-{% if request.user.is_authenticated and not request.user.is_guest %}
 <section class="widget" id="home-header-widget">
     <h2>
         <i class="material-symbols-outlined">text_snippet</i>
@@ -6,28 +5,23 @@
     </h2>
     <section class="notes">
         <div class="note accent-note full-row">
-            <p>Create spaces for thoughts to intertwine, grow and form ideas.
-            Add your friends, <span>post, vote and discuss.</span> <b><mark>Express on your behalf
-            or anonymously.</mark> Welcome to Notes, <span>a text based web application.</span></b></p>
+            <p>Create spaces for thoughts to intertwine and form ideas.
+            Add your friends, <span>post, vote and discuss.</span>
+            <mark>Welcome to Notes, the text based web application</mark>.</p>
+        </div>
+        <div class="note accent-note">
+            <p><b><mark>Sign-up</mark></b>, to start just set
+            a username <span>and a password</span>.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#sign-up-form')">person_add</i>
+            </nav>
+        </div>
+        <div class="note accent-note">
+            <p><b><mark>Sign-in</mark></b>, continue
+            from where you left off and explore more.</p>
+            <nav>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#sign-in-form')">login</i>
+            </nav>
         </div>
     </section>
 </section>
-{% else %}
-<section class="widget">
-    <div class="notes flex-rows">
-        <div class="note warning-note">
-            <h3>
-                <i class="material-symbols-outlined">domino_mask</i>
-                <span>guest session</span>
-            </h3>
-            <p>As a guest user your session will be terminated after complete 8 hours
-            of creation, <span>then everything</span> you created will be deleted.</p>
-            <ul class="text-align-right">
-                <li>
-                    <b id="timer" data-count-down="{{ request.user.timer }}"></b>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-{% endif %}
