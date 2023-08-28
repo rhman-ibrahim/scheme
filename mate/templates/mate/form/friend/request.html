@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'mate:create_friend_request' %}" id="friend-request-form">
-    {% with form=forms.mate.username %}
+    {% with form=forms.mate.friend.request %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

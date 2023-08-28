@@ -66,7 +66,7 @@ class AddFounderFriendsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         instance = kwargs['instance']
-        self.fields['members'].queryset = instance.founder_friends_queryset()
+        self.fields['members'].queryset = instance.founder_friends_queryset
 
     class Meta:
         model   = Space

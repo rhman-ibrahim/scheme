@@ -1,10 +1,8 @@
 # Django
-from django.contrib.admin.models import ADDITION, CHANGE, DELETION
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
 # Models
-from ping.models import Room
 from .models import Space
 
 # Forms
@@ -44,7 +42,11 @@ def create_space(request):
                 space.founder  = request.user
                 space.password = secret(form.cleaned_data['password'])
                 space          = form.save()
-                messages.success(request, "your space is created successfully")
+                space.build()
+                messages.success(
+                    request,
+                    "your space is created successfully"
+                )
         else:
             get_form_errors(request, form)
 
@@ -54,13 +56,12 @@ def create_space(request):
 @resource
 def retrieve_team_index(request):
     space = Space.objects.get(id=request.session.get('space'))
-    room  = Room.objects.get(identifier=space.identifier)
     return render(
         request,
         "team/index.html",
         {
             'space': space,
-            'room': room,
+            'room': space.room,
             'forms': {
                 'team': {
                     'space': SpaceForm(instance=space),
@@ -70,11 +71,13 @@ def retrieve_team_index(request):
                     'friends': AddFounderFriendsForm(instance=space),
                 },
                 'ping': {
-                    'room': RoomForm(initial={
-                        'token': request.user.token.key,
-                        'username': request.user.username,
-                        'identifier': room.identifier
-                    })
+                    'room': RoomForm(
+                        initial = {
+                            'identifier': space.room.identifier,
+                            'username': request.user.username,
+                            'token': request.user.token.key
+                        }
+                    )
                 }
             },
             'grid': {

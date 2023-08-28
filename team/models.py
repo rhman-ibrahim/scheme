@@ -1,11 +1,11 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.admin.models import LogEntry
 from django.db import models
 
 # Models
 from ping.models import Room
+from mate.models import Membership
 
 # Helpers
 from helpers.functions import generate_identifier, secret
@@ -17,7 +17,7 @@ class Space(models.Model):
     identifier  = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
-    members     = models.ManyToManyField("user.Account", blank=True, related_name="members", through="Membership")
+    members     = models.ManyToManyField("user.Account", blank=True, related_name="members")
     password    = models.CharField(max_length=128, null=False, blank=False)
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
@@ -48,6 +48,7 @@ class Space(models.Model):
     def room(self):
         return Room.objects.get(identifier=self.identifier)
     
+    @property
     def founder_friends_queryset(self):
         from user.models import Account
         friends = [int(friend.id) for friend in self.founder.profile.friends.all()]
@@ -56,6 +57,10 @@ class Space(models.Model):
             pk__in=list(set(friends).symmetric_difference(set(members)))
         )
     
+    def build(self):
+        Room.objects.create(identifier=self.identifier).members.set([self.founder])
+        Membership.objects.create(space=self,user=self.founder)
+
     def check_password(self, raw_password):
         return self.password == secret(raw_password)
 
@@ -65,29 +70,3 @@ class Space(models.Model):
         elif user == self.founder:
             return "founder"
         return None
-
-
-class Membership(models.Model):
-
-    user    = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    space   = models.ForeignKey('team.Space', on_delete=models.CASCADE)
-    key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
-    ready   = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        unique_together = ('user', 'space')
-    
-    def __str__(self):
-        return f"On {self.created.strftime('%B %d, %Y')}: {self.user.username} joined {self.space.name}."
-    
-    def save(self, *args, **kwargs):
-        try:
-            Membership.objects.get(key=self.key)
-            self.ready = False
-        except MultipleObjectsReturned:
-            self.ready = True
-        except Membership.DoesNotExist:
-            pass
-        super(Membership, self).save(*args, **kwargs)

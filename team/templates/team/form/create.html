@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'team:create_space' %}" id="space-create-form">
-    {% with form=forms.team.circle password=1 %}
+    {% with form=forms.team.space password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
