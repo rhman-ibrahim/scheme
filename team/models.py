@@ -51,7 +51,7 @@ class Space(models.Model):
     @property
     def founder_friends_queryset(self):
         from user.models import Account
-        friends = [int(friend.id) for friend in self.founder.profile.friends.all()]
+        friends = [int(friend.user.id) for friend in self.founder.profile.friends.all()]
         members = [int(member.id) for member in self.members.all()]
         return Account.objects.filter(
             pk__in=list(set(friends).symmetric_difference(set(members)))

@@ -1,36 +1,96 @@
 <section class="widget" id="team-navigate-widget">
     <h3>
         <i class="material-icons">person</i>
-        <span>{{ request.user.username }}</span>
+        <span class="text-transform-none">{{ request.user.username }}</span>
     </h3>
     <div class="notes">
         <div class="note info-note">
-            <p><b>Visit</b> the circle home page, list members, circle history.</p>
-            <nav>
-                <a class="material-icons" href="{% url 'team:retrieve_team_index' %}">home</a>
-            </nav>
-        </div>
-        <div class="note info-note">
-            <p><b>View</b> a list of your friends who are also members of this circle.</p>
-            <nav>
-                <i class="material-icons" onclick="Fixed.open('#friends-aside')">filter_alt</i>
-            </nav>
-        </div>
-        <div class="note info-note">
-            <p><b>Manage</b> your account, recovery token, circles, profile and theme.</p>
+            <p><b>Go</b> back to your account.</p>
             <nav>
                 <a href="{% url 'user:retrieve_account' %}">
                     <i class="material-icons">person</i>
                 </a>
             </nav>
         </div>
+        <div class="note info-note">
+            <p><b>Copy</b> your space ({{ space.name }}) secret.</p>
+            <nav>
+                <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ request.user.username }}">content_copy</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Renew</b> your space secret.</p>
+            <nav>
+                <i class="material-icons">refresh</i>
+            </nav>
+        </div>
         <div class="note warning-note">
-            <p><b>Logout</b>, and back to your account. You are logged in this circle.</p>
+            <p><b>Logout</b> from this space.</p>
             <nav>
                 <a href="{% url 'team:logout' %}" style="color:var(--lw);">
                     <i class="material-icons">logout</i>
                 </a>
             </nav>
         </div>
+        <div class="note danger-note">
+            <p><b>Leave</b> the circle and delete your all of your contributions.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#space-delete-or-leave-footer')">radio_button_checked</i>
+            </nav>
+        </div>
     </div>
 </section>
+{% if request.user == space.founder %}
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">admin_panel_settings</i>
+        <span>manage</span>
+    </h3>
+    <div class="notes">
+        <div class="note info-note">
+            <p><b>Add</b> your friends to the space.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">add</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Invite</b> a user to your space.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">mail</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Review</b> received space requests.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Review</b> sent space invitations.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">outgoing_mail</i>
+            </nav>
+        </div>
+    </div>
+</section>
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">shield</i>
+       <span>secuirty</span>
+    </h3>
+    <div class="notes">
+        <div class="note danger-note">
+            <p><mark><b>Transfer</b></mark> the space ownership <span>to another member</span>.</p>
+            <nav>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#space-transfer-form')">partner_exchange</i>
+            </nav>
+        </div>
+        <div class="note danger-note">
+            <p><mark><b>Delete</b></mark> the circle and delete its content, <span>this cannot be undone</span>.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#space-delete-or-leave-footer')">delete</i>
+            </nav>
+        </div>
+    </div>
+</section>
+{% endif %}

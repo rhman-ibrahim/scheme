@@ -1,0 +1,45 @@
+{% load filters %}
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">diversity_2</i>
+        <span class="text-transform-none">{{ space.name }}</span>
+    </h3>
+    <div class="notes">
+        <div class="note info-note">
+            <p>
+                <span><mark><b>{{ space.name }}</b></mark> was created {{ space.created|ago }},</span>
+                <span>by <b>{{ space.founder.username }}</b>,</span>
+                <span>on {{ space.created|date:"j/m/Y H:i A" }}.</span>
+            </p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#members-aside')">groups</i>
+            </nav>
+        </div>
+        {% if request.user == space.founder %}
+        <div class="note warning-note">
+            <p><b>Update</b> the circle's profile info, make sure to keep it specific.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#space-update-form')">edit</i>
+            </nav>
+        </div>
+        {% endif %}
+        <div class="note info-note">
+            <p><b>Share</b> the space identifier with users to send <span>join requests</span>.</p>
+            <nav>
+                <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ space.identifier }}">content_copy</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Post</b></p>
+            <nav>
+                <i class="material-icons">bubble_chart</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p><b>Chat</b></p>
+            <nav>
+                <i class="material-icons">forum</i>
+            </nav>
+        </div>
+    </div>
+</section>

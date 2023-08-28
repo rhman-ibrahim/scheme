@@ -82,10 +82,7 @@ def retrieve_team_index(request):
             },
             'grid': {
                 'title': f"{space.name} by {space.founder.username}",
-                'icons': {
-                    'left':"person",
-                    'right':"menu",
-                }
+                'icon': 'settings'
             }
         }    
     )
