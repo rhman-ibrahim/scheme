@@ -10,8 +10,6 @@ from django.contrib.auth import (
 )
 
 # Models
-from mate.models import FriendRequest
-from ping.models import Room
 from .models import Account
 
 # Forms
@@ -60,7 +58,7 @@ def retrieve_account(request):
         "user/index.html",
         {
             'grid': {
-                'title': f'settings / { request.user.username }',
+                'title': f'Settings / { request.user.username }',
                 'icons': {
                     'left': 'groups',
                     'right': 'diversity_2'

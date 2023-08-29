@@ -1,5 +1,15 @@
 {% extends 'templates/lc.html' %}
+{% load static %}
 
 {% block left %}
 {% include "mate/widgets/user.html" %}
+{% endblock %}
+
+{% block side %}
+{% include "ping/form/room.html" %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'ping/js/master.js' %}?v={% now "U" %}" defer></script>
+<script src="{% static 'ping/js/room.js' %}?v={% now "U" %}" defer></script>
 {% endblock %}

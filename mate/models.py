@@ -76,6 +76,10 @@ class Friendship(models.Model):
     created    = models.DateTimeField(auto_now_add=True)
     updated    = models.DateTimeField(auto_now=True)
 
+    @property
+    def room(self):
+        return Room.objects.get(identifier=self.identifier)
+
 
 class SpaceSignal(models.Model):
 

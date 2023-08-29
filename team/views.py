@@ -73,7 +73,7 @@ def retrieve_team_index(request):
                 'ping': {
                     'room': RoomForm(
                         initial = {
-                            'identifier': space.room.identifier,
+                            'identifier': space.identifier,
                             'username': request.user.username,
                             'token': request.user.token.key
                         }
@@ -82,7 +82,7 @@ def retrieve_team_index(request):
             },
             'grid': {
                 'title': f"{space.name} by {space.founder.username}",
-                'icon': 'settings'
+                'icon': 'menu'
             }
         }    
     )

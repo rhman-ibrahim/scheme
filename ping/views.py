@@ -1,6 +1,3 @@
-# Django
-from django.contrib import messages
-
 # Models
 from ping.models import Room
 

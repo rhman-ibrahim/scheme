@@ -7,7 +7,6 @@ from django.shortcuts import render
 # Models
 from team.models import Space
 from user.models import Account
-from ping.models import Room
 from .models import (
     FriendRequest, Friendship,
     SpaceRequest, SpaceInvitation
@@ -15,6 +14,7 @@ from .models import (
 
 # Forms
 from mate.forms import SignalForm
+from ping.forms import RoomForm
 
 # Decorators
 from helpers.decorators import (
@@ -174,13 +174,27 @@ def delete_space_invitation(request, id):
 def retrieve_friend_index(request, username):
     mate        = Account.objects.get(username=username)
     friendship  = Friendship.objects.get(users__lte=2, users__in=[mate, request.user])
-    room        = Room.objects.get(identifier=friendship.identifier)
     return render(
         request,
         "mate/index.html",
         {
+            'grid': {
+                'title':f'{ mate.username }',
+                'icon':'menu'
+            },
+            'forms': {
+                'ping': {
+                    'room': RoomForm(
+                        initial = {
+                            'identifier': friendship.identifier,
+                            'username': request.user.username,
+                            'token': request.user.token.key
+                        }
+                    ),
+                }
+            },
             'mate':mate,
             'friendship':friendship,
-            'room':room
+            'room':friendship.room
         }
     )
