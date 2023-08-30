@@ -1,0 +1,42 @@
+<section class="widget" id="home-header-widget">
+    <h2>
+        <i class="material-symbols-outlined">search_off</i>
+        <b>object not found</b>
+    </h2>
+    <section class="notes">
+        <div class="note accent-note full-row">
+            <p>The requested object is not found, maybe it has been deleted
+            or there is a misspelled word in your query.</p>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="note accent-note">
+            <p>Go back to your account and browse <span>the available</span> options.</p>
+            <nav>
+                <a href="{% url 'user:retrieve_account' %}">
+                    <i class="material-icons">person</i>
+                </a>
+            </nav>
+        </div>
+        {% if space %}
+        <div class="note accent-note">
+            <p>Go back to your <mark>{{ space.name }}</mark> and browse
+            <span>the available</span> options.</p>
+            <nav>
+                <a href="{% url 'team:retrieve_team_index' %}">
+                    <i class="material-icons">diversity_2</i>
+                </a>
+            </nav>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="note accent-note">
+            <p>Go back to the home page and browse <span>the available</span> options.</p>
+            <nav>
+                <a href="{% url 'home:retrieve_home_index' %}">
+                    <i class="material-icons">home</i>
+                </a>
+            </nav>
+        </div>
+        {% endif %}
+    </section>
+</section>

@@ -64,6 +64,8 @@ def resource_not_found(request):
         request,
         "home/404.html",
         {
-            'title':'Resource Not Found.'
+            'grid': {
+                'title': "404 Object Is Not Found",
+            },
         }
     )
