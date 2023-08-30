@@ -4,6 +4,7 @@ from django.contrib import messages
 
 # Models
 from .models import Space
+from mate.models import Membership
 
 # Forms
 from ping.forms import RoomForm
@@ -62,6 +63,7 @@ def retrieve_team_index(request):
         {
             'space': space,
             'room': space.room,
+            'membership': Membership.objects.get(user=request.user, space=space),
             'forms': {
                 'team': {
                     'space': SpaceForm(instance=space),

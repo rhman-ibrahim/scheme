@@ -60,8 +60,8 @@ def retrieve_account(request):
             'grid': {
                 'title': f'Settings / { request.user.username }',
                 'icons': {
-                    'left': 'groups',
-                    'right': 'diversity_2'
+                    'left': 'layers',
+                    'right': 'menu'
                 }
             },
             'forms': {
