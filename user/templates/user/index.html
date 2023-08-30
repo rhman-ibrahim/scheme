@@ -2,17 +2,18 @@
 
 {% block main %}
 {% include "user/widgets/account.html" %}
-{% include "user/widgets/token.html" %}
+{% include "components/widgets/token.html" %}
 {% include "user/widgets/settings.html" %}
 {% include "components/widgets/theme.html" %}
 {% endblock %}
 
 {% block right %}
+{% include "user/widgets/friends.html" %}
 {% include "user/widgets/spaces.html" %}
 {% endblock %}
 
 {% block left %}
-{% include "user/widgets/friends.html" %}
+{% include "components/widgets/connect.html" %}
 {% endblock %}
 
 {% block side %}

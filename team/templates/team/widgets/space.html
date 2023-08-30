@@ -7,9 +7,8 @@
     <div class="notes">
         <div class="note info-note">
             <p>
-                <span><mark><b>{{ space.name }}</b></mark> was created {{ space.created|ago }},</span>
-                <span>by <b>{{ space.founder.username }}</b>,</span>
-                <span>on {{ space.created|date:"j/m/Y H:i A" }}.</span>
+                <span><mark>{{ space.name }}</mark> was created {{ space.created|ago }},</span>
+                <span>by {{ space.founder.username }},</span> <span>on {{ space.created|date:"j/m/Y H:i A" }}.</span>
             </p>
             <nav>
                 <i class="material-icons" onclick="Fixed.open('#members-aside')">groups</i>
@@ -17,29 +16,61 @@
         </div>
         {% if request.user == space.founder %}
         <div class="note warning-note">
-            <p><b>Update</b> the circle's profile info, make sure to keep it specific.</p>
+            <p><mark>Update</mark> the space's profile info, make sure to keep it specific.</p>
             <nav>
                 <i class="material-icons" onclick="Fixed.open('#space-update-form')">edit</i>
             </nav>
         </div>
         {% endif %}
         <div class="note info-note">
-            <p><b>Share</b> the space identifier with users to send <span>join requests</span>.</p>
+            <p><mark>Share</mark> the space identifier with users to send <span>space requests</span>.</p>
             <nav>
                 <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ space.identifier }}">content_copy</i>
             </nav>
         </div>
-        <div class="note info-note">
-            <p><b>Post</b></p>
+        <div class="note warning-note">
+            <p><mark>Logout</mark> from this space, some actions are not avalible while you are logined.</p>
             <nav>
-                <i class="material-icons">bubble_chart</i>
-            </nav>
-        </div>
-        <div class="note info-note">
-            <p><b>Chat</b></p>
-            <nav>
-                <i class="material-icons" onclick="Fixed.open('#room-chat-form')">forum</i>
+                <a href="{% url 'team:logout' %}" style="color:var(--lw);">
+                    <i class="material-icons">logout</i>
+                </a>
             </nav>
         </div>
     </div>
 </section>
+{% if request.user == space.founder %}
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">groups</i>
+        <span>manage</span>
+    </h3>
+    <div class="notes">
+        <div class="note info-note">
+            <p>Select from your friends to <mark>add</mark> <span>directly to the space.</span></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">add</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p>Submit an <mark>account identifier</mark>
+            to send <span><mark>a space invitation</mark></span>,
+            add a message <span>with your invitation.</span></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">mail</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p>View a list of all the received <mark><span>space requests.</span></mark></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
+            </nav>
+        </div>
+        <div class="note info-note">
+            <p>View a list of all the sent <mark><span>space invitations.</span></mark></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">outgoing_mail</i>
+            </nav>
+        </div>
+    </div>
+</section>
+{% endif %}
