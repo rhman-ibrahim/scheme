@@ -39,5 +39,19 @@
                 </a>
             </nav>
         </div>
+        {% if space %}
+        <div class="note accent-note">
+            <p>You are logged into <mark>{{ space.name }}</mark>,
+            back to the space to continue or to log-out.</p>
+            <nav>
+                <a href="{% url 'team:retrieve_team_index' %}">
+                    <i class="material-symbols-outlined">diversity_2</i>
+                </a>
+                <a href="{% url 'team:logout' %}" style="color:var(--lw);">
+                    <i class="material-icons">logout</i>
+                </a>
+            </nav>
+        </div>
+        {% endif %}
     </section>
 </section>
