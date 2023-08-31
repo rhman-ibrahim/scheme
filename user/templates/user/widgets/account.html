@@ -4,7 +4,7 @@
         <span class="text-transform-none">{{ request.user.username }}</span>
     </h3>
     <section class="notes">
-        {% if request.user.is_guest %}
+        {% if request.user.is_temporary %}
         <div class="note warning-note full-width">
             <p>You are using <b><mark>notes</mark></b> with a temporary account for an 8-hours session,
             remember to save your temporary account's key. After session termination,
