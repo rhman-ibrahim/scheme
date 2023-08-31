@@ -46,10 +46,10 @@ def is_authenticated(status):
         return wrapper
     return decorator
 
-def is_guest(status):
+def is_temporary(status):
     def decorator(view):
         def wrapper(request, *args, **kwargs):
-            if status == request.user.is_guest:
+            if status == request.user.is_temporary:
                 return view(request, *args, **kwargs)
             else:
                 if status:

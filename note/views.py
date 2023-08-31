@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth import login as account_sign_in
 from django.template.loader import render_to_string
 from helpers.decorators import (
-    resource, is_authenticated, is_guest, back
+    resource, is_authenticated, is_temporary, back
 )
 from helpers.functions import get_form_errors
 from user.models import Token
@@ -62,7 +62,7 @@ def login(request):
             get_form_errors(request, form)
 
 @is_authenticated(True)
-@is_guest(False)
+@is_temporary(False)
 def update_token(request):
     token = request.user.token
     if token != None:

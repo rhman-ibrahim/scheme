@@ -30,7 +30,7 @@ from helpers.functions import (
 
 # Decorators
 from helpers.decorators import (
-    is_guest, is_authenticated,
+    is_temporary, is_authenticated,
     back, center, resource,
 )
 
@@ -90,7 +90,7 @@ def retrieve_account(request):
     )
 
 @is_authenticated(True)
-@is_guest(False)
+@is_temporary(False)
 @back
 def update_account_password(request):
     if request.method == 'POST':
@@ -114,7 +114,7 @@ def update_account_status(request):
     return redirect("home:retrieve_home_index")
 
 @is_authenticated(True)
-@is_guest(False)
+@is_temporary(False)
 @back
 def update_profile_info(request):
     if request.method == 'POST':

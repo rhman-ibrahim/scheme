@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
     def create_guest(self, username, password=None):
         if not username or not password:
             raise ValueError('a username and a password are required.')
-        user = self.model(username=username, is_guest=True)
+        user = self.model(username=username, is_temporary=True)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -55,7 +55,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_superuser   = models.BooleanField(default=False)
     is_admin       = models.BooleanField(default=False)
     is_staff       = models.BooleanField(default=False)
-    is_guest       = models.BooleanField(default=False)
+    is_temporary       = models.BooleanField(default=False)
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = 'username'
@@ -74,7 +74,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     
     @property
     def is_expired(self):
-        if self.is_guest:
+        if self.is_temporary:
             ct = datetime.datetime.now(tz=pytz.timezone('Africa/Cairo'))
             tt = self.created + datetime.timedelta(hours=8)
             df = tt - ct
@@ -83,7 +83,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     @property
     def timer(self):
-        if self.is_guest:
+        if self.is_temporary:
             tt = self.created + datetime.timedelta(hours=8)
             return tt.strftime("%b %d, %Y %H:%M:%S")
         return None
