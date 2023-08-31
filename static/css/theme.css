@@ -1,0 +1,46 @@
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --danger: #d64242;
+    --info: #0090e0;
+    --success: #34c240;
+    --warning: #fa9f47;
+    --primary: #9D00FF;
+    --secondary: #7D39FF;
+    --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+body,
+.dark {
+    --d1: var(--black);
+    --d2: hsl(0, 0%, 04%);
+    --d3: hsl(0, 0%, 12%);
+    --d4: var(--white);
+}
+
+.light {
+    --d1: var(--white);
+    --d2: hsl(0, 0%, 98%);
+    --d3: hsl(0, 0%, 92%);
+    --d4: var(--black);
+}
+
+/*
+    background
+*/
+
+.accent-background {
+    background: var(--primary);
+}
+.danger-background {
+    background: var(--danger);
+}
+.info-background {
+    background: var(--info);
+}
+.success-background {
+    background: var(--success);
+}
+.warning-background {
+    background: var(--warning);
+}

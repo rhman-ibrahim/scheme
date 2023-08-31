@@ -1,0 +1,511 @@
+:root {
+    --wh: 100vh;
+    --ww: 100vw;
+}
+
+html,
+body,
+main,
+.column {
+    background: var(--d1);
+    height: var(--wh);
+}
+
+html,
+body,
+main {
+    overflow: hidden;
+}
+
+form,
+header,
+footer,
+textarea,
+.column,
+#room-chat-form #messages {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+form::-webkit-scrollbar,
+header::-webkit-scrollbar,
+footer::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+.column::-webkit-scrollbar,
+#room-chat-form #messages::-webkit-scrollbar {
+    display: none;
+}
+
+/*
+  form
+*/
+
+form {
+    width: 100%;
+    padding: 4px;
+    max-height: 50vh;
+    height: max-content;
+    background: var(--d1);
+    border-top: 1.32px solid var(--d2);
+    transition: bottom 1s ease-in-out;
+    border-radius: 8px 8px 0px 0px;
+    position: fixed;
+    bottom: -50vh;
+    right: 0px;
+    left: 0px;
+}
+  
+form.active {
+    bottom: 0px;
+}
+
+form > nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+form > nav > button {
+    border-radius: 100%;
+    text-align: center;
+    height: 18px;
+    width: 18px;
+}
+
+form label {
+    line-height: 1.4;
+}
+
+form label::first-letter {
+    text-transform: capitalize;
+}
+  
+fieldset > div {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 4px;
+    gap: 4px;
+}
+
+input,
+textarea {
+    display: block;
+    outline: 1px solid var(--d3);
+    font-size: 1rem !important;
+    background: var(--d2);
+    border-radius: 4px;
+    color: var(--d4);
+    border: none;
+    resize: none;
+    padding: 8px;
+    width: 100%;
+}
+
+textarea {
+    height: min-content;
+}
+
+fieldset div.check div.container,
+fieldset div.radio div.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding: 8px 4px;
+    gap: 8px;
+}
+
+div.check div.container [type=checkbox],
+div.radio div.container [type=radio] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+div.check div.container [type=checkbox] + h6,
+div.radio div.container [type=radio] + h6 {
+    border-radius: 8px;
+    background: var(--d1);
+    outline: 1px solid var(--d3);
+    text-transform: capitalize;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px;
+}
+
+div.check div.container [type=checkbox]:checked + h6,
+div.radio div.container input:checked + h6 {
+    background: var(--primary);
+    color: var(--d1);
+}
+
+div.file label {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    outline: 1px solid var(--d2);
+    text-transform: capitalize;
+}
+
+div.file input {
+    display: none;
+}
+
+/*
+    aside
+*/
+
+#left,
+#right,
+aside {
+    box-shadow: var(--box-shadow);
+    max-width: 360px;
+    width: 100%;
+}
+
+#left,
+aside {
+    position: fixed;
+    border-right: 1.32px solid var(--d3);
+    transition: left 1s ease-in-out;
+    left: -360px;
+    bottom: 0px;
+    top: 0px;
+}
+
+#right {
+    position: fixed;
+    border-left: 1.32px solid var(--d3);
+    transition: right 1s ease-in-out;
+    right: -360px;
+    bottom: 0px;
+    top: 0px;
+}
+
+#left.active,
+aside.active {
+    left: 0px;
+}
+
+#right.active {
+    right: 0px;
+}
+
+/*
+    header &
+    footer
+*/
+
+header,
+footer {
+    width: var(--ww);
+    box-shadow: var(--box-shadow);
+    height: calc(var(--wh) / 2);
+    background: var(--d1);
+    height: max-content;
+    max-height: 50vh;
+    padding: 8px;
+}
+
+header {
+    border-bottom: 1.32px solid var(--d2);
+    transition: top 1s ease-in-out;
+    position: fixed;
+    top: -50vh;
+    right: 0px;
+    left: 0px;
+}
+
+header.message {
+    border-bottom: none;
+}
+
+header.active {
+    top: 0px;
+}
+
+footer {
+    border-top: 1.32px solid var(--d2);
+    transition: bottom 1s ease-in-out;
+    position: fixed;
+    bottom: -50vh;
+    right: 0px;
+    left: 0px;
+}
+
+footer.active {
+    bottom: 0px;
+}
+
+/*
+    .column
+*/
+
+.column {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px 48px 8px;
+    width: 100%;
+    gap: 8px;
+}
+
+.column-button {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    color: var(--d4);
+    outline: 1.32px solid var(--d3);
+    box-shadow: var(--box-shadow);
+    background: var(--d2);
+    border-radius: 100%;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+/*
+    .widget &
+    .notes
+*/
+
+.widget,
+.notes {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.widget {
+    padding: 8px 0px;
+    gap: 12px;
+}
+
+.notes {
+    gap: 8px;
+}
+
+.notes .vertical-line {
+    z-index: 1;
+    width: 1.32px;
+    background: var(--d3);
+    position: absolute;
+    content: "";
+    bottom: 0px; 
+    left: 16px;
+    top: 0px;
+}
+
+/*
+    .note
+*/
+
+.note {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    outline: 1.32px solid var(--d3);
+    background: var(--d2);
+    border-radius: 8px;
+    padding: 16px;
+    gap: 4px;
+    flex: 1;
+}
+
+.note > * {
+    flex: 1;
+}
+
+.note > nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.accent-note:hover {
+    outline-color: var(--primary);
+}
+.accent-note:hover mark,
+.accent-note:hover i {
+    color: var(--primary);
+}
+
+.danger-note:hover {
+    outline-color: var(--danger);
+}
+.danger-note:hover mark,
+.danger-note:hover i {
+    color: var(--danger);
+}
+
+.info-note:hover {
+    outline-color: var(--info);
+}
+.info-note:hover mark,
+.info-note:hover i{
+    color: var(--info);
+}
+
+.success-note:hover {
+    outline-color: var(--success);
+}
+.success-note:hover mark,
+.success-note:hover i {
+    color: var(--success);
+}
+
+.warning-note:hover {
+    outline-color: var(--warning);
+}
+.warning-note:hover mark,
+.warning-note:hover i {
+    color: var(--warning);
+}
+
+/*
+    .notes-horizontally-scroll
+*/
+
+.notes-horizontally-scroll {
+    display: flex;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow: auto;
+    padding: 8px;
+    gap: 8px;
+}
+
+.notes-horizontally-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.notes-horizontally-scroll .note {
+    flex-wrap: wrap;
+    flex: 0 0 320px;
+}
+
+/*
+  #chat
+*/
+
+#room-chat-form nav {
+  padding: 4px;
+}
+  
+#room-chat-form #messages {
+  display: flex;
+  flex-direction: column;
+  height: calc(var(--wh) / 3);
+  padding: 8px;
+  gap: 8px;
+}
+
+#room-chat-form #messages ul {
+  border-radius: 8px;
+  padding: 8px;
+}
+
+#room-chat-form #messages.one-to-one ul li:first-child,
+#room-chat-form #messages.group ul.outgoing li:first-child {
+  display: none;
+}
+
+#room-chat-form #messages ul.outgoing {
+  outline: 1.32px solid var(--d3);
+}
+
+#room-chat-form #messages ul.incoming {
+  background: var(--d3);
+  text-align: right;
+}
+
+/*
+  #blurred-layer
+  The glass effect is from: https://css.glass
+*/
+
+#blurred-layer {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  position: fixed;
+  inset: 0px;
+}
+
+/*
+    z-index
+*/
+
+.message {
+    z-index: 64;
+}
+
+aside .column-button,
+#left .column-button,
+#right .column-button {
+    z-index: 32;
+}
+
+form,
+aside,
+header,
+footer,
+#left,
+#right,
+#left .column-button,
+#right .column-button {
+    z-index: 16;
+}
+
+#blurred-layer {
+    z-index: 8;
+}
+
+#main .column-button {
+    z-index: 4;
+}
+
+.note {
+    z-index: 2;
+}
+
+.vertical-line {
+    z-index: 1;
+}
+
+/*
+    @media
+*/
+
+@media (width >= 720px) {
+  
+    form {
+        width: 360px;
+        position: fixed;
+        left: calc((var(--ww) - 540px));
+        right: 180px;
+    }
+    
+    #main .notes {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  
+    #main .note:not(.full-width) {
+      max-width: calc(calc(100% - 8px) / 2);
+      flex: calc(calc(100% - 8px) / 2);
+    }
+
+    #main .note.full-width {
+        max-width: 100%;
+        flex: 100%;
+    }
+  
+}

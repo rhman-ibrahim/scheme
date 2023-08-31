@@ -2,6 +2,7 @@ main {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    position: relative;
     overflow: hidden;
     margin: auto;
 }
@@ -9,6 +10,28 @@ main {
 #main,
 #lr-grid #main {
     grid-column: 1/13;
+}
+
+#lcr-left-button.column-button {
+    position: absolute;
+    bottom: 8px;
+    right: 48px;
+}
+
+#lcr-right-button.column-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+@media (width > 360px) {
+
+    aside .column-button,
+    #right .column-button,
+    #left .column-button {
+        display: none;
+    }
+    
 }
 
 @media (width >= 720px) {
@@ -30,8 +53,11 @@ main {
         width: 100%;
     }
 
-}
+    #lr-grid #main .column-button {
+        display: none;
+    }
 
+}
 
 @media (width >= 1080px) {
     
@@ -68,8 +94,13 @@ main {
         grid-column: 5/13;
     }
 
-}
+    #lc-grid .column-button,
+    #cr-grid .column-button,
+    #lcr-left-button {
+        display: none;
+    }
 
+}
 
 @media (width >= 1440px) {
     
@@ -92,78 +123,6 @@ main {
         grid-column: 10/13;
         width: 100%;
     }
-
-}
-
-.column-button {
-    width: 32px;
-    height: 32px;
-    padding: 4px;
-    color: var(--d4);
-    outline: 1.32px solid var(--d3);
-    box-shadow: var(--box-shadow);
-    background: var(--d2);
-    border-radius: 100%;
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-}
-
-.view-link {
-    width: 32px;
-    height: 32px;
-    padding: 4px;
-    color: var(--white);
-    outline: 1.32px solid var(--info);
-    box-shadow: var(--box-shadow);
-    background: var(--info);
-    border-radius: 100%;
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-}
-
-#lcr-left-button.column-button {
-    position: absolute;
-    bottom: 8px;
-    right: 48px;
-}
-
-#lcr-right-button.column-button {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-}
-
-@media (width > 360px) {
-
-    aside .column-button,
-    #right .column-button,
-    #left .column-button {
-        display: none;
-    }
-    
-}
-
-@media (width >= 720px) {
-
-    #lr-grid #main .column-button {
-        display: none;
-    }
-
-}
-
-@media (width >= 1080px) {
-
-    #lc-grid .column-button,
-    #cr-grid .column-button,
-    #lcr-left-button {
-        display: none;
-    }
-
-}
-
-@media (width >= 1440px) {
 
     #lcr-right-button {
         display: none;
