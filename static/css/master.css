@@ -48,7 +48,7 @@ form {
     max-height: 50vh;
     height: max-content;
     background: var(--d1);
-    border-top: 1.32px solid var(--d2);
+    outline: 1.32px solid var(--d3);
     transition: bottom 1s ease-in-out;
     border-radius: 8px 8px 0px 0px;
     position: fixed;
@@ -162,7 +162,6 @@ div.file input {
 #left,
 #right,
 aside {
-    box-shadow: var(--box-shadow);
     max-width: 360px;
     width: 100%;
 }
@@ -184,6 +183,10 @@ aside {
     right: -360px;
     bottom: 0px;
     top: 0px;
+}
+
+aside {
+    box-shadow: var(--box-shadow);
 }
 
 #left.active,
