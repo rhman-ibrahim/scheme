@@ -7,8 +7,9 @@ SECRET_KEY     = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u
 DEBUG            = True
 
 ALLOWED_HOSTS    = [
-    '127.0.0.1',
-    '192.168.1.15'
+    '192.168.43.110', # Hostspot
+    '192.168.1.15',   # Wi-Fi
+    '127.0.0.1'       # localhost
 ]
 
 INSTALLED_APPS = [
@@ -21,10 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Scheme
     'user.apps.UserConfig',
-    'note.apps.NoteConfig',
     'mate.apps.MateConfig',
     'team.apps.TeamConfig',
-    # 'blog.apps.BlogConfig',
     'ping.apps.PingConfig',
     'home.apps.HomeConfig',
     # reset framework

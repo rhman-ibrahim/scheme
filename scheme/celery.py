@@ -22,11 +22,11 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'fixing-tokens-keys': {
-        'task': 'note.tasks.fixing_tokens_keys',
+        'task': 'home.tasks.fixing_tokens_keys',
         'schedule': 45,
     },
     'fixing-membership-keys': {
-        'task': 'note.tasks.fixing_memberships_keys',
+        'task': 'home.tasks.fixing_memberships_keys',
         'schedule': 90,
     },
 }
