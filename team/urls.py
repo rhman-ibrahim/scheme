@@ -1,18 +1,28 @@
 from django.urls import path
-from . import views
+from .views import (
+    templates, membership, space
+)
 
 
 app_name    = "team"
 urlpatterns = [
-    # Create
-    path('create/', views.create_space, name="create_space"),
-    # Render
-    path('', views.retrieve_team_index, name="retrieve_team_index"),
-    # Update
-    path('import/friends/', views.import_friends, name="import_friends"),
-    path('remove/<int:user_id>/', views.remove_space_member, name="remove_space_member"),
-    path('transfer/', views.transfer_space, name="transfer_space"),
-    path('logout/', views.logout, name="logout"),
-    path('login/', views.login, name="login"),
-    path('leave/', views.leave, name="leave"),
+
+    # Templates
+    path('membership/<int:id>/', templates.member, name="member"),
+    path('settings/', templates.founder, name="founder"),
+    path('', templates.index, name="index"),
+    
+    # Membership
+    path('logout/', membership.log_out, name="logout"),
+    path('update/membership/<int:id>/', membership.refresh, name="update_membersihp"),
+    path('login/', membership.log_in, name="login"),
+    path('leave/', membership.leave, name="leave"),
+    
+    # Space
+    path('create/', space.instance, name="instance"),
+    path('terminate/member/<int:id>', space.terminate, name="terminate"),
+    path('import/friends/', space.friends, name="friends"),
+    path('transfer/', space.transfer, name="transfer"),
+    path('delete/', space.delete, name="delete")
+
 ]

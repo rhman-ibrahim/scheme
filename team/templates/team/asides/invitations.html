@@ -1,0 +1,26 @@
+{% load filters %}
+<aside id="invitations-aside">
+    <div class="column">
+        <button type="button" onclick="Fixed.clear()" class="material-icons column-button">close</button>
+        <section class="widget">
+            {% if space.invitations.count %}
+            <table>
+            {% for invitation in space.invitations.all %}
+                <tr>
+                    <td>
+                        <b class="text-transform-none">{{ invitation.user.username }}</b>
+                    </td>
+                    <td>
+                        <a href="{% url 'mate:delete_space_invitation' invitation.id %}" class="material-icons">close</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+            {% else %}
+            <div class="note">
+                <p class="text-align-center">You have no invitations.</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</aside>

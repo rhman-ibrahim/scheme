@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'team:login' %}" id="login-form">
+    {% with form=template.forms.login password=1 %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

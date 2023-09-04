@@ -1,0 +1,28 @@
+{% load filters %}
+<aside id="requests-aside">
+    <div class="column">
+        <button type="button" onclick="Fixed.clear()" class="material-icons column-button">close</button>
+        <section class="widget">
+            {% if space.requests.count %}
+            {% for sreq in space.requests.all %}
+            <div class="note">
+                <p>From <mark><b class="text-transform-none">{{ sreq.sender.username }}</b></mark> {{ sreq.created|ago }}</p>
+                <p>{{ sreq.message}}</p>
+                <nav>
+                    <a href="{% url 'mate:accept_space_request' sreq.id %}">
+                        <i class="material-icons">done</i>
+                    </a>
+                    <a href="{% url 'mate:reject_space_request' sreq.id %}">
+                        <i class="material-icons">close</i>
+                    </a>
+                </nav>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="note">
+                <p class="text-align-center">You have no received requests.</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</aside>

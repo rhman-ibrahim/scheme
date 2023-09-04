@@ -1,0 +1,20 @@
+<form method="POST" action="{% url 'team:instance' %}" id="update-form">
+    {% with form=template.forms.space %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'team:friends' %}" id="friends-form">
+    {% with form=template.forms.import %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'team:transfer' %}" id="transfer-form">
+    {% with form=template.forms.transfer %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>
+<form method="POST" action="{% url 'team:delete' %}" id="delete-form">
+    {% with form=template.forms.delete %}
+    {% include "components/form/base.html" %}
+    {% endwith %}
+</form>

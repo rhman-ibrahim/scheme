@@ -1,0 +1,37 @@
+{% load filters %}
+<section class="widget">
+    <h3>
+        <i class="material-symbols-outlined">token</i>
+        <span>token</span>
+    </h3>
+    <section class="notes">
+        <div class="note">
+            <p><mark>Copy</mark> your space ({{ space.name }}) key,
+            space keys are used to log-in directly wether <span>signed-in or not.</span></p>
+            <nav>
+                <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ membership.user.key }}">content_copy</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p>It is recommened to renew your <span><mark>space's key</mark></span>
+            regulary, last update <span>was <mark>{{ membership.updated|ago }}</mark>.</span></p>
+            <nav>
+                <i class="material-icons">refresh</i>
+            </nav>
+        </div>
+    </section>
+</section>
+<section class="widget">
+    <h3>
+        <i class="material-icons">shield</i>
+        <span>secuirty</span>
+    </h3>
+    <section class="notes">
+        <div class="note">
+            <p><mark>Leave</mark> the circle and delete your all of your contributions.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#leave-form')">person_remove</i>
+            </nav>
+        </div>
+    </section>
+</section>

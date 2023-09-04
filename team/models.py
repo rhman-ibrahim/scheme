@@ -1,23 +1,25 @@
-# Django
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry
+from django.urls import reverse
 from django.db import models
 
-# Models
+from helpers.functions import (
+    generate_identifier, secret
+)
+
+from home.models import TimeStamp
 from ping.models import Room
-from mate.models import Membership
-
-# Helpers
-from helpers.functions import generate_identifier, secret
+from user.models import Token
 
 
-class Space(models.Model):
+
+class Space(TimeStamp):
 
     name        = models.CharField(max_length=32, null=False, blank=False)
     identifier  = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
     description = models.TextField(max_length=512, blank=True)
     founder     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="founder", null=False, blank=False)
-    members     = models.ManyToManyField("user.Account", blank=True, related_name="members")
+    members     = models.ManyToManyField("user.Account", blank=True, related_name="memberships", through="Membership")
     password    = models.CharField(max_length=128, null=False, blank=False)
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
@@ -33,16 +35,21 @@ class Space(models.Model):
         return False if not bool(self.description) else True
     
     @property
-    def join_requests(self):
-        from mate.models import SpaceRequest
-        return SpaceRequest.objects.filter(circle=self, status=2)
-
-    @property
     def logs(self):
         return LogEntry.objects.filter(
             content_type = ContentType.objects.get_for_model(Space),
             object_id    = self.id
         )
+    
+    @property
+    def requests(self):
+        from mate.models import SpaceRequest
+        return SpaceRequest.objects.filter(space=self, status=2)
+
+    @property
+    def invitations(self):
+        from mate.models import SpaceInvitation
+        return SpaceInvitation.objects.filter(space=self, status=2)
     
     @property
     def room(self):
@@ -64,9 +71,34 @@ class Space(models.Model):
     def check_password(self, raw_password):
         return self.password == secret(raw_password)
 
-    def user_role(self, user):
-        if user in self.members.all():
-            return "member"
-        elif user == self.founder:
-            return "founder"
-        return None
+    def save(self):
+        super().save()
+        self.build()
+
+
+class Membership(models.Model):
+
+    space   = models.ForeignKey('team.Space', on_delete=models.CASCADE)
+    user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
+    key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
+    ready   = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('user', 'space')
+    
+    def __str__(self):
+        return f"{self.user.username}'s {self.space.name} membership"
+    
+    def save(self, *args, **kwargs):
+        query = Membership.objects.filter(key=self.key)
+        if query.exists():
+            self.ready = False
+        self.ready = True
+        super(Membership, self).save(*args, **kwargs)
+    
+    def refresh(self):
+        self.key = generate_identifier()
+        self.save()
+
+    def url(self):
+        return reverse("team:member", args=[str(self.id)])

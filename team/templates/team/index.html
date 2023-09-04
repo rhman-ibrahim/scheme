@@ -3,12 +3,13 @@
 
 {% block right %}
 {% include "team/widgets/space.html" %}
-{% include "components/widgets/communicate.html" %}
-{% include "team/widgets/user.html" %}
+{% include "user/widgets/communicate.html" %}
+{% include "team/widgets/membership.html" %}
 {% endblock %}
 
 {% block side %}
-{% include "ping/form/room.html" %}
+{% include "team/asides/members.html" %}
+{% include "ping/forms/room.html" %}
 {% endblock %}
 
 {% block js %}

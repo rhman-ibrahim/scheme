@@ -1,10 +1,18 @@
+from django.core.exceptions import NON_FIELD_ERRORS
 from django import forms
 from .models import Space
-
+from user.models import Account
+from helpers.functions import (
+    secret,
+)
 
 class SpaceForm(forms.ModelForm):
 
-    name        = forms.CharField(
+    founder = forms.IntegerField(
+        required=True,
+        widget=forms.HiddenInput()
+    )
+    name = forms.CharField(
         max_length=32,
         required=True,
         widget=forms.TextInput(
@@ -14,12 +22,12 @@ class SpaceForm(forms.ModelForm):
             }
         )
     )
-    password    = forms.CharField(
+    password = forms.CharField(
         widget=forms.PasswordInput(
             attrs = {
-                'data-field':"password",
                 'placeholder': "space password",
-                'autocomplete':"new-password"
+                'autocomplete':"new-password",
+                'class':"password"
             }
         )
     )
@@ -40,6 +48,16 @@ class SpaceForm(forms.ModelForm):
         model  = Space
         fields = ['name', 'password', 'description']
 
+    def clean(self):
+        if Space.objects.filter(name=self.cleaned_data['name'],founder__id=self.cleaned_data['founder']).exists():
+            raise forms.ValidationError({'name': ['You have a circle with this name']})
+        super().clean()
+
+    def save(self):
+        instance          = super().save(commit=False)
+        instance.password = secret(self.cleaned_data['password'])
+        instance.founder  = Account.objects.get(id=self.cleaned_data['founder'])
+        instance.save()
 
 class SpaceLoginForm(forms.Form):
 
@@ -56,7 +74,8 @@ class SpaceLoginForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(
             attrs={
-                'autocomplete':'current-password'
+                'autocomplete':'current-password',
+                'class':"password"
             }
         )
     )

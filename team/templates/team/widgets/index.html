@@ -1,0 +1,77 @@
+{% load filters %}
+<section class="widget">
+    <h3>
+        <i class="material-icons">diversity_2</i>
+        <span>{{ space.name }}</span>
+    </h3>
+    <section class="notes">
+        <div class="note">
+            <p><mark>Update</mark> the space's profile info, make sure to keep it specific.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#update-form')">edit</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p><mark>Back</mark> to the space's home page.</p>
+            <nav>
+                <a href="{% url 'team:index' %}">
+                    <i class="material-icons">home</i>
+                </a>
+            </nav>
+        </div>
+    </section>
+</section>
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">groups</i>
+        <span>manage</span>
+    </h3>
+    <div class="notes">
+        <div class="note">
+            <p>Select from your friends list to <mark>add</mark> <span>directly to the space.</span></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#founder-friends-form')">add</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p>Submit an <mark>account identifier</mark>
+            to send <span><mark>a space invitation</mark></span>,
+            add a message <span>with your invitation.</span></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#invitation-form')">mail</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p>View a list of all the received <mark><span>space requests.</span></mark></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#requests-aside')">mark_email_unread</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p>View a list of all the sent <mark><span>space invitations.</span></mark></p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#invitations-aside')">outgoing_mail</i>
+            </nav>
+        </div>
+    </div>
+</section>
+<section class="widget" id="team-navigate-widget">
+    <h3>
+        <i class="material-icons">shield</i>
+       <span>secuirty</span>
+    </h3>
+    <section class="notes">
+        <div class="note">
+            <p><mark>Transfer</mark> the space ownership <span>to another member</span>.</p>
+            <nav>
+                <i class="material-symbols-outlined" onclick="Fixed.open('#transfer-form')">partner_exchange</i>
+            </nav>
+        </div>
+        <div class="note">
+            <p><mark>Delete</mark> the circle and delete its content, <span>this cannot be undone</span>.</p>
+            <nav>
+                <i class="material-icons" onclick="Fixed.open('#delete-form')">delete</i>
+            </nav>
+        </div>
+    </section>
+</section>
