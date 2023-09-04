@@ -1,39 +1,33 @@
 # Django
-from django.db import IntegrityError
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.contrib import messages
-from django.shortcuts import render
 
 # Models
 from team.models import Space
 from user.models import Account
 from .models import (
-    FriendRequest, Friendship,
-    SpaceRequest, SpaceInvitation
+    SpaceRequest, SpaceInvitation,
+    FriendRequest
 ) 
 
 # Forms
 from mate.forms import SignalForm
-from ping.forms import RoomForm
 
-# Decorators
+# Helpers
 from helpers.decorators import (
-    back,
-    is_authenticated,
-    is_founder, is_logined,
-    resource
+    is_authenticated, is_founder, is_logged,
+    resource, back
 )
-
-# Functions
 from helpers.functions import (
-    get_form_errors,
-    create_a_guest_account,
+    create_a_temporary_account,
+    get_form_errors
 )
 
-
-@is_authenticated(True)
 @back
 def create_friend_request(request):
+    if not request.user.is_authenticated:
+        create_a_temporary_account(request)
     if request.method == "POST":
         try:
             form = SignalForm(request.POST)
@@ -58,7 +52,7 @@ def create_friend_request(request):
 @back
 def create_space_request(request):
     if not request.user.is_authenticated:
-        create_a_guest_account(request)
+        create_a_temporary_account(request)
     if request.method == 'POST':
         form  = SignalForm(request.POST)
         if form.is_valid():
@@ -73,17 +67,19 @@ def create_space_request(request):
             get_form_errors(request, form)
 
 @is_authenticated(True)
-@is_logined(True)
 @back
 def create_space_invitation(request):
     if request.method == 'POST':
         form  = SignalForm(request.POST)
         if form.is_valid():
-            query  = SpaceInvitation.objects.filter(space__identifier=form.cleaned_data['identifier'], user=request.user)
+            query  = SpaceInvitation.objects.filter(
+                space__id=request.session.get('space'),
+                user__username=form.cleaned_data['identifier']
+            )
             if not query.exists():
                 SpaceInvitation.objects.create(
-                    space=Space.objects.get(identifier=form.cleaned_data['identifier']),
-                    user=request.user
+                    space=Space.objects.get(id=request.session.get('space')),
+                    user=Account.objects.get(username=form.cleaned_data['identifier'])
                 )
                 messages.success(request, "space invitation created successfully.")
         else:
@@ -120,23 +116,18 @@ def delete_friend_request(request, id):
         messages.warning(request,"you are not allowed to perform this action")
 
 @is_authenticated(True)
-@is_logined(True)
-@is_founder
 @back
 def accept_space_request(request, id):
     sreq = SpaceRequest.objects.get(id=id)
     sreq.accept()
 
 @is_authenticated(True)
-@is_logined(True)
-@is_founder
 @back
 def reject_space_request(request, id):
     sreq = SpaceRequest.objects.get(id=id)
     sreq.reject()
     
 @is_authenticated(True)
-@is_logined(True)
 @back
 def delete_space_request(request, id):
     sreq = SpaceRequest.objects.get(id=id)
@@ -145,56 +136,19 @@ def delete_space_request(request, id):
         messages.warning(request,"You are not allowed to preform this action")
 
 @is_authenticated(True)
-@is_logined(True)
-@is_founder
 @back
 def accept_space_invitation(request, id):
     sreq = SpaceInvitation.objects.get(id=id)
     sreq.accept()
 
 @is_authenticated(True)
-@is_logined(True)
-@is_founder
 @back
 def reject_space_invitation(request, id):
     sreq = SpaceInvitation.objects.get(id=id)
     sreq.reject()
 
 @is_authenticated(True)
-@is_logined(True)
 @back
 def delete_space_invitation(request, id):
     sreq = SpaceInvitation.objects.get(id=id)
-    if request.user == sreq.user:
-        sreq.cancel()
-        messages.warning(request,"You are not allowed to preform this action")
-
-@is_authenticated(True)
-@resource
-def retrieve_friend_index(request, username):
-    mate        = Account.objects.get(username=username)
-    friendship  = Friendship.objects.get(users__lte=2, users__in=[mate, request.user])
-    return render(
-        request,
-        "mate/index.html",
-        {
-            'grid': {
-                'title':f'{ mate.username }',
-                'icon':'menu'
-            },
-            'forms': {
-                'ping': {
-                    'room': RoomForm(
-                        initial = {
-                            'identifier': friendship.identifier,
-                            'username': request.user.username,
-                            'token': request.user.token.key
-                        }
-                    ),
-                }
-            },
-            'mate':mate,
-            'friendship':friendship,
-            'room':friendship.room
-        }
-    )
+    sreq.cancel()

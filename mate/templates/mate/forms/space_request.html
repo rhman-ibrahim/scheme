@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'mate:create_space_request' %}" id="space-request-form">
-    {% with form=forms.mate.space.request %}
+    {% with form=template.forms.space_request %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

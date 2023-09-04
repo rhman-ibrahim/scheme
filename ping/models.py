@@ -1,12 +1,10 @@
-# Django
 from django.urls import reverse
 from django.db import models
-
-# Helpers
 from helpers.functions import generate_identifier
+from home.models import TimeStamp
 
 
-class Room(models.Model):
+class Room(TimeStamp):
 
     identifier  = models.CharField(max_length=36, default=generate_identifier, null=False, blank=False)
     status      = models.BooleanField(default=True, blank=False, null=False)
@@ -28,11 +26,10 @@ class Room(models.Model):
         return "group" if self.members.count() > 2 else "one-to-one"
     
 
-class Message(models.Model):
+class Message(TimeStamp):
 
     room    = models.ForeignKey("ping.Room", on_delete=models.CASCADE)
     sender  = models.ForeignKey("user.Account", on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
     body    = models.TextField()
 
     def __str__(self):

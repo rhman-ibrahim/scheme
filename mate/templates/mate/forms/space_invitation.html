@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'mate:create_space_invitation' %}" id="space-invitation-form">
-    {% with form=forms.mate.space.invitation %}
+    {% with form=template.forms.invitation %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

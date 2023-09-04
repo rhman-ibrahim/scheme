@@ -1,14 +1,10 @@
-# Validators
-from django.core.exceptions import (
-    ValidationError, MultipleObjectsReturned
-)
-# DB
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db import models
 
 # Models
 from ping.models import Room
-
+from home.models import TimeStamp
 # Helpers
 from helpers.functions import generate_identifier
 
@@ -19,15 +15,13 @@ REQUEST_STATUS = (
     (2, "Pending"),
 )
 
-class FriendRequest(models.Model):
+class FriendRequest(TimeStamp):
 
     status     = models.IntegerField(choices=REQUEST_STATUS, default=2, blank=False, null=False)
     identifier = models.CharField(max_length=36, default=generate_identifier, null=False, blank=False)
     receiver   = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="receiver")
     sender     = models.ForeignKey("user.Account", on_delete=models.CASCADE, related_name="sender")
     message    = models.TextField(max_length=256, blank=True, null=True, default="Sender did not provide a message.")
-    created    = models.DateTimeField(auto_now_add=True)
-    updated    = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('sender', 'receiver')
@@ -69,26 +63,22 @@ class FriendRequest(models.Model):
     def cancel(self):
         self.delete()
         
-class Friendship(models.Model):
+class Friendship(TimeStamp):
 
     users      = models.ManyToManyField("user.Account", max_length=2, editable=False)
     identifier = models.CharField(max_length=36, default=generate_identifier, null=False, blank=False)
-    created    = models.DateTimeField(auto_now_add=True)
-    updated    = models.DateTimeField(auto_now=True)
 
     @property
     def room(self):
         return Room.objects.get(identifier=self.identifier)
 
 
-class SpaceSignal(models.Model):
+class SpaceSignal(TimeStamp):
 
     message   = models.TextField(max_length=256, blank=True, null=True, default="Sender did not provide a message.")
     status    = models.IntegerField(default=2, choices=REQUEST_STATUS, blank=False,null=False)
     user      = models.ForeignKey('user.Account', on_delete=models.CASCADE)
     space     = models.ForeignKey('team.Space', on_delete=models.CASCADE)
-    created   = models.DateTimeField(auto_now_add=True)
-    updated   = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract        = True
@@ -106,8 +96,7 @@ class SpaceSignal(models.Model):
         self.build()
 
     def build(self):
-        Membership.objects.create(user=self.user, space=self)
-        room, created = Room.objects.get_or_create(identifier=self.identifier)
+        room, created = Room.objects.get_or_create(identifier=self.space.identifier)
         room.members.add(self.user)
 
     def reject(self):
@@ -126,28 +115,3 @@ class SpaceInvitation(SpaceSignal):
 
     def __str__(self):
         return f'from {self.space.name}/{self.space.founder} to {self.user} ({self.get_status_display()})'
-    
-class Membership(models.Model):
-
-    user    = models.ForeignKey('user.Account', on_delete=models.CASCADE)
-    space   = models.ForeignKey('team.Space', on_delete=models.CASCADE)
-    key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
-    ready   = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        unique_together = ('user', 'space')
-    
-    def __str__(self):
-        return f"On {self.created.strftime('%B %d, %Y')}: {self.user.username} joined {self.space.name}."
-    
-    def save(self, *args, **kwargs):
-        try:
-            Membership.objects.get(key=self.key)
-            self.ready = False
-        except MultipleObjectsReturned:
-            self.ready = True
-        except Membership.DoesNotExist:
-            pass
-        super(Membership, self).save(*args, **kwargs)

@@ -4,7 +4,6 @@ from . import views
 
 app_name    = "mate"
 urlpatterns = [
-    path('<str:username>/', views.retrieve_friend_index, name="retrieve_friend_index"),
     path('create/request/', views.create_friend_request, name='create_friend_request'),
     path('accept/<int:id>/', views.accept_friend_request, name='accept_friend_request'),
     path('reject/<int:id>/', views.reject_friend_request, name='reject_friend_request'),
