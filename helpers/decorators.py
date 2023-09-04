@@ -9,8 +9,8 @@ def center(view):
     def wrapper(request, *args, **kwargs):
         view(request, *args, **kwargs)
         if request.user.is_authenticated:
-            return redirect("user:retrieve_account")
-        return redirect("home:retrieve_home_index")
+            return redirect("user:account")
+        return redirect("home:index")
     return wrapper
 
 def resource(view):
@@ -19,11 +19,11 @@ def resource(view):
             return view(request, *args, **kwargs)
         except ObjectDoesNotExist:
             messages.warning(request, "the requested resource does not exist")
-            return redirect('home:resource_not_found')
+            return redirect('home:404')
     return wrapper
 
 def back(view):
-    @resource
+    # @resource
     def wrapper(request, *args, **kwargs):
         response = view(request, *args, **kwargs)
         if not isinstance(response, (HttpResponseRedirect, HttpResponsePermanentRedirect)):
@@ -39,10 +39,10 @@ def is_authenticated(status):
             else:
                 if status:
                     messages.warning(request, "you have to sign-in first.")
-                    return redirect("home:retrieve_home_index")
+                    return redirect("home:index")
                 else:
                     messages.warning(request, "you have to sign-out first.")
-                    return redirect("user:retrieve_account")
+                    return redirect("user:account")
         return wrapper
     return decorator
 
@@ -52,41 +52,43 @@ def is_temporary(status):
             if status == request.user.is_temporary:
                 return view(request, *args, **kwargs)
             else:
-                if status:
+                if status == True:
                     messages.warning(request, "only guest users are allowed.")
-                messages.warning(request, "guest users are not allowed.")
-                return redirect('user:retrieve_account')
+                else:
+                    messages.warning(request, "guest users are not allowed.")
+                    return redirect('user:account')
         return wrapper
     return decorator
 
-def is_logined(status):
+def is_logged(status):
     def decorator(view):
+        @is_authenticated(True)
         def wrapper(request, *args, **kwargs):
-            connected = True if 'space' in request.session else False
-            if request.user.is_authenticated:
-                if status == connected:
-                    return view(request, *args, **kwargs)
-                elif status == True:
+            connection = True if 'space' in request.session else False
+            if status == connection:
+                return view(request, *args, **kwargs)
+            else:
+                if status == True:
                     messages.warning(request, "you have to login to the space.")
                 else:
                     messages.warning(request, "you have to logout to the space.")
-                    return redirect('team:retrieve_team_index')
-            messages.warning(request, "you have to signin")
+                return redirect('team:index')
         return wrapper
     return decorator
     
 def is_founder(view):
+    @is_authenticated(True)
+    @is_logged(True)
     def wrapper(request, *args, **kwargs):
-        if 'space' in request.session:
-            query = Space.objects.filter(id=request.session.get('space'))
-            if query.exists():
-                space = query.first()
-                if space.founder == request.user:
-                    return view(request, *args, **kwargs)
-                else:
-                    messages.warning(
-                        request,
-                        "only space founder is allowed"
-                    )
-                    return redirect('team:retrieve_team_index')
-        return wrapper
+        query = Space.objects.filter(id=request.session.get('space'))
+        if query.exists():
+            space = query.first()
+            if space.founder == request.user:
+                return view(request, *args, **kwargs)
+            else:
+                messages.warning(
+                    request,
+                    "only space founder is allowed"
+                )
+                return redirect('team:index')
+    return wrapper

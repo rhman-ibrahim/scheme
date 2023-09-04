@@ -17,7 +17,7 @@ def secret(raw_string):
 def generate_identifier():
     return get_random_string(length=32)
 
-def create_a_guest_account(request):
+def create_a_temporary_account(request):
     from user.models import Account
     user = Account.objects.create_guest(
         username = str(uuid.uuid4())[:8],
