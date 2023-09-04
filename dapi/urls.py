@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import MessageViewSet
-from team.api import SpaceViewSet
-from ping.api import RoomViewSet
-from user.api import AccountViewSet
+from .views.ping import RoomViewSet
+from .views.user import AccountViewSet
+from .views.ping import MessageViewSet
+from .views.team import SpaceViewSet
 
 
 app_name    = "api"
