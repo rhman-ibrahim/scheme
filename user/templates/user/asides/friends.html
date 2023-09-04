@@ -3,18 +3,20 @@
         <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
         <section class="widget">
             {% if request.user.profile.friends.count %}
+            <table>
             {% for friend in request.user.profile.friends.all %}
-            <div class="note info-note">
-                <mark><b class="text-transform-none">{{ friend.user.username }}</b></mark>
-                <nav>
-                    <a href="{{ friend.index }}">
-                        <i class="material-icons">link</i>
-                    </a>
-                </nav>
-            </div>
+                <tr>
+                    <td>
+                        <b class="text-transform-none">{{ friend.user.username }}</b>
+                    </td>
+                    <td>
+                        <a href="{{ friend.index }}" class="material-icons">link</a>
+                    </td>
+                </tr>
             {% endfor %}
+            </table>
             {% else %}
-            <div class="note info-note">
+            <div class="note">
                 <p class="text-align-center">You have no sent connections.</p>
             </div>
             {% endif %}

@@ -1,5 +1,0 @@
-<form method="POST" action="{% url 'user:delete_account' %}" id="account-delete-form">
-    {% with form=forms.user.delete password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>

@@ -2,9 +2,9 @@
 
 {% block main %}
 {% include "user/widgets/account.html" %}
-{% include "components/widgets/token.html" %}
+{% include "home/widgets/token.html" %}
 {% include "user/widgets/settings.html" %}
-{% include "components/widgets/theme.html" %}
+{% include "home/widgets/theme.html" %}
 {% endblock %}
 
 {% block right %}
@@ -13,21 +13,20 @@
 {% endblock %}
 
 {% block left %}
-{% include "components/widgets/connect.html" %}
+{% include "home/widgets/connect.html" %}
 {% endblock %}
 
 {% block side %}
-{% include "user/aside/friends.html" %}
-{% include "mate/aside/friend/sent.html" %}
-{% include "mate/aside/friend/received.html" %}
-{% include "mate/aside/space/sent.html" %}
-{% include "team/aside/spaces.html" %}
-{% include "note/form/login.html" %}
-{% include "user/form/password.html" %}
-{% include "user/form/profile.html" %}
-{% include "user/form/delete.html" %}
-{% include "mate/form/friend/request.html" %}
-{% include "mate/form/space/request.html" %}
-{% include "team/form/create.html" %}
-{% include "team/form/login.html" %}
+{% include "home/forms/login.html" %}
+{% include "user/forms/index.html" %}
+{% include "user/asides/requests/friend/sent.html" %}
+{% include "user/asides/requests/friend/received.html" %}
+{% include "user/asides/requests/space.html" %}
+{% include "user/asides/invitations.html" %}
+{% include "user/asides/friends.html" %}
+{% include "user/asides/spaces.html" %}
+{% include "mate/forms/friend_request.html" %}
+{% include "mate/forms/space_request.html" %}
+{% include "team/forms/create.html" %}
+{% include "team/forms/login.html" %}
 {% endblock %}

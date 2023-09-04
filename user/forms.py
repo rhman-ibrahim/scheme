@@ -1,101 +1,35 @@
 from django import forms
-from django.contrib.auth import authenticate
-from django.contrib.auth.forms import (
-    UserCreationForm, PasswordChangeForm,
-    SetPasswordForm
-)
-from user.models import (
-    Account, Profile
-)
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.hashers import check_password
+from user.models import Account, Profile
 
+class PasswordConfirmForm(forms.Form):
 
-class SignUpForm(UserCreationForm):
+    account  = forms.IntegerField(
+        widget=forms.HiddenInput(
 
-    username = forms.CharField(
-        label='Username',
-        help_text='usernames are 4 to 16 alphabetic/numeric characters.',
-        widget = forms.TextInput(
-            attrs = {
-                'id':'sign-up-form-username',
-                'pattern':'^[a-zA-Z0-9]{4,16}$',
-                'autocomplete':'username'
-            }
         )
     )
-    password1 = forms.CharField(
-        label='Password',
-        help_text='at least 8 characters containing alphabetic/numeric characters and special characters.',
-        widget = forms.PasswordInput(
-            attrs = {
-                'id':'sign-up-form-password-1',
-                'autocomplete':'new-password',
-                'class':'password',
-            }
-        )
-    )
-    password2 = forms.CharField(
-        label='Confirm',
-        help_text="repeat your password.",
-        widget = forms.PasswordInput(
-            attrs = {
-                'id':'sign-up-form-password-2',
-                'autocomplete':'new-password',
-                'class':'password',
-            }
-        )
-    )
-
-    def __init__(self, *args, **kwargs):
-        super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.pop("autofocus", None)
-
-    class Meta:
-
-        model  = Account
-        fields = ['username']
-
-
-class SignInForm(forms.ModelForm):
-
-    username = forms.CharField(
-        label='Username',
-        widget = forms.TextInput(
-            attrs = {
-                'id':'sign-in-form-username',
-                'pattern':'^[a-zA-Z0-9]{4,16}$',
-                'autocomplete':'username',
-            }
-        )
-    )
+    
     password = forms.CharField(
-        label='Password',
         widget = forms.PasswordInput(
-            attrs = {
-                'id':'sign-in-form-password',
-                'autocomplete':'current-password',
+            attrs  = {
                 'class':'password',
+                'id':'password-confirm-form',
+                'autocomplete':'current-password',
             }
         )
     )
-    
-    def clean(self):
+
+    def confirm(self):
         if self.is_valid():
-            username = self.cleaned_data['username']
-            password = self.cleaned_data['password']
-            try:
-                account = Account.objects.get(username=username) 
-            except Account.DoesNotExist:
-                raise forms.ValidationError('account does not exist')
-            if account.is_active == False:
-                raise forms.ValidationError('your account has not been activated yet')
-            if not authenticate(username=username, password=password):
-                raise forms.ValidationError('password is incorrect')
+            account = Account.objects.get(id=self.cleaned_data['account'])
+            if check_password(self.cleaned_data['password'], account.password):
+                return True
+            else:
+                self.add_error('password', 'wrong password')
 
-    
-    class Meta:
 
-        model  = Account
-        fields = ['username', 'password']
 
 class PasswordUpdateForm(PasswordChangeForm):
     
@@ -170,16 +104,3 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model  = Profile
         fields = ['name', 'email', 'about']
-
-
-class PasswordForm(forms.Form):
-
-    password = forms.CharField(
-        widget = forms.PasswordInput(
-            attrs  = {
-                'class':'password',
-                'id':'account-delete-password-form',
-                'autocomplete':'current-password',
-            }
-        )
-    )

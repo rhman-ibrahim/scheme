@@ -1,18 +1,17 @@
-# Standard libraries
 import datetime, pytz
-
-# Django
-from django.urls import reverse
+from django.db.models import Q
 from django.core.validators import RegexValidator
 from django.contrib.admin.models import LogEntry
-from django.core.exceptions import MultipleObjectsReturned
-from django.db.models import Q
 from django.db import models
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser, PermissionsMixin
+    BaseUserManager, AbstractBaseUser,
+    PermissionsMixin
 )
-
-from helpers.functions import generate_identifier
+from django.urls import reverse
+from home.models import TimeStamp
+from helpers.functions import (
+    generate_identifier
+)
 
 
 class UserManager(BaseUserManager):
@@ -42,22 +41,20 @@ class UserManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser, PermissionsMixin):
+class Account(AbstractBaseUser, PermissionsMixin, TimeStamp):
 
     username       = models.CharField(
         validators = [
             RegexValidator(regex='^[a-zA-Z0-9]{4,16}$', message='this is not a valid username')
         ],
         unique      = True,
-        max_length  = 16
+        max_length  = 8
     )
     is_active      = models.BooleanField(default=True)
     is_superuser   = models.BooleanField(default=False)
     is_admin       = models.BooleanField(default=False)
     is_staff       = models.BooleanField(default=False)
-    is_temporary       = models.BooleanField(default=False)
-    created        = models.DateTimeField(auto_now_add=True)
-    updated        = models.DateTimeField(auto_now=True)
+    is_temporary   = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
     objects        = UserManager()
 
@@ -88,29 +85,32 @@ class Account(AbstractBaseUser, PermissionsMixin):
             return tt.strftime("%b %d, %Y %H:%M:%S")
         return None
 
+    def deactivate(self):
+        self.is_active = False
+        self.save()
 
-class Token(models.Model):
+class Token(TimeStamp):
 
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
     key     = models.CharField(max_length=32, default=generate_identifier, null=False, blank=False)
     ready   = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.key
+        return f"{self.user.username}'s token"
 
     def save(self, *args, **kwargs):
-        try:
-            Token.objects.get(key=self.key)
+        query = Token.objects.filter(key=self.key)
+        if query.exists():
             self.ready = False
-        except MultipleObjectsReturned:
-            self.ready = True
-        except Token.DoesNotExist:
-            pass
+        self.ready = True
         super(Token, self).save(*args, **kwargs)
 
-class Profile(models.Model):
+    def refresh(self):
+        self.key = generate_identifier()
+        self.save()
+
+
+class Profile(TimeStamp):
     
     user    = models.OneToOneField("user.Account", on_delete=models.CASCADE, primary_key=True)
     name    = models.CharField(max_length=64, blank=True, null=True)
@@ -122,7 +122,7 @@ class Profile(models.Model):
         return f"{self.user.username}'s profile"
 
     def index(self):
-        return reverse("mate:retrieve_friend_index", args=[str(self.user.username)])
+        return reverse("user:friend", args=[str(self.user.username)])
 
     @property
     def has_name(self):
@@ -150,6 +150,11 @@ class Profile(models.Model):
             },
             'space': SpaceRequest.objects.filter(user=self.user, status=2).distinct().order_by('-id')
         }
+    
+    @property
+    def invitations(self):
+        from mate.models import SpaceInvitation
+        return SpaceInvitation.objects.filter(user=self.user, status=2).distinct().order_by('-id')
     
     @property
     def spaces(self):

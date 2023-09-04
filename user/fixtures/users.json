@@ -9,9 +9,7 @@
       "is_superuser":true,
       "is_admin": true,
       "is_staff": true,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   },
   {
@@ -34,9 +32,7 @@
       "is_superuser":false,
       "is_admin": false,
       "is_staff": false,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   },
   {
@@ -49,9 +45,7 @@
       "is_superuser":false,
       "is_admin": false,
       "is_staff": false,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   },
   {
@@ -64,9 +58,7 @@
       "is_superuser":false,
       "is_admin": false,
       "is_staff": false,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   },
   {
@@ -79,9 +71,7 @@
       "is_superuser":false,
       "is_admin": false,
       "is_staff": false,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   },
   {
@@ -94,9 +84,7 @@
       "is_superuser":false,
       "is_admin": false,
       "is_staff": false,
-      "is_guest": false,
-      "created": "2022-10-1T00:00:00+00:00",
-      "updated": "2022-10-1T00:00:00+00:00"
+      "is_temporary": false
     }
   }
 ]

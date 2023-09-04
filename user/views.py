@@ -1,98 +1,40 @@
+import tempfile
+from weasyprint import HTML, CSS
+from django.template.loader import render_to_string
 # Django
-from django.db.models import Q
 from django.contrib import messages
-from django.contrib.auth.hashers import check_password
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import (
     update_session_auth_hash,
-    authenticate, login,
     logout,
 )
 
 # Models
+from mate.models import Friendship
 from .models import Account
 
 # Forms
 from mate.forms import SignalForm
 from team.forms import SpaceForm, SpaceLoginForm
-from note.forms import KeyForm
+from ping.forms import RoomForm
+from home.forms import KeyForm
 from .forms import (
-    SignInForm, SignUpForm,
     PasswordUpdateForm, ProfileForm,
-    PasswordForm
+    PasswordConfirmForm
 )
 
 # Functions
-from helpers.functions import (
-    get_form_errors,
-    create_a_guest_account,
-)
-
-# Decorators
-from helpers.decorators import (
-    is_temporary, is_authenticated,
-    back, center, resource,
-)
+from helpers.functions import get_form_errors
+from helpers.decorators import back
 
 
-@is_authenticated(False)
-def create_account(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"your account has been created successfully.")
-        else:
-            get_form_errors(request,form)
-        return redirect("user:retrieve_account")
+def update_token(request):
+    request.user.token.refresh()
+    messages.success(request, "your token has been updated successfully")
+    return redirect("user:account")
 
-@is_authenticated(False)
-def create_guest(request):
-    create_a_guest_account(request)
-    return redirect('user:retrieve_account')
-
-@is_authenticated(True)
-def retrieve_account(request):
-    return render(
-        request,
-        "user/index.html",
-        {
-            'grid': {
-                'title': f'Settings / { request.user.username }',
-                'icons': {
-                    'left': 'layers',
-                    'right': 'menu'
-                }
-            },
-            'forms': {
-                'user': {
-                    'password': PasswordUpdateForm(False),
-                    'delete': PasswordForm(auto_id="account_delete_%s"),
-                    'info': ProfileForm(instance=request.user.profile, auto_id="profile_info_%s"),
-                },
-                'team': {
-                    'space': SpaceForm(auto_id="space_%s"),
-                    'login': SpaceLoginForm(auto_id="space_login_%s")
-                },
-                'note': {
-                    'login': KeyForm(auto_id="space_login_%s")
-                },
-                'mate': {
-                    'friend': {
-                        'request':SignalForm(auto_id="friend_request_%s")
-                    },
-                    'space': {
-                        'request': SignalForm(auto_id="space_request_%s")
-                    }
-                }
-            }
-        }
-    )
-
-@is_authenticated(True)
-@is_temporary(False)
-@back
-def update_account_password(request):
+def update_password(request):
     if request.method == 'POST':
         form = PasswordUpdateForm(request.user, request.POST)
         if form.is_valid():
@@ -102,21 +44,7 @@ def update_account_password(request):
         else:
             get_form_errors(request, form)
 
-
-@is_authenticated(True)
-@resource
-def update_account_status(request):
-    account = Account.objects.get(id=request.user.id)
-    account.is_active = False
-    account.save()
-    logout(request)
-    messages.info(request, 'account has been deactivated')
-    return redirect("home:retrieve_home_index")
-
-@is_authenticated(True)
-@is_temporary(False)
-@back
-def update_profile_info(request):
+def update_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
@@ -126,44 +54,99 @@ def update_profile_info(request):
             messages.success(request, "profile info updated successfully")
         else:
             get_form_errors(request, form)
-
-@is_authenticated(False)
-@center
-def signin(request):
-    if request.method == 'POST':
-        form = SignInForm(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
-            )
-            if user is not None:
-                login(request, user)
-                messages.success(request, 'signed in successfully')
-                return redirect("user:retrieve_account")
-        else:
-            get_form_errors(request, form)
-
-@is_authenticated(True)
-def signout(request):
-    if 'circle' in request.session:
-        request.session.pop('circle')
+            
+def sign_out(request):
+    if 'space' in request.session:
+        request.session.pop('space')
     logout(request)
     messages.success(request, 'signed out successfully')
-    return redirect('home:retrieve_home_index')
+    return redirect('home:index')
 
-@is_authenticated(True)
-@center
-def delete_account(request):
-    form = PasswordForm(request.POST)
-    if form.is_valid():
-        if check_password(form.cleaned_data['password'],request.user.password):
-            account = Account.objects.get(username=request.user.username)
-            account.delete()
-            messages.success(request,"your account has been deleted successfully.")
-            logout(request)
-            return redirect("home:retrieve_home_index")
+def deactivate(request):
+    request.user.deactivate()
+    logout(request)
+    messages.info(request, 'account has been deactivated')
+    return redirect("home:index")
+
+def pdf(request):
+    if request.method == 'POST':
+        form = PasswordConfirmForm(request.POST)
+        if form.confirm():
+            response                              = HttpResponse(content_type='application/pdf;')
+            response['Content-Disposition']       = f'inline; attachment; filename={request.user.username}.pdf'
+            response['Content-Transfer-Encoding'] = 'binary'
+            html   = HTML(string=render_to_string('user/pdf.html',{'token':request.user.token, 'user':request.user}))
+            css    = [CSS(f'/home/rhman/Documents/dj/scheme/user/static/user/css/pdf.css')]
+            result = html.write_pdf(stylesheets=css)
+            with tempfile.NamedTemporaryFile(delete=True) as output:
+                output.write(result)
+                output.flush()
+                output = open(output.name, 'rb')
+                response.write(output.read())
+            return response
         else:
-            messages.error(request,"incorrect password")
-    else:
-        get_form_errors(request, form)
+            get_form_errors(request, form)
+            return redirect('user:account')
+
+def friend(request, username):
+    mate        = Account.objects.get(username=username)
+    friendship  = Friendship.objects.filter(users__lte=2, users__in=[mate, request.user]).first()
+    return render(
+        request,
+        "user/friend.html",
+        {
+            'grid': {
+                'title':f'{ mate.username }',
+                'icon':'menu'
+            },
+            'forms': {
+                'ping': {
+                    'room': RoomForm(
+                        initial = {
+                            'identifier': friendship.identifier,
+                            'username': request.user.username,
+                            'token': request.user.token.key
+                        }
+                    ),
+                }
+            },
+            'mate':mate,
+            'friendship':friendship,
+            'room':friendship.room
+        }
+    )
+
+def account(request):
+    return render(
+        request,
+        "user/index.html",
+        {
+            'template': {
+                'title': f'Settings / { request.user.username }',
+                'icons': {
+                    'left': 'layers',
+                    'right': 'menu'
+                },
+                'forms': {
+                    'password': PasswordUpdateForm(False),
+                    'info': ProfileForm(instance=request.user.profile, auto_id="profile_info_%s"),
+                    'friend_request':SignalForm(auto_id="friend_request_%s"),
+                    'space_request':SignalForm(auto_id="space_request_%s"),
+                    'login': SpaceLoginForm(auto_id="space_login_%s"),
+                    'membership': KeyForm(auto_id="space_login_%s"),
+                    'pdf': PasswordConfirmForm(
+                        auto_id="account_pdf_%s",
+                        initial={
+                            'account':request.user.id
+                        }
+                    ),
+                    'space': SpaceForm(
+                        auto_id="space_%s",
+                        initial={
+                            'founder':request.user.id
+                        }
+                    ),
+                }
+            }
+        }
+    )

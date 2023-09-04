@@ -1,0 +1,25 @@
+<aside id="spaces-aside">
+    <div class="column">
+        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <section class="widget">
+            {% if request.user.profile.spaces.all.count %}
+            <table>
+                {% for space in request.user.profile.spaces.all.all %}
+                <tr>
+                    <td>
+                        <b class="text-transform-none">{{ space.name }}</b>
+                    </td>
+                    <td>
+                        <i class="material-icons" onclick="Fixed.SpaceLoginForm('{{ space.name }}')">login</i>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="note">
+                <p class="text-align-center">You have no sent requests.</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</aside>
