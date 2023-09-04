@@ -2,18 +2,15 @@
 
 {% block main %}
 {% include "home/widgets/sign.html" %}
-{% include "components/widgets/connect.html" %}
-{% include "components/widgets/token.html" %}
-{% include "components/widgets/theme.html" %}
+{% include "home/widgets/connect.html" %}
+{% include "home/widgets/token.html" %}
+{% include "home/widgets/theme.html" %}
 {% endblock %}
 
 {% block side %}
-{% include "user/form/signup.html" %}
-{% include "user/form/signin.html" %}
-{% include "note/form/reset.html" %}
-{% include "note/form/signin.html" %}
-{% include "note/form/login.html" %}
-{% include "mate/form/friend/request.html" %}
-{% include "mate/form/space/request.html" %}
-{% include "team/form/create.html" %}
+{% include "home/forms/index.html" %}
+{% include "home/forms/login.html" %}
+{% include "mate/forms/friend_request.html" %}
+{% include "mate/forms/space_request.html" %}
+{% include "team/forms/create.html" %}
 {% endblock %}
