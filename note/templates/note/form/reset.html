@@ -1,5 +1,0 @@
-<form method="POST" action="{% url 'note:reset' %}" id="token-reset-form">
-    {% with form=forms.note.reset password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
