@@ -7,21 +7,25 @@
         <div class="note">
             <p>View a list of all the <mark>friends</mark> <span>you are connected to.</span></p>
             <nav>
-                <i class="material-icons" onclick="Fixed.open('#friends-aside')">menu</i>
+                <button type="button" onclick="Fixed.open('#friends-aside')">
+                    <i class="material-icons">menu</i>
+                </button>
             </nav>
         </div>
         <div class="note">
             <p>View a list of all the received <mark><span>friend requests.</span></mark></p>
             <nav>
-                <i class="material-icons"
-                onclick="Fixed.open('#friend-received-requests-aside')">mark_email_unread</i>
+                <button type="button" onclick="Fixed.open('#friend-received-requests-aside')">
+                    <i class="material-icons">mark_email_unread</i>
+                </button>
             </nav>
         </div>
         <div class="note">
             <p>View a list of all the sent (pending) <mark><span>friend requests.</span></mark></p>
             <nav>
-                <i class="material-icons"
-                onclick="Fixed.open('#friend-sent-requests-aside')">outgoing_mail</i>
+                <button type="button" onclick="Fixed.open('#friend-sent-requests-aside')">
+                    <i class="material-icons">outgoing_mail</i>
+                </button>
             </nav>
         </div>
     </section>

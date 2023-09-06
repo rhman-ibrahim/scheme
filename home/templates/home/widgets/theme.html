@@ -7,9 +7,15 @@
         <div class="note">
             <p>Dark mode, light mode, or follow your system mode settings.</p>
             <ul class="text-align-right">
-                <li class="material-icons" onclick="Theme.light()" data-mode="light">light_mode</li>
-                <li class="material-icons" onclick="Theme.dark()" data-mode="dark">dark_mode</li>
-                <li class="material-icons" onclick="Theme.default()" data-mode="default">contrast</li>
+                <button type="button" onclick="Theme.light()" data-mode="light">
+                    <li class="material-icons">light_mode</li>
+                </button>
+                <button type="button" onclick="Theme.dark()" data-mode="dark">
+                    <li class="material-icons">dark_mode</li>
+                </button>
+                <button type="button" onclick="Theme.default()" data-mode="default">
+                    <li class="material-icons">contrast</li>
+                </button>
             </ul>
         </div>
     </div>

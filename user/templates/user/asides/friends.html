@@ -1,6 +1,8 @@
 <aside id="friends-aside">
     <div class="column">
-        <button type="button" class="material-icons column-button" onclick="Fixed.clear()">close</button>
+        <button type="button" class="column-button" onclick="Fixed.clear()">
+            <i class="material-icons">close</i>
+        </button>
         <section class="widget">
             {% if request.user.profile.friends.count %}
             <table>

@@ -8,7 +8,8 @@
         <div class="note">
             <p>
                 <span><mark>{{ space.name }}</mark> was created {{ space.created|ago }},</span>
-                <span>by {{ space.founder.username }},</span> <span>on {{ space.created|date:"j/m/Y H:i A" }}.</span>
+                <span>by {{ space.founder.username }},</span>
+                <span>on {{ space.created|date:"j/m/Y H:i A" }}.</span>
             </p>
             <nav>
                 <a href="{% url 'team:founder' %}" class="material-icons">admin_panel_settings</a>
@@ -17,13 +18,17 @@
         <div class="note">
             <p><mark>View</mark> a list of all the space members.</p>
             <nav>
-                <i class="material-icons" onclick="Fixed.open('#members-aside')">groups</i>
+                <button type="button" onclick="Fixed.open('#members-aside')">
+                    <i class="material-icons">groups</i>
+                </button>
             </nav>
         </div>
         <div class="note">
             <p><mark>Share</mark> the space identifier with users to send <span>space requests</span>.</p>
             <nav>
-                <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ template.space.identifier }}">content_copy</i>
+                <button type="button" onclick="Template.copy(this)" data-clipboard="{{ template.space.identifier }}">
+                    <i class="material-icons">content_copy</i>
+                </button>
             </nav>
         </div>
         <div class="note">

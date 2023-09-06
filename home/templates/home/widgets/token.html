@@ -11,7 +11,9 @@
             using <span>your space</span> key to sign-in and log-in
             <span>in a single step.</span></p>
             <nav>
-                <i class="material-symbols-outlined" onclick="Fixed.open('#log_in-key-form')">diversity_2</i>
+                <button type="button" onclick="Fixed.open('#log_in-key-form')">
+                    <i class="material-symbols-outlined">diversity_2</i>
+                </button>
             </nav>
         </div>
         {% endif %}
@@ -20,7 +22,9 @@
             <p><mark>Download</mark> your account key and <span>spaces' keys</span>,
             do not share it <span>and store it safe.</span></p>
             <nav>
-                <i class="material-icons" onclick="Template.copyToClipboard(this)" data-clipboard="{{ request.user.token.key }}">content_copy</i>
+                <button type="button" onclick="Template.copy(this)" data-clipboard="{{ request.user.token.key }}">
+                    <i class="material-icons">content_copy</i>
+                </button>
             </nav>
         </div>
         <div class="note">
@@ -37,14 +41,18 @@
             <p><mark>Forgot password?</mark>, submit your account token,
             alongside the new password <span>to reset.</span></p>
             <nav>
-                <i class="material-icons" onclick="Fixed.open('#reset-form')">lock_reset</i>
+                <button type="button" onclick="Fixed.open('#reset-form')">
+                    <i class="material-icons">lock_reset</i>
+                </button>
             </nav>
         </div>
         <div class="note">
             <p><mark>Sign-in</mark> to your account, using your key
             instead of using your username <span>and password.</span></p>
             <nav>
-                <i class="material-icons" onclick="Fixed.open('#sign_in-key-form')">login</i>
+                <button type="button" onclick="Fixed.open('#sign_in-key-form')">
+                    <i class="material-icons">login</i>
+                </button>
             </nav>
         </div>
         {% endif %}
