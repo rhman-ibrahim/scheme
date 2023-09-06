@@ -1,43 +1,3 @@
-:root {
-    --wh: 100vh;
-    --ww: 100vw;
-}
-
-html,
-body,
-main,
-.column {
-    background: var(--d1);
-    height: var(--wh);
-}
-
-html,
-body,
-main {
-    overflow: hidden;
-}
-
-form,
-header,
-footer,
-textarea,
-.column,
-#room-chat-form #messages {
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
-form::-webkit-scrollbar,
-header::-webkit-scrollbar,
-footer::-webkit-scrollbar,
-textarea::-webkit-scrollbar,
-.column::-webkit-scrollbar,
-#room-chat-form #messages::-webkit-scrollbar {
-    display: none;
-}
-
 /*
   form
 */
@@ -327,46 +287,6 @@ footer.active {
     flex-direction: row;
     justify-content: flex-end;
     gap: 8px;
-}
-
-.accent-note:hover {
-    outline-color: var(--primary);
-}
-.accent-note:hover mark,
-.accent-note:hover i {
-    color: var(--primary);
-}
-
-.danger-note:hover {
-    outline-color: var(--danger);
-}
-.danger-note:hover mark,
-.danger-note:hover i {
-    color: var(--danger);
-}
-
-.info-note:hover {
-    outline-color: var(--info);
-}
-.info-note:hover mark,
-.info-note:hover i{
-    color: var(--info);
-}
-
-.success-note:hover {
-    outline-color: var(--success);
-}
-.success-note:hover mark,
-.success-note:hover i {
-    color: var(--success);
-}
-
-.warning-note:hover {
-    outline-color: var(--warning);
-}
-.warning-note:hover mark,
-.warning-note:hover i {
-    color: var(--warning);
 }
 
 /*

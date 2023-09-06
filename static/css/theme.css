@@ -44,3 +44,47 @@ body,
 .warning-background {
     background: var(--warning);
 }
+
+/*
+    :hover
+*/
+
+.accent-note:hover {
+    outline-color: var(--primary);
+}
+.accent-note:hover mark,
+.accent-note:hover i {
+    color: var(--primary);
+}
+
+.danger-note:hover {
+    outline-color: var(--danger);
+}
+.danger-note:hover mark,
+.danger-note:hover i {
+    color: var(--danger);
+}
+
+.info-note:hover {
+    outline-color: var(--info);
+}
+.info-note:hover mark,
+.info-note:hover i{
+    color: var(--info);
+}
+
+.success-note:hover {
+    outline-color: var(--success);
+}
+.success-note:hover mark,
+.success-note:hover i {
+    color: var(--success);
+}
+
+.warning-note:hover {
+    outline-color: var(--warning);
+}
+.warning-note:hover mark,
+.warning-note:hover i {
+    color: var(--warning);
+}
