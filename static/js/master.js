@@ -209,7 +209,7 @@ class Template {
         children.forEach(child => parent.appendChild(child));
         return parent;
     }
-    static copyToClipboard = element => {
+    static copy = element => {
         let dataToCopy = element.getAttribute(`data-clipboard`);
         navigator.clipboard.writeText(dataToCopy)
         .then(
