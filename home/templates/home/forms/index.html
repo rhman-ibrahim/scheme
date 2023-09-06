@@ -1,20 +1,20 @@
 <form method="POST" action="{% url 'home:sign_up' %}" id="sign_up-form">
-    {% with form=forms.user.signup password=1 %}
+    {% with form=template.forms.sign_up password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 <form method="POST" action="{% url 'home:sign_in' %}" id="sign_in-form">
-    {% with form=forms.user.signin password=1 %}
+    {% with form=template.forms.sign_in password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 <form method="POST" action="{% url 'home:reset' %}" id="reset-form">
-    {% with form=forms.note.reset password=1 %}
+    {% with form=template.forms.reset password=1 %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
 <form method="POST" action="{% url 'home:account' %}" id="sign_in-key-form">
-    {% with form=forms.note.signin %}
+    {% with form=template.forms.token %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>

@@ -107,28 +107,16 @@ def index(request):
         request,
         "home/index.html",
         {
-            'grid': {
+            'template': {
                 'title': "Express on your behalf or anonymously.",
-            },
-            'forms': {
-                'user': {
-                    'signup': SignUpForm(auto_id="sign_up_%s"),
-                    'signin': SignInForm(auto_id="sign_in_%s"),
-                },
-                'note': {
+                'forms': {
                     'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
-                    'signin': KeyForm(auto_id=f"sign_in_with_token_%s"),
-                    'login': KeyForm(auto_id=f"login_secret_%s")
-                },
-                'mate': {
-                    'friend': {
-                        'request':SignalForm(auto_id="friend_request_%s"),
-                    },
-                    'space': {
-                        'request': SignalForm(auto_id="space_request_%s")
-                    }
-                },
-                'team': {
+                    'friend_request': SignalForm(auto_id="friend_request_%s"),
+                    'space_request': SignalForm(auto_id="space_request_%s"),
+                    'token': KeyForm(auto_id=f"sign_in_with_token_%s"),
+                    'membership': KeyForm(auto_id=f"login_secret_%s"),
+                    'sign_in': SignInForm(auto_id="sign_in_%s"),
+                    'sign_up': SignUpForm(auto_id="sign_up_%s"),
                     'space': SpaceForm(auto_id="space_form_%s")
                 }
             }

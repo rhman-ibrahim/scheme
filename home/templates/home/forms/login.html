@@ -1,5 +1,5 @@
 <form method="POST" action="{% url 'home:space' %}" id="log_in-key-form">
-    {% with form=forms.note.login %}
+    {% with form=template.forms.membership %}
     {% include "components/form/base.html" %}
     {% endwith %}
 </form>
