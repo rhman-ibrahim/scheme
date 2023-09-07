@@ -47,7 +47,7 @@ class Grid {
         document.documentElement.style.setProperty('--ww', `${window.innerWidth}px`);
     }
     static justifyColumnContent = () => {
-        document.querySelectorAll('section:not(#main) div.column')
+        document.querySelectorAll('section:not(#center) div.column')
         .forEach(
             column => {
                 let widgetsTotalHeights = 0;
