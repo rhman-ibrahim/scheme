@@ -9,7 +9,11 @@ DEBUG            = True
 ALLOWED_HOSTS    = [
     '192.168.43.110', # Hostspot
     '192.168.1.15',   # Wi-Fi
-    '127.0.0.1'       # localhost
+    '127.0.0.1',      # localhost
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
 ]
 
 INSTALLED_APPS = [
@@ -32,11 +36,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     # Third Party
+    'corsheaders',
     'channels',
     'mptt',
 ]
 
 MIDDLEWARE     = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
