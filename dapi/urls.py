@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.ping import RoomViewSet
 from .views.user import AccountViewSet
-from .views.ping import MessageViewSet
+from .views.ping import MessageViewSet, StatusViewSet
 from .views.team import SpaceViewSet
 
 
@@ -13,5 +13,8 @@ urlpatterns = [
     path('signin/', AccountViewSet.as_view({'post':'signin'})),
     path('create/circle/', SpaceViewSet.as_view({'post':'create'})),
     path('circle/<int:pk>/info/', SpaceViewSet.as_view({'get':'info'})),
-    path('room/<str:identifier>/messages/', RoomViewSet.as_view({'get':'messages'}))
+    path('room/<str:identifier>/messages/', RoomViewSet.as_view({'get':'messages'})),
+    # Status
+    path('connection/status/', StatusViewSet.as_view({'get':'status'})),
+    path('connection/check/', StatusViewSet.as_view({'get':'check'}))
 ]

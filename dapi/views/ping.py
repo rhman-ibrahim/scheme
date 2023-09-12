@@ -1,3 +1,4 @@
+import http.client
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status, viewsets
@@ -7,6 +8,36 @@ from ping.models import Message
 from dapi.decoratores import resource
 from dapi.serializers.ping import MessageSerializer
 
+class StatusViewSet(viewsets.ViewSet):
+
+    permission_classes = [AllowAny]
+    
+    def check(self, request):
+        return Response(
+            'Hello World!, Server Is Up.',
+            status.HTTP_200_OK
+        )
+
+    def status(self, request):
+        
+        try:
+            conn = http.client.HTTPConnection("127.0.0.1", 8000)
+            conn.request("GET", "/api/connection/check/")
+            response = conn.getresponse()
+            server_is_up = response.status < 500
+        except (http.client.HTTPException, ConnectionRefusedError):
+            server_is_up = False
+
+        return Response(
+            {
+                'status': {
+                    'icon': 'wifi' if server_is_up else 'wifi_off',
+                    'description': "Django is up and running.",
+                    'is_on': server_is_up
+                }
+            },
+            status= status.HTTP_200_OK if server_is_up else status.HTTP_503_SERVICE_UNAVAILABLE
+        )
 
 class MessageViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
