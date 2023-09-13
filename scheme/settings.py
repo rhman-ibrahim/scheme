@@ -12,10 +12,6 @@ ALLOWED_HOSTS    = [
     '127.0.0.1',      # localhost
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-]
-
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -52,7 +48,7 @@ MIDDLEWARE     = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF     = 'scheme.urls'
+ROOT_URLCONF = 'scheme.urls'
 
 TEMPLATES      = [
     {
@@ -156,3 +152,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST  = [
+#     'http://localhost:5173'
+# ]
+CORS_ALLOWED_ORIGINS   = [
+    'http://localhost:5173',
+]
