@@ -2,45 +2,42 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
-from dapi.serializers.user import AccountSerializer
+from django.middleware.csrf import get_token
 from user.models import Token
+from home.forms import SignUpForm, SignInForm
 
 
 class AccountViewSet(viewsets.ViewSet):
     
     permission_classes = [AllowAny]
 
+    def csrf(self, request):
+        return Response({'token':get_token(request)}, status=status.HTTP_200_OK)
+
     def signup(self, request):
-        serializer = AccountSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+        form = SignUpForm(request.data)
+        if form.is_valid():
+            form.save()
             return Response(
                 {'message': 'Your account has been created successfully'},
                 status=status.HTTP_201_CREATED
             )
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        else:
+            return Response(
+                {'messages': form.errors},
+                status=status.HTTP_406_NOT_ACCEPTABLE
+            )
     
     def signin(self, request):
-        if request.data.get('username') == None or request.data.get('password') == None:
+        form = SignInForm(data=request.data)
+        if form.is_valid():
+            user = form.get_user()
             return Response(
-                {'message': 'HTTP_400_BAD_REQUEST'},
-                status=status.HTTP_400_BAD_REQUEST
+                {'token': user.token.key},
+                status=status.HTTP_200_OK
             )
         else:
-            user = authenticate(
-                username=request.data.get('username'),
-                password=request.data.get('password')
+            return Response(
+                {'messages': form.errors},
+                status=status.HTTP_401_UNAUTHORIZED
             )
-            if user is not None:
-                return Response(
-                    {'token': Token.objects.get(user=user).key},
-                    status=status.HTTP_200_OK
-                )
-            else:
-                return Response(
-                    {'message': 'HTTP_401_UNAUTHORIZED'},
-                    status=status.HTTP_401_UNAUTHORIZED
-                )
