@@ -38,14 +38,10 @@ class SignUpForm(UserCreationForm):
         )
     )
 
-    def __init__(self, *args, **kwargs):
-        super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.pop("autofocus", None)
-
     class Meta:
 
         model  = Account
-        fields = ['username']
+        fields = ['username', 'password1', 'password2']
 
 
 class SignInForm(AuthenticationForm):
