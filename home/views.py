@@ -1,8 +1,6 @@
 # Django
 from django.contrib import messages
-from django.contrib.auth import (
-    authenticate, login,
-)
+from django.contrib.auth import login
 from django.shortcuts import (
     render, redirect
 )
@@ -34,29 +32,6 @@ def sign(request):
     create_a_temporary_account(request)
     return redirect('user:account')
     
-@is_authenticated(False)
-@back
-def sign_up(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"your account has been created successfully.")
-        else:
-            get_form_errors(request,form)
-
-@is_authenticated(False)
-@back
-def sign_in(request):
-    if request.method == 'POST':
-        form = SignInForm(request, data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            messages.success(request, 'signed in successfully')
-            return redirect("user:account")
-        else:
-            get_form_errors(request, form)
-
 @is_authenticated(False)
 @resource
 def account(request):
