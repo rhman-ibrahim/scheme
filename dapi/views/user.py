@@ -1,8 +1,9 @@
+from django.middleware.csrf import get_token
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from home.forms import SignUpForm, SignInForm
-from django.middleware.csrf import get_token
+from rest_framework_simplejwt.tokens import RefreshToken
 from helpers.functions import get_form_errors
 
 
@@ -13,6 +14,7 @@ class TokenViewSet(viewsets.ViewSet):
     def csrf(self, request):
         return Response({'csrfToken', get_token(request)}, status=status.HTTP_200_OK)
 
+
 class AccountViewSet(viewsets.ViewSet):
     
     permission_classes = [AllowAny]
@@ -22,12 +24,12 @@ class AccountViewSet(viewsets.ViewSet):
         if form.is_valid():
             form.save()
             return Response(
-                {'message': 'Your account has been created successfully'},
+                {'body': 'Your account has been created successfully'},
                 status=status.HTTP_201_CREATED
             )
         else:
             return Response(
-                {'messages': get_form_errors(form)},
+                {'body': get_form_errors(form)},
                 status=status.HTTP_406_NOT_ACCEPTABLE
             )
     
@@ -35,12 +37,19 @@ class AccountViewSet(viewsets.ViewSet):
         form = SignInForm(data=request.data)
         if form.is_valid():
             user = form.get_user()
+            refresh = RefreshToken.for_user(user)
+            access_token = refresh.access_token
             return Response(
-                {'token': user.token.key},
+                {
+                    'jwt': {
+                        'access': str(access_token),
+                        'refresh': str(refresh)
+                    }
+                },
                 status=status.HTTP_200_OK
             )
         else:
             return Response(
-                {'messages': get_form_errors(form)},
+                {'body': get_form_errors(form)},
                 status=status.HTTP_401_UNAUTHORIZED
             )
