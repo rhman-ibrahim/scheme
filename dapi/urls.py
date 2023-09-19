@@ -28,6 +28,10 @@ urlpatterns = [
         'user/sign/in/',
         AccountViewSet.as_view({'post':'signin'})
     ),
+    path(
+        'user/sign/out/',
+        AccountViewSet.as_view({'post':'signout'})
+    ),
     # Room & Message
     path(
         'room/<str:identifier>/messages/',

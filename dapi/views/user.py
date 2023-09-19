@@ -8,11 +8,12 @@ from helpers.functions import get_form_errors
 
 
 class TokenViewSet(viewsets.ViewSet):
-
     permission_classes = [AllowAny]
-    
     def csrf(self, request):
-        return Response({'csrfToken', get_token(request)}, status=status.HTTP_200_OK)
+        return Response(
+            {'csrfToken', get_token(request)},
+            status=status.HTTP_200_OK
+        )
 
 
 class AccountViewSet(viewsets.ViewSet):
@@ -52,4 +53,18 @@ class AccountViewSet(viewsets.ViewSet):
             return Response(
                 {'body': get_form_errors(form)},
                 status=status.HTTP_401_UNAUTHORIZED
+            )
+    
+    def signout(self, request):
+        try:
+            token = RefreshToken(request.data['refresh'])
+            token.blacklist()
+            return Response(
+                {'body': 'Signed out successfully'},
+                status=status.HTTP_205_RESET_CONTENT
+            )
+        except Exception as e:
+            return Response(
+                {'body': 'Something went wrong'},
+                status=status.HTTP_406_NOT_ACCEPTABLE
             )
