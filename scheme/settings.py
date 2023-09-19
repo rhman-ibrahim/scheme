@@ -9,24 +9,34 @@ ALLOWED_HOSTS    = [
 ]
 
 INSTALLED_APPS   = [
+    
     'daphne',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     # Scheme
     'user.apps.UserConfig',
     'mate.apps.MateConfig',
     'team.apps.TeamConfig',
     'ping.apps.PingConfig',
     'home.apps.HomeConfig',
+    
     # reset framework
     'dapi.apps.DapiConfig',
+    
     # DRF
     'rest_framework',
     # 'rest_framework.authtoken',
+    
+    # JWT
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    
     # Third Party
     'corsheaders',
     'channels',
