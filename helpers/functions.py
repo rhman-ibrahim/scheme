@@ -25,14 +25,15 @@ def create_a_temporary_account(request):
     )
     login(request, user)
 
-def get_form_errors(request, form):
-    [
-        messages.error(request, str(error).replace("This field", str(field.name).capitalize()))
+def get_form_errors(form):
+    field_errors = [
+        str(error).replace("This field", str(field.name).capitalize())
         for field in form for error in field.errors
     ]
-    [
-        messages.error(request, error) for error in form.non_field_errors()
+    non_field_errors = [
+        error for error in form.non_field_errors()
     ]
+    return field_errors + non_field_errors
 
 def log(user_id, instance, flag, message=""):
     # Create the log entry for C_UD operations.
