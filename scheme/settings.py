@@ -7,9 +7,7 @@ SECRET_KEY     = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u
 DEBUG            = True
 
 ALLOWED_HOSTS    = [
-    '192.168.43.110', # Hostspot
-    '192.168.1.15',   # Wi-Fi
-    '127.0.0.1',      # localhost
+    '3850-197-48-58-83.ngrok-free.app'
 ]
 
 INSTALLED_APPS = [
@@ -156,19 +154,21 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL   = False
 CORS_ALLOW_CREDENTIALS  = True
-CORS_ALLOWED_ORIGINS    = [
-    'http://localhost:5173'
-]
 CORS_ORIGIN_WHITELIST   = [
-    'http://localhost:5173'
+    'https://6bba-197-48-58-83.ngrok-free.app'
+]
+CORS_ALLOWED_ORIGINS    = [
+    'https://6bba-197-48-58-83.ngrok-free.app'
+]
+CORS_EXPOSE_HEADERS = [
+    'Set-Cookie',
 ]
 
-CSRF_COOKIE_SECURE      = False
-CSRF_COOKIE_SAMESITE    = None
-CSRF_COOKIE_HTTPONLY    = False
+# CSRF_COOKIE_SECURE      = False
+# CSRF_COOKIE_SAMESITE    = None
+# CSRF_COOKIE_HTTPONLY    = False
 
-SESSION_COOKIE_SECURE   = False
-SESSION_COOKIE_HTTPONLY = False
-SESSION_COOKIE_SAMESITE = None
-SESSION_COOKIE_DOMAIN   = 'localhost'
-
+# SESSION_COOKIE_SECURE   = False
+# SESSION_COOKIE_HTTPONLY = False
+# SESSION_COOKIE_SAMESITE = None
+# SESSION_COOKIE_DOMAIN   = '6bba-197-48-58-83.ngrok-free.app'
