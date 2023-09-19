@@ -1,16 +1,23 @@
 from django.urls import path
 from .views.ping import RoomViewSet
-from .views.user import AccountViewSet, TokenViewSet
-from .views.ping import MessageViewSet, StatusViewSet
+from .views.user import AccountViewSet
+from .views.ping import MessageViewSet
 from .views.team import SpaceViewSet
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 app_name    = "api"
 urlpatterns = [
-    # CSRF
+    # JWT
     path(
-        'csrf/',
-        TokenViewSet.as_view({'get':'csrf'})
+        'token/',
+        TokenObtainPairView.as_view()
+    ),
+    path(
+        'token/refresh/',
+        TokenRefreshView.as_view()
     ),
     # Account
     path(
