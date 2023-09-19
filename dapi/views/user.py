@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from home.forms import SignUpForm, SignInForm
 from django.middleware.csrf import get_token
-
+from helpers.functions import get_form_errors
 
 
 class TokenViewSet(viewsets.ViewSet):
@@ -27,7 +27,7 @@ class AccountViewSet(viewsets.ViewSet):
             )
         else:
             return Response(
-                {'messages': form.errors},
+                {'messages': get_form_errors(form)},
                 status=status.HTTP_406_NOT_ACCEPTABLE
             )
     
@@ -35,14 +35,12 @@ class AccountViewSet(viewsets.ViewSet):
         form = SignInForm(data=request.data)
         if form.is_valid():
             user = form.get_user()
-            response = Response(
+            return Response(
                 {'token': user.token.key},
                 status=status.HTTP_200_OK
             )
-            response.set_cookie('ping', "pong", samesite=None, secure=False, httponly=False)
-            return response
         else:
             return Response(
-                {'messages': form.errors},
+                {'messages': get_form_errors(form)},
                 status=status.HTTP_401_UNAUTHORIZED
             )
