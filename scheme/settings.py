@@ -1,16 +1,14 @@
 from pathlib import Path
+from datetime import timedelta
 
-
-BASE_DIR       = Path(__file__).resolve().parent.parent
-SECRET_KEY     = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u3@cx'
-
+BASE_DIR         = Path(__file__).resolve().parent.parent
+SECRET_KEY       = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u3@cx'
 DEBUG            = True
-
 ALLOWED_HOSTS    = [
     '3850-197-48-58-83.ngrok-free.app'
 ]
 
-INSTALLED_APPS = [
+INSTALLED_APPS   = [
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,14 +26,14 @@ INSTALLED_APPS = [
     'dapi.apps.DapiConfig',
     # DRF
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
     # Third Party
     'corsheaders',
     'channels',
     'mptt',
 ]
 
-MIDDLEWARE     = [
+MIDDLEWARE       = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -46,9 +44,9 @@ MIDDLEWARE     = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'scheme.urls'
+ROOT_URLCONF     = 'scheme.urls'
 
-TEMPLATES      = [
+TEMPLATES        = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ BASE_DIR / "html" ],
@@ -74,7 +72,7 @@ TEMPLATES      = [
 WSGI_APPLICATION = 'scheme.wsgi.application'
 
 # Database
-DATABASES          = {
+DATABASES        = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -98,35 +96,53 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE     = 'Africa/Cairo'
-USE_I18N      = True
-USE_TZ        = True
+LANGUAGE_CODE    = 'en-us'
+TIME_ZONE        = 'Africa/Cairo'
+USE_I18N         = True
+USE_TZ           = True
 
 # Static files (CSS, JavaScript, Images)
-STATICFILES_DIRS    = [
+STATICFILES_DI   = [
     BASE_DIR / 'static',
     BASE_DIR / 'ping/static',
     BASE_DIR / 'user/static'
 ]
 
-STATIC_URL          = '/static/'
-STATIC_ROOT         = 'scheme'
+STATIC_URL       = '/static/'
+STATIC_ROOT      = 'scheme'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# User
 AUTH_USER_MODEL  = 'user.Account'
-
-# Messages
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
-# ASGI
+MESSAGE_STORAGE  = 'django.contrib.messages.storage.session.SessionStorage'
 ASGI_APPLICATION = 'scheme.asgi.application'
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL   = False
+CORS_ALLOW_CREDENTIALS  = True
+CORS_ORIGIN_WHITELIST   = [
+    'https://6bba-197-48-58-83.ngrok-free.app'
+]
+CORS_ALLOWED_ORIGINS    = [
+    'https://6bba-197-48-58-83.ngrok-free.app'
+]
+CORS_EXPOSE_HEADERS = [
+    'Set-Cookie',
+]
+
+# CSRF
+# CSRF_COOKIE_SECURE      = False
+# CSRF_COOKIE_SAMESITE    = None
+# CSRF_COOKIE_HTTPONLY    = False
+
+# SESSION_COOKIE_SECURE   = False
+# SESSION_COOKIE_HTTPONLY = False
+# SESSION_COOKIE_SAMESITE = None
+# SESSION_COOKIE_DOMAIN   = '6bba-197-48-58-83.ngrok-free.app'
+
 # Channels
-CHANNEL_LAYERS = {
+CHANNEL_LAYERS   = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG":
@@ -143,32 +159,26 @@ CHANNEL_LAYERS = {
 
 # API
 REST_FRAMEWORK = {
-     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'dapi.models.SchemeToken',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'dapi.models.SchemeToken',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
+# JWT
 
-CORS_ORIGIN_ALLOW_ALL   = False
-CORS_ALLOW_CREDENTIALS  = True
-CORS_ORIGIN_WHITELIST   = [
-    'https://6bba-197-48-58-83.ngrok-free.app'
-]
-CORS_ALLOWED_ORIGINS    = [
-    'https://6bba-197-48-58-83.ngrok-free.app'
-]
-CORS_EXPOSE_HEADERS = [
-    'Set-Cookie',
-]
-
-# CSRF_COOKIE_SECURE      = False
-# CSRF_COOKIE_SAMESITE    = None
-# CSRF_COOKIE_HTTPONLY    = False
-
-# SESSION_COOKIE_SECURE   = False
-# SESSION_COOKIE_HTTPONLY = False
-# SESSION_COOKIE_SAMESITE = None
-# SESSION_COOKIE_DOMAIN   = '6bba-197-48-58-83.ngrok-free.app'
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUTH_HEADER_TYPES": ("JWT",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+}
