@@ -8,3 +8,14 @@ class TimeStamp(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Widget(TimeStamp):
+
+    view = models.CharField(max_length=32)
+    name = models.CharField(max_length=32)
+    note = models.CharField(max_length=32)
+    card = models.TextField(max_length=256)
+
+    def __str__(self):
+        return f"{self.view}'s {self.note}"
