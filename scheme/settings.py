@@ -4,8 +4,12 @@ from datetime import timedelta
 BASE_DIR         = Path(__file__).resolve().parent.parent
 SECRET_KEY       = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u3@cx'
 DEBUG            = True
+
+NGROK_8000  = "8d6e-102-44-176-34.ngrok-free.app"
+NGROK_5173  = "e891-102-44-176-34.ngrok-free.app"
+
 ALLOWED_HOSTS    = [
-    '3850-197-48-58-83.ngrok-free.app'
+    NGROK_8000
 ]
 
 INSTALLED_APPS   = [
@@ -132,13 +136,16 @@ ASGI_APPLICATION = 'scheme.asgi.application'
 CORS_ORIGIN_ALLOW_ALL   = False
 CORS_ALLOW_CREDENTIALS  = True
 CORS_ORIGIN_WHITELIST   = [
-    'https://6bba-197-48-58-83.ngrok-free.app'
+    f'https://{NGROK_5173}'
 ]
 CORS_ALLOWED_ORIGINS    = [
-    'https://6bba-197-48-58-83.ngrok-free.app'
+    f'https://{NGROK_5173}'
 ]
 CORS_EXPOSE_HEADERS = [
     'Set-Cookie',
+]
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{NGROK_8000}'
 ]
 
 # CSRF
