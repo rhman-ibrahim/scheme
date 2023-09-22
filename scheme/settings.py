@@ -5,8 +5,8 @@ BASE_DIR         = Path(__file__).resolve().parent.parent
 SECRET_KEY       = 'django-insecure-a@z!v*k0_u5*%fp(ix9l=7g59z12hi)bgjnq1l-_61*q!u3@cx'
 DEBUG            = True
 
-NGROK_8000  = "8d6e-102-44-176-34.ngrok-free.app"
-NGROK_5173  = "e891-102-44-176-34.ngrok-free.app"
+NGROK_8000       = "09ec-197-48-236-158.ngrok-free.app"
+NGROK_5173       = "66b1-197-48-236-158.ngrok-free.app"
 
 ALLOWED_HOSTS    = [
     NGROK_8000
