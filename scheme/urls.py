@@ -8,5 +8,5 @@ urlpatterns = [
     path('mate/', include('mate.urls'), name="mate"),
     path('team/', include('team.urls'), name="team"),
     path('ping/', include('ping.urls'), name="ping"),
-    path('api/', include('dapi.urls'), name="api"),
+    path('dapi/', include('dapi.urls'), name="dapi"),
 ]
