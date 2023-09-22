@@ -33,6 +33,29 @@ def sign(request):
     return redirect('user:account')
     
 @is_authenticated(False)
+@back
+def sign_up(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"your account has been created successfully.")
+        else:
+            get_form_errors(request,form)
+
+@is_authenticated(False)
+@back
+def sign_in(request):
+    if request.method == 'POST':
+        form = SignInForm(request, data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            messages.success(request, 'signed in successfully')
+            return redirect("user:account")
+        else:
+            get_form_errors(request, form)
+
+@is_authenticated(False)
 @resource
 def account(request):
     if request.method == 'POST':
@@ -82,16 +105,28 @@ def index(request):
         request,
         "home/index.html",
         {
-            'template': {
+            'grid': {
                 'title': "Express on your behalf or anonymously.",
-                'forms': {
+            },
+            'forms': {
+                'user': {
+                    'signup': SignUpForm(auto_id="sign_up_%s"),
+                    'signin': SignInForm(auto_id="sign_in_%s"),
+                },
+                'note': {
                     'reset': PassWordResetForm(False, auto_id="password_reset_%s"),
-                    'friend_request': SignalForm(auto_id="friend_request_%s"),
-                    'space_request': SignalForm(auto_id="space_request_%s"),
-                    'token': KeyForm(auto_id=f"sign_in_with_token_%s"),
-                    'membership': KeyForm(auto_id=f"login_secret_%s"),
-                    'sign_in': SignInForm(auto_id="sign_in_%s"),
-                    'sign_up': SignUpForm(auto_id="sign_up_%s"),
+                    'signin': KeyForm(auto_id=f"sign_in_with_token_%s"),
+                    'login': KeyForm(auto_id=f"login_secret_%s")
+                },
+                'mate': {
+                    'friend': {
+                        'request':SignalForm(auto_id="friend_request_%s"),
+                    },
+                    'space': {
+                        'request': SignalForm(auto_id="space_request_%s")
+                    }
+                },
+                'team': {
                     'space': SpaceForm(auto_id="space_form_%s")
                 }
             }
