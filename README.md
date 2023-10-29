@@ -1,1 +1,1 @@
-[![Tools](https://skillicons.dev/icons?i=python,django,html)](https://skillicons.dev)
+[![Tools](https://skillicons.dev/icons?i=python,django)](https://skillicons.dev)
