@@ -1,9 +1,7 @@
 <header>
     <div style="text-align:right">
-        <a href="https://skillicons.dev">
-            <img src="https://skillicons.dev/icons?i=python" />
-            <img src="https://skillicons.dev/icons?i=django" />
-        </a>
+        <img src="https://skillicons.dev/icons?i=python" />
+        <img src="https://skillicons.dev/icons?i=django" />
     </div>
     <div>
         <h1>Scheme.</h1>
