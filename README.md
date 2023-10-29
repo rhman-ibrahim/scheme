@@ -2,8 +2,6 @@
     <div style="text-align:right">
         <a href="https://skillicons.dev">
             <img src="https://skillicons.dev/icons?i=python" />
-        </a>
-        <a href="https://skillicons.dev">
             <img src="https://skillicons.dev/icons?i=django" />
         </a>
     </div>
