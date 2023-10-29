@@ -1,5 +1,0 @@
-<form method="POST" action="{% url 'team:leave' %}" id="leave-form">
-    {% with form=template.forms.leave password=1 %}
-    {% include "components/form/base.html" %}
-    {% endwith %}
-</form>
