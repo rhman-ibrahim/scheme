@@ -2,6 +2,7 @@
     <div style="text-align:right">
         <img src="https://skillicons.dev/icons?i=python" />
         <img src="https://skillicons.dev/icons?i=django" />
+        <img src="https://skillicons.dev/icons?i=react" />
     </div>
     <div>
         <h1>Scheme.</h1>
