@@ -5,7 +5,7 @@
     </div>
     <div>
         <h1>Scheme.</h1>
-        <p>It is a text based social space where users add their friends, follow new people, create and manage circles, post and chat using texts only, and no media at all.</p>
+        <p>It is a text based social space where users add their friends, follow new people, create and manage circles, post, poll and chat using texts only, and no media at all.</p>
     </div>
 </header>
 
