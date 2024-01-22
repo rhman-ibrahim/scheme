@@ -29,7 +29,6 @@ echo "/modules/re" >> .gitignore
 # Commit the changes
 git add .
 git commit -m "Initial commit with submodules (added to the ignore file)."
-git push
 
 # Display success message
 echo "Directories and submodules created successfully."
