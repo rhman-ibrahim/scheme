@@ -22,5 +22,14 @@ git init
 git submodule add https://github.com/rhman-ibrahim/scheme-django modules/dj
 git submodule add https://github.com/rhman-ibrahim/scheme-react modules/re
 
+# Step 5: Create a .gitignore file and add submodules to it
+echo "/modules/dj" >> .gitignore
+echo "/modules/re" >> .gitignore
+
+# Commit the changes
+git add .
+git commit -m "Initial commit with submodules (added to the ignore file)."
+git push
+
 # Display success message
 echo "Directories and submodules created successfully."
