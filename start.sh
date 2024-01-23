@@ -41,6 +41,8 @@ ln -s "$PWD/submodules/dj/manage.py" "$PWD/scripts/manage.py"
 echo "/submodules/dj/" >> .gitignore
 echo "/submodules/re/" >> .gitignore
 echo "/scripts/" >> .gitignore
+echo "/logs/" >> .gitignore
+echo "db.sqlite3" >> .gitignore
 
 # 08:
 python -m venv venv
