@@ -30,6 +30,7 @@ git init
 # 05:
 git submodule add https://github.com/rhman-ibrahim/scheme-django submodules/dj
 git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
+git submodule add https://github.com/rhman-ibrahim/scheme scripts
 
 # 06:
 echo "/submodules/dj" >> .gitignore
