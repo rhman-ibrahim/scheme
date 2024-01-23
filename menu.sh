@@ -7,19 +7,19 @@ function build {
 }
 
 function clean {
-    source clean.sh
+    ./clean.sh
 }
 
 function load {
-    source load.sh
+    ./load.sh
 }
 
 function migrate {
-    source migrate.sh
+    ./migrate.sh
 }
 
 function run {
-    source run.sh
+    ./run.sh
 }
 
 # Main
