@@ -1,13 +1,16 @@
 #!/bin/bash
 
-# Export variables
-export DJANGO_SETTINGS_MODULE=scheme.build.devp
+if [ -z "$1" ]; then
+    echo "'t' for a new tab."
+    echo "'w' for a new window."
+    exit 1
+fi
 
-# Run Django
-gnome-terminal --tab --title "Django" -- bash -c "python manage.py runserver 0.0.0.0:8000"
-
-# Notes
-# - To run in a new window:
-# gnome-terminal --window --working-directory "$PWD" --title "<title>" -- bash -c "<command>"
-# - To run in a new tab:
-# gnome-terminal --tab --title "<title>" -- bash -c "<command>"
+if [ "$1" = "t" ]; then
+    gnome-terminal --tab --title "Django" -- bash -c "python manage.py runserver 0.0.0.0:8000"
+elif [ "$1" = "w" ]; then
+    gnome-terminal --window --working-directory "$PWD" --title "Django" -- bash -c "python manage.py runserver 0.0.0.0:8000"
+else
+    echo "Invalid argument. Please provide 't' for tab or 'w' for window."
+    exit 1
+fi
