@@ -15,7 +15,7 @@ function load {
 }
 
 function migrate {
-    source migrare.sh
+    source migrate.sh
 }
 
 function run {
