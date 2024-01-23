@@ -10,7 +10,7 @@ load_fixtures() {
 }
 
 # Find all 'fixtures' directories recursively under 'modules' and 'submodules'
-find modules submodules -type d -name 'fixtures' -print0 | while IFS= read -r -d $'\0' dir; do
+find ../modules/dj ../submodules/dj -type d -name 'fixtures' -print0 | while IFS= read -r -d $'\0' dir; do
     load_fixtures "$dir"
 done
 
