@@ -4,13 +4,14 @@
 # Step 02: Create a folder with this name.
 # Step 03: Inside this folder, create 3 folders: [submodules, modules].
 # Step 04: Initialize a git repo.
-# Step 05: Use git add module twice to add scheme-django & scheme-react.
-# Step 06: Create A .gitignore file & Add subsubmodules to it.
-# Step 07: Create A Virutal Environment.
-# Step 08: Activate The Virtual Enviroment.
-# Step 09: Install Dependencies.
-# Step 10: The first commit.
-# Step 11: Display 'End of Script.' Message.
+# Step 05: Use git add module to add scheme, scheme-django & scheme-react.
+# Step 06: Create a soft link for manage.py where needed.
+# Step 07: Create A .gitignore file & Add subsubmodules to it.
+# Step 08: Create A Virutal Environment.
+# Step 09: Activate The Virtual Enviroment.
+# Step 10: Install Dependencies.
+# Step 11: The first commit.
+# Step 12: Display 'End of Script.' Message.
 
 # 01:
 if [ -z "$1" ]; then
@@ -33,23 +34,27 @@ git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
 git submodule add https://github.com/rhman-ibrahim/scheme scripts
 
 # 06:
+ln -s "$PWD/submodules/dj/manage.py" "$PWD/modules/dj/manage.py"
+ln -s "$PWD/submodules/dj/manage.py" "$PWD/scripts/manage.py"
+
+# 07:
 echo "/submodules/dj" >> .gitignore
 echo "/submodules/re" >> .gitignore
 echo "/scripts" >> .gitignore
 
-# 07:
+# 08:
 python -m venv venv
 
-# 08:Set PYTHONPATH after activation.
+# 09:Set PYTHONPATH after activation.
 export PYTHONPATH="$PWD/venv/lib/python3.10/site-packages"
 source venv/bin/activate
 
-# 09:
+# 10:
 pip install -r submodules/dj/requirements.txt
 
-# 10:
+# 11:
 git add .
 git commit -m "Initial commit with subsubmodules (added to the ignore file)."
 
-# 11:
+# 12:
 echo "End Of Script."
