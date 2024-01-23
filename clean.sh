@@ -1,27 +1,13 @@
 #!/bin/bash
 
-# Delete cache files
-rm -rf scheme/__pycache__
-rm -rf scheme/*/__pycache__
-rm -rf scheme/base/apps/__pycache__
-rm -rf scheme/base/apps/*/__pycache__
-rm -rf scheme/base/apps/*/models/__pycache__
-rm -rf scheme/base/apps/*/views/__pycache__
+# Navigate to the root directory of the project (parent of 'scripts' directory)
+cd "$(dirname "$(pwd)")" || exit
 
-# Delete migrations files
-rm -rf scheme/base/apps/*/migrations
+# Delete all 'migrations' directories
+find . -type d -name 'migrations' -exec rm -r {} +
 
-# Delete db.sqlite3 file (Django Database)
-if [ -f "db.sqlite3" ]
-    then rm db.sqlite3
-fi
+# Delete all '__pycache__' directories
+find . -type d -name '__pycache__' -exec rm -r {} +
 
-# # Delete celerybeat-schedule file
-if [ -f "celerybeat-schedule" ]
-    then rm celerybeat-schedule
-fi
-
-# Delete dump.rdb (redis database) file
-if [ -f "dump.rdb" ]
-    then rm dump.rdb
-fi
+# Delete 'db.sqlite3' file
+find . -type f -name 'db.sqlite3' -exec rm {} +
