@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Find all fixtures directories and load JSON files inside them
-
 # Function to load JSON files in a directory
 load_fixtures() {
     local directory="$1"
@@ -11,8 +9,8 @@ load_fixtures() {
     done
 }
 
-# Find all fixtures directories and load JSON files
-find . -type d -name 'fixtures' -print0 | while IFS= read -r -d $'\0' dir; do
+# Find all 'fixtures' directories recursively under 'modules' and 'submodules'
+find modules submodules -type d -name 'fixtures' -print0 | while IFS= read -r -d $'\0' dir; do
     load_fixtures "$dir"
 done
 
