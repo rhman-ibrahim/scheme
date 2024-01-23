@@ -35,6 +35,7 @@ git submodule add https://github.com/rhman-ibrahim/scheme scripts
 # 06:
 echo "/submodules/dj" >> .gitignore
 echo "/submodules/re" >> .gitignore
+echo "/scripts" >> .gitignore
 
 # 07:
 python -m venv venv
