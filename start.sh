@@ -38,9 +38,9 @@ ln -s "$PWD/submodules/dj/manage.py" "$PWD/modules/dj/manage.py"
 ln -s "$PWD/submodules/dj/manage.py" "$PWD/scripts/manage.py"
 
 # 07:
-echo "/submodules/dj" >> .gitignore
-echo "/submodules/re" >> .gitignore
-echo "/scripts" >> .gitignore
+echo "/submodules/dj/" >> .gitignore
+echo "/submodules/re/" >> .gitignore
+echo "/scripts/" >> .gitignore
 
 # 08:
 python -m venv venv
