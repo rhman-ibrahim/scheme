@@ -5,7 +5,7 @@
 cd ../modules/dj
 
 # 02: Create a new application using 'manage.py'
-python manage.py startapp "$1"
+python ../submodules/dj/manage.py startapp "$1"
 
 # 03: Back to the root
 cd ../../
