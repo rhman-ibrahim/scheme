@@ -37,11 +37,16 @@ git submodule add https://github.com/rhman-ibrahim/scheme scripts
 ln -s "$PWD/submodules/dj/manage.py" "$PWD/scripts/manage.py"
 
 # 07:
-echo "/submodules/dj/" >> .gitignore
-echo "/submodules/re/" >> .gitignore
-echo "/scripts/" >> .gitignore
-echo "/logs/" >> .gitignore
-echo "db.sqlite3" >> .gitignore
+ignore_list="\
+**/migrations/
+**/__pycache__/
+/submodules/dj/
+/submodules/re/
+/scripts/
+/logs/
+/db.sqlite3
+"
+echo "$content_to_append" >> .gitignore
 
 # 08:
 python -m venv venv
