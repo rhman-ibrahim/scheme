@@ -4,8 +4,8 @@
 # Step 02: Create a folder with this name.
 # Step 03: Inside this folder, create 3 folders: [submodules, modules].
 # Step 04: Initialize a git repo.
-# Step 05: Use git add module to add scheme, scheme-django & scheme-react.
-# Step 06: Create A .gitignore file & Add subsubmodules to it.
+# Step 05: Create A .gitignore file.
+# Step 06: Use git add module to add scheme, scheme-django & scheme-react.
 # Step 07: Create A Virutal Environment.
 # Step 08: Activate The Virtual Enviroment.
 # Step 09: Install Dependencies.
@@ -28,21 +28,22 @@ mkdir submodules modules modules/dj modules/re
 git init
 
 # 05:
-git submodule add https://github.com/rhman-ibrahim/scheme-django submodules/dj
-git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
-git submodule add https://github.com/rhman-ibrahim/scheme bash
-
-# 06:
 ignore_list="\
+db.sqlite3
 **/migrations/
 **/__pycache__/
-/submodules/dj/
-/submodules/re/
-/bash/
-/logs/
-/db.sqlite3
+submodules/
+scripts/
+logs/
+venv/
 "
 echo "$ignore_list" >> .gitignore
+
+
+# 06:
+git submodule add https://github.com/rhman-ibrahim/scheme-django submodules/dj
+git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
+git submodule add https://github.com/rhman-ibrahim/scheme scripts
 
 # 07:
 python -m venv venv
