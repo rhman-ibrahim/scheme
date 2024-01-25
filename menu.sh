@@ -22,6 +22,10 @@ function run {
     ./run.sh
 }
 
+function link {
+    ./link.sh
+}
+
 # Main
 
 function init {
@@ -32,12 +36,13 @@ function init {
     echo "3: Load."
     echo "4: Migrate."
     echo "5: Run."
+    echo "6: Link."
     echo "0: Exit."
     read -p "Info: Input a value from 0 to 5: " input
     
-    re='^[0-5]$'
+    re='^[0-6]$'
     if ! [[ $input =~ $re ]] ; then
-    echo "Error: Only integer values from 0 to 5."
+    echo "Error: Only integer values from 0 to 6."
     fi
 
     if [ "$input" == 0 ]; then
@@ -63,6 +68,10 @@ function init {
 
     if [ "$input" == 5 ]; then
         run
+    fi
+
+    if [ "$input" == 5 ]; then
+        link
     fi
 
     done
