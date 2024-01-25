@@ -34,7 +34,6 @@ git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
 git submodule add https://github.com/rhman-ibrahim/scheme scripts
 
 # 06:
-ln -s "$PWD/submodules/dj/manage.py" "$PWD/modules/dj/manage.py"
 ln -s "$PWD/submodules/dj/manage.py" "$PWD/scripts/manage.py"
 
 # 07:
