@@ -30,7 +30,7 @@ git init
 # 05:
 git submodule add https://github.com/rhman-ibrahim/scheme-django submodules/dj
 git submodule add https://github.com/rhman-ibrahim/scheme-react submodules/re
-git submodule add https://github.com/rhman-ibrahim/scheme scripts
+git submodule add https://github.com/rhman-ibrahim/scheme bash
 
 # 06:
 ignore_list="\
@@ -38,7 +38,7 @@ ignore_list="\
 **/__pycache__/
 /submodules/dj/
 /submodules/re/
-/scripts/
+/bash/
 /logs/
 /db.sqlite3
 "
