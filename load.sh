@@ -5,7 +5,7 @@ load_fixtures() {
     local directory="$1"
     echo "Loading fixtures in $directory"
     for file in "$directory"/*.json; do
-        python manage.py loaddata "$file"
+        python ../submodules/dj/manage.py loaddata "$file"
     done
 }
 
