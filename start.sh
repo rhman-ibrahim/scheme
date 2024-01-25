@@ -46,7 +46,7 @@ ignore_list="\
 /logs/
 /db.sqlite3
 "
-echo "$content_to_append" >> .gitignore
+echo "$ignore_list" >> .gitignore
 
 # 08:
 python -m venv venv
