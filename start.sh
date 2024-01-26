@@ -43,6 +43,7 @@ submodules/
 scripts/
 logs/
 venv/
+node_modules/
 "
 echo "$ignore_list" >> .gitignore
 
