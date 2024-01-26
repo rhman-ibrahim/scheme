@@ -9,8 +9,8 @@
 # Step 07: Create A Virutal Environment.
 # Step 08: Activate The Virtual Enviroment.
 # Step 09: Install Dependencies.
-# Step 10: The first commit.
-# Step 11: Display 'End of Script.' Message.
+# Step 11: The first commit.
+# Step 12: Display 'End of Script.' Message.
 
 # 01:
 if [ -z "$1" ]; then
@@ -56,9 +56,17 @@ source venv/bin/activate
 # 09:
 pip install -r submodules/dj/requirements.txt
 
-# 10:
+mv submodules/re/jsconfig.json .
+mv submodules/re/package.json .
+mv submodules/re/package-lock.json .
+mv submodules/re/vite.config.js .
+
+npm config set prefix .
+npm install
+
+# 11:
 git add .
 git commit -m "Initial commit with subsubmodules (added to the ignore file)."
 
-# 11:
+# 12:
 echo "End Of Script."
