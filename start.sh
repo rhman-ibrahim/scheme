@@ -57,6 +57,8 @@ source venv/bin/activate
 # 09:
 pip install -r submodules/dj/requirements.txt
 
+mv submodules/re/public .
+mv submodules/re/index.html .
 mv submodules/re/jsconfig.json .
 mv submodules/re/package.json .
 mv submodules/re/package-lock.json .
