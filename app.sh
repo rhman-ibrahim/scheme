@@ -1,14 +1,11 @@
 #!/bin/bash
 
+# 01: Navigate to 'modules/dj'.
+# 02: Create a new application using 'manage.py'.
+# 03: Back to the root.
+# 04: Create a soft link for the new app.
 
-# 01: Navigate to modules/dj
-cd ../modules/dj
-
-# 02: Create a new application using 'manage.py'
-python ../../submodules/dj/manage.py startapp "$1"
-
-# 03: Back to the root
+cd ../modules/py
+python ../../base/py/manage.py startapp "$1"
 cd ../../
-
-# 04: Create a soft link
-ln -s "$PWD/modules/dj/$1" "$PWD/submodules/dj/apps/$1"
+ln -s "$PWD/modules/py/$1" "$PWD/base/py/apps/$1"

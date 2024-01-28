@@ -1,6 +1,6 @@
 #!/bin/bash
 
-manage_utility_path="../submodules/dj/manage.py"
+manage_utility_path="../base/py/manage.py"
 
 if [ -z "$1" ]; then
     echo "'t' for a new tab."
