@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Step 01: Check if a name is provided & create the directories if so.
-# Step 02: Initialize a git repo & add base (scheme, scheme-django & scheme-react).
-# Step 03: Create A .gitignore file.
-# Step 04: Create A Virutal Environment, set both & activate.
-# Step 05: Install Dependencies.
-# Step 06: The first commit.
+# Step 02: Initialize a git repo & add base (sch-py, sch-js, sch-sh & scheme-conf).
+# Step 03: Delete configuration files and entry point from sch-py & sch-js.
+# Step 04: Create A .gitignore file.
+# Step 05: Create A Virutal Environment, set both & activate.
+# Step 06: Install Dependencies.
+# Step 07: The first commit.
 
 # 01:
 if [ -z "$1" ]; then
@@ -22,10 +23,21 @@ git init
 git submodule add https://github.com/rhman-ibrahim/sch-py base/py
 git submodule add https://github.com/rhman-ibrahim/sch-js base/js
 git submodule add https://github.com/rhman-ibrahim/sch-sh scripts
+git submodule add https://github.com/rhman-ibrahim/sch-conf .
 git rm --cached -r base/
 git rm --cached -r scripts/
 
 # 03:
+rm -rf base/js/public
+rm base/js/index.html
+rm base/py/requirements.txt
+rm base/js/package.json
+rm base/js/package-lock.json
+rm base/js/vite.config.js
+rm base/js/.eslintrc.cjs
+rm base/js/jsconfig.json
+
+# 04:
 ignore_list="\
 db.sqlite3
 **/migrations/
@@ -38,30 +50,16 @@ node_modules/
 "
 echo "$ignore_list" >> .gitignore
 
-# 04:
+# 05:
 python -m venv venv
-
-# 04: set PYTHONPATH & activate
 export PYTHONPATH="$PWD/venv/lib/python3.10/site-packages"
 source venv/bin/activate
-
-# 04: set config
 npm config set prefix .
 
-# 05: PY
-mv base/py/requirements.txt .
+# 06:
 pip install -r requirements.txt
-
-# 05: JS
-mv base/js/public .
-mv base/js/index.html .
-mv base/js/jsconfig.json .
-mv base/js/package.json .
-mv base/js/package-lock.json .
-mv base/js/vite.config.js .
-mv base/js/.eslintrc.cjs .
 npm install
 
-# 06:
+# 07:
 git add .
 git commit -m "Initial commit"
