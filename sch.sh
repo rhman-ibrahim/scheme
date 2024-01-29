@@ -64,9 +64,9 @@ npm install
 
 # 07:
 git submodule deinit -f conf
-git rm --cached -r scripts/
-git rm --cached -r base/
-git rm --cached -r conf/
+git rm --cached -rf scripts/
+git rm --cached -rf base/
+git rm --cached -rf conf/
 git add .
 git commit -m "Initial commit"
 
