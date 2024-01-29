@@ -2,11 +2,12 @@
 
 # Step 01: Check if a name is provided & create the directories if so.
 # Step 02: Initialize a git repo & add base (sch-py, sch-js, sch-sh & scheme-conf).
-# Step 03: Delete configuration files and entry point from sch-py & sch-js.
+# Step 03: Manage the project files.
 # Step 04: Create A .gitignore file.
 # Step 05: Create A Virutal Environment, set both & activate.
 # Step 06: Install Dependencies.
 # Step 07: The first commit.
+# Step 08: Open the project.
 
 # 01:
 if [ -z "$1" ]; then
@@ -23,19 +24,25 @@ git init
 git submodule add https://github.com/rhman-ibrahim/sch-py base/py
 git submodule add https://github.com/rhman-ibrahim/sch-js base/js
 git submodule add https://github.com/rhman-ibrahim/sch-sh scripts
-git submodule add https://github.com/rhman-ibrahim/sch-conf .
+git submodule add https://github.com/rhman-ibrahim/sch-conf
 git rm --cached -r base/
 git rm --cached -r scripts/
 
+
 # 03:
-rm -rf base/js/public
+mv base/js/public .
+mv base/js/package.json .
+mv base/js/package-lock.json .
+mv base/py/requirements.txt .
+mv base/js/.eslintrc.cjs .
+mv sch-conf/* .
+
+rm -rf sch-conf
 rm base/js/index.html
-rm base/py/requirements.txt
-rm base/js/package.json
-rm base/js/package-lock.json
 rm base/js/vite.config.js
-rm base/js/.eslintrc.cjs
 rm base/js/jsconfig.json
+
+git submodule deinit -f sch-conf
 
 # 04:
 ignore_list="\
@@ -63,3 +70,6 @@ npm install
 # 07:
 git add .
 git commit -m "Initial commit"
+
+# 08:
+code "$1"
