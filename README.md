@@ -55,11 +55,6 @@
     <section id="sch-cf">
         <h2>sch-cf: Configuration Files</h2>
         <p><b>sch-cf</b> repository stores the project's entry point (HTML file) and the configurarion files, these files may have different extensions. For more information about the repository visit <a href="https://github.com/rhman-ibrahim/sch-cf" target="_blank"><b>sch-cf</b></a>. In future this repository will store more advanced configuration files like <b>Docker</b>, <b>AWS: Amazon Web Services</b> and any new tool I will learn and use to automate and develope the <b>Scheme</b> foundation code.</p>
-        <nav>
-            <a href="https://www.w3.org/" target="_blank">
-                <img src="https://skillicons.dev/icons?i=html" />
-            </a>
-        </nav>
     </section>
 </main>
 <footer>
