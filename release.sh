@@ -10,7 +10,7 @@
 mkdir $1 && cd $1
 
 # 02:
-wget https://github.com/rhman-ibrahim/scheme/releases/download/v0.0.0-alpha/$2.zip
+wget https://github.com/rhman-ibrahim/scheme/releases/download/$2/$2.zip
 unzip $2.zip
 rm -f $2.zip
 
