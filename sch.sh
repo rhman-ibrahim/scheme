@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 01: Check if a name is provided & create the directories if so.
-# Step 02: Initialize a git repo & add base (sch-py, sch-js, sch-sh & scheme-conf).
+# Step 02: Initialize a git repo & add base (sch-py, sch-js, sch-sh & sch-cf).
 # Step 03: Delete configuration files and entry point from sch-py & sch-js.
 # Step 04: Create A .gitignore file.
 # Step 05: Create A Virutal Environment, set both & activate.
@@ -24,18 +24,18 @@ git init
 git submodule add https://github.com/rhman-ibrahim/sch-py base/py
 git submodule add https://github.com/rhman-ibrahim/sch-js base/js
 git submodule add https://github.com/rhman-ibrahim/sch-sh scripts
-git submodule add https://github.com/rhman-ibrahim/sch-conf conf
+git submodule add https://github.com/rhman-ibrahim/sch-cf configs
 
 # 03:
 
-mv conf/* .
+mv configs/* .
 mv base/js/package.json .
 mv base/js/package-lock.json .
 mv base/py/requirements.txt .
 mv base/js/.eslintrc.cjs .
 mv base/js/public .
 
-rm -rf conf
+rm -rf configs
 rm base/js/index.html
 rm base/js/vite.config.js
 rm base/js/jsconfig.json
@@ -63,10 +63,10 @@ pip install -r requirements.txt
 npm install
 
 # 07:
-git submodule deinit -f conf
+git submodule deinit -f configs
 git rm --cached -rf scripts/
 git rm --cached -rf base/
-git rm --cached -rf conf/
+git rm --cached -rf configs/
 git add .
 git commit -m "Initial commit"
 
