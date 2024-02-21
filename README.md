@@ -77,19 +77,41 @@
     </div>
 </main>
 <footer>
-    <h2>A Word Of Appreciation</h2>
-    <ul>
-        <li><b>I want to express huge and tremendous respect and admiration for these poeple whom horned this simple file by their names being mentioned here in it, and also those who contributed or worked in shadow to introduce a kind of help.
-        <mark>Guido van Rossum: Python</mark>, <mark>Adrian Holovaty: Django</mark>, <mark>Simon Willison: Django</mark>, <mark>Tom Christie: DRF</mark>, <mark>Brendan Eich: JavaScript</mark>, <mark>Jordan Walke: React</mark>, <mark>Evan You: Vite</mark>, <mark>Brian Fox: Bash</mark>; Thank You.<b></li>
-        <li><b>Finally, I would love to give this file more honor to have tha name of <mark>Linus Torvalds: Linux & Git</mark> mentioned in it, <mark>Linus Benedict Torvalds</mark> is a Finnish software engineer who is the creator and lead developer of the Linux kernel. He also created the distributed version control system Git. Words won't be enough to express the respect you deserve, hope one day to have my name mentioned for doing something which is more than great like you.</b></li>
-    </ul>
-    <br />
-    <nav>
-        <a href="https://www.linux.org/" target="_blank">
-            <img src="https://skillicons.dev/icons?i=linux" />
-        </a>
-        <a href="https://git-scm.com/" target="_blank">
-            <img src="https://skillicons.dev/icons?i=git" />
-        </a>
-    </nav>
+    <div>
+        <h2>A Word Of Appreciation</h2>
+        <ul>
+            <li><b>I want to express huge and tremendous respect and admiration for these poeple whom horned this simple file by their names being mentioned here in it, and also those who contributed or worked in shadow to introduce a kind of help.
+            <mark>Guido van Rossum: Python</mark>, <mark>Adrian Holovaty: Django</mark>, <mark>Simon Willison: Django</mark>, <mark>Tom Christie: DRF</mark>, <mark>Brendan Eich: JavaScript</mark>, <mark>Jordan Walke: React</mark>, <mark>Evan You: Vite</mark>, <mark>Brian Fox: Bash</mark>; Thank You.<b></li>
+            <li><b>Finally, I would love to give this file more honor to have tha name of <mark>Linus Torvalds: Linux & Git</mark> mentioned in it, <mark>Linus Benedict Torvalds</mark> is a Finnish software engineer who is the creator and lead developer of the Linux kernel. He also created the distributed version control system Git. Words won't be enough to express the respect you deserve, hope one day to have my name mentioned for doing something which is more than great like you.</b></li>
+        </ul>
+        <br />
+        <nav>
+            <a href="https://www.linux.org/" target="_blank">
+                <img src="https://skillicons.dev/icons?i=linux" />
+            </a>
+            <a href="https://git-scm.com/" target="_blank">
+                <img src="https://skillicons.dev/icons?i=git" />
+            </a>
+        </nav>
+    </div>
+    <div>
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://github.com/rhman-ibrahim/scheme"><strong>scheme</strong> (this one)</a>
+            </li>
+            <li>
+                <a href="https://github.com/rhman-ibrahim/scheme.django"><strong>scheme.django</strong></a>
+            </li>
+            <li>
+                <a href="https://github.com/rhman-ibrahim/scheme.react"><strong>scheme.react</strong></a>
+            </li>
+            <li>
+                <a href="https://github.com/rhman-ibrahim/scheme.bash"><strong>scheme.bash</strong></a>
+            </li>
+            <li>
+                <a href="https://github.com/rhman-ibrahim/scheme.config"><strong>scheme.config</strong></a>
+            </li>
+        </ul>
+    </div>
 </footer>
