@@ -12,14 +12,10 @@
     </div>
     <div>
         <h2>This Repository</h2>
-        <p>I created this repository during the early days of <b>Django</b> learning process and before starting learning <b>React</b>, I decided to keep it as it is because I'm really proud of this messy commits history which reflects my journey from being lost and overwhelmed to focus and determination. And, also to use this repository to explain <b>Scheme</b> related repositories: <a href="#scheme.django"><b>scheme.django</b></a>, <a href="#scheme.react"><b>scheme.react</b></a>, <a href="#scheme.bash"><b>scheme.bash</b></a> and <a href="#scheme.config"><b>scheme.config</b></a>.</p>
+        <p>I created this repository during the early days of <b>Django</b> learning process and before starting learning <b>React</b>, I decided to keep it as it is because I'm really proud of this messy commits history which reflects my journey from being lost and overwhelmed to focus and determination. And, also to use this repository to explain <b>Scheme</b> related repositories: <a href="#scheme.django"><b>scheme.django</b></a>, <a href="#scheme.react"><b>scheme.react</b></a> and <a href="#scheme.bash"><b>scheme.bash</b></a>.</p>
     </div>
 </header>
 <main>
-    <div id="scheme.config">
-        <h2>1. scheme.config</h2>
-        <p><b>scheme.config</b> repository stores the project's entry point (HTML file) and the configurarion files, these files may have different extensions. For more information visit <a href="https://github.com/rhman-ibrahim/scheme.config" target="_blank"><b>scheme.config</b></a>.</p>
-    </div>
     <div id="scheme.django">
         <h2>2. scheme.django</h2>
         <p><b>scheme.django</b> repository stores the Django and DRF back-end boilerplate code. For more information visit <a href="https://github.com/rhman-ibrahim/scheme.django" target="_blank"><b>scheme.django</b></a>.</p>
@@ -108,9 +104,6 @@
             </li>
             <li>
                 <a href="https://github.com/rhman-ibrahim/scheme.bash"><strong>scheme.bash</strong></a>
-            </li>
-            <li>
-                <a href="https://github.com/rhman-ibrahim/scheme.config"><strong>scheme.config</strong></a>
             </li>
         </ul>
     </div>
