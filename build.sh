@@ -31,9 +31,10 @@ mv submodules/ui/package.json .
 mv submodules/ui/package-lock.json .
 mv submodules/ui/.eslintrc.cjs .
 mv submodules/ui/public .
-rm submodules/ui/index.html
-rm submodules/ui/vite.config.js
-rm submodules/ui/jsconfig.json
+mv submodules/ui/App.jsx .
+mv submodules/ui/index.html .
+mv submodules/ui/vite.config.js .
+mv submodules/ui/jsconfig.json .
 
 # 04:
 python -m venv venv
